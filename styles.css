@@ -40,3 +40,11 @@ button:hover {
   font-size: 18px;
   color: #555;
 }
+
+
+/* Media queries for responsive design */
+@media (max-width: 600px) {
+  .container {
+    max-width: 90%;
+  }
+}

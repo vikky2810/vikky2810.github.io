@@ -1,42 +1,16 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Software Engineer Portfolio</title>
-  <link rel="stylesheet" href="style.css">
+  <title>Number Guessing Game</title>
+  <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
-  <header>
-    <h1>John Doe</h1>
-    <p>Software Engineer</p>
-  </header>
-  
-  <main>
-    <h2>About Me</h2>
-    <p>I am a passionate software engineer with experience in web development and problem-solving. I enjoy building scalable and efficient solutions that deliver value to users.</p>
-    
-    <h2>Projects</h2>
-    <div class="project">
-      <h3>Project 1</h3>
-      <p>A web application for online shopping with features like product search, shopping cart, and secure payment integration.</p>
-    </div>
-    
-    <div class="project">
-      <h3>Project 2</h3>
-      <p>A mobile app for task management that allows users to create, track, and prioritize their daily tasks.</p>
-    </div>
-    
-    <h2>Skills</h2>
-    <ul>
-      <li>JavaScript</li>
-      <li>HTML/CSS</li>
-      <li>Python</li>
-      <li>Java</li>
-      <li>Database Management</li>
-    </ul>
-    
-    <h2>Contact</h2>
-    <p>Email: john.doe@example.com</p>
-    <p>Phone: 123-456-7890</p>
-  </main>
+  <h1>Number Guessing Game</h1>
+  <p>Guess a number between 1 and 100:</p>
+  <input type="number" id="guessInput">
+  <button onclick="checkGuess()">Check</button>
+  <p id="message"></p>
+
+  <script src="script.js"></script>
 </body>
 </html>

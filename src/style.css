@@ -1,25 +1,47 @@
+@font-face {
+    font-family: btn-font;
+    src: url(./Fonts/Fontspring-DEMO-noyhgeometric-medium.otf);
+}
+
+
 body{
     margin: 0;
     padding: 0;
 }
-.blogging-title a{
+.button-title a{
     text-decoration: none;
     color: inherit;
 }
 
-.blogging-title{
+.button-title{
     cursor: pointer;
     margin-left: 700px;
     margin-right: 700px;
     text-decoration: none;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-    font-size: medium;
+    font-size: 16px;
     justify-content: center;
     margin-top: 45vh;
     display: flex;
 }
 
 
-.blogging-title:hover{
+.button-title:hover{
     color: #6f6faaaf;
+}
+
+
+.button-title button{
+    background-color: #fdfdfffd;
+    border: 2px solid black;
+    color: black;
+    padding: 15px;
+    font-family: btn-font;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 25px;
+}
+.button-title button:hover{
+    background-color: #000000fd;
+    color: white;
 }

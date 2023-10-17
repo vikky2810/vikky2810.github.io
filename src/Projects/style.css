@@ -1,0 +1,14 @@
+.body{
+    margin: 0;
+    padding: 0;
+}
+
+.navigation-bar{
+    font-size: 25px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    /* background-color: rgb(110, 104, 95); */
+    display: flex;
+    margin-top: 25px;
+    margin-bottom: 25px;
+    justify-content: center;
+}

@@ -24,6 +24,13 @@ The styling is implemented using custom CSS rules defined in the `style.css` fil
 - Custom font face: Utilizing the `Fontspring-DEMO-noyhgeometric-medium.otf` font.
 - Button styling: A stylized button with hover effects, making use of both custom and default fonts.
 
+
 ## Contributing
 
-Feel free to contribute to the project by adding new features, improving the design, or fixing any issues. Create a pull request, and your changes will be reviewed.
+If you'd like to contribute to this project, please follow these steps:
+
+1. Fork the repository.
+2. Create a new branch for your feature or bug fix: `git checkout -b feature/your-feature`.
+3. Make your changes and commit them: `git commit -m 'Add your feature'`.
+4. Push to the branch: `git push origin feature/your-feature`.
+5. Create a pull request.

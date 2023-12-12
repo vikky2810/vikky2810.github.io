@@ -3,22 +3,24 @@
     src: url(./Fonts/Fontspring-DEMO-noyhgeometric-medium.otf);
 }
 
-.logo img{
+.logo img {
     margin-left: 10px;
     margin-bottom: -43px;
     height: 50px;
     width: 380px;
 }
 
-.nav-bar{
-    
+.nav-bar {
+
     display: flex;
 }
-.nav{
+
+.nav {
     display: flex;
     margin-left: 155px;
 }
-.nav a{
+
+.nav a {
     text-decoration: none;
     color: black;
     font-family: btn-font;

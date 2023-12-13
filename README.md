@@ -1,36 +1,57 @@
-# EngineerVikky Blog
+# EngineerVikky Portfolio Website
 
-This repository contains the source code for EngineerVikky's blog website. The website is designed to showcase various projects and is styled using custom CSS. Below is an overview of the project structure and how to navigate through the code.
+This is the README file for EngineerVikky's portfolio website. Below you will find information about the HTML and CSS code structure, as well as instructions on how to set up and customize the website.
 
-## Project Structure
+## Table of Contents
 
-- **index.html:** The main HTML file that serves as the entry point to the website.
-- **src/style.css:** The CSS file responsible for styling the website.
-- **Fonts/Fontspring-DEMO-noyhgeometric-medium.otf:** Custom font file used for the button text.
-- **src/Projects/index.html:** Placeholder link to a Projects section (not implemented in this example).
+1. [Introduction](#introduction)
+2. [File Structure](#file-structure)
+3. [Setup](#setup)
+4. [Customization](#customization)
+5. [Credits](#credits)
 
-## How to Run
+## Introduction
 
-To view the website, simply open the `index.html` file in a web browser. The styling is linked through the `style.css` file located in the `src` directory.
+This portfolio website is designed for EngineerVikky to showcase their work, projects, and blog. The website has a simple and clean layout with a navigation bar and a logo.
 
-```bash
-open index.html
-```
+## File Structure
 
-## Styling
+- `index.html`: The main HTML file that structures the content of the website.
+- `style.css`: The main CSS file that defines the styles for the website.
+- `src/`: This directory contains additional resources, such as images and fonts.
+- `Fonts/`: This directory holds custom fonts used in the project.
 
-The styling is implemented using custom CSS rules defined in the `style.css` file. Notable features include:
+## Setup
 
-- Custom font face: Utilizing the `Fontspring-DEMO-noyhgeometric-medium.otf` font.
-- Button styling: A stylized button with hover effects, making use of both custom and default fonts.
+1. Clone the repository to your local machine:
 
+    ```bash
+    git clone https://github.com/your-username/EngineerVikky-Portfolio.git
+    ```
 
-## Contributing
+2. Open `index.html` in your preferred web browser to view the website.
 
-If you'd like to contribute to this project, please follow these steps:
+## Customization
 
-1. Fork the repository.
-2. Create a new branch for your feature or bug fix: `git checkout -b feature/your-feature`.
-3. Make your changes and commit them: `git commit -m 'Add your feature'`.
-4. Push to the branch: `git push origin feature/your-feature`.
-5. Create a pull request.
+### Changing Logo
+
+Replace the current logo with your own by replacing the image file located at `src/images/enginner_viks.png`.
+
+### Updating Navigation Links
+
+Modify the links in the navigation bar by updating the `href` attribute in the `<a>` tags inside the `<div class="nav">` section in `index.html`.
+
+### Customizing Styles
+
+Feel free to customize the styles in `style.css` to match your preferences. You can change colors, fonts, and layout properties to make the portfolio reflect your personal style.
+
+### Adding Content
+
+Expand the content of the portfolio by adding sections or modifying existing ones in `index.html`. Update project details, add a blog section, or include any additional information you want to showcase.
+
+## Credits
+
+- Logo: [Enginner Viks Logo](src/images/enginner_viks.png)
+- Font: [Fontspring-DEMO-noyhgeometric-medium.otf](Fonts/Fontspring-DEMO-noyhgeometric-medium.otf)
+
+Feel free to reach out for any further assistance or customization needs. Good luck with your portfolio!

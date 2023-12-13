@@ -26,7 +26,7 @@ This portfolio website is designed for EngineerVikky to showcase their work, pro
 1. Clone the repository to your local machine:
 
     ```bash
-    git clone https://github.com/your-username/EngineerVikky-Portfolio.git
+    git clone https://github.com/vikky2810/vikky2810.github.io
     ```
 
 2. Open `index.html` in your preferred web browser to view the website.

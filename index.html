@@ -4,9 +4,91 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vikram Kamble | Portfolio site. </title>
+    
+    <!-- Primary Meta Tags -->
+    <title>Vikram Kamble - Full Stack Developer Portfolio | B.Tech Computer Science Student</title>
+    <meta name="title" content="Vikram Kamble - Full Stack Developer Portfolio | B.Tech Computer Science Student" />
+    <meta name="description" content="Vikram Kamble is a passionate B.Tech Computer Science student and Full Stack Developer. Explore my projects, skills in React, Node.js, and experience in web development." />
+    <meta name="keywords" content="Vikram Kamble, Full Stack Developer, Web Developer, React Developer, Node.js Developer, B.Tech Computer Science, Portfolio, Frontend Developer, Backend Developer, JavaScript, Python" />
+    <meta name="author" content="Vikram Kamble" />
+    <meta name="robots" content="index, follow" />
+    <meta name="language" content="English" />
+    <meta name="revisit-after" content="7 days" />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://vikky2810.github.io/" />
+    <meta property="og:title" content="Vikram Kamble - Full Stack Developer Portfolio" />
+    <meta property="og:description" content="Passionate B.Tech Computer Science student and Full Stack Developer. Specializing in React, Node.js, and modern web technologies." />
+    <meta property="og:image" content="https://vikky2810.github.io/src/assets/profile-pic.png" />
+    <meta property="og:site_name" content="Vikram Kamble Portfolio" />
+    <meta property="og:locale" content="en_US" />
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://vikky2810.github.io/" />
+    <meta property="twitter:title" content="Vikram Kamble - Full Stack Developer Portfolio" />
+    <meta property="twitter:description" content="Passionate B.Tech Computer Science student and Full Stack Developer. Specializing in React, Node.js, and modern web technologies." />
+    <meta property="twitter:image" content="https://vikky2810.github.io/src/assets/profile-pic.png" />
+    
+    <!-- Additional SEO Meta Tags -->
+    <meta name="theme-color" content="#000000" />
+    <meta name="msapplication-TileColor" content="#000000" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="apple-mobile-web-app-title" content="Vikram Kamble Portfolio" />
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://vikky2810.github.io/" />
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="src/assets/profile-pic.png" />
+    <link rel="apple-touch-icon" href="src/assets/profile-pic.png" />
+    
+    <!-- Preconnect to external domains for performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    
+    <!-- Stylesheets -->
     <link rel="stylesheet" href="src/style.css" />
     <link rel="stylesheet" href="src/mediaqueries.css" />
+    
+    <!-- Structured Data for Rich Snippets -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Vikram Kamble",
+      "jobTitle": "Full Stack Developer",
+      "description": "B.Tech Computer Science student and passionate Full Stack Developer",
+      "url": "https://vikky2810.github.io/",
+      "image": "https://vikky2810.github.io/src/assets/profile-pic.png",
+      "sameAs": [
+        "https://linkedin.com/in/vikram-kamble-888933264",
+        "https://github.com/vikky2810"
+      ],
+      "knowsAbout": [
+        "React",
+        "Node.js",
+        "JavaScript",
+        "Python",
+        "HTML",
+        "CSS",
+        "MongoDB",
+        "MySQL",
+        "Express.js",
+        "Git"
+      ],
+      "alumniOf": {
+        "@type": "EducationalOrganization",
+        "name": "B.Tech Computer Science"
+      },
+      "worksFor": {
+        "@type": "Organization",
+        "name": "Freelance"
+      }
+    }
+    </script>
   </head>
   <body>
     <nav id="desktop-nav">
@@ -38,7 +120,15 @@
     </nav>
     <section id="profile">
       <div class="section__pic-container">
-        <img src="src/assets/profile-pic.png" alt="John Doe profile picture" />
+        <img 
+          src="src/assets/profile-pic.png" 
+          alt="Vikram Kamble profile picture" 
+          class="profile-pic"
+          loading="lazy"
+          width="400"
+          height="400"
+          style="max-width: 100%; height: auto;"
+        />
       </div>
       <div class="section__text">
         <p class="section__text__p1">Hello, I'm</p>
@@ -75,13 +165,6 @@
       <p class="section__text__p1">Get To Know More</p>
       <h1 class="title">About Me</h1>
       <div class="section-container">
-        <div class="section__pic-container">
-          <img
-            src="src/assets/about-pic.png"
-            alt="Profile picture"
-            class="about-pic"
-          />
-        </div>
         <div class="about-details-container">
           <div class="about-containers">
             <div class="details-container">
@@ -263,8 +346,12 @@
             <div class="article-container">
               <img
                 src="src/assets/project-1.png"
-                alt="Project 1"
+                alt="Alpaca Image Generator Project"
                 class="project-img"
+                loading="lazy"
+                width="300"
+                height="200"
+                style="max-width: 100%; height: auto;"
               />
             </div>
             <h2 class="experience-sub-title project-title">
@@ -290,8 +377,12 @@
             <div class="article-container">
               <img
                 src="src/assets/project-2.png"
-                alt="Project 2"
+                alt="TicTacToe Game Project"
                 class="project-img"
+                loading="lazy"
+                width="300"
+                height="200"
+                style="max-width: 100%; height: auto;"
               />
             </div>
             <h2 class="experience-sub-title project-title">TicTacToe Game</h2>
@@ -317,8 +408,12 @@
             <div class="article-container">
               <img
                 src="src/assets/project-3.png"
-                alt="Project 3"
+                alt="Project in Development"
                 class="project-img"
+                loading="lazy"
+                width="300"
+                height="200"
+                style="max-width: 100%; height: auto;"
               />
             </div>
             <h2 class="experience-sub-title project-title">In Working..</h2>

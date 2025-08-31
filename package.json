@@ -1,0 +1,26 @@
+{
+  "name": "vikram-kamble-portfolio",
+  "version": "1.0.0",
+  "description": "Vikram Kamble's Personal Portfolio Website - Static Site",
+  "main": "index.html",
+  "scripts": {
+    "dev": "python -m http.server 8000",
+    "serve": "npx http-server -p 8000",
+    "build": "echo 'Static site ready for deployment'"
+  },
+  "keywords": [
+    "portfolio",
+    "web-development",
+    "react",
+    "nodejs",
+    "fullstack",
+    "static-site"
+  ],
+  "author": "Vikram Kamble",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/vikky2810/vikky2810.github.io"
+  },
+  "homepage": "https://vikky2810.github.io"
+}

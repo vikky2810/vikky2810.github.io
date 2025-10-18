@@ -258,10 +258,18 @@ section {
   display: flex;
   height: 400px;
   width: 400px;
+  max-width: 100%;
   margin: auto 0;
   position: relative;
   align-items: center;
   justify-content: center;
+}
+
+.section__pic-container img {
+  max-width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: var(--radius-full);
 }
 
 /* Profile picture container styling */

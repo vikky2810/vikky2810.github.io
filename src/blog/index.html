@@ -1,17 +1,80 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blogs!</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <div class="navigation-bar">
-        <div class="nav">
-            Welcome <strong>Coder!!</strong>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <!-- Primary Meta Tags -->
+    <title>Blog - Vikram Kamble | Full Stack Developer</title>
+    <meta name="title" content="Blog - Vikram Kamble | Full Stack Developer" />
+    <meta name="description" content="Read the latest blog posts by Vikram Kamble, covering topics in web development, programming, and technology insights." />
+    <meta name="keywords" content="Vikram Kamble, Blog, Web Development, Programming, Technology, React, Node.js, JavaScript, Tutorials" />
+    <meta name="author" content="Vikram Kamble" />
+    <meta name="robots" content="index, follow" />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://vikky2810.github.io/src/blog/" />
+    <meta property="og:title" content="Blog - Vikram Kamble | Full Stack Developer" />
+    <meta property="og:description" content="Read the latest blog posts by Vikram Kamble, covering topics in web development, programming, and technology insights." />
+    <meta property="og:image" content="https://vikky2810.github.io/src/assets/profile-pic.png" />
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://vikky2810.github.io/src/blog/" />
+    <meta property="twitter:title" content="Blog - Vikram Kamble | Full Stack Developer" />
+    <meta property="twitter:description" content="Read the latest blog posts by Vikram Kamble, covering topics in web development, programming, and technology insights." />
+    <meta property="twitter:image" content="https://vikky2810.github.io/src/assets/profile-pic.png" />
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="../assets/profile-pic.png" />
+    
+    <!-- Preconnect to external domains for performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="style.css" />
+    
+    <!-- Structured Data for Rich Snippets -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Blog",
+      "name": "Vikram Kamble's Blog",
+      "description": "Blog posts about web development, programming, and technology",
+      "url": "https://vikky2810.github.io/src/blog/",
+      "author": {
+        "@type": "Person",
+        "name": "Vikram Kamble",
+        "url": "https://vikky2810.github.io/"
+      }
+    }
+    </script>
+  </head>
+  <body>
+    <!-- Navigation Header -->
+    <header class="blog-header">
+      <div class="header-container">
+        <a href="../../index.html" class="back-btn">
+          <span class="back-icon">←</span>
+          <span class="back-text">Back to Portfolio</span>
+        </a>
+      </div>
+    </header>
+
+    <!-- Blog Cards Section -->
+    <section id="blog-cards">
+      <div class="blog-cards-container" id="blog-cards-container">
+        <!-- Blog cards will be dynamically loaded here -->
+        <div class="loading-spinner" id="loading-spinner">
+          <div class="spinner"></div>
+          <p>Loading blogs...</p>
         </div>
-    </div>
-</body>
+      </div>
+    </section>
+
+    <script src="script.js"></script>
+  </body>
 </html>

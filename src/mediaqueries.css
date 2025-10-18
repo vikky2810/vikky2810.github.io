@@ -48,7 +48,6 @@
   }
   
   @media screen and (max-width: 600px) {
-    
     #contact,
     footer {
       height: 40vh;
@@ -88,8 +87,8 @@
       text-align: center;
     }
     .section__pic-container {
-      width: 100%;
-      max-width: 300px;
+      width: 90%;
+      max-width: 280px;
       height: auto;
       aspect-ratio: 1;
       margin: 0 auto;
@@ -103,6 +102,25 @@
     }
     .text-container {
       text-align: justify;
+    }
+  }
+
+  @media screen and (max-width: 400px) {
+    .section__pic-container {
+      width: 85%;
+      max-width: 250px;
+    }
+    .title {
+      font-size: 1.75rem;
+    }
+    .section__text__p2 {
+      font-size: 1.1rem;
+    }
+    #profile {
+      padding: 0.5rem;
+    }
+    .btn-container {
+      gap: 0.5rem;
     }
   }
   

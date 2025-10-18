@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Code Highlight Test</title>
+
+  <!-- Prism Dark Theme -->
+  <link 
+    rel="stylesheet" 
+    href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" 
+  />
+  
+  <style>
+    body {
+      background: #1e1e1e;
+      color: #ccc;
+      font-family: "Fira Code", monospace;
+      padding: 2rem;
+    }
+    .code-block {
+      border-radius: 8px;
+      overflow: auto;
+      padding: 1rem;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>React Code Example</h2>
+
+  <pre class="code-block"><code class="language-jsx">
+// Example JavaScript code
+const greet = () => {
+  console.log("Hello, world!");
+};
+  </code></pre>
+
+  <!-- Prism Core -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+
+  <!-- Add language support -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-jsx.min.js"></script>
+</body>
+</html>

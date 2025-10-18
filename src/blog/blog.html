@@ -1,24 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blog Post - Vikram Kamble</title>
     <link rel="stylesheet" href="../style.css">
     <link rel="stylesheet" href="../mediaqueries.css">
+    <!-- PrismJS CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+
     <style>
         .blog-post {
             max-width: 800px;
             margin: 0 auto;
             padding: 2rem;
             line-height: 1.8;
+            
         }
-        
+
         .blog-header {
             text-align: center;
             margin-bottom: 3rem;
         }
-        
+
+        .copy-button {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 6px;
+            font-size: 0.8rem;
+            padding: 4px 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-family: "Poppins", sans-serif;
+        }
+
+        .copy-button:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .copy-button.copied {
+            background: #22c55e;
+            /* green */
+            color: #fff;
+            border-color: #22c55e;
+        }
+
+
+        .code-block {
+            border-radius: 8px;
+            overflow: auto;
+            padding: 1rem;
+            background: #0f172a !important;
+        }
+
         .blog-meta {
             display: flex;
             justify-content: center;
@@ -27,43 +66,44 @@
             color: var(--text-secondary);
             flex-wrap: wrap;
         }
-        
+
         .blog-meta span {
             display: flex;
             align-items: center;
             gap: 0.5rem;
         }
-        
+
         .blog-content {
             color: var(--text-secondary);
             font-size: 1.1rem;
         }
-        
+
         .blog-content h2 {
             color: var(--text-primary);
             margin: 2rem 0 1rem 0;
             font-size: 1.8rem;
         }
-        
+
         .blog-content h3 {
             color: var(--text-primary);
             margin: 1.5rem 0 0.5rem 0;
             font-size: 1.4rem;
         }
-        
+
         .blog-content p {
             margin-bottom: 1.5rem;
         }
-        
-        .blog-content ul, .blog-content ol {
+
+        .blog-content ul,
+        .blog-content ol {
             margin-bottom: 1.5rem;
             padding-left: 2rem;
         }
-        
+
         .blog-content li {
             margin-bottom: 0.5rem;
         }
-        
+
         .code-block {
             background: var(--bg-secondary);
             border: 1px solid var(--border-color);
@@ -72,13 +112,13 @@
             margin: 1.5rem 0;
             overflow-x: auto;
         }
-        
+
         .code-block pre {
             color: var(--text-primary);
             font-family: 'Courier New', monospace;
             margin: 0;
         }
-        
+
         .back-btn {
             display: inline-flex;
             align-items: center;
@@ -92,11 +132,11 @@
             margin-bottom: 2rem;
             transition: var(--transition-normal);
         }
-        
+
         .back-btn:hover {
             transform: translateY(-2px);
         }
-        
+
         .warning {
             background: rgba(245, 158, 11, 0.1);
             border: 1px solid var(--accent-color);
@@ -104,12 +144,12 @@
             padding: 1rem;
             margin: 1.5rem 0;
         }
-        
+
         .warning p {
             margin: 0;
             color: var(--accent-color);
         }
-        
+
         .info {
             background: rgba(59, 130, 246, 0.1);
             border: 1px solid var(--primary-color);
@@ -117,12 +157,12 @@
             padding: 1rem;
             margin: 1.5rem 0;
         }
-        
+
         .info p {
             margin: 0;
             color: var(--primary-color);
         }
-        
+
         .success {
             background: rgba(34, 197, 94, 0.1);
             border: 1px solid #22c55e;
@@ -130,24 +170,24 @@
             padding: 1rem;
             margin: 1.5rem 0;
         }
-        
+
         .success p {
             margin: 0;
             color: #22c55e;
         }
-        
+
         .loading {
             text-align: center;
             padding: 3rem;
             color: var(--text-secondary);
         }
-        
+
         .error {
             text-align: center;
             padding: 3rem;
             color: #ef4444;
         }
-        
+
         .blog-category {
             display: inline-block;
             background: var(--gradient-secondary);
@@ -158,7 +198,7 @@
             font-weight: 600;
             margin-bottom: 1rem;
         }
-        
+
         .blog-image {
             width: 100%;
             max-width: 600px;
@@ -168,36 +208,36 @@
             display: block;
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
         }
-        
+
         .blog-content table {
             width: 100%;
             border-collapse: collapse;
             margin: 1.5rem 0;
         }
-        
+
         .blog-content table th,
         .blog-content table td {
             text-align: left;
             padding: 0.75rem;
             border: 1px solid var(--border-color);
         }
-        
+
         .blog-content table th {
             background: var(--bg-secondary);
             font-weight: 600;
             color: var(--text-primary);
         }
-        
+
         @media (max-width: 768px) {
             .blog-post {
                 padding: 1rem;
             }
-            
+
             .blog-meta {
                 flex-direction: column;
                 gap: 0.5rem;
             }
-            
+
             .blog-image {
                 max-width: 100%;
                 margin: 1rem auto;
@@ -205,10 +245,11 @@
         }
     </style>
 </head>
+
 <body>
     <div class="blog-post">
         <a href="index.html" class="back-btn">← Back to Blog</a>
-        
+
         <div id="blog-content">
             <div class="loading">Loading blog post...</div>
         </div>
@@ -220,39 +261,39 @@
                 // Get the blog ID from URL parameters
                 const urlParams = new URLSearchParams(window.location.search);
                 const blogId = urlParams.get('id');
-                
+
                 if (!blogId) {
                     throw new Error('No blog ID provided');
                 }
-                
+
                 // Load the blogs data
                 const response = await fetch('../blogs.json');
                 if (!response.ok) {
                     throw new Error('Failed to load blog data');
                 }
                 const data = await response.json();
-                
+
                 // Find the specific blog post
                 const blog = data.blogs.find(b => b.id == blogId);
-                
+
                 if (!blog) {
                     throw new Error('Blog post not found');
                 }
-                
+
                 displayBlogPost(blog);
             } catch (error) {
                 console.error('Error loading blog post:', error);
-                document.getElementById('blog-content').innerHTML = 
+                document.getElementById('blog-content').innerHTML =
                     '<div class="error">Failed to load blog post. Please try again later.</div>';
             }
         }
-        
+
         function displayBlogPost(blog) {
             const blogContent = document.getElementById('blog-content');
-            
+
             // Update page title
             document.title = `${blog.title} - Vikram Kamble`;
-            
+
             const blogHTML = `
                 <div class="blog-header">
                     <div class="blog-category">${blog.category}</div>
@@ -269,10 +310,44 @@
                     ${blog.content}
                 </div>
             `;
-            
+
             blogContent.innerHTML = blogHTML;
+
+            if (window.Prism) {
+                Prism.highlightAll();
+                addCopyButtons();
+            }
         }
-        
+
+        function addCopyButtons() {
+            document.querySelectorAll('pre code').forEach(codeBlock => {
+                const button = document.createElement('button');
+                button.className = 'copy-button';
+                button.textContent = 'Copy';
+
+                // Wrap the pre element to position the button
+                const pre = codeBlock.parentNode;
+                pre.style.position = 'relative';
+                pre.appendChild(button);
+
+                button.addEventListener('click', async () => {
+                    const text = codeBlock.innerText;
+                    try {
+                        await navigator.clipboard.writeText(text);
+                        button.textContent = 'Copied!';
+                        button.classList.add('copied');
+                        setTimeout(() => {
+                            button.textContent = 'Copy';
+                            button.classList.remove('copied');
+                        }, 1500);
+                    } catch (err) {
+                        console.error('Failed to copy', err);
+                    }
+                });
+            });
+        }
+
+
         function formatDate(dateString) {
             try {
                 const date = new Date(dateString);
@@ -290,9 +365,17 @@
                 return 'Date Error';
             }
         }
-        
+
         // Load blog post when page loads
         document.addEventListener('DOMContentLoaded', loadBlogPost);
     </script>
+
+    <!-- Prism.js core -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+
+    <!-- React/JSX syntax support -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-jsx.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
 </body>
+
 </html>

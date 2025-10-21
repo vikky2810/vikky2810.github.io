@@ -11,9 +11,13 @@ document.addEventListener('DOMContentLoaded', function() {
     
     images.forEach(img => {
         img.addEventListener('error', function() {
+            console.log('Image failed to load:', this.src);
             // If the image fails to load, try to load the PNG version
             const currentSrc = this.src;
             if (currentSrc.includes('.webp')) {
+                this.src = currentSrc.replace('.webp', '.png');
+            } else if (currentSrc.includes('project-')) {
+                // For project images, try fallback to PNG version
                 this.src = currentSrc.replace('.webp', '.png');
             } else {
                 // If still fails, try alternative paths
@@ -28,6 +32,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Load and display blogs
     loadBlogs();
+
+    // Load and display projects
+    loadProjects();
 });
 
 // Function to load blogs from JSON file
@@ -110,5 +117,60 @@ function openBlog(blogId) {
     } else {
         console.log('Blog ID not provided');
     }
+}
+
+// Function to load projects from JSON file
+async function loadProjects() {
+    const container = document.getElementById('projects-container');
+    if (!container) return; // Not on homepage or section absent
+    try {
+        const response = await fetch('src/projects.json');
+        const data = await response.json();
+        displayProjects(data.projects || []);
+    } catch (error) {
+        console.error('Error loading projects:', error);
+        container.innerHTML = '<p style="text-align: center; color: var(--text-secondary);">Projects coming soon...</p>';
+    }
+}
+
+// Function to display projects
+function displayProjects(projects) {
+    const container = document.getElementById('projects-container');
+    if (!container) return;
+
+    const cardsHtml = (projects || []).map(project => `
+        <div class="details-container color-container project-card">
+            <div class="project-image-container">
+              <img
+                src="${project.image}"
+                alt="${project.alt || project.title}"
+                class="project-img"
+                loading="lazy"
+                onerror="this.src=this.src.replace('.webp', '.png')"
+              />
+            </div>
+            <div class="project-content">
+              <h2 class="experience-sub-title project-title">${project.title}</h2>
+              <div class="btn-container">
+                <button
+                  class="btn btn-color-2 project-btn" 
+                  ${project.github ? '' : 'disabled="true"'}
+                  onclick="${project.github ? `window.open('${project.github}')` : ''}"
+                >
+                  Github
+                </button>
+                <button
+                  class="btn btn-color-2 project-btn" 
+                  ${project.live ? '' : 'disabled="true"'}
+                  onclick="${project.live ? `window.open('${project.live}')` : ''}"
+                >
+                  Live Demo
+                </button>
+              </div>
+            </div>
+        </div>
+    `).join('');
+
+    container.innerHTML = cardsHtml || '<p style="text-align: center; color: var(--text-secondary);">No projects to display yet.</p>';
 }
   

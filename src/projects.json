@@ -1,0 +1,31 @@
+{
+  "projects": [
+    {
+      "id": 1,
+      "title": "AI explains Repo",
+      "image": "src/assets/pro.png",
+      "alt": "AI explains Repo Project",
+      "github": "https://github.com/vikky2810/ai-explains-repo",
+      "live": "https://ai-explains-repo.vercel.app/"
+    },
+    {
+      "id": 2,
+      "title": "TicTacToe Game",
+      "image": "src/assets/project-2.png",
+      "alt": "TicTacToe Game Project",
+      "github": "",
+      "live": "https://github.com/",
+      "disabled": true
+    },
+    {
+      "id": 3,
+      "title": "In Working..",
+      "image": "src/assets/project-3.png",
+      "alt": "Project in Development",
+      "github": "https://github.com/",
+      "live": "https://github.com/"
+    }
+  ]
+}
+
+

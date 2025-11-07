@@ -402,8 +402,21 @@ section {
 
 #about {
   position: relative;
-  padding: 3rem;
+  padding: 7rem;
   margin: 2rem 0;
+}
+
+#about .section-container{
+  width: 90%;
+  margin: 0 auto;
+  /* border: 1px solid red; */
+}
+
+#about .text-container{
+  width: 70%;
+  margin: 0 auto;
+  text-align: center;
+  /* border: 1px solid red; */
 }
 
 .about-containers {
@@ -499,6 +512,10 @@ section {
 /* EXPERIENCE SECTION */
 
 #experience {
+  padding: 7rem;
+  /* border: 1px solid red; */
+  width: 90%;
+  margin: 0 auto  ;
   position: relative;
 }
 
@@ -540,6 +557,10 @@ article .icon {
 /* PROJECTS SECTION */
 
 #projects {
+  padding: 7rem;
+  width: 90%;
+  margin: 0 auto;
+  /* border: 1px solid red; */
   position: relative;
 }
 
@@ -700,7 +721,7 @@ img {
   justify-content: center;
   flex-direction: column;
   height: 70vh;
-  padding: 3rem;
+  padding: 7rem;
   margin: 2rem 0;
 }
 
@@ -844,7 +865,11 @@ img {
 
 #blogs {
   position: relative;
-  padding: 3rem;
+  height: 100vh;
+  padding: 7rem;
+  width: 90%;
+  margin: 0 auto;
+  /* border: 1px solid red; */
   margin: 2rem 0;
 }
 

@@ -1,14 +1,12 @@
 @media screen and (max-width: 1400px) {
     #profile {
-      height: 83vh;
-      margin-bottom: 6rem;
+      min-height: 80vh;
     }
     .about-containers {
       flex-wrap: wrap;
     }
-    #contact,
-    #projects {
-      height: fit-content;
+    section {
+      padding: 5rem 8rem;
     }
   }
   
@@ -35,7 +33,7 @@
       height: fit-content;
     }
     section {
-      margin: 0 5%;
+      padding: 4rem 5%;
     }
     .section__pic-container {
       width: 275px;
@@ -48,13 +46,19 @@
   }
   
   @media screen and (max-width: 600px) {
-    #contact,
+    #contact {
+      min-height: 50vh;
+    }
     footer {
-      height: 40vh;
+      height: auto;
+      min-height: 30vh;
     }
     #profile {
-      height: 83vh;
-      margin-bottom: 0;
+      min-height: 75vh;
+      padding: 3rem 2rem;
+    }
+    section {
+      padding: 3rem 2rem;
     }
     article {
       font-size: 1rem;
@@ -120,9 +124,11 @@
       font-size: 1.1rem;
     }
     #profile {
-      padding: 0.5rem;
-      height: auto;
-      min-height: 80vh;
+      padding: 2rem 1rem;
+      min-height: 70vh;
+    }
+    section {
+      padding: 2rem 1rem;
     }
     .btn-container {
       gap: 0.5rem;

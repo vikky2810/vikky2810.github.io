@@ -32,6 +32,8 @@
     width: 30px;
     visibility: visible !important;
     opacity: 1 !important;
+    position: relative;
+    align-items: center;
   }
 
   .hamburger-icon span {
@@ -41,6 +43,41 @@
     opacity: 1 !important;
     visibility: visible !important;
     box-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease-in-out !important;
+    position: absolute !important;
+    left: 0;
+    right: 0;
+    transform-origin: center center;
+  }
+
+  .hamburger-icon span:first-child {
+    top: 0 !important;
+  }
+
+  .hamburger-icon span:nth-child(2) {
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+  }
+
+  .hamburger-icon span:last-child {
+    bottom: 0 !important;
+  }
+
+  /* Hamburger Icon X Animation for 360px screens */
+  .hamburger-icon.open span:first-child {
+    top: 50% !important;
+    transform: translateY(-50%) rotate(45deg) !important;
+  }
+
+  .hamburger-icon.open span:nth-child(2) {
+    opacity: 0 !important;
+    transform: translateY(-50%) scaleX(0) !important;
+    visibility: hidden !important;
+  }
+
+  .hamburger-icon.open span:last-child {
+    top: 50% !important;
+    transform: translateY(-50%) rotate(-45deg) !important;
   }
 
   /* Sections */
@@ -185,13 +222,14 @@
     height: 28px;
     width: 32px;
     cursor: pointer;
-    padding: 4px;
+    padding: 0;
     background: transparent;
     border: none;
     z-index: 1002;
     visibility: visible !important;
     opacity: 1 !important;
     position: relative;
+    align-items: center;
   }
 
   .hamburger-icon span {
@@ -200,25 +238,68 @@
     height: 3px;
     background-color: var(--text-primary) !important;
     border-radius: 2px;
-    transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out !important;
     opacity: 1 !important;
     visibility: visible !important;
-    position: relative;
+    position: absolute !important;
+    left: 0;
+    right: 0;
     z-index: 1003;
+    transform-origin: center center;
   }
 
-  .hamburger-icon span:nth-child(1) {
-    margin-bottom: 6px;
+  .hamburger-icon span:first-child {
+    top: 0 !important;
+    margin-bottom: 0 !important;
   }
 
   .hamburger-icon span:nth-child(2) {
-    margin-bottom: 6px;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    margin-bottom: 0 !important;
+  }
+
+  .hamburger-icon span:last-child {
+    bottom: 0 !important;
   }
 
   /* Ensure hamburger icon is visible on dark background */
   #hamburger-nav .hamburger-icon span {
     background-color: #f1f5f9 !important;
     box-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
+  }
+
+  /* Hamburger Icon X Animation for Mobile */
+  .hamburger-icon.open span:first-child {
+    top: 50% !important;
+    transform: translateY(-50%) rotate(45deg) !important;
+  }
+
+  .hamburger-icon.open span:nth-child(2) {
+    opacity: 0 !important;
+    transform: translateY(-50%) scaleX(0) !important;
+    visibility: hidden !important;
+  }
+
+  .hamburger-icon.open span:last-child {
+    top: 50% !important;
+    transform: translateY(-50%) rotate(-45deg) !important;
+  }
+
+  /* Reset transforms when not open */
+  .hamburger-icon span:first-child {
+    transition: all 0.3s ease-in-out !important;
+  }
+
+  .hamburger-icon span:nth-child(2) {
+    opacity: 1 !important;
+    transform: translateY(-50%) scaleX(1) !important;
+    visibility: visible !important;
+    transition: all 0.3s ease-in-out !important;
+  }
+
+  .hamburger-icon span:last-child {
+    transition: all 0.3s ease-in-out !important;
   }
 
   .menu-links {
@@ -639,6 +720,23 @@
     padding: 1rem 2rem;
     font-size: 1.3rem;
     border-bottom: 1px solid var(--border-color);
+  }
+
+  /* Hamburger Icon X Animation for Small Devices */
+  .hamburger-icon.open span:first-child {
+    top: 50% !important;
+    transform: translateY(-50%) rotate(45deg) !important;
+  }
+
+  .hamburger-icon.open span:nth-child(2) {
+    opacity: 0 !important;
+    transform: translateY(-50%) scaleX(0) !important;
+    visibility: hidden !important;
+  }
+
+  .hamburger-icon.open span:last-child {
+    top: 50% !important;
+    transform: translateY(-50%) rotate(-45deg) !important;
   }
 
   /* Sections */

@@ -27,6 +27,11 @@
             margin-bottom: 3rem;
         }
 
+        .code-block-wrapper {
+            position: relative;
+            border-radius: 8px;
+        }
+
         .copy-button {
             position: absolute;
             top: 8px;
@@ -40,6 +45,7 @@
             cursor: pointer;
             transition: all 0.2s ease;
             font-family: "Poppins", sans-serif;
+            z-index: 10;
         }
 
         .copy-button:hover {
@@ -64,10 +70,13 @@
         .blog-meta {
             display: flex;
             justify-content: center;
+            align-items: center;
             gap: 2rem;
             margin: 1rem 0;
             color: var(--text-secondary);
             flex-wrap: wrap;
+            width: 100%;
+            text-align: center;
         }
 
         .blog-meta span {
@@ -324,14 +333,28 @@
 
         function addCopyButtons() {
             document.querySelectorAll('pre code').forEach(codeBlock => {
+                // Check if already wrapped
+                const pre = codeBlock.parentNode;
+                if (pre.parentNode.classList && pre.parentNode.classList.contains('code-block-wrapper')) {
+                    return; // Already processed
+                }
+
                 const button = document.createElement('button');
                 button.className = 'copy-button';
                 button.textContent = 'Copy';
 
-                // Wrap the pre element to position the button
-                const pre = codeBlock.parentNode;
-                pre.style.position = 'relative';
-                pre.appendChild(button);
+                // Create a wrapper div around the pre element
+                const wrapper = document.createElement('div');
+                wrapper.className = 'code-block-wrapper';
+                
+                // Insert wrapper before pre
+                pre.parentNode.insertBefore(wrapper, pre);
+                
+                // Move pre into wrapper
+                wrapper.appendChild(pre);
+                
+                // Add button to wrapper (not to pre)
+                wrapper.appendChild(button);
 
                 button.addEventListener('click', async () => {
                     const text = codeBlock.innerText;

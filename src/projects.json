@@ -10,12 +10,11 @@
     },
     {
       "id": 2,
-      "title": "TicTacToe Game",
-      "image": "src/assets/project-2.png",
-      "alt": "TicTacToe Game Project",
-      "github": "",
-      "live": "https://github.com/",
-      "disabled": true
+      "title": "Online Python code Editor",
+      "image": "src/assets/project2.png",
+      "alt": "python code editor",
+      "github": "https://github.com/vikky2810/OnlineCodeEditor",
+      "live": "https://viks-online-code-editor.vercel.app/"
     },
     {
       "id": 3,

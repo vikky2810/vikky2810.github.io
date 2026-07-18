@@ -380,3 +380,19 @@
         transform: scale(1.1);
     }
 }
+
+/* ============================================
+   RAMX-STYLE COMPACT CONTACT OVERRIDE
+   Appended last so it wins over the legacy
+   centered card layout above.
+   ============================================ */
+#contact {
+    display: block;
+    align-items: stretch;
+    text-align: left;
+    overflow: visible;
+}
+
+#contact::before {
+    display: none;
+}

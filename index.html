@@ -69,9 +69,9 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
   <!-- Stylesheets -->
-  <link rel="stylesheet" href="src/style.css?v=3" />
-  <link rel="stylesheet" href="src/mediaqueries.css?v=3" />
-  <link rel="stylesheet" href="src/contact.css?v=1" />
+  <link rel="stylesheet" href="src/style.css?v=8" />
+  <link rel="stylesheet" href="src/mediaqueries.css?v=8" />
+  <link rel="stylesheet" href="src/contact.css?v=2" />
 
   <!-- Structured Data for Rich Snippets -->
   <script type="application/ld+json">
@@ -117,7 +117,8 @@
     <div>
       <ul class="nav-links">
         <li><a href="#about">About</a></li>
-        <li><a href="#experience">Experience</a></li>
+        <li><a href="#work">Experience</a></li>
+        <li><a href="#experience">Skills</a></li>
         <li><a href="#projects">Projects</a></li>
         <li><a href="#blogs">Blogs</a></li>
         <li><a href="#contact">Contact</a></li>
@@ -134,7 +135,8 @@
       </div>
       <div class="menu-links">
         <li><a href="#about" onclick="toggleMenu()">About</a></li>
-        <li><a href="#experience" onclick="toggleMenu()">Experience</a></li>
+        <li><a href="#work" onclick="toggleMenu()">Experience</a></li>
+        <li><a href="#experience" onclick="toggleMenu()">Skills</a></li>
         <li><a href="#projects" onclick="toggleMenu()">Projects</a></li>
         <li><a href="#blogs" onclick="toggleMenu()">Blogs</a></li>
         <li><a href="#contact" onclick="toggleMenu()">Contact</a></li>
@@ -142,271 +144,187 @@
     </div>
   </nav>
   <section id="profile">
-    <div class="section__pic-container">
-      <img src="src/assets/profile-pic.webp" alt="Vikram Kamble profile picture" class="profile-pic" loading="lazy"
-        width="120" height="120" />
-    </div>
-    <div class="section__text">
-      <h1 class="title">Building digital products with <span class="gradient-text">Passion & Purpose</span></h1>
-      <p class="section__text__p2">
-        Hi, I'm <span style="color: var(--text-primary); font-weight: 600;">Vikram Kamble</span>, 
-        a Full Stack Developer and B.Tech student specializing in building exceptional digital experiences.
-      </p>
-      <div class="btn-container">
-        <button class="btn btn-color-1" onclick="location.href='./#contact'">
-          Let's Talk <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
-        </button>
-        <button class="btn btn-color-2" onclick="window.open('./src/assets/Vikram Kamble Resume.pdf')">
-          Resume
-        </button>
+    <div class="profile-header">
+      <img src="src/assets/profile-pic.webp" alt="Vikram Kamble profile picture" class="profile-avatar"
+        width="96" height="96" />
+      <div class="profile-intro">
+        <h1 class="profile-name">Vikram Kamble</h1>
+        <p class="profile-subtitle">
+          Full Stack Developer <span class="dot">·</span> B.Tech Student <span class="dot">·</span>
+          <span class="profile-email">
+            <a href="mailto:kamblevikram2810@gmail.com">kamblevikram2810@gmail.com</a>
+            <button class="copy-email" type="button" aria-label="Copy email"
+              onclick="copyEmail(this, 'kamblevikram2810@gmail.com')">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+              </svg>
+            </button>
+          </span>
+        </p>
       </div>
-      <div id="socials-container">
-        <img src="src/assets/linkedin.webp" alt="My LinkedIn profile" class="icon"
-          onclick="window.open('https://linkedin.com/in/vikram-kamble-888933264')" />
-        <img src="src/assets/github.webp" alt="My Github profile" class="icon"
-          onclick="window.open('https://github.com/vikky2810')" />
+    </div>
+    <p class="profile-bio">Love to build cool stuff. Full Stack Developer, B.Tech CS student & lifelong learner.</p>
+    <div class="profile-socials">
+      <a href="https://linkedin.com/in/vikram-kamble-888933264" target="_blank" rel="noopener" aria-label="LinkedIn">
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.63-1.85 3.36-1.85 3.59 0 4.25 2.36 4.25 5.43v6.31zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.55V9h3.57v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z"/>
+        </svg>
+      </a>
+      <a href="https://github.com/vikky2810" target="_blank" rel="noopener" aria-label="GitHub">
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 .3a12 12 0 0 0-3.8 23.38c.6.12.83-.26.83-.57v-2c-3.34.72-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.08-.75.09-.73.09-.73 1.2.09 1.83 1.24 1.83 1.24 1.07 1.83 2.81 1.3 3.5.99.1-.78.42-1.3.76-1.6-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.14-.3-.54-1.52.1-3.18 0 0 1-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.28-1.55 3.29-1.23 3.29-1.23.65 1.66.24 2.88.12 3.18.77.84 1.23 1.91 1.23 3.22 0 4.61-2.8 5.63-5.48 5.92.42.36.81 1.1.81 2.22v3.29c0 .31.21.69.83.57A12 12 0 0 0 12 .3z"/>
+        </svg>
+      </a>
+      <a href="mailto:kamblevikram2810@gmail.com" aria-label="Email">
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round">
+          <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+          <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+        </svg>
+      </a>
+      <a href="./src/assets/Vikram Kamble Resume.pdf" target="_blank" rel="noopener" class="resume-pill">Resume</a>
+    </div>
+  </section>
+
+  <section id="work">
+    <h2 class="section-heading">Experience</h2>
+    <div class="exp-list">
+      <div class="exp-row">
+        <div class="exp-top">
+          <div class="exp-left">
+            <span class="exp-company">Software Engineer Intern <span class="exp-badge">Working</span></span>
+            <span class="exp-role">RegiKart Private Limited · Internship</span>
+          </div>
+          <div class="exp-right">
+            <span class="exp-date">Jun 2026 – Present</span>
+            <span class="exp-loc">Kolkata, India · Remote</span>
+          </div>
+        </div>
+      </div>
+      <!-- Duplicate an .exp-row block below to add more roles -->
+      <div class="exp-row">
+        <div class="exp-top">
+          <div class="exp-left">
+            <span class="exp-company">Python Development Intern <span class="exp-badge">Completed</span></span>
+            <span class="exp-role">6-Month Internship</span>
+          </div>
+          <div class="exp-right">
+            <span class="exp-date">2024</span>
+            <span class="exp-loc">Remote</span>
+          </div>
+        </div>
+      </div>
+      <div class="exp-row">
+        <div class="exp-top">
+          <div class="exp-left">
+            <span class="exp-company">Freelance Developer</span>
+            <span class="exp-role">Full Stack Web Development</span>
+          </div>
+          <div class="exp-right">
+            <span class="exp-date">2023 – Present</span>
+            <span class="exp-loc">Remote</span>
+          </div>
+        </div>
       </div>
     </div>
   </section>
   <section id="blogs">
-    <p class="section__text__p1">Read My Latest</p>
-    <h1 class="title">Blogs</h1>
+    <h2 class="section-heading">Blog</h2>
     <div class="blogs-container" id="blogs-container">
       <!-- Blogs will be dynamically loaded here -->
     </div>
-    <div style="text-align: center; margin-top: 2rem;">
-      <a href="src/blog/index.html" class="btn btn-color-2 project-btn">
-        View All Blogs
-      </a>
+    <div class="blogs-showall">
+      <a href="src/blog/index.html" class="showall-btn">Show all blogs</a>
     </div>
   </section>
   <section id="about">
-    <p class="section__text__p1">Get To Know More</p>
-    <h1 class="title">About Me</h1>
-    <div class="section-container">
-      <div class="about-details-container">
-        <div class="about-containers">
-          <div class="details-container">
-            <img src="src/assets/experience.webp" alt="Experience icon" class="icon" />
-            <h3>Experience</h3>
-            <p>6 Months <br />Python Internship</p>
-          </div>
-          <div class="details-container">
-            <img src="src/assets/education.webp" alt="Education icon" class="icon" />
-            <h3>Education</h3>
-            <p>B.Tech Computer Science (Pursuing)</p>
-          </div>
-        </div>
-        <div class="text-container">
-          <p>
-            Hi, I am currently Final Year in B. Tech Computer Science &
-            Engineering. I love being in Tech. <br>I am Looking forward to make
-            Connections and Collaborations with different Tech people in order
-            to grow equally.. Thank you for being with me , Here..
-          </p>
-        </div>
+    <h2 class="section-heading">About</h2>
+    <p class="about-text">
+      Hi, I'm currently in my final year of B.Tech in Computer Science & Engineering, and I love being in tech.
+      I'm always looking to make connections and collaborate with different people in the space so we can grow
+      together. Thanks for stopping by.
+    </p>
+    <div class="about-facts">
+      <div class="fact">
+        <span class="fact-label">Experience</span>
+        <span class="fact-value">6 Months · Python Internship</span>
+      </div>
+      <div class="fact">
+        <span class="fact-label">Education</span>
+        <span class="fact-value">B.Tech Computer Science (Pursuing)</span>
       </div>
     </div>
   </section>
 
   <section id="experience">
-    <p class="section__text__p1">Explore My</p>
-    <h1 class="title">Experience</h1>
-    <div class="experience-details-container">
-      <div class="about-containers">
-        <div class="details-container">
-          <h2 class="experience-sub-title">Frontend Development</h2>
-          <div class="article-container">
-            <article>
-              <img src="src/assets/checkmark.webp" alt="Experience icon" class="icon" />
-              <div>
-                <h3>HTML</h3>
-                <p>Experienced</p>
-              </div>
-            </article>
-            <article>
-              <img src="src/assets/checkmark.webp" alt="Experience icon" class="icon" />
-              <div>
-                <h3>CSS</h3>
-                <p>Experienced</p>
-              </div>
-            </article>
-            <article>
-              <img src="src/assets/checkmark.webp" alt="Experience icon" class="icon" />
-              <div>
-                <h3>Angular</h3>
-                <p>Basics</p>
-              </div>
-            </article>
-            <article>
-              <img src="src/assets/checkmark.webp" alt="Experience icon" class="icon" />
-              <div>
-                <h3>JavaScript</h3>
-                <p>Intermediate</p>
-              </div>
-            </article>
-            <article>
-              <img src="src/assets/checkmark.webp" alt="Experience icon" class="icon" />
-              <div>
-                <h3>React</h3>
-                <p>Intermediate</p>
-              </div>
-            </article>
-          </div>
-        </div>
-        <div class="details-container">
-          <h2 class="experience-sub-title">Backend Development</h2>
-          <div class="article-container">
-            <article>
-              <img src="src/assets/checkmark.webp" alt="Experience icon" class="icon" />
-              <div>
-                <h3>MySQL</h3>
-                <p>Intermediate</p>
-              </div>
-            </article>
-            <article>
-              <img src="src/assets/checkmark.webp" alt="Experience icon" class="icon" />
-              <div>
-                <h3>Node JS</h3>
-                <p>Intermediate</p>
-              </div>
-            </article>
-            <article>
-              <img src="src/assets/checkmark.webp" alt="Experience icon" class="icon" />
-              <div>
-                <h3>Express JS</h3>
-                <p>Intermediate</p>
-              </div>
-            </article>
-            <article>
-              <img src="src/assets/checkmark.webp" alt="Experience icon" class="icon" />
-              <div>
-                <h3>Git</h3>
-                <p>Intermediate</p>
-              </div>
-            </article>
-            <article>
-              <img src="src/assets/checkmark.webp" alt="Experience icon" class="icon" />
-              <div>
-                <h3>MongoDB</h3>
-                <p>Intermediate</p>
-              </div>
-            </article>
-          </div>
-        </div>
+    <h2 class="section-heading">Skills</h2>
+    <div class="skills-group">
+      <h3 class="skills-group-title">Frontend</h3>
+      <div class="skill-tags">
+        <span class="skill-tag">HTML</span>
+        <span class="skill-tag">CSS</span>
+        <span class="skill-tag">JavaScript</span>
+        <span class="skill-tag">React</span>
+        <span class="skill-tag">Angular</span>
       </div>
     </div>
-
+    <div class="skills-group">
+      <h3 class="skills-group-title">Backend</h3>
+      <div class="skill-tags">
+        <span class="skill-tag">Node.js</span>
+        <span class="skill-tag">Express.js</span>
+        <span class="skill-tag">MySQL</span>
+        <span class="skill-tag">MongoDB</span>
+        <span class="skill-tag">Git</span>
+      </div>
+    </div>
   </section>
   <section id="projects">
-    <p class="section__text__p1">Browse My Recent</p>
-    <h1 class="title">Projects</h1>
-    <div class="experience-details-container">
-      <div class="about-containers" id="projects-container">
-        <!-- Projects will be dynamically loaded here -->
-      </div>
+    <h2 class="section-heading">Projects</h2>
+    <div class="projects-list" id="projects-container">
+      <!-- Projects will be dynamically loaded here -->
     </div>
-
   </section>
   <section id="contact">
-    <p class="section__text__p1">Get in Touch</p>
-    <h1 class="title">Contact Me</h1>
-    <p class="contact-subtitle">Let's connect and create something amazing together</p>
-
-    <div class="contact-cards-wrapper">
-      <!-- Email Card -->
-      <div class="contact-card contact-card-email">
-        <div class="contact-card-icon">
-          <img src="src/assets/email.webp" alt="Email icon" class="contact-icon-img" />
-        </div>
-        <div class="contact-card-content">
-          <h3 class="contact-card-title">Email Me</h3>
-          <p class="contact-card-text">Drop me a message anytime</p>
-          <a href="mailto:kamblevikram2810@gmail.com" class="contact-link">
-            kamblevikram2810@gmail.com
-          </a>
-        </div>
-        <div class="contact-card-arrow">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M7 17L17 7M17 7H7M17 7V17" />
-          </svg>
-        </div>
-      </div>
-
-      <!-- LinkedIn Card -->
-      <div class="contact-card contact-card-linkedin">
-        <div class="contact-card-icon">
-          <img src="src/assets/linkedin.webp" alt="LinkedIn icon" class="contact-icon-img" />
-        </div>
-        <div class="contact-card-content">
-          <h3 class="contact-card-title">LinkedIn</h3>
-          <p class="contact-card-text">Let's connect professionally</p>
-          <a href="https://linkedin.com/in/vikram-kamble-888933264" class="contact-link" target="_blank">
-            @vikram-kamble
-          </a>
-        </div>
-        <div class="contact-card-arrow">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M7 17L17 7M17 7H7M17 7V17" />
-          </svg>
-        </div>
-      </div>
-
-      <!-- GitHub Card -->
-      <div class="contact-card contact-card-github">
-        <div class="contact-card-icon">
-          <img src="src/assets/github.webp" alt="GitHub icon" class="contact-icon-img" />
-        </div>
-        <div class="contact-card-content">
-          <h3 class="contact-card-title">GitHub</h3>
-          <p class="contact-card-text">Check out my projects</p>
-          <a href="https://github.com/vikky2810" class="contact-link" target="_blank">
-            @vikky2810
-          </a>
-        </div>
-        <div class="contact-card-arrow">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M7 17L17 7M17 7H7M17 7V17" />
-          </svg>
-        </div>
-      </div>
-    </div>
-
-    <!-- Quick Connect Section -->
-    <div class="contact-quick-connect">
-      <p class="quick-connect-text">Quick Connect</p>
-      <div class="social-icons-row">
-        <a href="mailto:kamblevikram2810@gmail.com" class="social-icon-link" aria-label="Email">
-          <img src="src/assets/email.webp" alt="Email" class="social-icon" />
-        </a>
-        <a href="https://linkedin.com/in/vikram-kamble-888933264" class="social-icon-link" target="_blank"
-          aria-label="LinkedIn">
-          <img src="src/assets/linkedin.webp" alt="LinkedIn" class="social-icon" />
-        </a>
-        <a href="https://github.com/vikky2810" class="social-icon-link" target="_blank" aria-label="GitHub">
-          <img src="src/assets/github.webp" alt="GitHub" class="social-icon" />
-        </a>
-      </div>
+    <h2 class="section-heading">Get in touch</h2>
+    <p class="contact-lead">
+      Have a project in mind, or just want to say hi? My inbox is always open, and I'll try to get back to you.
+    </p>
+    <div class="contact-links">
+      <a href="mailto:kamblevikram2810@gmail.com" class="contact-link-row">
+        <span class="contact-link-label">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"></rect><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path></svg>
+          Email
+        </span>
+        <span class="contact-link-value">kamblevikram2810@gmail.com</span>
+      </a>
+      <a href="https://linkedin.com/in/vikram-kamble-888933264" target="_blank" rel="noopener" class="contact-link-row">
+        <span class="contact-link-label">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.63-1.85 3.36-1.85 3.59 0 4.25 2.36 4.25 5.43v6.31zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.55V9h3.57v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z"/></svg>
+          LinkedIn
+        </span>
+        <span class="contact-link-value">@vikram-kamble</span>
+      </a>
+      <a href="https://github.com/vikky2810" target="_blank" rel="noopener" class="contact-link-row">
+        <span class="contact-link-label">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .3a12 12 0 0 0-3.8 23.38c.6.12.83-.26.83-.57v-2c-3.34.72-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.08-.75.09-.73.09-.73 1.2.09 1.83 1.24 1.83 1.24 1.07 1.83 2.81 1.3 3.5.99.1-.78.42-1.3.76-1.6-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.14-.3-.54-1.52.1-3.18 0 0 1-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.28-1.55 3.29-1.23 3.29-1.23.65 1.66.24 2.88.12 3.18.77.84 1.23 1.91 1.23 3.22 0 4.61-2.8 5.63-5.48 5.92.42.36.81 1.1.81 2.22v3.29c0 .31.21.69.83.57A12 12 0 0 0 12 .3z"/></svg>
+          GitHub
+        </span>
+        <span class="contact-link-value">@vikky2810</span>
+      </a>
     </div>
   </section>
-  <footer style="padding: 4rem 2rem; border-top: 1px solid var(--border-color); background: var(--bg-primary);">
-    <div style="display: flex; flex-direction: column; align-items: center; gap: 2rem;">
-      <div class="logo">Vikram Kamble</div>
-      <nav style="height: auto; background: transparent; border: none; backdrop-filter: none; position: static;">
-        <ul class="nav-links" style="justify-content: center;">
-          <li><a href="#about">About</a></li>
-          <li><a href="#experience">Experience</a></li>
-          <li><a href="#projects">Projects</a></li>
-          <li><a href="#blogs">Blogs</a></li>
-          <li><a href="#contact">Contact</a></li>
-        </ul>
-      </nav>
-      <p style="color: var(--text-muted); font-size: 0.875rem;">
-        &copy; 2026 Vikram Kamble. Crafted with <span style="color: #ef4444;">&hearts;</span> and code.
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <span class="footer-name">Vikram Kamble</span>
+      <p class="footer-copy">
+        &copy; 2026 · Built with <span style="color: #ef4444;">&hearts;</span> and code.
       </p>
     </div>
   </footer>
-  <script src="src/script.js"></script>
+  <script src="src/script.js?v=4"></script>
 </body>
 
 </html>

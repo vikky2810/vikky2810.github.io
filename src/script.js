@@ -5,6 +5,20 @@ function toggleMenu() {
     icon.classList.toggle("open");
 }
 
+// Copy email to clipboard with a brief "copied" checkmark
+function copyEmail(btn, email) {
+    navigator.clipboard.writeText(email).then(() => {
+        const original = btn.innerHTML;
+        btn.innerHTML =
+            '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>';
+        btn.style.color = "var(--primary-color)";
+        setTimeout(() => {
+            btn.innerHTML = original;
+            btn.style.color = "";
+        }, 1500);
+    }).catch(() => {});
+}
+
 // Handle image loading errors and provide fallbacks
 document.addEventListener('DOMContentLoaded', function() {
     const images = document.querySelectorAll('img');
@@ -49,7 +63,7 @@ const embeddedBlogsData = {
             "date": "2025-10-18",
             "readTime": "8 min read",
             "category": "Web Development",
-            "content": "<p>If you've ever started a coding project, you've probably asked yourself: \"Should I use a library or a framework?\" They both promise to save you time, provide reusable code, and make development smoother. But the difference between them is bigger than most beginners realize. Choosing the wrong one can turn a simple project into a confusing mess.</p><p>In this post, we'll break down the distinction, give real-world analogies, show examples in modern web development, and even provide code snippets so it clicks immediately.</p><h2>Library vs Framework in One Sentence</h2><p>Here's the cheat code:</p><ul><li><strong>Library:</strong> You're in charge. You call the code when you need it.</li><li><strong>Framework:</strong> It's in charge. It calls your code at specific points.</li></ul><p>This concept is also called \"Inversion of Control\". Basically, with a framework, you follow its rules. With a library, you make the rules.</p><h2>A Side-by-Side Comparison</h2><table><thead><tr><th>Aspect</th><th>Library</th><th>Framework</th></tr></thead><tbody><tr><td>Control Flow</td><td>You call it</td><td>It calls you</td></tr><tr><td>Ownership</td><td>You structure the app</td><td>Framework dictates the structure</td></tr><tr><td>Flexibility</td><td>High</td><td>Medium/Low</td></tr><tr><td>Examples</td><td>React, NumPy, Lodash</td><td>Angular, Django, Next.js</td></tr><tr><td>Analogy</td><td>Toolbox</td><td>Skeleton or meal kit</td></tr></tbody></table><h2>Real-World Analogy: Cooking</h2><p>Imagine you're cooking dinner:</p><ul><li>A library is like a box of ingredients. You can make any dish in any order. You control everything.</li><li>A framework is like a meal kit. It comes with a recipe and a plan. You can add spices or tweak a little, but you're generally following its instructions.</li></ul><p>This is exactly why beginners sometimes feel \"restricted\" with frameworks — they aren't meant to give total freedom. They give structure so you don't have to reinvent the wheel every time.</p><h2>Why This Matters in Web Development</h2><h3>React: The Library</h3><p>React is a library for building UI components. It provides tools to create reusable UI elements like buttons, modals, and navigation bars. But beyond that, you decide:</p><ul><li>How the app is structured</li><li>How routing works</li><li>How data fetching works</li></ul><p>Here's a tiny React example:</p><pre class=\"code-block\"><code class=\"language-js\">import React from \"react\";\n\nfunction Greeting({ name }) {\n  return &lt;h1&gt;Hello, {name}!&lt;/h1&gt;;\n}\n\nexport default Greeting;</code></pre><p>You call this component wherever you want. React doesn't dictate when or how you use it.</p><h3>Next.js: The Framework</h3><p>Next.js is a framework built on React. It handles routing, server-side rendering, static site generation, and more. It dictates certain patterns, like:</p><ul><li>File-based routing (pages/index.js becomes your homepage)</li><li>API routes (pages/api/)</li><li>Built-in optimizations (SSR, SSG, image optimization)</li></ul><p>A tiny Next.js page example:</p><pre class=\"code-block\"><code class=\"language-js\">// pages/index.js\nexport default function Home() {\n  return &lt;h1&gt;Welcome to my Next.js site!&lt;/h1&gt;;\n}</code></pre><p>Notice how you don't need to configure routing — Next.js handles it automatically. That's the framework \"calling your code,\" instead of you calling the library manually.</p><h2>Picking Between a Library and a Framework</h2><ul><li><strong>Project Complexity:</strong> Small or highly customized projects → library (React, Lodash); Larger projects with standard patterns → framework (Next.js, Angular, Django)</li><li><strong>Learning Curve:</strong> Libraries are easier to start with since they're more flexible; Frameworks have more conventions and rules but save time once you understand them.</li><li><strong>Community & Ecosystem:</strong> Both have huge communities, but frameworks often come with built-in tooling; Libraries might require piecing together multiple tools.</li></ul><h2>Code Snippets: Library vs Framework in Action</h2><h3>Using React (Library Approach)</h3><pre class=\"code-block\"><code class=\"language-jsx\">import React, { useEffect, useState } from \"react\";\n\nfunction UsersList() {\n  const [users, setUsers] = useState([]);\n\n  useEffect(() =&gt; {\n    fetch(\"https://jsonplaceholder.typicode.com/users\")\n      .then((res) =&gt; res.json())\n      .then(setUsers);\n  }, []);\n\n  return (\n    &lt;ul&gt;\n      {users.map((user) =&gt; (\n        &lt;li key={user.id}&gt;{user.name}&lt;/li&gt;\n      ))}\n    &lt;/ul&gt;\n  );\n}\n\nexport default UsersList;</code></pre><p>You decide everything: how to fetch, where to store state, when to render.</p><h3>Using Next.js (Framework Approach)</h3><pre class=\"code-block\"><code class=\"language-js\">// pages/users.js\nexport async function getServerSideProps() {\n  const res = await fetch(\"https://jsonplaceholder.typicode.com/users\");\n  const users = await res.json();\n  return { props: { users } };\n}\n\nexport default function Users({ users }) {\n  return (\n    &lt;ul&gt;\n      {users.map((user) =&gt; (\n        &lt;li key={user.id}&gt;{user.name}&lt;/li&gt;\n      ))}\n    &lt;/ul&gt;\n  );\n}</code></pre><p>Here, Next.js decides when and how to fetch data (server-side) and inject it into your page. You just provide the component logic. That's inversion of control in practice.</p><h2>Common Misconceptions</h2><ul><li>\"Libraries are always easier than frameworks\" → Not true. Libraries give flexibility, but you're responsible for app architecture.</li><li>\"Frameworks are restrictive\" → They're structured. That structure can save you time and prevent messy code in large apps.</li><li>\"React is a framework\" → Nope. React is a library; Next.js is a framework built on top of it.</li></ul><h2>Key Takeaways</h2><ul><li>Library = You call it. Flexibility.</li><li>Framework = It calls you. Structure.</li><li>React vs Next.js perfectly illustrates the difference.</li><li>Project choice matters — pick the right tool for the size and complexity of your app.</li><li>Understanding inversion of control will make your life easier when learning frameworks.</li></ul><p>Bottom Line: Knowing the difference between a library and a framework is more than a buzzword. It helps you structure projects correctly, pick the right tools, and avoid unnecessary frustration. Next time someone asks you this in an interview or a project, you'll answer like a pro.</p>"
+            "content": "<p>If you've ever started a coding project, you've probably asked yourself: \"Should I use a library or a framework?\" They both promise to save you time, provide reusable code, and make development smoother. But the difference between them is bigger than most beginners realize. Choosing the wrong one can turn a simple project into a confusing mess.</p><p>In this post, we'll break down the distinction, give real-world analogies, show examples in modern web development, and even provide code snippets so it clicks immediately.</p><h2>Library vs Framework in One Sentence</h2><p>Here's the cheat code:</p><ul><li><strong>Library:</strong> You're in charge. You call the code when you need it.</li><li><strong>Framework:</strong> It's in charge. It calls your code at specific points.</li></ul><p>This concept is also called \"Inversion of Control\". Basically, with a framework, you follow its rules. With a library, you make the rules.</p><h2>A Side-by-Side Comparison</h2><table><thead><tr><th>Aspect</th><th>Library</th><th>Framework</th></tr></thead><tbody><tr><td>Control Flow</td><td>You call it</td><td>It calls you</td></tr><tr><td>Ownership</td><td>You structure the app</td><td>Framework dictates the structure</td></tr><tr><td>Flexibility</td><td>High</td><td>Medium/Low</td></tr><tr><td>Examples</td><td>React, NumPy, Lodash</td><td>Angular, Django, Next.js</td></tr><tr><td>Analogy</td><td>Toolbox</td><td>Skeleton or meal kit</td></tr></tbody></table><h2>Real-World Analogy: Cooking</h2><p>Imagine you're cooking dinner:</p><ul><li>A library is like a box of ingredients. You can make any dish in any order. You control everything.</li><li>A framework is like a meal kit. It comes with a recipe and a plan. You can add spices or tweak a little, but you're generally following its instructions.</li></ul><p>This is exactly why beginners sometimes feel \"restricted\" with frameworks, they aren't meant to give total freedom. They give structure so you don't have to reinvent the wheel every time.</p><h2>Why This Matters in Web Development</h2><h3>React: The Library</h3><p>React is a library for building UI components. It provides tools to create reusable UI elements like buttons, modals, and navigation bars. But beyond that, you decide:</p><ul><li>How the app is structured</li><li>How routing works</li><li>How data fetching works</li></ul><p>Here's a tiny React example:</p><pre class=\"code-block\"><code class=\"language-js\">import React from \"react\";\n\nfunction Greeting({ name }) {\n  return &lt;h1&gt;Hello, {name}!&lt;/h1&gt;;\n}\n\nexport default Greeting;</code></pre><p>You call this component wherever you want. React doesn't dictate when or how you use it.</p><h3>Next.js: The Framework</h3><p>Next.js is a framework built on React. It handles routing, server-side rendering, static site generation, and more. It dictates certain patterns, like:</p><ul><li>File-based routing (pages/index.js becomes your homepage)</li><li>API routes (pages/api/)</li><li>Built-in optimizations (SSR, SSG, image optimization)</li></ul><p>A tiny Next.js page example:</p><pre class=\"code-block\"><code class=\"language-js\">// pages/index.js\nexport default function Home() {\n  return &lt;h1&gt;Welcome to my Next.js site!&lt;/h1&gt;;\n}</code></pre><p>Notice how you don't need to configure routing, Next.js handles it automatically. That's the framework \"calling your code,\" instead of you calling the library manually.</p><h2>Picking Between a Library and a Framework</h2><ul><li><strong>Project Complexity:</strong> Small or highly customized projects → library (React, Lodash); Larger projects with standard patterns → framework (Next.js, Angular, Django)</li><li><strong>Learning Curve:</strong> Libraries are easier to start with since they're more flexible; Frameworks have more conventions and rules but save time once you understand them.</li><li><strong>Community & Ecosystem:</strong> Both have huge communities, but frameworks often come with built-in tooling; Libraries might require piecing together multiple tools.</li></ul><h2>Code Snippets: Library vs Framework in Action</h2><h3>Using React (Library Approach)</h3><pre class=\"code-block\"><code class=\"language-jsx\">import React, { useEffect, useState } from \"react\";\n\nfunction UsersList() {\n  const [users, setUsers] = useState([]);\n\n  useEffect(() =&gt; {\n    fetch(\"https://jsonplaceholder.typicode.com/users\")\n      .then((res) =&gt; res.json())\n      .then(setUsers);\n  }, []);\n\n  return (\n    &lt;ul&gt;\n      {users.map((user) =&gt; (\n        &lt;li key={user.id}&gt;{user.name}&lt;/li&gt;\n      ))}\n    &lt;/ul&gt;\n  );\n}\n\nexport default UsersList;</code></pre><p>You decide everything: how to fetch, where to store state, when to render.</p><h3>Using Next.js (Framework Approach)</h3><pre class=\"code-block\"><code class=\"language-js\">// pages/users.js\nexport async function getServerSideProps() {\n  const res = await fetch(\"https://jsonplaceholder.typicode.com/users\");\n  const users = await res.json();\n  return { props: { users } };\n}\n\nexport default function Users({ users }) {\n  return (\n    &lt;ul&gt;\n      {users.map((user) =&gt; (\n        &lt;li key={user.id}&gt;{user.name}&lt;/li&gt;\n      ))}\n    &lt;/ul&gt;\n  );\n}</code></pre><p>Here, Next.js decides when and how to fetch data (server-side) and inject it into your page. You just provide the component logic. That's inversion of control in practice.</p><h2>Common Misconceptions</h2><ul><li>\"Libraries are always easier than frameworks\" → Not true. Libraries give flexibility, but you're responsible for app architecture.</li><li>\"Frameworks are restrictive\" → They're structured. That structure can save you time and prevent messy code in large apps.</li><li>\"React is a framework\" → Nope. React is a library; Next.js is a framework built on top of it.</li></ul><h2>Key Takeaways</h2><ul><li>Library = You call it. Flexibility.</li><li>Framework = It calls you. Structure.</li><li>React vs Next.js perfectly illustrates the difference.</li><li>Project choice matters, pick the right tool for the size and complexity of your app.</li><li>Understanding inversion of control will make your life easier when learning frameworks.</li></ul><p>Bottom Line: Knowing the difference between a library and a framework is more than a buzzword. It helps you structure projects correctly, pick the right tools, and avoid unnecessary frustration. Next time someone asks you this in an interview or a project, you'll answer like a pro.</p>"
         }
     ]
 };
@@ -125,27 +139,19 @@ function displayBlogs(blogs) {
     }
 
     container.innerHTML = recentBlogs.map(blog => `
-        <div class="blog-card">
-            <div class="blog-image">
-                <img 
-                    src="${getCorrectImagePath(blog.image || '')}" 
-                    alt="${blog.alt || blog.title || 'Blog image'}" 
-                    loading="lazy"
-                    onerror="this.onerror=null; this.src='src/assets/profile-pic.png';"
-                />
+        <div class="blog-row" onclick="openBlog(${blog.id})">
+            <div class="blog-row-main">
+                <h3 class="blog-row-title">${blog.title || 'Untitled'}</h3>
+                <p class="blog-row-desc">${blog.summary || ''}</p>
+                <span class="blog-row-date">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                    ${formatDate(blog.date)}
+                </span>
             </div>
-            <div class="blog-content">
-                <div class="blog-meta">
-                    <span class="blog-category">${blog.category || 'General'}</span>
-                    <span class="blog-date">${formatDate(blog.date)}</span>
-                </div>
-                <h3 class="blog-title">${blog.title || 'Untitled'}</h3>
-                <p class="blog-description">${blog.summary || ''}</p>
-                <div class="blog-footer">
-                    <span class="blog-read-time">${blog.readTime || '5 min read'}</span>
-                    <button class="blog-btn" onclick="openBlog(${blog.id})">Read More</button>
-                </div>
-            </div>
+            <span class="blog-row-more">
+                Read more
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+            </span>
         </div>
     `).join('');
 }
@@ -299,34 +305,19 @@ function displayProjects(projects) {
     const cardsHtml = projects
         .filter(project => project && project.title) // Filter out invalid projects
         .map(project => `
-        <div class="details-container color-container project-card">
-            <div class="project-image-container">
-              <img
-                src="${project.image || ''}"
-                alt="${project.alt || project.title || 'Project image'}"
-                class="project-img"
-                loading="lazy"
-                onerror="this.onerror=null; this.src='src/assets/project-1.png';"
-              />
+        <div class="project-row">
+            <div class="project-row-main">
+                <h3 class="project-row-title">${project.title || 'Untitled Project'}</h3>
+                ${project.description ? `<p class="project-row-desc">${project.description}</p>` : ''}
             </div>
-            <div class="project-content">
-              <h2 class="experience-sub-title project-title">${project.title || 'Untitled Project'}</h2>
-              <div class="btn-container">
-                <button
-                  class="btn btn-color-2 project-btn" 
-                  ${project.github ? '' : 'disabled="true"'}
-                  ${project.github ? `onclick="window.open('${project.github}', '_blank')"` : ''}
-                >
-                  Github
-                </button>
-                <button
-                  class="btn btn-color-2 project-btn" 
-                  ${project.live ? '' : 'disabled="true"'}
-                  ${project.live ? `onclick="window.open('${project.live}', '_blank')"` : ''}
-                >
-                  Live Demo
-                </button>
-              </div>
+            <div class="project-row-links">
+                ${project.github ? `<a href="${project.github}" target="_blank" rel="noopener" aria-label="GitHub repository">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .3a12 12 0 0 0-3.8 23.38c.6.12.83-.26.83-.57v-2c-3.34.72-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.08-.75.09-.73.09-.73 1.2.09 1.83 1.24 1.83 1.24 1.07 1.83 2.81 1.3 3.5.99.1-.78.42-1.3.76-1.6-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.14-.3-.54-1.52.1-3.18 0 0 1-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.28-1.55 3.29-1.23 3.29-1.23.65 1.66.24 2.88.12 3.18.77.84 1.23 1.91 1.23 3.22 0 4.61-2.8 5.63-5.48 5.92.42.36.81 1.1.81 2.22v3.29c0 .31.21.69.83.57A12 12 0 0 0 12 .3z"/></svg>
+                </a>` : ''}
+                ${project.live ? `<a href="${project.live}" target="_blank" rel="noopener" class="project-live" aria-label="Live demo">
+                    Live
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                </a>` : ''}
             </div>
         </div>
     `).join('');

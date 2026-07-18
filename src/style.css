@@ -257,7 +257,7 @@ a:hover {
 /* SECTIONS */
 
 section {
-  padding: 8rem 2rem;
+  padding: 5rem 2rem;
   margin: 0 auto;
   max-width: 1200px;
   box-sizing: border-box;
@@ -444,7 +444,7 @@ section {
 
 #about {
   position: relative;
-  padding: 6rem 10rem;
+  padding: 4rem 2rem;
 }
 
 #about .section-container {
@@ -558,7 +558,7 @@ section {
 /* EXPERIENCE SECTION */
 
 #experience {
-  padding: 6rem 10rem;
+  padding: 4rem 2rem;
   position: relative;
 }
 
@@ -615,7 +615,7 @@ article .icon {
 /* PROJECTS SECTION */
 
 #projects {
-  padding: 6rem 10rem;
+  padding: 4rem 2rem;
   position: relative;
 }
 
@@ -759,8 +759,8 @@ img {
   display: flex;
   justify-content: center;
   flex-direction: column;
-  padding: 6rem 10rem;
-  min-height: 60vh;
+  padding: 4rem 2rem;
+  min-height: auto;
 }
 
 .contact-info-upper-container {
@@ -905,14 +905,14 @@ img {
 
 #blogs {
   position: relative;
-  padding: 6rem 10rem;
+  padding: 4rem 2rem;
 }
 
 .blogs-container {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fill, minmax(300px, 360px));
+  justify-content: center;
   gap: 2rem;
-  margin-top: 3rem;
   max-width: 1200px;
   margin: 3rem auto 0;
 }

@@ -2384,3 +2384,94 @@ screen and (min-resolution: 192dpi) {
     align-items: flex-start;
   }
 }
+
+/* ============================================
+   USE THE HORIZONTAL MENU ON EVERY SCREEN
+   Drop the hamburger entirely.
+   ============================================ */
+#hamburger-nav {
+  display: none !important;
+}
+
+#desktop-nav {
+  display: flex !important;
+}
+
+@media screen and (max-width: 768px) {
+  #desktop-nav {
+    height: auto;
+    min-height: 0;
+    padding: 0.7rem 0;
+  }
+
+  #desktop-nav > div {
+    padding: 0 1.25rem;
+    overflow-x: auto;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  #desktop-nav > div::-webkit-scrollbar {
+    display: none;
+  }
+
+  .nav-links {
+    flex-wrap: nowrap;
+    gap: 0.9rem;
+    font-size: 0.6rem;
+    white-space: nowrap;
+  }
+
+  .nav-links li {
+    flex-shrink: 0;
+  }
+
+  /* Keep the hero left-aligned and tidy on mobile */
+  #profile {
+    align-items: flex-start;
+    text-align: left;
+    padding: 2.5rem 1.5rem 1.5rem;
+    max-width: 100%;
+  }
+
+  .profile-header {
+    gap: 1rem;
+    align-items: center;
+  }
+
+  .profile-avatar {
+    height: 68px;
+    width: 68px;
+  }
+
+  .profile-name {
+    font-size: 1.5rem;
+    margin-bottom: 0.35rem;
+  }
+
+  .profile-subtitle {
+    font-size: 0.82rem;
+    gap: 0.3rem 0.45rem;
+  }
+
+  .profile-bio {
+    font-size: 0.95rem;
+    text-align: left;
+    max-width: 100%;
+  }
+
+  .profile-socials {
+    flex-wrap: wrap;
+  }
+
+  /* Consistent section rhythm on mobile */
+  #work,
+  #blogs {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+
+  .section-heading {
+    font-size: 1.35rem;
+  }
+}

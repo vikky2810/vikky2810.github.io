@@ -278,11 +278,11 @@ section {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 2rem;
-  padding: 8rem 2rem;
-  min-height: 90vh;
+  gap: 1.25rem;
+  padding: 3rem 2rem 4rem;
+  min-height: calc(100vh - 12vh);
   text-align: center;
-  background: radial-gradient(circle at 50% -20%, var(--primary-glow), transparent 70%);
+  background: var(--bg-primary);
 }
 
 .section__pic-container {
@@ -343,6 +343,16 @@ section {
   font-weight: 800;
   margin-bottom: 1.5rem;
   max-width: 900px;
+}
+
+#profile .title {
+  font-size: 3.25rem;
+  margin-bottom: 0.5rem;
+  max-width: 760px;
+}
+
+#profile .section__text__p2 {
+  margin-bottom: 1.5rem;
 }
 
 .gradient-text {
@@ -550,9 +560,9 @@ section {
 }
 
 .section__pic-container {
-  height: 400px;
-  width: 400px;
-  margin: auto 0;
+  height: 180px;
+  width: 180px;
+  margin: 0 auto;
 }
 
 /* EXPERIENCE SECTION */
@@ -878,8 +888,8 @@ body {
 
 /* Profile picture styling */
 .section__pic-container .profile-pic {
-  width: 400px;
-  height: 400px;
+  width: 180px;
+  height: 180px;
   border-radius: 50%;
   object-fit: cover;
   display: block;

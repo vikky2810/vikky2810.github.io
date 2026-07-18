@@ -2214,3 +2214,66 @@ screen and (min-resolution: 192dpi) {
     margin-top: 0.5rem;
   }
 }
+
+/* ============================================
+   TWO-COLUMN HERO (Desktop & Tablet landscape)
+   Image on the left, info on the right.
+   Appended last so it wins over the earlier
+   per-breakpoint #profile rules. Mobile (<=768px)
+   keeps the stacked, centered layout above.
+   ============================================ */
+@media screen and (min-width: 769px) {
+  #profile {
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 3.5rem;
+    padding: 4rem 3rem;
+    min-height: calc(100vh - 12vh);
+    text-align: left;
+  }
+
+  .section__pic-container,
+  .section__pic-container .profile-pic {
+    width: 260px;
+    height: 260px;
+    flex-shrink: 0;
+    margin: 0;
+  }
+
+  .section__text {
+    flex: 1;
+    max-width: 600px;
+    text-align: left;
+    align-self: center;
+  }
+
+  #profile .title {
+    font-size: 3.25rem;
+    max-width: 100%;
+  }
+
+  #profile .section__text__p2 {
+    margin-left: 0;
+    margin-right: 0;
+    max-width: 100%;
+  }
+
+  #profile .btn-container,
+  #profile #socials-container {
+    justify-content: flex-start;
+  }
+}
+
+/* Comfortable extra breathing room on wide screens */
+@media screen and (min-width: 1100px) {
+  #profile {
+    gap: 5rem;
+  }
+
+  .section__pic-container,
+  .section__pic-container .profile-pic {
+    width: 300px;
+    height: 300px;
+  }
+}

@@ -5,9 +5,9 @@
 /* CSS Custom Properties for Dark Theme */
 :root {
   /* Primary Colors - Modern SaaS Palette */
-  --primary-color: #6366f1; /* Indigo */
-  --primary-glow: rgba(99, 102, 241, 0.5);
-  --secondary-color: #a855f7; /* Purple */
+  --primary-color: #14b8a6; /* Teal */
+  --primary-glow: rgba(20, 184, 166, 0.5);
+  --secondary-color: #06b6d4; /* Cyan */
   --accent-color: #f59e0b;
 
   /* Neutral Colors - Ultra Dark Theme */
@@ -16,7 +16,7 @@
   --text-muted: #64748b;
 
   /* Background Colors - Deep Space */
-  --bg-primary: #020617;
+  --bg-primary: #0B0909;
   --bg-secondary: #0f172a;
   --bg-tertiary: #1e293b;
   --bg-card: rgba(15, 23, 42, 0.5);
@@ -34,8 +34,8 @@
 
   /* Gradients */
   --gradient-text: linear-gradient(to right, #ffffff, #94a3b8);
-  --gradient-brand: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
-  --gradient-primary: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+  --gradient-brand: linear-gradient(135deg, #14b8a6 0%, #06b6d4 100%);
+  --gradient-primary: linear-gradient(135deg, #14b8a6 0%, #06b6d4 100%);
   --gradient-surface: linear-gradient(180deg, rgba(30, 41, 59, 0.5) 0%, rgba(15, 23, 42, 0.5) 100%);
 
   /* Transitions */
@@ -320,10 +320,10 @@ section {
   text-transform: uppercase;
   letter-spacing: 0.1em;
   margin-bottom: 1.5rem;
-  background: rgba(99, 102, 241, 0.1);
+  background: rgba(20, 184, 166, 0.1);
   padding: 0.5rem 1rem;
   border-radius: var(--radius-full);
-  border: 1px solid rgba(99, 102, 241, 0.2);
+  border: 1px solid rgba(20, 184, 166, 0.2);
   display: inline-block;
 }
 
@@ -426,12 +426,12 @@ section {
 .btn-color-1 {
   background: var(--gradient-brand);
   color: white;
-  box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4);
+  box-shadow: 0 4px 15px rgba(20, 184, 166, 0.4);
 }
 
 .btn-color-1:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(99, 102, 241, 0.5);
+  box-shadow: 0 8px 25px rgba(20, 184, 166, 0.5);
 }
 
 .btn-color-2 {

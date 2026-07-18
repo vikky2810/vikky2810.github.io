@@ -424,14 +424,13 @@ section {
 }
 
 .btn-color-1 {
-  background: var(--gradient-brand);
+  background: var(--primary-color);
   color: white;
-  box-shadow: 0 4px 15px rgba(20, 184, 166, 0.4);
 }
 
 .btn-color-1:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(20, 184, 166, 0.5);
+  background: #0d9488;
 }
 
 .btn-color-2 {

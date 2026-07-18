@@ -28,16 +28,14 @@
     align-items: center;
     gap: 1.25rem;
     padding: 1.5rem;
-    background: linear-gradient(135deg,
-            rgba(30, 41, 59, 0.8) 0%,
-            rgba(30, 41, 59, 0.6) 100%);
+    background: var(--bg-card);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-    border: 1px solid rgba(51, 65, 85, 0.6);
-    border-radius: 20px;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
     position: relative;
     overflow: hidden;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: var(--transition-normal);
     cursor: pointer;
 }
 
@@ -48,15 +46,16 @@
     left: 0;
     right: 0;
     height: 3px;
-    background: var(--gradient-primary);
+    background: var(--gradient-brand);
     opacity: 0;
-    transition: opacity 0.3s ease;
+    transition: opacity var(--transition-normal);
 }
 
 .contact-card:hover {
     transform: translateY(-4px);
     border-color: var(--primary-color);
-    box-shadow: var(--shadow-xl);
+    background: var(--bg-secondary);
+    box-shadow: var(--shadow-lg), var(--shadow-glow);
 }
 
 .contact-card:hover::before {

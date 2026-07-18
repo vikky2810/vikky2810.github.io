@@ -36,6 +36,9 @@ Thumbs.db
 logs
 *.log
 
+# Crash dumps
+*.stackdump
+
 # Runtime data
 pids
 *.pid

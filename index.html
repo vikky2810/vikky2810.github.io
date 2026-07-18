@@ -144,18 +144,24 @@
   <section id="profile">
     <div class="section__pic-container">
       <img src="src/assets/profile-pic.webp" alt="Vikram Kamble profile picture" class="profile-pic" loading="lazy"
-        width="400" height="400" style="max-width: 100%; height: auto;" />
+        width="120" height="120" />
     </div>
     <div class="section__text">
-      <p class="section__text__p1">Hello, I'm</p>
-      <h1 class="title">Vikram Kamble</h1>
-      <p class="section__text__p2">B. Tech Student</p>
+      <p class="section__text__p1">
+        <span style="display: inline-block; width: 8px; height: 8px; background: #10b981; border-radius: 50%; margin-right: 8px; box-shadow: 0 0 10px #10b981; animation: pulse 2s infinite;"></span>
+        Available for new opportunities
+      </p>
+      <h1 class="title">Building digital products with <span class="gradient-text">Passion & Purpose</span></h1>
+      <p class="section__text__p2">
+        Hi, I'm <span style="color: var(--text-primary); font-weight: 600;">Vikram Kamble</span>, 
+        a Full Stack Developer and B.Tech student specializing in building exceptional digital experiences.
+      </p>
       <div class="btn-container">
-        <button class="btn btn-color-2" onclick="window.open('./src/assets/Vikram Kamble Resume.pdf')">
-          Download CV
-        </button>
         <button class="btn btn-color-1" onclick="location.href='./#contact'">
-          Contact Info
+          Let's Talk <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+        </button>
+        <button class="btn btn-color-2" onclick="window.open('./src/assets/Vikram Kamble Resume.pdf')">
+          Resume
         </button>
       </div>
       <div id="socials-container">
@@ -387,19 +393,22 @@
       </div>
     </div>
   </section>
-  <footer>
-    <nav>
-      <div class="nav-links-container">
-        <ul class="nav-links">
+  <footer style="padding: 4rem 2rem; border-top: 1px solid var(--border-color); background: var(--bg-primary);">
+    <div style="display: flex; flex-direction: column; align-items: center; gap: 2rem;">
+      <div class="logo">Vikram Kamble</div>
+      <nav style="height: auto; background: transparent; border: none; backdrop-filter: none; position: static;">
+        <ul class="nav-links" style="justify-content: center;">
           <li><a href="#about">About</a></li>
           <li><a href="#experience">Experience</a></li>
           <li><a href="#projects">Projects</a></li>
           <li><a href="#blogs">Blogs</a></li>
           <li><a href="#contact">Contact</a></li>
         </ul>
-      </div>
-    </nav>
-    <p>Copyright &#169; 2023 Vikram Kamble. All Rights Reserved.</p>
+      </nav>
+      <p style="color: var(--text-muted); font-size: 0.875rem;">
+        &copy; 2026 Vikram Kamble. Crafted with <span style="color: #ef4444;">&hearts;</span> and code.
+      </p>
+    </div>
   </footer>
   <script src="src/script.js"></script>
 </body>

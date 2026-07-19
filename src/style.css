@@ -42,6 +42,14 @@
   --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   --transition-normal: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 
+  /* ====================================================
+     >>> ADJUST GAP BETWEEN SECTIONS HERE <<<
+     This controls the top & bottom padding of every
+     section. Two adjacent sections add up, so the visible
+     gap ≈ 2 × this value. Lower it to tighten the layout.
+     ==================================================== */
+  --section-gap: 0rem;
+
   /* Border Radius */
   --radius-sm: 0.5rem;
   --radius-md: 0.75rem;
@@ -899,7 +907,7 @@ section {
 
 #about {
   position: relative;
-  padding: 4rem 2rem;
+  padding: var(--section-gap) 2rem;
 }
 
 #about .section-container {
@@ -1013,7 +1021,7 @@ section {
 /* EXPERIENCE SECTION */
 
 #experience {
-  padding: 4rem 2rem;
+  padding: var(--section-gap) 2rem;
   position: relative;
 }
 
@@ -1070,7 +1078,8 @@ article .icon {
 /* PROJECTS SECTION */
 
 #projects {
-  padding: 4rem 2rem;
+  padding: var(--section-gap) 2rem;
+  margin-top: 2rem;
   position: relative;
 }
 
@@ -1214,7 +1223,7 @@ img {
   display: flex;
   justify-content: center;
   flex-direction: column;
-  padding: 4rem 2rem;
+  padding: var(--section-gap) 2rem;
   min-height: auto;
 }
 
@@ -1360,7 +1369,7 @@ img {
 
 #blogs {
   position: relative;
-  padding: 2rem 2rem 3rem;
+  padding: var(--section-gap) 2rem;
   max-width: 760px;
   margin: 0 auto;
 }

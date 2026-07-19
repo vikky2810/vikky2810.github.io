@@ -1536,7 +1536,7 @@
     align-items: center;
     padding: 1rem 2rem;
     height: auto;
-    min-height: 12vh;
+    min-height: 56px;
   }
 
   .logo {
@@ -1738,7 +1738,7 @@
   /* Navigation */
   nav {
     padding: 0 2rem;
-    height: 15vh;
+    height: 56px;
   }
 
   .nav-links {
@@ -2001,11 +2001,11 @@
 
   /* Navigation */
   nav {
-    height: 12vh;
+    height: 56px;
   }
 
   #hamburger-nav {
-    min-height: 12vh;
+    min-height: 56px;
   }
 
   /* Sections */

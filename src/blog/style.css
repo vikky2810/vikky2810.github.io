@@ -1,43 +1,48 @@
 /* Import Google Fonts */
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap");
 
-/* CSS Custom Properties for Dark Theme */
+/* CSS Custom Properties for Dark Theme - matches portfolio home */
 :root {
-  /* Primary Colors */
-  --primary-color: #3b82f6;
-  --primary-dark: #1d4ed8;
-  
-  
-  /* Neutral Colors - Dark Theme */
-  --text-primary: #f1f5f9;
-  --text-secondary: #cbd5e1;
-  --text-muted: #94a3b8;
-  
-  /* Background Colors - Dark Theme */
-  --bg-primary: #0f172a;
-  --bg-secondary: #1e293b;
-  
-  /* Border Colors - Dark Theme */
-  --border-color: #334155;
-  --border-hover: #475569;
-  
-  /* Shadow Colors - Dark Theme */
-  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.3);
-  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.4), 0 2px 4px -2px rgb(0 0 0 / 0.4);
-  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.4), 0 4px 6px -4px rgb(0 0 0 / 0.4);
-  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.4), 0 8px 10px -6px rgb(0 0 0 / 0.4);
-  
+  /* Primary Colors - Modern SaaS Palette */
+  --primary-color: #14b8a6; /* Teal */
+  --primary-glow: rgba(20, 184, 166, 0.5);
+  --secondary-color: #06b6d4; /* Cyan */
+  --accent-color: #f59e0b;
+
+  /* Neutral Colors - Ultra Dark Theme */
+  --text-primary: #ffffff;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+
+  /* Background Colors - Deep Space */
+  --bg-primary: #0B0909;
+  --bg-secondary: #0f172a;
+  --bg-tertiary: #1e293b;
+  --bg-card: rgba(15, 23, 42, 0.5);
+
+  /* Border Colors */
+  --border-color: rgba(51, 65, 85, 0.5);
+  --border-hover: rgba(100, 116, 139, 0.8);
+
+  /* Shadow Colors */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.5);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.5);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.5);
+  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.6), 0 8px 10px -6px rgb(0 0 0 / 0.6);
+  --shadow-glow: 0 0 20px var(--primary-glow);
+
   /* Gradients */
-  --gradient-primary: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
-  
+  --gradient-brand: linear-gradient(135deg, #14b8a6 0%, #06b6d4 100%);
+  --gradient-primary: linear-gradient(135deg, #14b8a6 0%, #06b6d4 100%);
+
   /* Transitions */
   --transition-normal: 0.3s ease;
   --transition-slow: 0.5s ease;
-  
+
   /* Border Radius */
-  --radius-md: 0.5rem;
-  --radius-lg: 0.75rem;
-  --radius-xl: 1rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.5rem;
   --radius-full: 9999px;
 }
 
@@ -49,7 +54,7 @@
 }
 
 body {
-  font-family: "Poppins", sans-serif;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   color: var(--text-primary);
   background-color: var(--bg-primary);
   line-height: 1.6;
@@ -62,17 +67,16 @@ html {
 
 /* Blog Header Styles */
 .blog-header {
-  background: rgba(15, 23, 42, 0.95);
-  backdrop-filter: blur(10px);
+  background: var(--bg-primary);
   border-bottom: 1px solid var(--border-color);
   position: sticky;
   top: 0;
   z-index: 1000;
-  padding: 1rem 0;
+  padding: 0.75rem 0;
 }
 
 .header-container {
-  max-width: 1200px;
+  max-width: 760px;
   margin: 0 auto;
   padding: 0 2rem;
 }
@@ -81,23 +85,20 @@ html {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 0.75rem 1.5rem;
-  background: var(--gradient-primary);
-  color: white;
+  padding: 0.5rem 1.1rem;
+  background: transparent;
+  color: var(--text-secondary);
   text-decoration: none;
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-full);
   font-weight: 600;
-  font-size: 1rem;
+  font-size: 0.85rem;
   transition: var(--transition-normal);
-  box-shadow: var(--shadow-md);
-  border: 2px solid transparent;
+  border: 1px solid var(--border-color);
 }
 
 .back-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-lg);
-  background: var(--gradient-primary);
   border-color: var(--primary-color);
+  color: var(--primary-color);
 }
 
 .back-icon {
@@ -212,17 +213,86 @@ html {
 }
 
 .blog-cards-container {
-  max-width: 1200px;
+  max-width: 760px;
   margin: 0 auto;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 400px));
-  gap: 2rem;
-  justify-content: center;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Row-based listing — matches the portfolio home page */
+.blog-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1.5rem;
+  padding: 1.5rem 0;
+  border-bottom: 1px solid var(--border-color);
+  cursor: pointer;
+  transition: var(--transition-normal);
+}
+
+.blog-row:first-child {
+  padding-top: 0;
+}
+
+.blog-row:hover {
+  opacity: 0.85;
+}
+
+.blog-row-main {
+  min-width: 0;
+}
+
+.blog-row-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 0.35rem;
+  line-height: 1.3;
+}
+
+.blog-row-desc {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  margin-bottom: 0.6rem;
+}
+
+.blog-row-date {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.blog-row-more {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  white-space: nowrap;
+  flex-shrink: 0;
+  padding-top: 0.15rem;
+  transition: var(--transition-normal);
+}
+
+.blog-row:hover .blog-row-more {
+  color: var(--primary-color);
+}
+
+.blog-row:hover .blog-row-more svg {
+  transform: translateX(3px);
+}
+
+.blog-row-more svg {
+  transition: var(--transition-normal);
 }
 
 /* Blog Card Styles */
 .blog-card {
-  background: var(--bg-secondary);
+  background: rgba(255, 255, 255, 0.03);
   border-radius: var(--radius-xl);
   overflow: hidden;
   transition: var(--transition-normal);
@@ -234,8 +304,8 @@ html {
 
 .blog-card:hover {
   transform: translateY(-8px);
-  box-shadow: var(--shadow-xl);
-  border-color: var(--border-hover);
+  box-shadow: var(--shadow-lg), var(--shadow-glow);
+  border-color: var(--primary-color);
 }
 
 .blog-card::before {
@@ -258,6 +328,8 @@ html {
   position: relative;
   height: 200px;
   overflow: hidden;
+  background: var(--bg-tertiary);
+  border-bottom: 1px solid var(--border-color);
 }
 
 .blog-image img {
@@ -267,30 +339,41 @@ html {
   transition: var(--transition-slow);
 }
 
+/* Soften the transition from a bright image into the dark card */
+.blog-image::after {
+  content: '';
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 48px;
+  background: linear-gradient(to top, rgba(11, 9, 9, 0.55), transparent);
+  pointer-events: none;
+}
+
 .blog-card:hover .blog-image img {
   transform: scale(1.05);
 }
 
 .blog-content {
-  padding: 1.5rem;
+  padding: 1.75rem;
 }
 
 .blog-meta {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 1rem;
+  margin-bottom: 1.25rem;
   flex-wrap: wrap;
   gap: 0.5rem;
 }
 
 .blog-category {
-  background: var(--gradient-primary);
-  color: white;
-  padding: 0.25rem 0.75rem;
+  background: rgba(20, 184, 166, 0.12);
+  color: var(--primary-color);
+  border: 1px solid rgba(20, 184, 166, 0.3);
+  padding: 0.3rem 0.85rem;
   border-radius: var(--radius-full);
-  font-size: 0.875rem;
-  font-weight: 500;
+  font-size: 0.75rem;
+  font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.05em;
 }
@@ -302,11 +385,12 @@ html {
 }
 
 .blog-title {
-  font-size: 1.5rem;
-  font-weight: 600;
+  font-size: 1.4rem;
+  font-weight: 700;
   color: var(--text-primary);
-  margin-bottom: 1rem;
+  margin-bottom: 0.75rem;
   line-height: 1.3;
+  letter-spacing: -0.01em;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   line-clamp: 2;
@@ -343,8 +427,8 @@ html {
 }
 
 .blog-btn {
-  background: var(--gradient-primary);
-  color: white;
+  background: var(--primary-color);
+  color: #0B0909;
   border: none;
   padding: 0.75rem 1.5rem;
   border-radius: var(--radius-md);
@@ -357,6 +441,7 @@ html {
 }
 
 .blog-btn:hover {
+  background: #0d9488;
   transform: translateY(-2px);
   box-shadow: var(--shadow-md);
 }
@@ -590,7 +675,7 @@ tbody tr {
 }
 
 tbody tr:hover {
-  background: rgba(59, 130, 246, 0.1);
+  background: rgba(20, 184, 166, 0.1);
   transform: translateY(-1px);
 }
 
@@ -609,7 +694,7 @@ tbody td {
 tbody td:first-child {
   font-weight: 600;
   color: var(--text-primary);
-  background: rgba(59, 130, 246, 0.05);
+  background: rgba(20, 184, 166, 0.05);
 }
 
 /* Responsive Table */

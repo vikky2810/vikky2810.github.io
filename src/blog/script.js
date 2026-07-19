@@ -80,47 +80,41 @@ function displayBlogs(blogs) {
         return;
     }
 
-    // Create blog cards HTML
+    // Create blog rows HTML
     container.innerHTML = blogs.map(blog => createBlogCard(blog)).join('');
-    
-    // Add fade-in animation to cards
-    const cards = container.querySelectorAll('.blog-card');
-    cards.forEach((card, index) => {
-        card.style.opacity = '0';
-        card.style.transform = 'translateY(20px)';
-        
+
+    // Add fade-in animation to rows
+    const rows = container.querySelectorAll('.blog-row');
+    rows.forEach((row, index) => {
+        row.style.opacity = '0';
+        row.style.transform = 'translateY(20px)';
+
         setTimeout(() => {
-            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-            card.style.opacity = '1';
-            card.style.transform = 'translateY(0)';
+            row.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            row.style.opacity = '1';
+            row.style.transform = 'translateY(0)';
         }, index * 100);
     });
 }
 
-// Function to create individual blog card HTML
+// Function to create individual blog row HTML (matches the portfolio home listing)
 function createBlogCard(blog) {
     const formattedDate = formatDate(blog.date);
-    const imagePath = getCorrectImagePath(blog.image);
-    
+
     return `
-        <div class="blog-card" data-category="${blog.category.toLowerCase()}" onclick="openBlog(${blog.id})">
-            <div class="blog-image">
-                <img src="${imagePath}" alt="${blog.alt || blog.title}" loading="lazy" />
+        <div class="blog-row" data-category="${blog.category.toLowerCase()}" onclick="openBlog(${blog.id})">
+            <div class="blog-row-main">
+                <h3 class="blog-row-title">${blog.title}</h3>
+                <p class="blog-row-desc">${blog.summary}</p>
+                <span class="blog-row-date">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                    ${formattedDate}
+                </span>
             </div>
-            <div class="blog-content">
-                <div class="blog-meta">
-                    <span class="blog-category">${blog.category}</span>
-                    <span class="blog-date">${formattedDate}</span>
-                </div>
-                <h3 class="blog-title">${blog.title}</h3>
-                <p class="blog-description">${blog.summary}</p>
-                <div class="blog-footer">
-                    <span class="blog-read-time">${blog.readTime}</span>
-                    <button class="blog-btn" onclick="event.stopPropagation(); openBlog(${blog.id})">
-                        Read More
-                    </button>
-                </div>
-            </div>
+            <span class="blog-row-more">
+                Read more
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+            </span>
         </div>
     `;
 }

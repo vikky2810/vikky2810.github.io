@@ -44,7 +44,7 @@
             padding: 4px 8px;
             cursor: pointer;
             transition: all 0.2s ease;
-            font-family: "Poppins", sans-serif;
+            font-family: "Inter", sans-serif;
             z-index: 10;
         }
 
@@ -135,18 +135,21 @@
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
-            background: var(--gradient-primary);
-            color: var(--text-primary);
-            padding: 0.75rem 1.5rem;
+            background: transparent;
+            color: var(--text-secondary);
+            border: 1px solid var(--border-color);
+            padding: 0.5rem 1.1rem;
             border-radius: var(--radius-full);
             text-decoration: none;
+            font-size: 0.85rem;
             font-weight: 600;
             margin-bottom: 2rem;
             transition: var(--transition-normal);
         }
 
         .back-btn:hover {
-            transform: translateY(-2px);
+            border-color: var(--primary-color);
+            color: var(--primary-color);
         }
 
         .warning {
@@ -163,7 +166,7 @@
         }
 
         .info {
-            background: rgba(59, 130, 246, 0.1);
+            background: rgba(20, 184, 166, 0.1);
             border: 1px solid var(--primary-color);
             border-radius: var(--radius-lg);
             padding: 1rem;

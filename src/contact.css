@@ -391,6 +391,7 @@
     align-items: stretch;
     text-align: left;
     overflow: visible;
+    padding-top: 3rem;
 }
 
 #contact::before {

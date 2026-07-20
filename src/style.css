@@ -716,7 +716,7 @@ section {
 .site-footer {
   border-top: 1px solid var(--border-color);
   background: var(--bg-primary);
-  padding: 2rem;
+  padding: 1.25rem 2rem;
 }
 
 .footer-inner {
@@ -737,6 +737,7 @@ section {
 .footer-copy {
   font-size: 0.85rem;
   color: var(--text-muted);
+  margin: 0;
 }
 
 .section__pic-container {
@@ -1299,9 +1300,6 @@ img {
 /* FOOTER SECTION */
 
 footer {
-  height: 26vh;
-  margin: 0 1rem;
-  padding: 2rem;
   border-top: 1px solid var(--border-color);
 }
 

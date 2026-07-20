@@ -1,6 +1,13 @@
 {
   "projects": [
     {
+      "id": 3,
+      "title": "Health-Aware Recipe Modifier",
+      "description": "Full-stack Flask app that generates recipes tailored to user-specified medical conditions using the Gemini API — flags harmful ingredients, recommends safe substitutes, and generates PDF summary reports.",
+      "github": "https://github.com/vikky2810/Recipe-Modifier",
+      "live": "https://recipe-modifier-app.vercel.app"
+    },
+    {
       "id": 1,
       "title": "AI explains Repo",
       "image": "src/assets/pro.png",
@@ -15,14 +22,6 @@
       "alt": "python code editor",
       "github": "https://github.com/vikky2810/OnlineCodeEditor",
       "live": "https://viks-online-code-editor.vercel.app/"
-    },
-    {
-      "id": 3,
-      "title": "In Working..",
-      "image": "src/assets/project-3.png",
-      "alt": "Project in Development",
-      "github": "https://github.com/",
-      "live": "https://github.com/"
     }
   ]
 }

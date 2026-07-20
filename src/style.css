@@ -20,6 +20,7 @@
   --bg-secondary: #0f172a;
   --bg-tertiary: #1e293b;
   --bg-card: rgba(15, 23, 42, 0.5);
+  --bg-nav: rgba(11, 9, 9, 0.72); /* --bg-primary, translucent for the nav blur */
 
   /* Border Colors */
   --border-color: rgba(51, 65, 85, 0.5);
@@ -98,12 +99,53 @@ nav {
   justify-content: space-around;
   align-items: center;
   height: 56px;
-  background: var(--bg-primary);
+  background: var(--bg-nav);
+  backdrop-filter: blur(12px) saturate(140%);
+  -webkit-backdrop-filter: blur(12px) saturate(140%);
   border-bottom: 1px solid var(--border-color);
   position: sticky;
   top: 0;
   z-index: 1000;
   transition: var(--transition-normal);
+}
+
+/* Browsers without backdrop-filter get the opaque bar instead of a see-through one */
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  nav {
+    background: var(--bg-primary);
+  }
+}
+
+/* Progressive blur/fade at the bottom edge of the viewport.
+   The mask ramps the blur in from nothing at the top of the strip to
+   full strength at the bottom, so content softens as it scrolls out. */
+.scroll-fade {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 90px;
+  z-index: 900;
+  pointer-events: none;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  background: linear-gradient(to top, var(--bg-primary) 5%, transparent 90%);
+  mask-image: linear-gradient(to top, #000 35%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to top, #000 35%, transparent 100%);
+  opacity: 1;
+  transition: opacity 0.25s ease;
+}
+
+/* Hide it once the footer is reached so the footer never sits under the blur */
+.scroll-fade.is-hidden {
+  opacity: 0;
+}
+
+/* No mask support means no gradient ramp — a hard blurred band looks worse than none */
+@supports not ((mask-image: linear-gradient(#000, transparent)) or (-webkit-mask-image: linear-gradient(#000, transparent))) {
+  .scroll-fade {
+    display: none;
+  }
 }
 
 .nav-links {

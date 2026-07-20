@@ -44,6 +44,20 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
+    // Fade out the bottom blur strip once the footer is in view, so the
+    // footer itself never sits underneath it.
+    const scrollFade = document.querySelector('.scroll-fade');
+    const footer = document.querySelector('.site-footer');
+    if (scrollFade && footer) {
+        const updateScrollFade = () => {
+            const footerTop = footer.getBoundingClientRect().top;
+            scrollFade.classList.toggle('is-hidden', footerTop <= window.innerHeight);
+        };
+        updateScrollFade();
+        window.addEventListener('scroll', updateScrollFade, { passive: true });
+        window.addEventListener('resize', updateScrollFade, { passive: true });
+    }
+
     // Keep the footer copyright year current
     const footerYear = document.getElementById('footer-year');
     if (footerYear) {

@@ -9,17 +9,19 @@
     },
     {
       "id": 1,
-      "title": "AI explains Repo",
+      "title": "AI Explains Repo",
+      "description": "Full-stack Next.js app that ingests GitHub repository data and generates AI-powered reports on code quality, architecture, security risks, and performance via the Gemini API, with authenticated session history.",
       "image": "src/assets/pro.png",
-      "alt": "AI explains Repo Project",
+      "alt": "AI Explains Repo Project",
       "github": "https://github.com/vikky2810/ai-explains-repo",
       "live": "https://ai-explains-repo.vercel.app/"
     },
     {
       "id": 2,
-      "title": "Online Python code Editor",
+      "title": "Online Python Code Editor",
+      "description": "Browser-based Python editor built with Flask and CodeMirror that executes user code server-side and streams output back in real time, with syntax highlighting, error handling, and a responsive dark UI.",
       "image": "src/assets/project2.png",
-      "alt": "python code editor",
+      "alt": "Online Python Code Editor",
       "github": "https://github.com/vikky2810/OnlineCodeEditor",
       "live": "https://viks-online-code-editor.vercel.app/"
     }

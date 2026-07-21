@@ -116,24 +116,77 @@ nav {
   }
 }
 
-/* Progressive blur/fade at the bottom edge of the viewport.
-   The mask ramps the blur in from nothing at the top of the strip to
-   full strength at the bottom, so content softens as it scrolls out. */
+/* Progressive blur at the bottom edge of the viewport.
+   A single masked blur layer only fades a uniformly-blurred band in and out,
+   which reads as haze. Instead we stack layers whose blur radius doubles as
+   they move down the strip, each masked to its own overlapping band. The
+   result is a true gradient of blur: barely-there at the top, maxed at the
+   bottom edge. */
 .scroll-fade {
   position: fixed;
   bottom: 0;
   left: 0;
   right: 0;
-  height: 90px;
+  height: 80px;
   z-index: 900;
   pointer-events: none;
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  background: linear-gradient(to top, var(--bg-primary) 5%, transparent 90%);
-  mask-image: linear-gradient(to top, #000 35%, transparent 100%);
-  -webkit-mask-image: linear-gradient(to top, #000 35%, transparent 100%);
   opacity: 1;
   transition: opacity 0.25s ease;
+}
+
+.scroll-fade__layer,
+.scroll-fade__tint {
+  position: absolute;
+  inset: 0;
+}
+
+/* Each band overlaps its neighbours so the steps blend into a smooth ramp */
+.scroll-fade__layer:nth-child(1) {
+  backdrop-filter: blur(0.5px);
+  -webkit-backdrop-filter: blur(0.5px);
+  mask-image: linear-gradient(to bottom, #000 0%, #000 16.7%, transparent 33.3%);
+  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 16.7%, transparent 33.3%);
+}
+
+.scroll-fade__layer:nth-child(2) {
+  backdrop-filter: blur(1px);
+  -webkit-backdrop-filter: blur(1px);
+  mask-image: linear-gradient(to bottom, transparent 0%, #000 16.7%, #000 33.3%, transparent 50%);
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 16.7%, #000 33.3%, transparent 50%);
+}
+
+.scroll-fade__layer:nth-child(3) {
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+  mask-image: linear-gradient(to bottom, transparent 16.7%, #000 33.3%, #000 50%, transparent 66.7%);
+  -webkit-mask-image: linear-gradient(to bottom, transparent 16.7%, #000 33.3%, #000 50%, transparent 66.7%);
+}
+
+.scroll-fade__layer:nth-child(4) {
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  mask-image: linear-gradient(to bottom, transparent 33.3%, #000 50%, #000 66.7%, transparent 83.3%);
+  -webkit-mask-image: linear-gradient(to bottom, transparent 33.3%, #000 50%, #000 66.7%, transparent 83.3%);
+}
+
+.scroll-fade__layer:nth-child(5) {
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  mask-image: linear-gradient(to bottom, transparent 50%, #000 66.7%, #000 83.3%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, transparent 50%, #000 66.7%, #000 83.3%, transparent 100%);
+}
+
+.scroll-fade__layer:nth-child(6) {
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  mask-image: linear-gradient(to bottom, transparent 66.7%, #000 83.3%, #000 100%);
+  -webkit-mask-image: linear-gradient(to bottom, transparent 66.7%, #000 83.3%, #000 100%);
+}
+
+/* Faint wash of page colour so text also dims, not just softens */
+.scroll-fade__tint {
+  background: linear-gradient(to top, var(--bg-primary) 0%, transparent 85%);
+  opacity: 0.9;
 }
 
 /* Hide it once the footer is reached so the footer never sits under the blur */

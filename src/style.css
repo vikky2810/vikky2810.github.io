@@ -664,24 +664,31 @@ section {
 
 .project-row {
   display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1.25rem 0;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.project-row-top {
+  display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 1.5rem;
-  padding: 1.25rem 0;
-  border-bottom: 1px solid var(--border-color);
+  width: 100%;
 }
 
 .project-row-title {
   font-size: 1.05rem;
   font-weight: 700;
   color: var(--text-primary);
-  margin-bottom: 0.25rem;
 }
 
 .project-row-desc {
   font-size: 0.9rem;
   color: var(--text-secondary);
   line-height: 1.5;
+  width: 100%;
 }
 
 .project-row-links {
@@ -689,6 +696,7 @@ section {
   align-items: center;
   gap: 1rem;
   flex-shrink: 0;
+  margin-left: auto;
 }
 
 .project-row-links a {

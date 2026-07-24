@@ -1743,7 +1743,7 @@
 
   .nav-links {
     gap: 1.5rem;
-    font-size: 1rem;
+    font-size: 0.975rem;
   }
 
   .logo {
@@ -1872,7 +1872,7 @@
 
   .nav-links {
     gap: 1.75rem;
-    font-size: 1.05rem;
+    font-size: 0.975rem;
   }
 
   /* Sections */
@@ -1957,7 +1957,7 @@
 
   .nav-links {
     gap: 2rem;
-    font-size: 1.1rem;
+    font-size: 0.975rem;
   }
 
   /* Sections */

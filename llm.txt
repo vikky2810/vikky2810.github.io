@@ -1,0 +1,36 @@
+# Vikram Kamble
+
+> Full Stack Developer and B.Tech Computer Science graduate based in India. This is my personal portfolio and technical blog, covering full-stack web development, Python, and building applications on top of LLM APIs.
+
+I build full-stack web applications — React and Next.js on the frontend, Node.js/Express and Flask on the backend, with MySQL and MongoDB for storage. Several of my recent projects are AI-powered tools built on the Gemini API. I currently work as a Software Engineer Intern at RegiKart Private Limited, and have been freelancing since 2023.
+
+The site is a static site hosted on GitHub Pages. Blog posts are stored as HTML strings in a single JSON file (`/src/blogs.json`) and rendered client-side, so the JSON is the most reliable source for full post content.
+
+## Main pages
+
+- [Portfolio home](https://vikky2810.github.io/): About, experience, skills, projects, and contact details on a single page.
+- [Blog index](https://vikky2810.github.io/src/blog/index.html): All blog posts, sorted newest first and filterable by category.
+- [Projects](https://vikky2810.github.io/src/Projects/index.html): Standalone projects page.
+
+## Blog posts
+
+- [SQL vs NoSQL: I've Shipped Both, Here's How I Actually Decide](https://vikky2810.github.io/src/blog/blog.html?id=2): Why the real decision is where your schema lives and how many ways you'll need to read your data — not scale. Includes a decision flowchart, SQL and MongoDB examples, and lessons from getting it wrong. Published 2026-06-20.
+- [Library vs Framework: The Real Difference Every Developer Should Know](https://vikky2810.github.io/src/blog/blog.html?id=1): Inversion of control explained with React and Next.js examples, real-world analogies, and guidance on picking between them. Published 2025-10-18.
+
+## Projects
+
+- [Health-Aware Recipe Modifier](https://github.com/vikky2810/Recipe-Modifier): Full-stack Flask app that generates recipes tailored to user-specified medical conditions using the Gemini API — flags harmful ingredients, recommends safe substitutes, and generates PDF summary reports. [Live demo](https://recipe-modifier-app.vercel.app).
+- [AI Explains Repo](https://github.com/vikky2810/ai-explains-repo): Full-stack Next.js app that ingests GitHub repository data and generates AI-powered reports on code quality, architecture, security risks, and performance via the Gemini API, with authenticated session history. [Live demo](https://ai-explains-repo.vercel.app/).
+- [Online Python Code Editor](https://github.com/vikky2810/OnlineCodeEditor): Browser-based Python editor built with Flask and CodeMirror that executes user code server-side and streams output back in real time, with syntax highlighting, error handling, and a responsive dark UI. [Live demo](https://viks-online-code-editor.vercel.app/).
+
+## Contact and profiles
+
+- [GitHub](https://github.com/vikky2810): Source for this site and all projects listed above.
+- [LinkedIn](https://linkedin.com/in/vikram-kamble-888933264): Professional background and work history.
+- [Email](mailto:kamblevikram2810@gmail.com): kamblevikram2810@gmail.com — open to collaboration and freelance work.
+
+## Optional
+
+- [Blog content JSON](https://vikky2810.github.io/src/blogs.json): Full text of every blog post, with title, summary, date, read time, and category. Preferred source over scraping the rendered pages.
+- [Resume (PDF)](https://vikky2810.github.io/src/assets/Vikram%20Kamble_Resume.pdf): Detailed experience, education, and skills.
+- [Sitemap](https://vikky2810.github.io/sitemap.xml): XML sitemap for the site.

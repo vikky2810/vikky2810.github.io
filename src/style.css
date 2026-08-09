@@ -692,20 +692,77 @@ section {
   gap: 0.6rem;
 }
 
+/* Hidden <symbol> library the skill tags pull their logos from */
+.icon-sprite {
+  display: none;
+}
+
+/* A tag is a logo tile until it's hovered or focused, when the name
+   slides out beside the logo. The name stays in the DOM throughout so
+   screen readers and search engines still see it. */
 .skill-tag {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 2.6rem;
+  height: 2.6rem;
   font-size: 0.85rem;
   font-weight: 500;
   color: var(--text-primary);
   background: var(--bg-tertiary);
   border: 1px solid var(--border-color);
-  padding: 0.4rem 0.9rem;
-  border-radius: var(--radius-full);
-  transition: var(--transition-fast);
+  padding: 0 0.7rem;
+  border-radius: var(--radius-md);
+  cursor: default;
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast),
+    transform var(--transition-fast);
 }
 
-.skill-tag:hover {
-  border-color: var(--primary-color);
-  color: var(--primary-color);
+.skill-icon {
+  width: 1.3rem;
+  height: 1.3rem;
+  flex-shrink: 0;
+  fill: var(--brand, currentColor);
+  transition: transform var(--transition-fast);
+}
+
+.skill-name {
+  max-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  opacity: 0;
+  transition: max-width var(--transition-normal), margin-left var(--transition-normal),
+    opacity var(--transition-fast);
+}
+
+.skill-tag:hover,
+.skill-tag:focus-visible {
+  border-color: var(--brand, var(--primary-color));
+  outline: none;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
+  box-shadow: 0 6px 16px -8px color-mix(in srgb, var(--brand, var(--primary-color)) 75%, transparent);
+}
+
+.skill-tag:hover .skill-icon,
+.skill-tag:focus-visible .skill-icon {
+  transform: scale(1.1);
+}
+
+.skill-tag:hover .skill-name,
+.skill-tag:focus-visible .skill-name {
+  max-width: 10rem;
+  margin-left: 0.5rem;
+  opacity: 1;
+}
+
+/* Touch devices never get a hover, so keep every name on show there */
+@media (hover: none) {
+  .skill-name {
+    max-width: 10rem;
+    margin-left: 0.5rem;
+    opacity: 1;
+  }
 }
 
 /* PROJECTS */
@@ -765,6 +822,7 @@ section {
   color: var(--primary-color);
 }
 
+.project-code,
 .project-live {
   font-weight: 500;
 }

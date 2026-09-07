@@ -102,7 +102,7 @@ function createBlogCard(blog) {
     const formattedDate = formatDate(blog.date);
 
     return `
-        <div class="blog-row" data-category="${blog.category.toLowerCase()}" onclick="openBlog(${blog.id})">
+        <a class="blog-row" data-category="${blog.category.toLowerCase()}" href="blog.html?id=${blog.id}">
             <div class="blog-row-main">
                 <h3 class="blog-row-title">${blog.title}</h3>
                 <p class="blog-row-desc">${blog.summary}</p>
@@ -115,7 +115,7 @@ function createBlogCard(blog) {
                 Read more
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
             </span>
-        </div>
+        </a>
     `;
 }
 

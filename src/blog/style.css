@@ -222,6 +222,8 @@ html {
 /* Row-based listing — matches the portfolio home page */
 .blog-row {
   display: flex;
+  text-decoration: none;
+  color: inherit;
   justify-content: space-between;
   align-items: flex-start;
   gap: 1.5rem;

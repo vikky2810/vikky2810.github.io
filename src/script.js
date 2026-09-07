@@ -159,7 +159,7 @@ function displayBlogs(blogs) {
     }
 
     container.innerHTML = recentBlogs.map(blog => `
-        <div class="blog-row" onclick="openBlog(${blog.id})">
+        <a class="blog-row" href="src/blog/blog.html?id=${blog.id}">
             <div class="blog-row-main">
                 <h3 class="blog-row-title">${blog.title || 'Untitled'}</h3>
                 <p class="blog-row-desc">${blog.summary || ''}</p>
@@ -172,7 +172,7 @@ function displayBlogs(blogs) {
                 Read more
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
             </span>
-        </div>
+        </a>
     `).join('');
 }
 

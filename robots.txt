@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://vikky2810.github.io/sitemap.xml

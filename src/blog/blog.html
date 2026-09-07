@@ -5,6 +5,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blog Post - Vikram Kamble</title>
+    <meta name="description" content="Blog posts on web development, programming and technology by Vikram Kamble." />
+    <meta name="author" content="Vikram Kamble" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://vikky2810.github.io/src/blog/" />
+
+    <!-- Open Graph / Facebook (populated per-post by JS) -->
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://vikky2810.github.io/src/blog/" />
+    <meta property="og:title" content="Blog Post - Vikram Kamble" />
+    <meta property="og:description" content="Blog posts on web development, programming and technology by Vikram Kamble." />
+    <meta property="og:image" content="https://vikky2810.github.io/src/assets/profile-pic.png" />
+    <meta property="og:site_name" content="Vikram Kamble Portfolio" />
+    <meta property="og:locale" content="en_US" />
+
+    <!-- Twitter (populated per-post by JS) -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://vikky2810.github.io/src/blog/" />
+    <meta property="twitter:title" content="Blog Post - Vikram Kamble" />
+    <meta property="twitter:description" content="Blog posts on web development, programming and technology by Vikram Kamble." />
+    <meta property="twitter:image" content="https://vikky2810.github.io/src/assets/profile-pic.png" />
     <link rel="stylesheet" href="../style.css">
     <link rel="stylesheet" href="../mediaqueries.css">
     <!-- <link rel="icon" type="image/x-icon" href="src/assets/profile-pic.png" /> -->
@@ -338,11 +358,78 @@
             }
         }
 
+        // Crawlers render this page's JS, so the per-post SEO tags are set here from blogs.json
+        const SITE = 'https://vikky2810.github.io';
+
+        function updateSeoTags(blog) {
+            const url = `${SITE}/src/blog/blog.html?id=${blog.id}`;
+            const image = blog.image
+                ? `${SITE}/src/assets/${blog.image.split('/').pop()}`
+                : `${SITE}/src/assets/profile-pic.png`;
+            const title = `${blog.title} - Vikram Kamble`;
+            const description = blog.summary || '';
+
+            document.title = title;
+            setMeta('name', 'description', description);
+            setMeta('property', 'og:type', 'article');
+            setMeta('property', 'og:url', url);
+            setMeta('property', 'og:title', title);
+            setMeta('property', 'og:description', description);
+            setMeta('property', 'og:image', image);
+            setMeta('property', 'twitter:url', url);
+            setMeta('property', 'twitter:title', title);
+            setMeta('property', 'twitter:description', description);
+            setMeta('property', 'twitter:image', image);
+
+            const canonical = document.querySelector('link[rel="canonical"]');
+            if (canonical) canonical.setAttribute('href', url);
+
+            addArticleSchema(blog, url, image, description);
+        }
+
+        function setMeta(attr, key, value) {
+            let tag = document.querySelector(`meta[${attr}="${key}"]`);
+            if (!tag) {
+                tag = document.createElement('meta');
+                tag.setAttribute(attr, key);
+                document.head.appendChild(tag);
+            }
+            tag.setAttribute('content', value);
+        }
+
+        function addArticleSchema(blog, url, image, description) {
+            const schema = {
+                '@context': 'https://schema.org',
+                '@type': 'BlogPosting',
+                headline: blog.title,
+                description: description,
+                image: image,
+                datePublished: blog.date,
+                dateModified: blog.date,
+                articleSection: blog.category,
+                mainEntityOfPage: { '@type': 'WebPage', '@id': url },
+                author: {
+                    '@type': 'Person',
+                    name: 'Vikram Kamble',
+                    url: SITE + '/'
+                },
+                publisher: {
+                    '@type': 'Person',
+                    name: 'Vikram Kamble',
+                    url: SITE + '/'
+                }
+            };
+            const script = document.createElement('script');
+            script.type = 'application/ld+json';
+            script.textContent = JSON.stringify(schema);
+            document.head.appendChild(script);
+        }
+
         function displayBlogPost(blog) {
             const blogContent = document.getElementById('blog-content');
 
-            // Update page title
-            document.title = `${blog.title} - Vikram Kamble`;
+            // Update page title, meta tags, canonical and structured data
+            updateSeoTags(blog);
 
             const blogHTML = `
                 <div class="blog-header">

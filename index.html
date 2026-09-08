@@ -234,8 +234,27 @@
   </section>
   <section id="blogs">
     <h2 class="section-heading">Blog</h2>
+    <p class="section-subtext">Technical notes on web development, Python, SQL vs NoSQL, and building AI-powered apps.</p>
     <div class="blogs-container" id="blogs-container">
-      <!-- Blogs will be dynamically loaded here -->
+      <a class="blog-row" href="src/blog/blog.html?id=2">
+        <div class="blog-row-main">
+          <h3 class="blog-row-title">SQL vs NoSQL: I&#39;ve Shipped Both, Here&#39;s How I Actually Decide</h3>
+          <p class="blog-row-desc">Most SQL vs NoSQL posts are a comparison chart copied from the docs. This one is a decision process, built from shipping real projects on both MySQL and MongoDB, with code, trade-offs, and a flowchart you can follow.</p>
+          <span class="blog-row-date">Jun 20, 2026 · Backend · 10 min read</span>
+        </div>
+        <span class="blog-row-more">Read more</span>
+      </a>
+      <a class="blog-row" href="src/blog/blog.html?id=1">
+        <div class="blog-row-main">
+          <h3 class="blog-row-title">Library vs Framework: The Real Difference Every Developer Should Know</h3>
+          <p class="blog-row-desc">Understanding the difference between a library and a framework is crucial for developers. Beginner-friendly explanations, real-world analogies, and practical React and Next.js examples.</p>
+          <span class="blog-row-date">Oct 18, 2025 · Web Development · 8 min read</span>
+        </div>
+        <span class="blog-row-more">Read more</span>
+      </a>
+      <noscript>
+        <p><a href="src/blog/index.html">Read all blog posts</a>: SQL vs NoSQL decision guide (MySQL vs MongoDB) and Library vs Framework explained with React and Next.js examples.</p>
+      </noscript>
     </div>
     <div class="blogs-showall">
       <a href="src/blog/index.html" class="showall-btn">Show all blogs</a>
@@ -244,9 +263,14 @@
   <section id="about">
     <h2 class="section-heading">About</h2>
     <p class="about-text">
-      Hi, I'm a B.Tech graduate in Computer Science & Engineering, and I love being in tech.
-      I'm always looking to make connections and collaborate with different people in the space so we can grow
-      together. Thanks for stopping by.
+      Hi, I'm Vikram Kamble, a B.Tech Computer Science &amp; Engineering graduate and Full Stack Developer based in India.
+      I build full-stack web applications with React, Next.js, Node.js, Express, Flask and Python, using MySQL and MongoDB.
+      I currently work as a Software Engineer Intern at RegiKart Private Limited and have freelanced since 2023.
+      My recent work focuses on AI-powered tools built with the Gemini API, including repo analysis, recipe generation, and browser-based code editors.
+    </p>
+    <p class="about-text">
+      I write about web development, SQL vs NoSQL decisions, and library vs framework trade-offs on my <a href="src/blog/index.html">blog</a>.
+      Explore my <a href="#projects">projects</a>, <a href="#experience">skills</a>, and <a href="#work">experience</a> below, or <a href="#contact">get in touch</a> for collaboration and freelance work.
     </p>
   </section>
 
@@ -358,8 +382,41 @@
   </section>
   <section id="projects">
     <h2 class="section-heading">Projects</h2>
+    <p class="section-subtext">Selected full-stack and AI-powered projects. Full details, source code and live demos linked.</p>
     <div class="projects-list" id="projects-container">
-      <!-- Projects will be dynamically loaded here -->
+      <div class="project-row">
+        <div class="project-row-top">
+          <h3 class="project-row-title">Health-Aware Recipe Modifier</h3>
+          <div class="project-row-links">
+            <a href="https://github.com/vikky2810/Recipe-Modifier" target="_blank" rel="noopener" class="project-code">GitHub</a>
+            <a href="https://recipe-modifier-app.vercel.app" target="_blank" rel="noopener" class="project-live">Live</a>
+          </div>
+        </div>
+        <p class="project-row-desc">Full-stack Flask app that generates recipes tailored to user-specified medical conditions using the Gemini API — flags harmful ingredients, recommends safe substitutes, and generates PDF summary reports.</p>
+      </div>
+      <div class="project-row">
+        <div class="project-row-top">
+          <h3 class="project-row-title">AI Explains Repo</h3>
+          <div class="project-row-links">
+            <a href="https://github.com/vikky2810/ai-explains-repo" target="_blank" rel="noopener" class="project-code">GitHub</a>
+            <a href="https://ai-explains-repo.vercel.app/" target="_blank" rel="noopener" class="project-live">Live</a>
+          </div>
+        </div>
+        <p class="project-row-desc">Full-stack Next.js app that ingests GitHub repository data and generates AI-powered reports on code quality, architecture, security risks, and performance via the Gemini API, with authenticated session history.</p>
+      </div>
+      <div class="project-row">
+        <div class="project-row-top">
+          <h3 class="project-row-title">Online Python Code Editor</h3>
+          <div class="project-row-links">
+            <a href="https://github.com/vikky2810/OnlineCodeEditor" target="_blank" rel="noopener" class="project-code">GitHub</a>
+            <a href="https://viks-online-code-editor.vercel.app/" target="_blank" rel="noopener" class="project-live">Live</a>
+          </div>
+        </div>
+        <p class="project-row-desc">Browser-based Python editor built with Flask and CodeMirror that executes user code server-side and streams output back in real time, with syntax highlighting, error handling, and a responsive dark UI.</p>
+      </div>
+      <noscript>
+        <p>Projects: Health-Aware Recipe Modifier (Flask + Gemini API), AI Explains Repo (Next.js + Gemini API), Online Python Code Editor (Flask + CodeMirror). See GitHub links above.</p>
+      </noscript>
     </div>
   </section>
   <section id="contact">

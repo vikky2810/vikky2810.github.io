@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SQL vs NoSQL: I've Shipped Both, Here's How I Actually Decide - Vikram Kamble</title>
+    <meta name="description" content="Most SQL vs NoSQL posts are a comparison chart someone copied from the docs. This one is a decision process, built from shipping real projects on both MySQL and MongoDB, with code, trade-offs, and a flowchart you can actually follow." />
+    <meta name="author" content="Vikram Kamble" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://vikky2810.github.io/src/blog/sql-vs-nosql.html" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://vikky2810.github.io/src/blog/sql-vs-nosql.html" />
+    <meta property="og:title" content="SQL vs NoSQL: I've Shipped Both, Here's How I Actually Decide - Vikram Kamble" />
+    <meta property="og:description" content="Most SQL vs NoSQL posts are a comparison chart someone copied from the docs. This one is a decision process, built from shipping real projects on both MySQL and MongoDB, with code, trade-offs, and a flowchart you can actually follow." />
+    <meta property="og:image" content="https://vikky2810.github.io/src/assets/sqlVSnosql.png" />
+    <meta property="og:site_name" content="Vikram Kamble Portfolio" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="article:published_time" content="2026-06-20" />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://vikky2810.github.io/src/blog/sql-vs-nosql.html" />
+    <meta property="twitter:title" content="SQL vs NoSQL: I've Shipped Both, Here's How I Actually Decide - Vikram Kamble" />
+    <meta property="twitter:description" content="Most SQL vs NoSQL posts are a comparison chart someone copied from the docs. This one is a decision process, built from shipping real projects on both MySQL and MongoDB, with code, trade-offs, and a flowchart you can actually follow." />
+    <meta property="twitter:image" content="https://vikky2810.github.io/src/assets/sqlVSnosql.png" />
+
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../mediaqueries.css">
+    <link rel="icon" type="image/x-icon" href="../assets/profile-pic.png" />
+    <link rel="apple-touch-icon" href="../assets/profile-pic.png" />
+    <!-- PrismJS CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="post.css">
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": "SQL vs NoSQL: I've Shipped Both, Here's How I Actually Decide",
+        "description": "Most SQL vs NoSQL posts are a comparison chart someone copied from the docs. This one is a decision process, built from shipping real projects on both MySQL and MongoDB, with code, trade-offs, and a flowchart you can actually follow.",
+        "image": "https://vikky2810.github.io/src/assets/sqlVSnosql.png",
+        "datePublished": "2026-06-20",
+        "dateModified": "2026-06-20",
+        "articleSection": "Backend",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://vikky2810.github.io/src/blog/sql-vs-nosql.html"
+        },
+        "author": {
+            "@type": "Person",
+            "name": "Vikram Kamble",
+            "url": "https://vikky2810.github.io/"
+        },
+        "publisher": {
+            "@type": "Person",
+            "name": "Vikram Kamble",
+            "url": "https://vikky2810.github.io/"
+        }
+    }
+    </script>
+</head>
+
+<body>
+    <main class="blog-post">
+        <a href="index.html" class="back-btn">← Back to Blog</a>
+
+        <header class="blog-header">
+            <div class="blog-category">Backend</div>
+            <h1>SQL vs NoSQL: I've Shipped Both, Here's How I Actually Decide</h1>
+            <div class="blog-meta">
+                <span>📅 <time datetime="2026-06-20">June 20, 2026</time></span>
+                <span>⏱️ 10 min read</span>
+                <span>🏷️ Backend</span>
+            </div>
+            <img src="../assets/sqlVSnosql.png" alt="SQL vs NoSQL" class="blog-image" width="1571" height="885">
+        </header>
+
+        <div class="blog-content">
+            <p>Search "SQL vs NoSQL" and you'll get four hundred versions of the same comparison chart. Structured vs unstructured. Vertical vs horizontal scaling. ACID vs BASE. All technically correct, and none of it helps you at 11 PM when you're staring at an empty project folder trying to decide what to actually use.</p>
+            <p>I've now shipped projects on both MySQL and MongoDB. The chart didn't help me. What helped was getting a few decisions wrong and having to live with them. So this post isn't a chart — it's the decision process I use now, why I use it, and the flowchart I wish someone had given me two years ago.</p>
+            <h2>The One-Sentence Version</h2>
+            <p>Here's the cheat code:</p>
+            <ul>
+                <li><strong>SQL:</strong> You decide the shape of your data up front, and the database enforces it forever.</li>
+                <li><strong>NoSQL:</strong> You decide the shape of your data later, and <em>you</em> enforce it forever.</li>
+            </ul>
+            <p>Read that second line again, because it's the part the comparison charts leave out. "Schemaless" does not mean there is no schema. Your data always has a shape — the question is only whether that shape lives in the database, where it's checked on every write, or in your application code, where nothing checks it and a typo ships to production.</p>
+            <h2>The Real Difference Isn't Scale</h2>
+            <p>Most beginners think this is a scaling decision. It usually isn't. Unless you're handling millions of writes, both databases will happily do everything you ask and neither will break a sweat. At the scale of a side project, a client site, or an internal tool, "which one is faster" is almost never the deciding factor.</p>
+            <p>The decision that actually matters is this:</p>
+            <blockquote>
+                <p><strong>How many different ways will I need to read this data later?</strong></p>
+            </blockquote>
+            <p>That's it. That's the whole question.</p>
+            <p>If you write data one way and read it back that same way, a document store is a great fit — the document <em>is</em> the answer, you fetch it and you're done. If you'll need to slice the same data twenty different ways later ("all users who signed up last month", "reports grouped by language", "who hasn't logged in since March"), a relational database is going to save you an enormous amount of pain, because you don't have to know those twenty questions in advance. SQL lets you ask questions you hadn't thought of yet. That's the actual superpower, and nobody puts it on the chart.</p>
+            <h2>A Side-by-Side Comparison</h2>
+            <div class="table-scroll">
+                <table>
+                    <thead>
+                        <tr><th>Aspect</th><th>SQL (MySQL, PostgreSQL)</th><th>NoSQL (MongoDB)</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Where the schema lives</td><td>In the database</td><td>In your application code</td></tr>
+                        <tr><td>Relationships</td><td>JOINs, done by the database</td><td>Embed the data, or join it yourself</td></tr>
+                        <tr><td>Unknown future queries</td><td>Easy — just write the query</td><td>Hard — you modelled for known reads</td></tr>
+                        <tr><td>Changing the shape</td><td>A migration, once, on the table</td><td>Free today, an <code>if</code> in your code forever</td></tr>
+                        <tr><td>Transactions</td><td>Mature, boring, reliable</td><td>Supported, but usually a design smell</td></tr>
+                        <tr><td>Scaling out</td><td>Harder (sharding is real work)</td><td>Built for it</td></tr>
+                        <tr><td>What breaks first</td><td>Your migration on deploy day</td><td>Your assumption about old documents</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <h2>How This Played Out in My Own Projects</h2>
+            <h3>Relational: the app with users and history</h3>
+            <p>In <strong>AI Explains Repo</strong>, users log in, analyse a GitHub repository, and get a report back. Their past reports stay in their history. Write that data out as sentences and the shape gives itself away: <em>a user has many sessions, a session has one report</em>. That word "has many" is the tell. Every time you catch yourself saying it, you're describing a relationship, and relationships are what relational databases were literally built for.</p>
+            <pre class="code-block"><code class="language-sql">CREATE TABLE users (
+  id         INT PRIMARY KEY AUTO_INCREMENT,
+  email      VARCHAR(255) UNIQUE NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE reports (
+  id         INT PRIMARY KEY AUTO_INCREMENT,
+  user_id    INT NOT NULL,
+  repo_url   VARCHAR(500) NOT NULL,
+  body       JSON NOT NULL,          -- the AI output, shape varies
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+);</code></pre>
+            <p>Two things worth noticing here, because this is the part I got wrong the first time.</p>
+            <p>First, <code>ON DELETE CASCADE</code>. When a user deletes their account, their reports go with them — enforced by the database, not by me remembering to write the cleanup code. In MongoDB, forgetting that line is how you end up with orphaned documents nobody notices for six months.</p>
+            <p>Second, look at <code>body JSON</code>. The AI's output doesn't have a fixed shape — some reports have security findings, some don't, the nesting varies by repo. That's genuinely unstructured, so I stopped fighting it and stored it as JSON. And this is the thing that took me too long to learn: <strong>modern SQL databases have JSON columns.</strong> "But my data is unstructured" hasn't been a reason to leave SQL since about 2016. You can keep the structured parts structured and let the messy part be messy, in the same table, in the same query.</p>
+            <h3>Document store: the data that has no fixed shape</h3>
+            <p>The <strong>Health-Aware Recipe Modifier</strong> is the opposite situation. It generates a recipe tailored to a medical condition — ingredients, substitutions, warnings, nutrition notes — and the shape genuinely differs from one recipe to the next. One has three substitutions, one has none, one has a nested list of warnings per ingredient.</p>
+            <p>Model that relationally and you get a table of recipes, a table of ingredients, a table of substitutions, a table of warnings, and a five-way JOIN to reassemble something you only ever read as one whole object. Model it as a document and it's just… the object:</p>
+            <pre class="code-block"><code class="language-js">await db.collection("recipes").insertOne({
+  userId: "u_123",
+  title: "Low-Sodium Chicken Curry",
+  condition: "hypertension",
+  ingredients: [
+    { name: "chicken", qty: "500g" },
+    { name: "salt", qty: "1 tsp", flagged: true,
+      reason: "high sodium", substitute: "lemon juice + herbs" }
+  ],
+  warnings: ["Avoid stock cubes — hidden sodium"],
+  createdAt: new Date()
+});</code></pre>
+            <p>No JOINs, no migration when the AI starts returning a new field, and the read is a single lookup. Here the document store isn't a compromise — it's genuinely the better model, because I write this data one way and read it back that exact same way.</p>
+            <h3>And sometimes: no database at all</h3>
+            <p>My <strong>Online Python Code Editor</strong> runs user code on the server and streams the output back. I spent real time planning the database for it before I noticed there was nothing to store. Nobody logs in, nothing persists, the interesting problems were all about sandboxing and process isolation instead.</p>
+            <p>Worth saying out loud, because "which database" is such a reflex question: <strong>the right answer is sometimes "none".</strong> A database you don't need is just a deploy step that can fail.</p>
+            <h2>Four Things That Changed My Mind</h2>
+            <p><strong>1. "MongoDB is faster" is usually about the index, not the database.</strong> Most speed comparisons you'll read online are between a well-indexed collection and an unindexed table. Add the index and the gap mostly disappears. Benchmark your own query before you switch databases over a number you read on Reddit.</p>
+            <p><strong>2. You will do joins in NoSQL anyway — just badly.</strong> The moment you need "this user's reports plus the user's plan", you're either using <code>$lookup</code> (a join with extra steps) or you're fetching in a loop and doing it in JavaScript. That loop is an N+1 query, it works fine on your ten test documents, and it falls over on real data. Avoiding joins by choosing MongoDB doesn't avoid joins — it just moves them somewhere slower and less tested.</p>
+            <p><strong>3. Migrations don't disappear, they hide.</strong> Adding a field to MongoDB is free on day one. But now half your documents have the field and half don't, and every piece of code that touches them needs <code>if (doc.version === 1)</code> — forever, in every function, in every service. A SQL migration hurts once, on deploy day, and then it's genuinely over. NoSQL doesn't remove that cost. It spreads it thin enough that you stop noticing you're paying it.</p>
+            <p><strong>4. "I'll figure out the schema later" means "I'll figure it out under pressure, with production data in it."</strong> Being forced to define a schema up front felt like friction when I was starting out. It's actually the database asking you a question you should be able to answer, at the cheapest possible moment to answer it.</p>
+            <h2>When Each One Genuinely Wins</h2>
+            <h3>Reach for SQL when…</h3>
+            <ul>
+                <li>Your data has relationships — users, orders, comments, anything you describe with "has many" or "belongs to".</li>
+                <li>Anything involves money, counts, or inventory. Transactions exist for a reason.</li>
+                <li>You'll need reporting or analytics later. <code>GROUP BY</code> beats writing an aggregation pipeline every time.</li>
+                <li>The data outlives the application. Schemas are documentation that can't go stale.</li>
+                <li>You don't know yet how you'll query it. This is the strongest reason on the list.</li>
+            </ul>
+            <h3>Reach for NoSQL when…</h3>
+            <ul>
+                <li>Each record is self-contained and read as a whole — documents, logs, events, AI outputs.</li>
+                <li>The shape genuinely varies per record and you're not just avoiding the design work.</li>
+                <li>It's cache-like, session-like, or disposable.</li>
+                <li>You're writing far more than you're reading, at volume, and horizontal scale is a real requirement rather than an aspiration.</li>
+            </ul>
+            <h3>And be honest about this one</h3>
+            <p>"It's faster to prototype" is a real advantage, and it's also a loan. You'll repay it the first time a product decision requires querying your data a way you never modelled for. Sometimes taking that loan is correct — a hackathon, a proof of concept, something you'll throw away. Just know you're taking it.</p>
+            <h2>The Flowchart I Actually Use</h2>
+            <pre class="code-block"><code>          Do I need to store anything at all?
+                    |
+            no ---&gt; use no database
+                    |
+                   yes
+                    |
+     Does my data have relationships?
+     ("a user HAS MANY reports")
+                    |
+            yes ---&gt; SQL
+                    |
+                    no
+                    |
+     Money, counts, or inventory involved?
+                    |
+            yes ---&gt; SQL
+                    |
+                    no
+                    |
+     Do I know every way I'll query this?
+                    |
+             no ---&gt; SQL
+                    |
+                   yes
+                    |
+     Do I read each record as one whole object?
+                    |
+             no ---&gt; SQL
+                    |
+                   yes
+                    |
+     Does the shape truly vary per record?
+                    |
+             no ---&gt; SQL (with a JSON column)
+                    |
+            yes ---&gt; NoSQL
+</code></pre>
+            <p>Yes, most paths lead to SQL. That's not a bias, that's the base rate: most applications have relationships and unknown future queries. NoSQL is the specialist tool, and it's excellent when the shoe fits. The mistake is reaching for it by default because it felt easier in the tutorial.</p>
+            <h2>Common Misconceptions</h2>
+            <ul>
+                <li><strong>"NoSQL is schemaless."</strong> → The schema moved into your code. It's still there, it's just unenforced and undocumented.</li>
+                <li><strong>"SQL can't handle unstructured data."</strong> → PostgreSQL's <code>JSONB</code> and MySQL's <code>JSON</code> columns have handled it for years, and you can index inside them.</li>
+                <li><strong>"NoSQL scales, SQL doesn't."</strong> → SQL scales fine to a size you are statistically unlikely to reach on a side project. Solve the problem you have.</li>
+                <li><strong>"Pick one and use it for everything."</strong> → Real systems mix them constantly: Postgres for the core data, Redis for sessions, Mongo for a document-shaped subsystem. "Which database" is a per-dataset question, not a per-project identity.</li>
+                <li><strong>"The choice is permanent."</strong> → Migrating is painful but survivable. Choosing nothing and building nothing is worse.</li>
+            </ul>
+            <h2>Key Takeaways</h2>
+            <ul>
+                <li>The schema always exists. You're only choosing whether the database enforces it or you do.</li>
+                <li>The deciding question is "how many ways will I read this?", not "how much data will I have?".</li>
+                <li>Relationships and unknown future queries → SQL. Self-contained, whole-object records → NoSQL.</li>
+                <li>JSON columns mean "my data is messy" is no longer a reason to leave SQL.</li>
+                <li>NoSQL doesn't delete the cost of migrations and joins — it relocates them into your application code.</li>
+                <li>Sometimes the correct database is no database.</li>
+            </ul>
+            <p><strong>Bottom Line:</strong> Don't pick a database by reading a comparison chart, and definitely don't pick one because it's what the tutorial used. Write down how you'll read your data, follow the flowchart, and pick the boring option when it's close. The best database for your project is usually the one you can debug at 2 AM — and you'll be doing that eventually, whichever one you choose.</p>
+        </div>
+    </main>
+
+    <!-- Prism.js syntax highlighting -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-jsx.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-sql.min.js"></script>
+    <script src="post.js"></script>
+</body>
+
+</html>

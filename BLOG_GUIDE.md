@@ -1,121 +1,58 @@
 # Blog Management Guide
 
-## How to Add New Blogs
+Every blog post is its own static HTML page in `src/blog/`. There is no JSON file and no JavaScript rendering: the full post (title, meta tags, content) is written directly in the HTML, so search engines see everything on the first load.
 
-Your blog section is now powered by a JSON file, making it super easy to add new blog posts!
+Current posts:
 
-### 📁 File Location
-All blog data is stored in: `src/blogs.json`
+| Post | File | URL |
+|------|------|-----|
+| SQL vs NoSQL | `src/blog/sql-vs-nosql.html` | https://vikky2810.github.io/src/blog/sql-vs-nosql.html |
+| Library vs Framework | `src/blog/library-vs-framework.html` | https://vikky2810.github.io/src/blog/library-vs-framework.html |
 
-### ➕ Adding a New Blog
+## ➕ Adding a New Blog Post
 
-1. Open `src/blogs.json`
-2. Add a new blog object to the `blogs` array
-3. Follow this structure:
+### 1. Create the page
+1. Copy an existing post, e.g. `src/blog/sql-vs-nosql.html`.
+2. Name the copy after the post using lowercase words and hyphens, e.g. `src/blog/react-hooks-explained.html`. The file name becomes the URL, so keep it short and descriptive.
 
-```json
-{
-  "id": 4,
-  "title": "Your Blog Title Here",
-  "description": "A brief description of your blog post. This will be shown on the card preview...",
-  "image": "src/assets/your-image.png",
-  "alt": "Image description for accessibility",
-  "date": "2024-01-20",
-  "readTime": "10 min read",
-  "category": "Technology",
-  "url": "https://your-blog-url.com"
-}
-```
+### 2. Update the `<head>`
+Replace these with the new post's details:
+- `<title>`: the post title followed by ` - Vikram Kamble`. This is the heading Google shows in search results.
+- `<meta name="description">`: a 1–2 sentence summary.
+- `<link rel="canonical">`, `og:url`, `twitter:url`: the new page's full URL, e.g. `https://vikky2810.github.io/src/blog/react-hooks-explained.html`.
+- `og:title`, `og:description`, `og:image`, `twitter:*`: the same title, summary and image.
+- `article:published_time`: the publish date (`YYYY-MM-DD`).
+- The `application/ld+json` block: `headline`, `description`, `image`, `datePublished`, `dateModified`, `articleSection` and `@id`.
 
-### 📋 Required Fields
+### 3. Update the page body
+- `.blog-category`, `<h1>`, the date (`<time datetime="YYYY-MM-DD">`), read time and category.
+- The cover image: put it in `src/assets/` and set `src`, `alt`, `width` and `height`.
+- Write the post inside `<div class="blog-content">`.
 
-- **id**: Unique number (increment from the last blog)
-- **title**: Blog post title
-- **description**: Brief description (will be truncated in preview)
-- **image**: Path to your blog image
-- **alt**: Alt text for accessibility
-- **date**: Publication date (YYYY-MM-DD format)
-- **readTime**: Estimated reading time
-- **category**: Blog category (e.g., "Technology", "Tutorial", "Review")
-- **url**: Link to the full blog post (use "#" if not ready)
+### 4. Link to it
+1. `src/blog/index.html`: add a `.blog-row` card (copy an existing one) at the top of the list.
+2. `index.html`: add the same card to the Blog section on the home page.
+3. `sitemap.xml`: add a `<url>` entry with the new URL.
+4. `llm.txt`: add the post under "Blog posts".
 
-### 🎨 Features
+### 5. After publishing
+In Google Search Console, open **URL Inspection**, paste the new URL and click **Request Indexing**.
 
-- **Automatic Sorting**: Blogs are automatically sorted by date (newest first)
-- **Recent Display**: Only the 3 most recent blogs are shown
-- **Responsive Design**: Works on all screen sizes
-- **Category Tags**: Each blog shows a colored category tag
-- **Read Time**: Shows estimated reading time
-- **Date Display**: Shows formatted publication date
+## 🎨 Available Styling
 
-### 🖼️ Adding Images
+Styles live in `src/blog/post.css` and are shared by every post.
 
-1. Place your blog images in `src/assets/`
-2. Use the path: `src/assets/your-image.png`
-3. Recommended size: 400x200px for best display
+- `<h2>` for main sections, `<h3>` for subsections
+- **Code blocks**: `<pre class="code-block"><code class="language-js">...</code></pre>` (also `language-jsx`, `language-sql`). Escape `<` as `&lt;` and `>` as `&gt;` inside code.
+- **Diagrams / plain text blocks**: `<pre class="code-block"><code>...</code></pre>` with no language class
+- **Tables**: wrap in `<div class="table-scroll">...</div>` so they scroll on mobile
+- **Callout boxes**: `<div class="warning">`, `<div class="info">`, `<div class="success">`, each with a `<p>` inside
+- **Quotes**: `<blockquote><p>...</p></blockquote>`
 
-### 🔄 How It Works
+`src/blog/post.js` adds a "Copy" button to code blocks; the post content does not depend on it.
 
-The website automatically:
-1. Loads blog data from `blogs.json`
-2. Sorts blogs by date (newest first)
-3. Displays the 3 most recent blogs
-4. Renders them with proper styling and interactions
+## 💡 Tips
 
-## 📝 Creating New Blog Posts
-
-### Step 1: Create the Blog HTML File
-1. Copy `src/blog/blog-template.html`
-2. Rename it to something descriptive (e.g., `my-new-blog.html`)
-3. Edit the content inside the template
-
-### Step 2: Update the Template
-Replace these placeholders in your new blog file:
-- `BLOG_TITLE` → Your actual blog title
-- `PUBLISH_DATE` → Publication date (e.g., "January 20, 2025")
-- `READ_TIME` → Estimated reading time (e.g., "10 min read")
-- `CATEGORY` → Blog category (e.g., "Technology")
-
-### Step 3: Add Your Content
-- Write your blog content in the `.blog-content` section
-- Use the provided CSS classes for styling:
-  - `<h2>` for main sections
-  - `<h3>` for subsections
-  - `.code-block` for code examples
-  - `.warning`, `.info`, `.success` for callout boxes
-
-### Step 4: Update JSON File
-Add your new blog to `src/blogs.json`:
-```json
-{
-  "id": 4,
-  "title": "Your Blog Title",
-  "description": "Brief description...",
-  "image": "src/assets/your-image.png",
-  "alt": "Image description",
-  "date": "2025-01-20",
-  "readTime": "10 min read",
-  "category": "Technology",
-  "url": "src/blog/your-blog-file.html"
-}
-```
-
-### 💡 Tips
-
-- Keep descriptions under 150 characters for best display
-- Use descriptive alt text for accessibility
-- Update the date when you publish
-- Use consistent categories for better organization
-- Test your blog URLs before publishing
-- Use the template for consistent styling
-- Add images to `src/assets/` folder
-
-### 🎨 Available Styling Classes
-
-- **Code blocks**: Use `.code-block` with `<pre>` tags
-- **Warning boxes**: Use `.warning` class
-- **Info boxes**: Use `.info` class  
-- **Success boxes**: Use `.success` class
-- **Lists**: Use standard `<ul>` and `<ol>` tags
-
-That's it! Create your HTML file, update the JSON, and your new blog will appear automatically! 🚀
+- Keep the summary under ~160 characters so Google doesn't cut it off.
+- Never rename a published post's file: its URL would change and Google would have to start over.
+- Test locally with `python -m http.server 8000` and open `http://localhost:8000/src/blog/`.

@@ -4,18 +4,18 @@
 
 I build full-stack web applications — React and Next.js on the frontend, Node.js/Express and Flask on the backend, with MySQL and MongoDB for storage. Several of my recent projects are AI-powered tools built on the Gemini API. I currently work as a Software Engineer Intern at RegiKart Private Limited, and have been freelancing since 2023.
 
-The site is a static site hosted on GitHub Pages. Blog posts are stored as HTML strings in a single JSON file (`/src/blogs.json`) and rendered client-side, so the JSON is the most reliable source for full post content.
+The site is a static site hosted on GitHub Pages. Every blog post is a standalone static HTML page with its full content in the HTML, no client-side rendering required.
 
 ## Main pages
 
 - [Portfolio home](https://vikky2810.github.io/): About, experience, skills, projects, and contact details on a single page.
-- [Blog index](https://vikky2810.github.io/src/blog/index.html): All blog posts, sorted newest first and filterable by category.
+- [Blog index](https://vikky2810.github.io/src/blog/index.html): All blog posts, sorted newest first.
 - [Projects](https://vikky2810.github.io/src/Projects/index.html): Standalone projects page.
 
 ## Blog posts
 
-- [SQL vs NoSQL: I've Shipped Both, Here's How I Actually Decide](https://vikky2810.github.io/src/blog/blog.html?id=2): Why the real decision is where your schema lives and how many ways you'll need to read your data — not scale. Includes a decision flowchart, SQL and MongoDB examples, and lessons from getting it wrong. Published 2026-06-20.
-- [Library vs Framework: The Real Difference Every Developer Should Know](https://vikky2810.github.io/src/blog/blog.html?id=1): Inversion of control explained with React and Next.js examples, real-world analogies, and guidance on picking between them. Published 2025-10-18.
+- [SQL vs NoSQL: I've Shipped Both, Here's How I Actually Decide](https://vikky2810.github.io/src/blog/sql-vs-nosql.html): Why the real decision is where your schema lives and how many ways you'll need to read your data — not scale. Includes a decision flowchart, SQL and MongoDB examples, and lessons from getting it wrong. Published 2026-06-20.
+- [Library vs Framework: The Real Difference Every Developer Should Know](https://vikky2810.github.io/src/blog/library-vs-framework.html): Inversion of control explained with React and Next.js examples, real-world analogies, and guidance on picking between them. Published 2025-10-18.
 
 ## Projects
 
@@ -31,6 +31,5 @@ The site is a static site hosted on GitHub Pages. Blog posts are stored as HTML 
 
 ## Optional
 
-- [Blog content JSON](https://vikky2810.github.io/src/blogs.json): Full text of every blog post, with title, summary, date, read time, and category. Preferred source over scraping the rendered pages.
 - [Resume (PDF)](https://vikky2810.github.io/src/assets/Vikram%20Kamble_Resume.pdf): Detailed experience, education, and skills.
 - [Sitemap](https://vikky2810.github.io/sitemap.xml): XML sitemap for the site.

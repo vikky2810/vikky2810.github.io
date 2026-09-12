@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Hand-maintained. Adding a post? Add an <item> at the TOP of the list and
+     update <lastBuildDate>. Newest first; pubDate is RFC-822, not ISO-8601. -->
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>Vikram Kamble's Blog</title>
+    <link>https://vikky2810.github.io/blog/</link>
+    <description>Posts about web development, backend engineering, and the decisions behind them - written from shipping real projects.</description>
+    <language>en-us</language>
+    <copyright>Vikram Kamble</copyright>
+    <lastBuildDate>Sat, 12 Sep 2026 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://vikky2810.github.io/feed.xml" rel="self" type="application/rss+xml" />
+    <image>
+      <url>https://vikky2810.github.io/src/assets/og-image.png</url>
+      <title>Vikram Kamble's Blog</title>
+      <link>https://vikky2810.github.io/blog/</link>
+    </image>
+    <item>
+      <title>Building With the Gemini API: The Part the Docs Don't Cover</title>
+      <link>https://vikky2810.github.io/blog/building-with-gemini-api/</link>
+      <guid isPermaLink="true">https://vikky2810.github.io/blog/building-with-gemini-api/</guid>
+      <pubDate>Sat, 12 Sep 2026 00:00:00 +0000</pubDate>
+      <category>AI</category>
+      <dc:creator>Vikram Kamble</dc:creator>
+      <description>The Gemini quickstart gets you a working call in ten lines. Everything that actually broke in my repo-analysis app happened somewhere else: choosing what to send, reading real error bodies, and handling a response that came back empty.</description>
+    </item>
+    <item>
+      <title>SQL vs NoSQL: I've Shipped Both, Here's How I Actually Decide</title>
+      <link>https://vikky2810.github.io/blog/sql-vs-nosql/</link>
+      <guid isPermaLink="true">https://vikky2810.github.io/blog/sql-vs-nosql/</guid>
+      <pubDate>Sat, 20 Jun 2026 00:00:00 +0000</pubDate>
+      <category>Backend</category>
+      <dc:creator>Vikram Kamble</dc:creator>
+      <description>Most SQL vs NoSQL posts are a comparison chart someone copied from the docs. This one is a decision process, built from shipping real projects on both MySQL and MongoDB, with code, trade-offs, and a flowchart you can actually follow.</description>
+    </item>
+    <item>
+      <title>Library vs Framework: The Real Difference Every Developer Should Know</title>
+      <link>https://vikky2810.github.io/blog/library-vs-framework/</link>
+      <guid isPermaLink="true">https://vikky2810.github.io/blog/library-vs-framework/</guid>
+      <pubDate>Sat, 18 Oct 2025 00:00:00 +0000</pubDate>
+      <category>Web Development</category>
+      <dc:creator>Vikram Kamble</dc:creator>
+      <description>Understanding the difference between a library and a framework is crucial for developers. This guide breaks it down with beginner-friendly explanations, real-world analogies, and practical React and Next.js examples.</description>
+    </item>
+  </channel>
+</rss>

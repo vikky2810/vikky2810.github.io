@@ -14,18 +14,22 @@
 
   <!-- Blog listing: gained the linked footnote into the projects 2026-09-12 -->
   <url>
-    <loc>https://vikky2810.github.io/src/blog/</loc>
+    <loc>https://vikky2810.github.io/blog/</loc>
     <lastmod>2026-09-12</lastmod>
   </url>
 
   <!-- Posts: both gained in-body internal links, a related-posts section and an
        author block on 2026-09-12; matches dateModified in each page's JSON-LD -->
   <url>
-    <loc>https://vikky2810.github.io/src/blog/sql-vs-nosql.html</loc>
+    <loc>https://vikky2810.github.io/blog/building-with-gemini-api/</loc>
     <lastmod>2026-09-12</lastmod>
   </url>
   <url>
-    <loc>https://vikky2810.github.io/src/blog/library-vs-framework.html</loc>
+    <loc>https://vikky2810.github.io/blog/sql-vs-nosql/</loc>
+    <lastmod>2026-09-12</lastmod>
+  </url>
+  <url>
+    <loc>https://vikky2810.github.io/blog/library-vs-framework/</loc>
     <lastmod>2026-09-12</lastmod>
   </url>
 

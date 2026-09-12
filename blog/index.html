@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <!-- Primary Meta Tags -->
+    <title>Blog - Vikram Kamble | Full Stack Developer</title>
+    <meta name="title" content="Blog - Vikram Kamble | Full Stack Developer" />
+    <meta name="description" content="Read the latest blog posts by Vikram Kamble, covering topics in web development, programming, and technology insights." />
+    <meta name="keywords" content="Vikram Kamble, Blog, Web Development, Programming, Technology, React, Node.js, JavaScript, Tutorials" />
+    <meta name="author" content="Vikram Kamble" />
+    <meta name="robots" content="index, follow" />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://vikky2810.github.io/blog/" />
+    <meta property="og:title" content="Blog - Vikram Kamble | Full Stack Developer" />
+    <meta property="og:description" content="Read the latest blog posts by Vikram Kamble, covering topics in web development, programming, and technology insights." />
+    <meta property="og:image" content="https://vikky2810.github.io/src/assets/og-image.png" />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Vikram Kamble - Full Stack Developer" />
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://vikky2810.github.io/blog/" />
+    <meta property="twitter:title" content="Blog - Vikram Kamble | Full Stack Developer" />
+    <meta property="twitter:description" content="Read the latest blog posts by Vikram Kamble, covering topics in web development, programming, and technology insights." />
+    <meta property="twitter:image" content="https://vikky2810.github.io/src/assets/og-image.png" />
+    <meta property="twitter:image:alt" content="Vikram Kamble - Full Stack Developer" />
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://vikky2810.github.io/blog/" />
+    <link rel="alternate" type="application/rss+xml" title="Vikram Kamble's Blog" href="/feed.xml" />
+
+    <!-- Favicon -->
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
+    <link rel="icon" type="image/png" href="/src/assets/favicon-32x32.png" sizes="32x32" />
+    <link rel="apple-touch-icon" href="/src/assets/apple-touch-icon.png" sizes="180x180" />
+    
+    <!-- Preconnect to external domains for performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="style.css" />
+    
+    <!-- Structured Data for Rich Snippets -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Blog",
+      "name": "Vikram Kamble's Blog",
+      "description": "Blog posts about web development, programming, and technology",
+      "url": "https://vikky2810.github.io/blog/",
+      "author": {
+        "@type": "Person",
+        "name": "Vikram Kamble",
+        "url": "https://vikky2810.github.io/"
+      }
+    }
+    </script>
+    <!-- Analytics: cookieless page views + goals, see src/analytics.js -->
+    <script defer src="/src/analytics.js"></script>
+  </head>
+  <body>
+    <!-- Navigation Header -->
+    <header class="blog-header">
+      <div class="header-container">
+        <a href="/" class="back-btn">
+          <span class="back-icon">←</span>
+          <span class="back-text">Back to Portfolio</span>
+        </a>
+      </div>
+    </header>
+
+    <!-- Blog Cards Section -->
+    <section id="blog-cards">
+      <h1 style="text-align:center;">Blog — Vikram Kamble</h1>
+      <p style="text-align:center;max-width:640px;margin:0 auto 2rem;">Practical guides on web development: SQL vs NoSQL decisions from real MySQL and MongoDB projects, and library vs framework differences with React and Next.js examples.</p>
+      <div class="blog-cards-container" id="blog-cards-container">
+        <a class="blog-row" data-category="ai" href="/blog/building-with-gemini-api/">
+          <div class="blog-row-main">
+            <h3 class="blog-row-title">Building With the Gemini API: The Part the Docs Don&#39;t Cover</h3>
+            <p class="blog-row-desc">The Gemini quickstart gets you a working call in ten lines. Everything that actually broke in my repo-analysis app happened somewhere else: choosing what to send, reading real error bodies, and handling a response that came back empty.</p>
+            <span class="blog-row-date">Sep 12, 2026 · AI · 8 min read</span>
+          </div>
+          <span class="blog-row-more">Read more</span>
+        </a>
+        <a class="blog-row" data-category="backend" href="/blog/sql-vs-nosql/">
+          <div class="blog-row-main">
+            <h3 class="blog-row-title">SQL vs NoSQL: I&#39;ve Shipped Both, Here&#39;s How I Actually Decide</h3>
+            <p class="blog-row-desc">Most SQL vs NoSQL posts are a comparison chart someone copied from the docs. This one is a decision process, built from shipping real projects on both MySQL and MongoDB, with code, trade-offs, and a flowchart you can actually follow.</p>
+            <span class="blog-row-date">Jun 20, 2026 · Backend · 10 min read</span>
+          </div>
+          <span class="blog-row-more">Read more</span>
+        </a>
+        <a class="blog-row" data-category="web development" href="/blog/library-vs-framework/">
+          <div class="blog-row-main">
+            <h3 class="blog-row-title">Library vs Framework: The Real Difference Every Developer Should Know</h3>
+            <p class="blog-row-desc">Understanding the difference between a library and a framework is crucial for developers. This guide breaks it down with beginner-friendly explanations, real-world analogies, and practical React and Next.js examples.</p>
+            <span class="blog-row-date">Oct 18, 2025 · Web Development · 8 min read</span>
+          </div>
+          <span class="blog-row-more">Read more</span>
+        </a>
+      </div>
+      <p class="blog-index-footnote">
+        Both posts come out of real projects — see
+        <a href="/#ai-explains-repo">AI Explains Repo</a>,
+        the <a href="/#health-aware-recipe-modifier">Health-Aware Recipe Modifier</a> and the
+        <a href="/#online-python-code-editor">Online Python Code Editor</a> on the
+        <a href="/#projects">projects page</a>, or
+        <a href="/#contact">get in touch</a>.
+        New posts land in the <a href="/feed.xml">RSS feed</a>.
+      </p>
+    </section>
+  </body>
+</html>

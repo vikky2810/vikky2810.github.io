@@ -9,12 +9,15 @@ The site is a static site hosted on GitHub Pages. Every blog post is a standalon
 ## Main pages
 
 - [Portfolio home](https://vikky2810.github.io/): About, experience, skills, projects, and contact details on a single page.
-- [Blog index](https://vikky2810.github.io/src/blog/): All blog posts, sorted newest first.
+- [Blog index](https://vikky2810.github.io/blog/): All blog posts, sorted newest first.
+- [RSS feed](https://vikky2810.github.io/feed.xml): All blog posts as an RSS 2.0 feed, newest first.
+
 
 ## Blog posts
 
-- [SQL vs NoSQL: I've Shipped Both, Here's How I Actually Decide](https://vikky2810.github.io/src/blog/sql-vs-nosql.html): Why the real decision is where your schema lives and how many ways you'll need to read your data — not scale. Includes a decision flowchart, SQL and MongoDB examples, and lessons from getting it wrong. Published 2026-06-20.
-- [Library vs Framework: The Real Difference Every Developer Should Know](https://vikky2810.github.io/src/blog/library-vs-framework.html): Inversion of control explained with React and Next.js examples, real-world analogies, and guidance on picking between them. Published 2025-10-18.
+- [Building With the Gemini API: The Part the Docs Don't Cover](https://vikky2810.github.io/blog/building-with-gemini-api/): What actually breaks when you ship a Gemini feature - context selection and truncation, reading the real error body instead of statusText, safety blocks that arrive as HTTP 200, and why prompt word limits are advisory. Built from the AI Explains Repo codebase. Published 2026-09-12.
+- [SQL vs NoSQL: I've Shipped Both, Here's How I Actually Decide](https://vikky2810.github.io/blog/sql-vs-nosql/): Why the real decision is where your schema lives and how many ways you'll need to read your data — not scale. Includes a decision flowchart, SQL and MongoDB examples, and lessons from getting it wrong. Published 2026-06-20.
+- [Library vs Framework: The Real Difference Every Developer Should Know](https://vikky2810.github.io/blog/library-vs-framework/): Inversion of control explained with React and Next.js examples, real-world analogies, and guidance on picking between them. Published 2025-10-18.
 
 ## Projects
 

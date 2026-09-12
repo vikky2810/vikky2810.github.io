@@ -9,26 +9,26 @@
     <!-- Old blog.html?id=N links: every post now has its own page, so send visitors there -->
     <script>
         (function () {
-            var pages = { '1': 'library-vs-framework.html', '2': 'sql-vs-nosql.html' };
+            var pages = { '1': '/blog/library-vs-framework/', '2': '/blog/sql-vs-nosql/' };
             var id = new URLSearchParams(window.location.search).get('id');
-            window.location.replace(pages[id] || 'index.html');
+            window.location.replace(pages[id] || '/blog/');
         })();
     </script>
-    <link rel="stylesheet" href="../style.css">
-    <link rel="stylesheet" href="post.css">
-    <link rel="icon" href="../../favicon.ico" sizes="32x32" />
-    <link rel="icon" type="image/png" href="../../src/assets/favicon-32x32.png" sizes="32x32" />
-    <link rel="apple-touch-icon" href="../../src/assets/apple-touch-icon.png" sizes="180x180" />
+    <link rel="stylesheet" href="/src/style.css">
+    <link rel="stylesheet" href="/blog/post.css">
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
+    <link rel="icon" type="image/png" href="/src/assets/favicon-32x32.png" sizes="32x32" />
+    <link rel="apple-touch-icon" href="/src/assets/apple-touch-icon.png" sizes="180x180" />
 </head>
 
 <body>
     <main class="blog-post">
-        <a href="./" class="back-btn">← Back to Blog</a>
+        <a href="/blog/" class="back-btn">← Back to Blog</a>
         <div class="blog-content">
             <p>This post has moved to its own page:</p>
             <ul>
-                <li><a href="sql-vs-nosql.html">SQL vs NoSQL: I've Shipped Both, Here's How I Actually Decide</a></li>
-                <li><a href="library-vs-framework.html">Library vs Framework: The Real Difference Every Developer Should Know</a></li>
+                <li><a href="/blog/sql-vs-nosql/">SQL vs NoSQL: I've Shipped Both, Here's How I Actually Decide</a></li>
+                <li><a href="/blog/library-vs-framework/">Library vs Framework: The Real Difference Every Developer Should Know</a></li>
             </ul>
         </div>
     </main>

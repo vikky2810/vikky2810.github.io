@@ -35,7 +35,25 @@ Replace these with the new post's details:
 3. `sitemap.xml`: add a `<url>` entry with the new URL.
 4. `llm.txt`: add the post under "Blog posts".
 
-### 5. After publishing
+### 5. Link out of it (don't skip this)
+A post with no outgoing links is a dead end: it passes no authority to the rest of the
+site and gives Google nothing to connect it to. Every post needs all four:
+
+1. **Breadcrumb** at the top of `<main>` (Home / Blog / this post) plus the matching
+   `BreadcrumbList` block in the `<head>`. Copy both from an existing post and change
+   the last crumb.
+2. **Contextual links in the body.** Wherever the post names one of the projects, link
+   it: `<a href="../../index.html#ai-explains-repo">AI Explains Repo</a>`. The anchor
+   ids are the project title, lowercased and hyphenated — `src/script.js` generates the
+   same slug when it re-renders the cards, so keep the two in sync.
+3. **`.post-related` section** after `.blog-content`, with a card for the most closely
+   related post and one for the projects page.
+4. **`.post-author` box** at the end, linking home, projects, the blog index and contact.
+
+Use real anchor text ("SQL vs NoSQL: how I actually decide"), never "click here" or a
+bare URL, and only link where the connection is genuine.
+
+### 6. After publishing
 In Google Search Console, open **URL Inspection**, paste the new URL and click **Request Indexing**.
 
 ## 🎨 Available Styling

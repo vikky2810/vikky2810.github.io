@@ -266,3 +266,159 @@
         margin: 1rem auto;
     }
 }
+
+/* ---------------------------------------------------------
+   Internal linking: breadcrumb, in-content links,
+   related posts and the author box at the end of a post.
+   --------------------------------------------------------- */
+
+.post-breadcrumb {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.45rem;
+    font-size: 0.8rem;
+    margin-bottom: 1.75rem;
+    color: var(--text-muted);
+}
+
+.post-breadcrumb a {
+    color: var(--text-secondary);
+    text-decoration: none;
+}
+
+.post-breadcrumb a:hover {
+    color: var(--primary-color);
+}
+
+.post-breadcrumb .crumb-sep {
+    opacity: 0.5;
+}
+
+.post-breadcrumb .crumb-current {
+    color: var(--text-muted);
+}
+
+/* Inline links inside the article body need to look like links */
+.blog-content a {
+    color: var(--primary-color);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+    text-decoration-color: rgba(20, 184, 166, 0.45);
+}
+
+.blog-content a:hover {
+    color: var(--secondary-color);
+    text-decoration-color: currentColor;
+}
+
+.post-related {
+    margin-top: 3.5rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border-color);
+}
+
+.post-related h2 {
+    font-size: 1.1rem;
+    color: var(--text-primary);
+    margin: 0 0 1.25rem;
+}
+
+.related-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1rem;
+}
+
+.related-card {
+    display: block;
+    padding: 1.25rem;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    background: var(--bg-card);
+    text-decoration: none;
+    transition: var(--transition-normal);
+}
+
+.related-card:hover {
+    border-color: var(--primary-color);
+    transform: translateY(-2px);
+}
+
+.related-card-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--primary-color);
+}
+
+.related-card-title {
+    font-size: 0.95rem;
+    line-height: 1.45;
+    color: var(--text-primary);
+    margin: 0.45rem 0 0.4rem;
+}
+
+.related-card-desc {
+    font-size: 0.85rem;
+    line-height: 1.6;
+    color: var(--text-secondary);
+    margin: 0;
+}
+
+.post-author {
+    display: flex;
+    gap: 1.1rem;
+    align-items: flex-start;
+    margin-top: 2rem;
+    padding: 1.5rem;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    background: var(--bg-card);
+}
+
+.post-author img {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+.post-author-name {
+    font-size: 0.95rem;
+    color: var(--text-primary);
+    margin: 0 0 0.35rem;
+}
+
+.post-author-bio {
+    font-size: 0.85rem;
+    line-height: 1.65;
+    color: var(--text-secondary);
+    margin: 0;
+}
+
+.post-author-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 0.75rem;
+    font-size: 0.83rem;
+}
+
+.post-author-links a {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+.post-author-links a:hover {
+    color: var(--secondary-color);
+}
+
+@media (max-width: 600px) {
+    .post-author {
+        flex-direction: column;
+        gap: 0.9rem;
+    }
+}

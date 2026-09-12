@@ -32,7 +32,11 @@ Replace these with the new post's details:
 ### 4. Link to it
 1. `src/blog/index.html`: add a `.blog-row` card (copy an existing one) at the top of the list.
 2. `index.html`: add the same card to the Blog section on the home page.
-3. `sitemap.xml`: add a `<url>` entry with the new URL.
+3. `sitemap.xml`: add a `<url>` entry with the new URL and a `<lastmod>` of the
+   publish date. Only bump an existing `<lastmod>` when the page's *content*
+   really changed - not for a favicon, meta tag or styling edit. Google discounts
+   `lastmod` entirely on sites where the dates turn out to be unreliable, and a
+   post's `lastmod` should match its `dateModified` in the JSON-LD.
 4. `llms.txt`: add the post under "Blog posts".
 
 ### 5. Link out of it (don't skip this)

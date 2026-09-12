@@ -111,6 +111,33 @@ vikky2810.github.io/
 - **Structured data** (JSON-LD)
 - **Semantic HTML** structure
 
+### Analytics
+Plausible, configured in `src/analytics.js` and pulled in by every page with one
+`<script defer src="/src/analytics.js">` tag. It is cookieless, so the site needs
+no consent banner, and it ignores localhost so local testing does not skew the
+numbers.
+
+Page views, resume downloads and outbound clicks are tracked automatically. Three
+more goals are fired from `src/analytics.js`: `Contact Click` for `mailto:` links,
+which Plausible does not count as outbound, and `Read 50%` / `Read 90%` for how far
+visitors actually get through a blog post. Views alone cannot tell a read from a
+bounce, so those two are what answer "which post is working" - filter either goal
+by page to compare posts.
+
+All five have to be added once under **Site Settings > Goals** in Plausible,
+otherwise they are collected but never charted:
+
+| Goal | Type |
+|------|------|
+| `File Download` | Special |
+| `Outbound Link: Click` | Special |
+| `Contact Click` | Custom event |
+| `Read 50%` | Custom event |
+| `Read 90%` | Custom event |
+
+Swapping providers, or pasting in a newer Plausible snippet, is an edit to
+`src/analytics.js` alone - no page markup changes.
+
 ## 🌐 Deployment Options
 
 ### GitHub Pages (Current)

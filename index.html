@@ -49,6 +49,7 @@
 
   <!-- Canonical URL -->
   <link rel="canonical" href="https://vikky2810.github.io/" />
+  <link rel="alternate" type="application/rss+xml" title="Vikram Kamble's Blog" href="/feed.xml" />
 
   <!-- Favicon -->
   <link rel="icon" href="favicon.ico" sizes="32x32" />
@@ -103,6 +104,8 @@
       }
     }
     </script>
+  <!-- Analytics: cookieless page views + goals, see src/analytics.js -->
+  <script defer src="/src/analytics.js"></script>
 </head>
 
 <body>
@@ -227,7 +230,15 @@
     <h2 class="section-heading">Blog</h2>
     <p class="section-subtext">Technical notes on web development, Python, SQL vs NoSQL, and building AI-powered apps.</p>
     <div class="blogs-container" id="blogs-container">
-      <a class="blog-row" href="src/blog/sql-vs-nosql.html">
+      <a class="blog-row" href="blog/building-with-gemini-api/">
+        <div class="blog-row-main">
+          <h3 class="blog-row-title">Building With the Gemini API: The Part the Docs Don&#39;t Cover</h3>
+          <p class="blog-row-desc">The quickstart gets you a working call in ten lines. Everything that actually broke happened somewhere else: what to send, reading real error bodies, and a response that came back empty.</p>
+          <span class="blog-row-date">Sep 12, 2026 · AI · 8 min read</span>
+        </div>
+        <span class="blog-row-more">Read more</span>
+      </a>
+      <a class="blog-row" href="blog/sql-vs-nosql/">
         <div class="blog-row-main">
           <h3 class="blog-row-title">SQL vs NoSQL: I&#39;ve Shipped Both, Here&#39;s How I Actually Decide</h3>
           <p class="blog-row-desc">Most SQL vs NoSQL posts are a comparison chart copied from the docs. This one is a decision process, built from shipping real projects on both MySQL and MongoDB, with code, trade-offs, and a flowchart you can follow.</p>
@@ -235,7 +246,7 @@
         </div>
         <span class="blog-row-more">Read more</span>
       </a>
-      <a class="blog-row" href="src/blog/library-vs-framework.html">
+      <a class="blog-row" href="blog/library-vs-framework/">
         <div class="blog-row-main">
           <h3 class="blog-row-title">Library vs Framework: The Real Difference Every Developer Should Know</h3>
           <p class="blog-row-desc">Understanding the difference between a library and a framework is crucial for developers. Beginner-friendly explanations, real-world analogies, and practical React and Next.js examples.</p>
@@ -244,11 +255,11 @@
         <span class="blog-row-more">Read more</span>
       </a>
       <noscript>
-        <p><a href="src/blog/">Read all blog posts</a>: SQL vs NoSQL decision guide (MySQL vs MongoDB) and Library vs Framework explained with React and Next.js examples.</p>
+        <p><a href="blog/">Read all blog posts</a>: SQL vs NoSQL decision guide (MySQL vs MongoDB) and Library vs Framework explained with React and Next.js examples.</p>
       </noscript>
     </div>
     <div class="blogs-showall">
-      <a href="src/blog/" class="showall-btn">Show all blogs</a>
+      <a href="blog/" class="showall-btn">Show all blogs</a>
     </div>
   </section>
   <section id="about">
@@ -260,7 +271,7 @@
       My recent work focuses on AI-powered tools built with the Gemini API, including repo analysis, recipe generation, and browser-based code editors.
     </p>
     <p class="about-text">
-      I write about web development, SQL vs NoSQL decisions, and library vs framework trade-offs on my <a href="src/blog/">blog</a>.
+      I write about web development, SQL vs NoSQL decisions, and library vs framework trade-offs on my <a href="blog/">blog</a>.
       Explore my <a href="#projects">projects</a>, <a href="#experience">skills</a>, and <a href="#work">experience</a> below, or <a href="#contact">get in touch</a> for collaboration and freelance work.
     </p>
   </section>

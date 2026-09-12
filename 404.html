@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Page Not Found - Vikram Kamble</title>
+  <meta name="description" content="That page doesn't exist. Links to the portfolio home page, the blog and the projects." />
+  <!-- follow, so crawlers that land here still reach the real pages below -->
+  <meta name="robots" content="noindex, follow" />
+
+  <link rel="icon" href="/favicon.ico" sizes="32x32" />
+  <link rel="icon" type="image/png" href="/src/assets/favicon-32x32.png" sizes="32x32" />
+  <link rel="apple-touch-icon" href="/src/assets/apple-touch-icon.png" sizes="180x180" />
+
+  <!-- Self-contained: this page is served at arbitrary URLs, so it should not
+       depend on a stylesheet path or block on anything. -->
+  <style>
+    :root {
+      --bg-primary: #0B0909;
+      --text-primary: #ffffff;
+      --text-secondary: #94a3b8;
+      --text-muted: #64748b;
+      --primary-color: #14b8a6;
+      --secondary-color: #06b6d4;
+      --border-color: rgba(51, 65, 85, 0.5);
+      --bg-card: rgba(15, 23, 42, 0.5);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem 1.25rem;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .wrap {
+      width: 100%;
+      max-width: 600px;
+      text-align: center;
+    }
+
+    .code {
+      font-size: clamp(4rem, 18vw, 7rem);
+      font-weight: 800;
+      line-height: 1;
+      letter-spacing: -0.04em;
+      margin: 0;
+      background: linear-gradient(135deg, #14b8a6 0%, #06b6d4 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    h1 {
+      font-size: clamp(1.15rem, 4.5vw, 1.5rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin: 1.25rem 0 0.6rem;
+    }
+
+    .lead {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      margin: 0 auto 2rem;
+      max-width: 430px;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.7rem;
+      justify-content: center;
+      margin-bottom: 2.75rem;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 0.6rem 1.3rem;
+      border-radius: 999px;
+      border: 1px solid var(--border-color);
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.875rem;
+      font-weight: 600;
+      transition: border-color 0.3s ease, color 0.3s ease;
+    }
+
+    .btn:hover {
+      border-color: var(--primary-color);
+      color: var(--primary-color);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #14b8a6 0%, #06b6d4 100%);
+      border-color: transparent;
+      color: #04121a;
+    }
+
+    .btn-primary:hover {
+      color: #04121a;
+      opacity: 0.9;
+    }
+
+    .reads {
+      text-align: left;
+      border-top: 1px solid var(--border-color);
+      padding-top: 1.75rem;
+    }
+
+    .reads-title {
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin: 0 0 1rem;
+      text-align: center;
+    }
+
+    .read {
+      display: block;
+      padding: 1rem 1.15rem;
+      margin-bottom: 0.7rem;
+      border: 1px solid var(--border-color);
+      border-radius: 0.75rem;
+      background: var(--bg-card);
+      text-decoration: none;
+      transition: border-color 0.3s ease, transform 0.3s ease;
+    }
+
+    .read:hover {
+      border-color: var(--primary-color);
+      transform: translateY(-2px);
+    }
+
+    .read-title {
+      display: block;
+      color: var(--text-primary);
+      font-size: 0.9rem;
+      font-weight: 600;
+      line-height: 1.45;
+      margin-bottom: 0.25rem;
+    }
+
+    .read-meta {
+      display: block;
+      color: var(--text-muted);
+      font-size: 0.78rem;
+    }
+  </style>
+</head>
+
+<body>
+  <main class="wrap">
+    <p class="code">404</p>
+    <h1>This page doesn't exist</h1>
+    <p class="lead">The link may be broken, or the page may have moved. Everything below still works.</p>
+
+    <div class="actions">
+      <a class="btn btn-primary" href="/">Portfolio home</a>
+      <a class="btn" href="/src/blog/">Blog</a>
+      <a class="btn" href="/#projects">Projects</a>
+      <a class="btn" href="/#contact">Contact</a>
+    </div>
+
+    <section class="reads">
+      <p class="reads-title">Recent posts</p>
+      <a class="read" href="/src/blog/sql-vs-nosql.html">
+        <span class="read-title">SQL vs NoSQL: I've Shipped Both, Here's How I Actually Decide</span>
+        <span class="read-meta">Backend · 10 min read</span>
+      </a>
+      <a class="read" href="/src/blog/library-vs-framework.html">
+        <span class="read-title">Library vs Framework: The Real Difference Every Developer Should Know</span>
+        <span class="read-meta">Web Development · 8 min read</span>
+      </a>
+    </section>
+  </main>
+</body>
+
+</html>

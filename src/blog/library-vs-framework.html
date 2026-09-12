@@ -44,7 +44,7 @@
         "description": "Understanding the difference between a library and a framework is crucial for developers. This guide breaks it down with beginner-friendly explanations, real-world analogies, and practical React and Next.js examples.",
         "image": "https://vikky2810.github.io/src/assets/frameworkVSlibrary.png",
         "datePublished": "2025-10-18",
-        "dateModified": "2025-10-18",
+        "dateModified": "2026-09-12",
         "articleSection": "Web Development",
         "mainEntityOfPage": {
             "@type": "WebPage",
@@ -62,11 +62,30 @@
         }
     }
     </script>
+
+    <!-- Breadcrumbs -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://vikky2810.github.io/" },
+            { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://vikky2810.github.io/src/blog/" },
+            { "@type": "ListItem", "position": 3, "name": "Library vs Framework", "item": "https://vikky2810.github.io/src/blog/library-vs-framework.html" }
+        ]
+    }
+    </script>
 </head>
 
 <body>
     <main class="blog-post">
-        <a href="index.html" class="back-btn">← Back to Blog</a>
+        <nav class="post-breadcrumb" aria-label="Breadcrumb">
+            <a href="../../index.html">Home</a>
+            <span class="crumb-sep">/</span>
+            <a href="index.html">Blog</a>
+            <span class="crumb-sep">/</span>
+            <span class="crumb-current" aria-current="page">Library vs Framework</span>
+        </nav>
 
         <header class="blog-header">
             <div class="blog-category">Web Development</div>
@@ -147,6 +166,9 @@ export default function Home() {
                 <li><strong>Learning Curve:</strong> Libraries are easier to start with since they're more flexible; Frameworks have more conventions and rules but save time once you understand them.</li>
                 <li><strong>Community & Ecosystem:</strong> Both have huge communities, but frameworks often come with built-in tooling; Libraries might require piecing together multiple tools.</li>
             </ul>
+            <h3>How I've Picked in My Own Projects</h3>
+            <p><a href="../../index.html#ai-explains-repo">AI Explains Repo</a> is built on Next.js. Routing, server-side data fetching and the build pipeline came with the framework, and my job was to fill in the slots it handed me. The <a href="../../index.html#health-aware-recipe-modifier">Health-Aware Recipe Modifier</a> runs on Flask, which asks far less of you up front — I chose the structure, the templates and the request flow myself, and I also owned every mistake in them.</p>
+            <p>Same developer, two different answers, because the projects were different sizes with different needs. The tool choice follows the project, not your preferences. That's the same reasoning I use when picking a database, which I wrote about in <a href="sql-vs-nosql.html">SQL vs NoSQL: how I actually decide</a>.</p>
             <h2>Code Snippets: Library vs Framework in Action</h2>
             <h3>Using React (Library Approach)</h3>
             <pre class="code-block"><code class="language-jsx">import React, { useEffect, useState } from "react";
@@ -205,6 +227,36 @@ export default function Users({ users }) {
             </ul>
             <p>Bottom Line: Knowing the difference between a library and a framework is more than a buzzword. It helps you structure projects correctly, pick the right tools, and avoid unnecessary frustration. Next time someone asks you this in an interview or a project, you'll answer like a pro.</p>
         </div>
+
+        <section class="post-related">
+            <h2>Keep reading</h2>
+            <div class="related-grid">
+                <a class="related-card" href="sql-vs-nosql.html">
+                    <span class="related-card-label">Related post</span>
+                    <h3 class="related-card-title">SQL vs NoSQL: I've Shipped Both, Here's How I Actually Decide</h3>
+                    <p class="related-card-desc">The same "which tool do I pick" problem one layer down, worked through with real MySQL and MongoDB projects and a flowchart.</p>
+                </a>
+                <a class="related-card" href="../../index.html#projects">
+                    <span class="related-card-label">Projects</span>
+                    <h3 class="related-card-title">The projects behind this post</h3>
+                    <p class="related-card-desc">AI Explains Repo (Next.js) and the Health-Aware Recipe Modifier (Flask) — source code and live demos for both.</p>
+                </a>
+            </div>
+        </section>
+
+        <aside class="post-author">
+            <img src="../assets/profile-pic.webp" alt="Vikram Kamble" width="56" height="56" loading="lazy">
+            <div class="post-author-body">
+                <h2 class="post-author-name">Vikram Kamble</h2>
+                <p class="post-author-bio">Full-stack developer working with React, Next.js, Flask and Node.js. I write about the decisions behind the code, not just the syntax.</p>
+                <div class="post-author-links">
+                    <a href="../../index.html">Portfolio home</a>
+                    <a href="../../index.html#projects">Projects</a>
+                    <a href="index.html">All blog posts</a>
+                    <a href="../../index.html#contact">Get in touch</a>
+                </div>
+            </div>
+        </aside>
     </main>
 
     <!-- Prism.js syntax highlighting -->

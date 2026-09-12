@@ -99,6 +99,15 @@ const embeddedProjectsData = {
     ]
 };
 
+// Turns "AI Explains Repo" into "ai-explains-repo" so blog posts can deep-link
+// to a single project. Must match the ids written into index.html.
+function slugifyTitle(title) {
+    return String(title)
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/^-+|-+$/g, '');
+}
+
 // Function to load projects from JSON file
 async function loadProjects() {
     const container = document.getElementById('projects-container');
@@ -160,7 +169,7 @@ function displayProjects(projects) {
     const cardsHtml = projects
         .filter(project => project && project.title) // Filter out invalid projects
         .map(project => `
-        <div class="project-row">
+        <div class="project-row" id="${slugifyTitle(project.title)}">
             <div class="project-row-top">
                 <h3 class="project-row-title">${project.title || 'Untitled Project'}</h3>
                 <div class="project-row-links">
@@ -179,5 +188,12 @@ function displayProjects(projects) {
     `).join('');
 
     container.innerHTML = cardsHtml || '<p style="text-align: center; color: var(--text-secondary); padding: 2rem;">No projects to display yet.</p>';
+
+    if (window.location.hash) {
+        const target = document.getElementById(window.location.hash.slice(1));
+        if (target && container.contains(target)) {
+            target.scrollIntoView({ block: 'start' });
+        }
+    }
 }
   

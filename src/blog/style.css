@@ -846,3 +846,25 @@ tbody td:first-child {
 }
 
 
+
+/* Outbound links from the blog listing into the rest of the site */
+.blog-index-footnote {
+  max-width: 640px;
+  margin: 2.25rem auto 0;
+  text-align: center;
+  font-size: 0.88rem;
+  line-height: 1.7;
+  color: var(--text-secondary);
+}
+
+.blog-index-footnote a {
+  color: var(--primary-color);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: rgba(20, 184, 166, 0.45);
+}
+
+.blog-index-footnote a:hover {
+  color: var(--secondary-color);
+  text-decoration-color: currentColor;
+}

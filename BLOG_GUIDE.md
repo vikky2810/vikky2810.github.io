@@ -43,7 +43,7 @@ site and gives Google nothing to connect it to. Every post needs all four:
    `BreadcrumbList` block in the `<head>`. Copy both from an existing post and change
    the last crumb.
 2. **Contextual links in the body.** Wherever the post names one of the projects, link
-   it: `<a href="../../index.html#ai-explains-repo">AI Explains Repo</a>`. The anchor
+   it: `<a href="../../#ai-explains-repo">AI Explains Repo</a>`. The anchor
    ids are the project title, lowercased and hyphenated — `src/script.js` generates the
    same slug when it re-renders the cards, so keep the two in sync.
 3. **`.post-related` section** after `.blog-content`, with a card for the most closely
@@ -52,6 +52,13 @@ site and gives Google nothing to connect it to. Every post needs all four:
 
 Use real anchor text ("SQL vs NoSQL: how I actually decide"), never "click here" or a
 bare URL, and only link where the connection is genuine.
+
+**Always link to the canonical URL.** A page's canonical is the one in its
+`<link rel="canonical">` tag, and for the two index pages that URL ends in a slash, not
+in `index.html`. From inside `src/blog/`, write `../../` for the home page (canonical
+`https://vikky2810.github.io/`), `../../#projects` for a home page section, and `./` for
+the blog listing (canonical `https://vikky2810.github.io/src/blog/`). Linking to
+`index.html` instead points at a duplicate of the canonical URL and splits its signals.
 
 ### 6. After publishing
 In Google Search Console, open **URL Inspection**, paste the new URL and click **Request Indexing**.

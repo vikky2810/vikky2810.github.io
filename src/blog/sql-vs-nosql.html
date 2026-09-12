@@ -80,9 +80,9 @@
 <body>
     <main class="blog-post">
         <nav class="post-breadcrumb" aria-label="Breadcrumb">
-            <a href="../../index.html">Home</a>
+            <a href="../../">Home</a>
             <span class="crumb-sep">/</span>
-            <a href="index.html">Blog</a>
+            <a href="./">Blog</a>
             <span class="crumb-sep">/</span>
             <span class="crumb-current" aria-current="page">SQL vs NoSQL</span>
         </nav>
@@ -135,7 +135,7 @@
             </div>
             <h2>How This Played Out in My Own Projects</h2>
             <h3>Relational: the app with users and history</h3>
-            <p>In <strong><a href="../../index.html#ai-explains-repo">AI Explains Repo</a></strong>, users log in, analyse a GitHub repository, and get a report back. Their past reports stay in their history. Write that data out as sentences and the shape gives itself away: <em>a user has many sessions, a session has one report</em>. That word "has many" is the tell. Every time you catch yourself saying it, you're describing a relationship, and relationships are what relational databases were literally built for.</p>
+            <p>In <strong><a href="../../#ai-explains-repo">AI Explains Repo</a></strong>, users log in, analyse a GitHub repository, and get a report back. Their past reports stay in their history. Write that data out as sentences and the shape gives itself away: <em>a user has many sessions, a session has one report</em>. That word "has many" is the tell. Every time you catch yourself saying it, you're describing a relationship, and relationships are what relational databases were literally built for.</p>
             <pre class="code-block"><code class="language-sql">CREATE TABLE users (
   id         INT PRIMARY KEY AUTO_INCREMENT,
   email      VARCHAR(255) UNIQUE NOT NULL,
@@ -154,7 +154,7 @@ CREATE TABLE reports (
             <p>First, <code>ON DELETE CASCADE</code>. When a user deletes their account, their reports go with them — enforced by the database, not by me remembering to write the cleanup code. In MongoDB, forgetting that line is how you end up with orphaned documents nobody notices for six months.</p>
             <p>Second, look at <code>body JSON</code>. The AI's output doesn't have a fixed shape — some reports have security findings, some don't, the nesting varies by repo. That's genuinely unstructured, so I stopped fighting it and stored it as JSON. And this is the thing that took me too long to learn: <strong>modern SQL databases have JSON columns.</strong> "But my data is unstructured" hasn't been a reason to leave SQL since about 2016. You can keep the structured parts structured and let the messy part be messy, in the same table, in the same query.</p>
             <h3>Document store: the data that has no fixed shape</h3>
-            <p>The <strong><a href="../../index.html#health-aware-recipe-modifier">Health-Aware Recipe Modifier</a></strong> is the opposite situation. It generates a recipe tailored to a medical condition — ingredients, substitutions, warnings, nutrition notes — and the shape genuinely differs from one recipe to the next. One has three substitutions, one has none, one has a nested list of warnings per ingredient.</p>
+            <p>The <strong><a href="../../#health-aware-recipe-modifier">Health-Aware Recipe Modifier</a></strong> is the opposite situation. It generates a recipe tailored to a medical condition — ingredients, substitutions, warnings, nutrition notes — and the shape genuinely differs from one recipe to the next. One has three substitutions, one has none, one has a nested list of warnings per ingredient.</p>
             <p>Model that relationally and you get a table of recipes, a table of ingredients, a table of substitutions, a table of warnings, and a five-way JOIN to reassemble something you only ever read as one whole object. Model it as a document and it's just… the object:</p>
             <pre class="code-block"><code class="language-js">await db.collection("recipes").insertOne({
   userId: "u_123",
@@ -170,7 +170,7 @@ CREATE TABLE reports (
 });</code></pre>
             <p>No JOINs, no migration when the AI starts returning a new field, and the read is a single lookup. Here the document store isn't a compromise — it's genuinely the better model, because I write this data one way and read it back that exact same way.</p>
             <h3>And sometimes: no database at all</h3>
-            <p>My <strong><a href="../../index.html#online-python-code-editor">Online Python Code Editor</a></strong> runs user code on the server and streams the output back. I spent real time planning the database for it before I noticed there was nothing to store. Nobody logs in, nothing persists, the interesting problems were all about sandboxing and process isolation instead.</p>
+            <p>My <strong><a href="../../#online-python-code-editor">Online Python Code Editor</a></strong> runs user code on the server and streams the output back. I spent real time planning the database for it before I noticed there was nothing to store. Nobody logs in, nothing persists, the interesting problems were all about sandboxing and process isolation instead.</p>
             <p>Worth saying out loud, because "which database" is such a reflex question: <strong>the right answer is sometimes "none".</strong> A database you don't need is just a deploy step that can fail.</p>
             <h2>Four Things That Changed My Mind</h2>
             <p><strong>1. "MongoDB is faster" is usually about the index, not the database.</strong> Most speed comparisons you'll read online are between a well-indexed collection and an unindexed table. Add the index and the gap mostly disappears. Benchmark your own query before you switch databases over a number you read on Reddit.</p>
@@ -262,7 +262,7 @@ CREATE TABLE reports (
                     <h3 class="related-card-title">Library vs Framework: The Real Difference Every Developer Should Know</h3>
                     <p class="related-card-desc">The other "which tool do I pick" question, answered the same way: with React and Next.js examples instead of a feature table.</p>
                 </a>
-                <a class="related-card" href="../../index.html#projects">
+                <a class="related-card" href="../../#projects">
                     <span class="related-card-label">Projects</span>
                     <h3 class="related-card-title">The projects behind this post</h3>
                     <p class="related-card-desc">AI Explains Repo, the Health-Aware Recipe Modifier and the Online Python Code Editor — source code and live demos for all three.</p>
@@ -276,10 +276,10 @@ CREATE TABLE reports (
                 <h2 class="post-author-name">Vikram Kamble</h2>
                 <p class="post-author-bio">Full-stack developer working with Next.js, Flask, MySQL and MongoDB. I write about the decisions behind the code, not just the syntax.</p>
                 <div class="post-author-links">
-                    <a href="../../index.html">Portfolio home</a>
-                    <a href="../../index.html#projects">Projects</a>
-                    <a href="index.html">All blog posts</a>
-                    <a href="../../index.html#contact">Get in touch</a>
+                    <a href="../../">Portfolio home</a>
+                    <a href="../../#projects">Projects</a>
+                    <a href="./">All blog posts</a>
+                    <a href="../../#contact">Get in touch</a>
                 </div>
             </div>
         </aside>

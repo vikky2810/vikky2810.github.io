@@ -33,7 +33,7 @@ Replace these with the new post's details:
 1. `src/blog/index.html`: add a `.blog-row` card (copy an existing one) at the top of the list.
 2. `index.html`: add the same card to the Blog section on the home page.
 3. `sitemap.xml`: add a `<url>` entry with the new URL.
-4. `llm.txt`: add the post under "Blog posts".
+4. `llms.txt`: add the post under "Blog posts".
 
 ### 5. Link out of it (don't skip this)
 A post with no outgoing links is a dead end: it passes no authority to the rest of the

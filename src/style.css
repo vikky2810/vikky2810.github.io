@@ -751,6 +751,10 @@ section {
   border-bottom: 1px solid var(--border-color);
 }
 
+.project-row:last-child {
+  border-bottom: none;
+}
+
 .project-row-top {
   display: flex;
   justify-content: space-between;
@@ -1104,6 +1108,7 @@ img {
 #blogs {
   position: relative;
   padding: var(--section-gap) 2rem;
+  padding-top: 2.5rem;
   max-width: 760px;
   margin: 0 auto;
 }

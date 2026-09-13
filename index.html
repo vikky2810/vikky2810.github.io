@@ -109,7 +109,8 @@
 </head>
 
 <body>
-  <nav id="desktop-nav">
+  <a class="skip-link" href="#profile">Skip to content</a>
+  <nav id="desktop-nav" aria-label="Primary">
     <div>
       <ul class="nav-links">
         <li><a href="#about">About</a></li>
@@ -121,28 +122,28 @@
       </ul>
     </div>
   </nav>
-  <nav id="hamburger-nav">
+  <nav id="hamburger-nav" aria-label="Primary">
     <div></div>
     <div class="hamburger-menu">
-      <div class="hamburger-icon" onclick="toggleMenu()">
+      <button class="hamburger-icon" type="button" onclick="toggleMenu()" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobile-menu">
         <span></span>
         <span></span>
         <span></span>
-      </div>
-      <div class="menu-links">
+      </button>
+      <ul class="menu-links" id="mobile-menu">
         <li><a href="#about" onclick="toggleMenu()">About</a></li>
         <li><a href="#work" onclick="toggleMenu()">Experience</a></li>
         <li><a href="#experience" onclick="toggleMenu()">Skills</a></li>
         <li><a href="#projects" onclick="toggleMenu()">Projects</a></li>
         <li><a href="#blogs" onclick="toggleMenu()">Blogs</a></li>
         <li><a href="#contact" onclick="toggleMenu()">Contact</a></li>
-      </div>
+      </ul>
     </div>
   </nav>
   <section id="profile">
     <div class="profile-header">
       <img src="src/assets/profile-pic.webp" alt="Vikram Kamble profile picture" class="profile-avatar"
-        width="96" height="96" />
+        width="96" height="96" fetchpriority="high" decoding="async" />
       <div class="profile-intro">
         <h1 class="profile-name">Vikram Kamble</h1>
         <p class="profile-subtitle">
@@ -180,7 +181,7 @@
           <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
         </svg>
       </a>
-      <a href="./src/assets/Vikram Kamble_Resume.pdf" target="_blank" rel="noopener" class="resume-pill">Resume</a>
+      <a href="./src/assets/Vikram-Kamble-Resume.pdf" target="_blank" rel="noopener" class="resume-pill">Resume</a>
     </div>
   </section>
 
@@ -309,25 +310,25 @@
     <div class="skills-group">
       <h3 class="skills-group-title">Frontend</h3>
       <div class="skill-tags">
-        <span class="skill-tag" style="--brand: #E34F26" tabindex="0">
+        <span class="skill-tag" style="--brand: #E34F26">
           <svg class="skill-icon" aria-hidden="true" focusable="false"><use href="#si-html5"></use></svg><span class="skill-name">HTML</span>
         </span>
-        <span class="skill-tag" style="--brand: #1572B6" tabindex="0">
+        <span class="skill-tag" style="--brand: #1572B6">
           <svg class="skill-icon" aria-hidden="true" focusable="false"><use href="#si-css"></use></svg><span class="skill-name">CSS</span>
         </span>
-        <span class="skill-tag" style="--brand: #F7DF1E" tabindex="0">
+        <span class="skill-tag" style="--brand: #F7DF1E">
           <svg class="skill-icon" aria-hidden="true" focusable="false"><use href="#si-js"></use></svg><span class="skill-name">JavaScript</span>
         </span>
-        <span class="skill-tag" style="--brand: #3178C6" tabindex="0">
+        <span class="skill-tag" style="--brand: #3178C6">
           <svg class="skill-icon" aria-hidden="true" focusable="false"><use href="#si-ts"></use></svg><span class="skill-name">TypeScript</span>
         </span>
-        <span class="skill-tag" style="--brand: #61DAFB" tabindex="0">
+        <span class="skill-tag" style="--brand: #61DAFB">
           <svg class="skill-icon" aria-hidden="true" focusable="false"><use href="#si-react"></use></svg><span class="skill-name">React</span>
         </span>
-        <span class="skill-tag" style="--brand: #FFFFFF" tabindex="0">
+        <span class="skill-tag" style="--brand: #FFFFFF">
           <svg class="skill-icon" aria-hidden="true" focusable="false"><use href="#si-next"></use></svg><span class="skill-name">Next.js</span>
         </span>
-        <span class="skill-tag" style="--brand: #DD0031" tabindex="0">
+        <span class="skill-tag" style="--brand: #DD0031">
           <svg class="skill-icon" aria-hidden="true" focusable="false"><use href="#si-angular"></use></svg><span class="skill-name">Angular</span>
         </span>
       </div>
@@ -335,25 +336,25 @@
     <div class="skills-group">
       <h3 class="skills-group-title">Backend</h3>
       <div class="skill-tags">
-        <span class="skill-tag" style="--brand: #5FA04E" tabindex="0">
+        <span class="skill-tag" style="--brand: #5FA04E">
           <svg class="skill-icon" aria-hidden="true" focusable="false"><use href="#si-node"></use></svg><span class="skill-name">Node.js</span>
         </span>
-        <span class="skill-tag" style="--brand: #E8EAED" tabindex="0">
+        <span class="skill-tag" style="--brand: #E8EAED">
           <svg class="skill-icon" aria-hidden="true" focusable="false"><use href="#si-express"></use></svg><span class="skill-name">Express.js</span>
         </span>
-        <span class="skill-tag" style="--brand: #4B8BBE" tabindex="0">
+        <span class="skill-tag" style="--brand: #4B8BBE">
           <svg class="skill-icon" aria-hidden="true" focusable="false"><use href="#si-python"></use></svg><span class="skill-name">Python</span>
         </span>
-        <span class="skill-tag" style="--brand: #3BABC3" tabindex="0">
+        <span class="skill-tag" style="--brand: #3BABC3">
           <svg class="skill-icon" aria-hidden="true" focusable="false"><use href="#si-flask"></use></svg><span class="skill-name">Flask</span>
         </span>
-        <span class="skill-tag" style="--brand: #EA2D2E" tabindex="0">
+        <span class="skill-tag" style="--brand: #EA2D2E">
           <svg class="skill-icon" aria-hidden="true" focusable="false"><use href="#si-java"></use></svg><span class="skill-name">Java</span>
         </span>
-        <span class="skill-tag" style="--brand: #5A9BD5" tabindex="0">
+        <span class="skill-tag" style="--brand: #5A9BD5">
           <svg class="skill-icon" aria-hidden="true" focusable="false"><use href="#si-mysql"></use></svg><span class="skill-name">MySQL</span>
         </span>
-        <span class="skill-tag" style="--brand: #47A248" tabindex="0">
+        <span class="skill-tag" style="--brand: #47A248">
           <svg class="skill-icon" aria-hidden="true" focusable="false"><use href="#si-mongodb"></use></svg><span class="skill-name">MongoDB</span>
         </span>
       </div>
@@ -361,22 +362,22 @@
     <div class="skills-group">
       <h3 class="skills-group-title">Tools & Platforms</h3>
       <div class="skill-tags">
-        <span class="skill-tag" style="--brand: #F03C2E" tabindex="0">
+        <span class="skill-tag" style="--brand: #F03C2E">
           <svg class="skill-icon" aria-hidden="true" focusable="false"><use href="#si-git"></use></svg><span class="skill-name">Git</span>
         </span>
-        <span class="skill-tag" style="--brand: #E8EAED" tabindex="0">
+        <span class="skill-tag" style="--brand: #E8EAED">
           <svg class="skill-icon" aria-hidden="true" focusable="false"><use href="#si-github"></use></svg><span class="skill-name">GitHub</span>
         </span>
-        <span class="skill-tag" style="--brand: #22A6F1" tabindex="0">
+        <span class="skill-tag" style="--brand: #22A6F1">
           <svg class="skill-icon" aria-hidden="true" focusable="false"><use href="#si-vscode"></use></svg><span class="skill-name">VS Code</span>
         </span>
-        <span class="skill-tag" style="--brand: #FCC624" tabindex="0">
+        <span class="skill-tag" style="--brand: #FCC624">
           <svg class="skill-icon" aria-hidden="true" focusable="false"><use href="#si-linux"></use></svg><span class="skill-name">Linux</span>
         </span>
-        <span class="skill-tag" style="--brand: #FFFFFF" tabindex="0">
+        <span class="skill-tag" style="--brand: #FFFFFF">
           <svg class="skill-icon" aria-hidden="true" focusable="false"><use href="#si-vercel"></use></svg><span class="skill-name">Vercel</span>
         </span>
-        <span class="skill-tag" style="--brand: #A78BFA" tabindex="0">
+        <span class="skill-tag" style="--brand: #A78BFA">
           <svg class="skill-icon" aria-hidden="true" focusable="false"><use href="#si-gemini"></use></svg><span class="skill-name">Gemini API</span>
         </span>
       </div>

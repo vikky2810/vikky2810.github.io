@@ -3,6 +3,8 @@ function toggleMenu() {
     const icon = document.querySelector(".hamburger-icon");
     menu.classList.toggle("open");
     icon.classList.toggle("open");
+    const isOpen = menu.classList.contains("open");
+    icon.setAttribute("aria-expanded", isOpen ? "true" : "false");
 }
 
 // Copy email to clipboard with a brief "copied" checkmark

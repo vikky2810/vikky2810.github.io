@@ -33,5 +33,5 @@ The site is a static site hosted on GitHub Pages. Every blog post is a standalon
 
 ## Optional
 
-- [Resume (PDF)](https://vikky2810.github.io/src/assets/Vikram%20Kamble_Resume.pdf): Detailed experience, education, and skills.
+- [Resume (PDF)](https://vikky2810.github.io/src/assets/Vikram-Kamble-Resume.pdf): Detailed experience, education, and skills.
 - [Sitemap](https://vikky2810.github.io/sitemap.xml): XML sitemap for the site.

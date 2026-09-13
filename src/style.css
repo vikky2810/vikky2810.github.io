@@ -772,6 +772,25 @@ section {
   width: 100%;
 }
 
+.project-row-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  width: 100%;
+  margin-top: 0.55rem;
+}
+
+.project-tag {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--text-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-full);
+  padding: 0.15rem 0.65rem;
+  line-height: 1.5;
+}
+
 .project-row-links {
   display: flex;
   align-items: center;

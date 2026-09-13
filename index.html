@@ -117,7 +117,7 @@
         <li><a href="#work">Experience</a></li>
         <li><a href="#experience">Skills</a></li>
         <li><a href="#projects">Projects</a></li>
-        <li><a href="#blogs">Blogs</a></li>
+        <li><a href="#blogs">Blog</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
     </div>
@@ -135,7 +135,7 @@
         <li><a href="#work" onclick="toggleMenu()">Experience</a></li>
         <li><a href="#experience" onclick="toggleMenu()">Skills</a></li>
         <li><a href="#projects" onclick="toggleMenu()">Projects</a></li>
-        <li><a href="#blogs" onclick="toggleMenu()">Blogs</a></li>
+        <li><a href="#blogs" onclick="toggleMenu()">Blog</a></li>
         <li><a href="#contact" onclick="toggleMenu()">Contact</a></li>
       </ul>
     </div>
@@ -185,6 +185,19 @@
     </div>
   </section>
 
+  <section id="about">
+    <h2 class="section-heading">About</h2>
+    <p class="about-text">
+      Hi, I'm Vikram Kamble, a B.Tech Computer Science &amp; Engineering graduate and Full Stack Developer based in India.
+      I build full-stack web applications with React, Next.js, Node.js, Express, Flask and Python, using MySQL and MongoDB.
+      I currently work as a Software Engineer Intern at RegiKart Private Limited and have freelanced since 2023.
+      My recent work focuses on AI-powered tools built with the Gemini API, including repo analysis, recipe generation, and browser-based code editors.
+    </p>
+    <p class="about-text">
+      I write about web development, SQL vs NoSQL decisions, and library vs framework trade-offs on my <a href="blog/">blog</a>.
+      Explore my <a href="#projects">projects</a>, <a href="#experience">skills</a>, and <a href="#work">experience</a> below, or <a href="#contact">get in touch</a> for collaboration and freelance work.
+    </p>
+  </section>
   <section id="work">
     <h2 class="section-heading">Experience</h2>
     <div class="exp-list">
@@ -199,6 +212,8 @@
             <span class="exp-loc">Kolkata, India · Remote</span>
           </div>
         </div>
+        <!-- TODO: add 2-3 bullets for this role — what you built, stack used, measurable outcome.
+             Example: <ul class="exp-points"><li>Shipped ...</li></ul> (style .exp-points in CSS when you add it) -->
       </div>
       <!-- Duplicate an .exp-row block below to add more roles -->
       <div class="exp-row">
@@ -212,6 +227,7 @@
             <span class="exp-loc">Kolhapur, Maharashtra</span>
           </div>
         </div>
+        <!-- TODO: add 2-3 bullets for this internship — projects, Python libraries used, outcome -->
       </div>
       <div class="exp-row">
         <div class="exp-top">
@@ -224,59 +240,10 @@
             <span class="exp-loc">Remote</span>
           </div>
         </div>
+        <!-- TODO: add 2-3 bullets — client/project types, stack, results delivered -->
       </div>
     </div>
   </section>
-  <section id="blogs">
-    <h2 class="section-heading">Blog</h2>
-    <p class="section-subtext">Technical notes on web development, Python, SQL vs NoSQL, and building AI-powered apps.</p>
-    <div class="blogs-container" id="blogs-container">
-      <a class="blog-row" href="blog/building-with-gemini-api/">
-        <div class="blog-row-main">
-          <h3 class="blog-row-title">Building With the Gemini API: The Part the Docs Don&#39;t Cover</h3>
-          <p class="blog-row-desc">The quickstart gets you a working call in ten lines. Everything that actually broke happened somewhere else: what to send, reading real error bodies, and a response that came back empty.</p>
-          <span class="blog-row-date">Sep 12, 2026 · AI · 8 min read</span>
-        </div>
-        <span class="blog-row-more">Read more</span>
-      </a>
-      <a class="blog-row" href="blog/sql-vs-nosql/">
-        <div class="blog-row-main">
-          <h3 class="blog-row-title">SQL vs NoSQL: I&#39;ve Shipped Both, Here&#39;s How I Actually Decide</h3>
-          <p class="blog-row-desc">Most SQL vs NoSQL posts are a comparison chart copied from the docs. This one is a decision process, built from shipping real projects on both MySQL and MongoDB, with code, trade-offs, and a flowchart you can follow.</p>
-          <span class="blog-row-date">Jun 20, 2026 · Backend · 10 min read</span>
-        </div>
-        <span class="blog-row-more">Read more</span>
-      </a>
-      <a class="blog-row" href="blog/library-vs-framework/">
-        <div class="blog-row-main">
-          <h3 class="blog-row-title">Library vs Framework: The Real Difference Every Developer Should Know</h3>
-          <p class="blog-row-desc">Understanding the difference between a library and a framework is crucial for developers. Beginner-friendly explanations, real-world analogies, and practical React and Next.js examples.</p>
-          <span class="blog-row-date">Oct 18, 2025 · Web Development · 8 min read</span>
-        </div>
-        <span class="blog-row-more">Read more</span>
-      </a>
-      <noscript>
-        <p><a href="blog/">Read all blog posts</a>: SQL vs NoSQL decision guide (MySQL vs MongoDB) and Library vs Framework explained with React and Next.js examples.</p>
-      </noscript>
-    </div>
-    <div class="blogs-showall">
-      <a href="blog/" class="showall-btn">Show all blogs</a>
-    </div>
-  </section>
-  <section id="about">
-    <h2 class="section-heading">About</h2>
-    <p class="about-text">
-      Hi, I'm Vikram Kamble, a B.Tech Computer Science &amp; Engineering graduate and Full Stack Developer based in India.
-      I build full-stack web applications with React, Next.js, Node.js, Express, Flask and Python, using MySQL and MongoDB.
-      I currently work as a Software Engineer Intern at RegiKart Private Limited and have freelanced since 2023.
-      My recent work focuses on AI-powered tools built with the Gemini API, including repo analysis, recipe generation, and browser-based code editors.
-    </p>
-    <p class="about-text">
-      I write about web development, SQL vs NoSQL decisions, and library vs framework trade-offs on my <a href="blog/">blog</a>.
-      Explore my <a href="#projects">projects</a>, <a href="#experience">skills</a>, and <a href="#work">experience</a> below, or <a href="#contact">get in touch</a> for collaboration and freelance work.
-    </p>
-  </section>
-
   <section id="experience">
     <h2 class="section-heading">Skills</h2>
 
@@ -402,6 +369,10 @@
           </div>
         </div>
         <p class="project-row-desc">Full-stack Flask app that generates recipes tailored to user-specified medical conditions using the Gemini API — flags harmful ingredients, recommends safe substitutes, and generates PDF summary reports.</p>
+        <div class="project-row-tags" aria-label="Technologies used">
+          <span class="project-tag">Flask</span>
+          <span class="project-tag">Gemini API</span>
+        </div>
       </div>
       <div class="project-row" id="ai-explains-repo">
         <div class="project-row-top">
@@ -418,6 +389,10 @@
           </div>
         </div>
         <p class="project-row-desc">Full-stack Next.js app that ingests GitHub repository data and generates AI-powered reports on code quality, architecture, security risks, and performance via the Gemini API, with authenticated session history.</p>
+        <div class="project-row-tags" aria-label="Technologies used">
+          <span class="project-tag">Next.js</span>
+          <span class="project-tag">Gemini API</span>
+        </div>
       </div>
       <div class="project-row" id="online-python-code-editor">
         <div class="project-row-top">
@@ -434,9 +409,71 @@
           </div>
         </div>
         <p class="project-row-desc">Browser-based Python editor built with Flask and CodeMirror that executes user code server-side and streams output back in real time, with syntax highlighting, error handling, and a responsive dark UI.</p>
+        <div class="project-row-tags" aria-label="Technologies used">
+          <span class="project-tag">Python</span>
+          <span class="project-tag">Flask</span>
+          <span class="project-tag">CodeMirror</span>
+        </div>
       </div>
     </div>
   </section>
+  <section id="blogs">
+    <h2 class="section-heading">Blog</h2>
+    <p class="section-subtext">Technical notes on web development, Python, SQL vs NoSQL, and building AI-powered apps.</p>
+    <div class="blogs-container" id="blogs-container">
+      <a class="blog-row" href="blog/building-with-gemini-api/">
+        <div class="blog-row-main">
+          <h3 class="blog-row-title">Building With the Gemini API: The Part the Docs Don&#39;t Cover</h3>
+          <p class="blog-row-desc">The quickstart gets you a working call in ten lines. Everything that actually broke happened somewhere else: what to send, reading real error bodies, and a response that came back empty.</p>
+          <span class="blog-row-date">Sep 12, 2026 · AI · 8 min read</span>
+        </div>
+        <span class="blog-row-more">Read more</span>
+      </a>
+      <a class="blog-row" href="blog/sql-vs-nosql/">
+        <div class="blog-row-main">
+          <h3 class="blog-row-title">SQL vs NoSQL: I&#39;ve Shipped Both, Here&#39;s How I Actually Decide</h3>
+          <p class="blog-row-desc">Most SQL vs NoSQL posts are a comparison chart copied from the docs. This one is a decision process, built from shipping real projects on both MySQL and MongoDB, with code, trade-offs, and a flowchart you can follow.</p>
+          <span class="blog-row-date">Jun 20, 2026 · Backend · 10 min read</span>
+        </div>
+        <span class="blog-row-more">Read more</span>
+      </a>
+      <a class="blog-row" href="blog/library-vs-framework/">
+        <div class="blog-row-main">
+          <h3 class="blog-row-title">Library vs Framework: The Real Difference Every Developer Should Know</h3>
+          <p class="blog-row-desc">Understanding the difference between a library and a framework is crucial for developers. Beginner-friendly explanations, real-world analogies, and practical React and Next.js examples.</p>
+          <span class="blog-row-date">Oct 18, 2025 · Web Development · 8 min read</span>
+        </div>
+        <span class="blog-row-more">Read more</span>
+      </a>
+      <noscript>
+        <p><a href="blog/">Read all blog posts</a>: SQL vs NoSQL decision guide (MySQL vs MongoDB) and Library vs Framework explained with React and Next.js examples.</p>
+      </noscript>
+    </div>
+    <div class="blogs-showall">
+      <a href="blog/" class="showall-btn">Show all blogs</a>
+    </div>
+  </section>
+  <!-- TODO (Education): uncomment and fill in when ready. Keep the same
+       look by reusing the .exp-list / .exp-row pattern from Experience.
+  <section id="education">
+    <h2 class="section-heading">Education</h2>
+    <div class="exp-list">
+      <div class="exp-row">
+        <div class="exp-top">
+          <div class="exp-left">
+            <span class="exp-company">B.Tech, Computer Science &amp; Engineering</span>
+            <span class="exp-role">Sant Gajanan Maharaj College Of Engineering</span>
+          </div>
+          <div class="exp-right">
+            <span class="exp-date">20XX – 20XX</span>
+            <span class="exp-loc">Maharashtra, India</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+       TODO (Certifications): same pattern — add only real, verifiable items
+       with issuer + year, e.g. <span class="exp-role">Issuer · Year</span>. -->
   <section id="contact">
     <h2 class="section-heading">Get in touch</h2>
     <p class="contact-lead">

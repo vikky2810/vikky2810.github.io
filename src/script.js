@@ -60,6 +60,32 @@ document.addEventListener('DOMContentLoaded', function() {
         window.addEventListener('resize', updateScrollFade, { passive: true });
     }
 
+    // Fade each section up as it enters the viewport, staggering the rows
+    // inside it. Skipped for reduced-motion users so nothing starts hidden.
+    if ('IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        const rows = ':scope > :not(.exp-list, .projects-list, .blogs-container, .contact-links, .icon-sprite), .exp-row, .project-row, .blog-row, .contact-link-row';
+        const observer = new IntersectionObserver((entries) => {
+            entries.filter(e => e.isIntersecting).forEach(({ target }) => {
+                observer.unobserve(target);
+                target.querySelectorAll('.reveal').forEach(el => {
+                    // Drop the reveal styles once done so the rows' own hover transitions apply again
+                    el.addEventListener('transitionend', e => {
+                        if (e.target === el) el.classList.remove('reveal', 'is-visible');
+                    });
+                    el.classList.add('is-visible');
+                });
+            });
+        }, { rootMargin: '0px 0px -10% 0px' });
+
+        document.querySelectorAll('body > section').forEach(section => {
+            section.querySelectorAll(rows).forEach((el, i) => {
+                el.style.setProperty('--i', Math.min(i, 8));
+                el.classList.add('reveal');
+            });
+            observer.observe(section);
+        });
+    }
+
     // Keep the footer copyright year current
     const footerYear = document.getElementById('footer-year');
     if (footerYear) {

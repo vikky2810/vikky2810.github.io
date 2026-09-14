@@ -77,6 +77,14 @@ body {
   width: 100%;
 }
 
+/* Amber highlight when selecting text. text-fill-color is set too, otherwise
+   the gradient-clipped name (transparent fill) would select as a blank block */
+::selection {
+  background-color: var(--accent-color);
+  color: var(--bg-primary);
+  -webkit-text-fill-color: var(--bg-primary);
+}
+
 p {
   color: var(--text-secondary);
 }

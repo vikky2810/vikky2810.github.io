@@ -445,6 +445,30 @@ section {
   margin-bottom: 0.25rem;
 }
 
+/* Silver/chrome glint that sweeps across the name, then rests 4s before
+   repeating. The gradient is white at both ends, so the name is plain
+   white between sweeps */
+@supports ((-webkit-background-clip: text) or (background-clip: text)) {
+  .profile-name {
+    background-image: linear-gradient(
+      100deg,
+      var(--text-primary) 0%,
+      var(--text-primary) 32%,
+      #94a3b8 42%,
+      #e2e8f0 50%,
+      #cbd5e1 58%,
+      var(--text-primary) 68%,
+      var(--text-primary) 100%
+    );
+    background-size: 300% 100%;
+    background-position: 0% 0;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: name-shimmer 6.4s ease-in-out 0.3s infinite both;
+  }
+}
+
 .profile-subtitle {
   font-size: 0.95rem;
   color: var(--text-secondary);
@@ -1303,8 +1327,20 @@ img {
   }
 }
 
+/* 2.4s sweep (0-37.5%), then a 4s hold (37.5-100%) of the 6.4s cycle */
+@keyframes name-shimmer {
+  0% {
+    background-position: 100% 0;
+  }
+  37.5%,
+  100% {
+    background-position: 0% 0;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .exp-badge::before {
+  .exp-badge::before,
+  .profile-name {
     animation: none;
   }
 }

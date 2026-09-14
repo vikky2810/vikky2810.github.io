@@ -1289,3 +1289,18 @@ img {
     box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
   }
 }
+
+/* Scroll reveal: script.js only adds .reveal when motion is allowed,
+   so content is never hidden without JS or with reduced motion on */
+.reveal {
+  opacity: 0;
+  transform: translateY(16px);
+}
+
+/* Transition lives here so hiding is instant and only the reveal animates */
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  transition-delay: calc(var(--i, 0) * 70ms);
+}

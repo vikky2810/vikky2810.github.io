@@ -271,8 +271,18 @@ a:hover {
   transition: var(--transition-normal);
 }
 
-.nav-links a:hover::after {
+.nav-links a:hover::after,
+.nav-links a.is-active::after {
   width: 100%;
+}
+
+/* Section currently in view (set by script.js) */
+.nav-links a.is-active {
+  color: var(--text-primary);
+}
+
+.menu-links a.is-active {
+  color: var(--primary-color);
 }
 
 .logo {

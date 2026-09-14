@@ -61,6 +61,13 @@ body {
   overflow-x: hidden;
 }
 
+/* Amber highlight when selecting text - matches portfolio home */
+::selection {
+  background-color: var(--accent-color);
+  color: var(--bg-primary);
+  -webkit-text-fill-color: var(--bg-primary);
+}
+
 html {
   scroll-behavior: smooth;
 }

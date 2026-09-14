@@ -591,6 +591,19 @@ section {
   border: 1px solid rgba(20, 184, 166, 0.25);
   padding: 0.1rem 0.5rem;
   border-radius: var(--radius-full);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+/* Status light: decorative, so it lives in CSS rather than the markup */
+.exp-badge::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #10b981;
+  animation: pulse 2s infinite;
 }
 
 .exp-role {
@@ -1287,6 +1300,12 @@ img {
   100% {
     transform: scale(0.95);
     box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .exp-badge::before {
+    animation: none;
   }
 }
 

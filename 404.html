@@ -24,6 +24,8 @@
       --text-muted: #64748b;
       --primary-color: #14b8a6;
       --secondary-color: #06b6d4;
+      --accent-color: #f59e0b;
+      --error-color: #f87171;
       --border-color: rgba(51, 65, 85, 0.5);
       --bg-card: rgba(15, 23, 42, 0.5);
     }
@@ -31,7 +33,7 @@
     * { box-sizing: border-box; }
 
     ::selection {
-      background-color: #f59e0b; /* --accent-color on the main site */
+      background-color: var(--accent-color);
       color: var(--bg-primary);
       -webkit-text-fill-color: var(--bg-primary);
     }
@@ -45,123 +47,112 @@
       padding: 2rem 1.25rem;
       background: var(--bg-primary);
       color: var(--text-primary);
-      font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      line-height: 1.7;
+      font-family: ui-monospace, "SFMono-Regular", "Cascadia Code", Menlo, Consolas, "Liberation Mono", monospace;
       -webkit-font-smoothing: antialiased;
     }
 
-    .wrap {
+    .terminal {
       width: 100%;
-      max-width: 600px;
-      text-align: center;
-    }
-
-    .code {
-      font-size: clamp(4rem, 18vw, 7rem);
-      font-weight: 800;
-      line-height: 1;
-      letter-spacing: -0.04em;
-      margin: 0;
-      background: linear-gradient(135deg, #14b8a6 0%, #06b6d4 100%);
-      -webkit-background-clip: text;
-      background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    h1 {
-      font-size: clamp(1.15rem, 4.5vw, 1.5rem);
-      font-weight: 700;
-      letter-spacing: -0.02em;
-      margin: 1.25rem 0 0.6rem;
-    }
-
-    .lead {
-      color: var(--text-secondary);
-      font-size: 0.95rem;
-      margin: 0 auto 2rem;
-      max-width: 430px;
-    }
-
-    .actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.7rem;
-      justify-content: center;
-      margin-bottom: 2.75rem;
-    }
-
-    .btn {
-      display: inline-block;
-      padding: 0.6rem 1.3rem;
-      border-radius: 999px;
-      border: 1px solid var(--border-color);
-      color: var(--text-secondary);
-      text-decoration: none;
-      font-size: 0.875rem;
-      font-weight: 600;
-      transition: border-color 0.3s ease, color 0.3s ease;
-    }
-
-    .btn:hover {
-      border-color: var(--primary-color);
-      color: var(--primary-color);
-    }
-
-    .btn-primary {
-      background: linear-gradient(135deg, #14b8a6 0%, #06b6d4 100%);
-      border-color: transparent;
-      color: #04121a;
-    }
-
-    .btn-primary:hover {
-      color: #04121a;
-      opacity: 0.9;
-    }
-
-    .reads {
-      text-align: left;
-      border-top: 1px solid var(--border-color);
-      padding-top: 1.75rem;
-    }
-
-    .reads-title {
-      font-size: 0.72rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--text-muted);
-      margin: 0 0 1rem;
-      text-align: center;
-    }
-
-    .read {
-      display: block;
-      padding: 1rem 1.15rem;
-      margin-bottom: 0.7rem;
+      max-width: 640px;
       border: 1px solid var(--border-color);
       border-radius: 0.75rem;
       background: var(--bg-card);
-      text-decoration: none;
-      transition: border-color 0.3s ease, transform 0.3s ease;
+      box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.6), 0 0 40px rgba(20, 184, 166, 0.08);
+      overflow: hidden;
     }
 
-    .read:hover {
-      border-color: var(--primary-color);
-      transform: translateY(-2px);
+    .titlebar {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.7rem 1rem;
+      border-bottom: 1px solid var(--border-color);
+      background: rgba(30, 41, 59, 0.5);
     }
 
-    .read-title {
-      display: block;
-      color: var(--text-primary);
-      font-size: 0.9rem;
-      font-weight: 600;
-      line-height: 1.45;
-      margin-bottom: 0.25rem;
+    .dot {
+      width: 0.75rem;
+      height: 0.75rem;
+      border-radius: 50%;
     }
 
-    .read-meta {
-      display: block;
+    .dot:nth-child(1) { background: #ef4444; }
+    .dot:nth-child(2) { background: #f59e0b; }
+    .dot:nth-child(3) { background: #22c55e; }
+
+    .titlebar-text {
+      flex: 1;
+      text-align: center;
+      margin-right: 2.75rem; /* offsets the dots so the title sits centered */
       color: var(--text-muted);
       font-size: 0.78rem;
+    }
+
+    .screen {
+      margin: 0;
+      padding: 1.25rem 1.25rem 1.5rem;
+      font-size: clamp(0.8rem, 3.2vw, 0.92rem);
+      line-height: 1.8;
+    }
+
+    .line {
+      margin: 0;
+      overflow-wrap: anywhere;
+    }
+
+    .gap { margin-top: 1rem; }
+
+    .user { color: var(--primary-color); }
+    .path { color: var(--secondary-color); }
+    .sigil { color: var(--text-muted); }
+    .error { color: var(--error-color); }
+
+    h1.error {
+      font: inherit;
+      margin: 0;
+    }
+    .out { color: var(--text-secondary); }
+    .comment { color: var(--text-muted); }
+
+    .listing {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.25rem 1.5rem;
+    }
+
+    .screen a {
+      color: var(--secondary-color);
+      text-decoration: none;
+      border-bottom: 1px dashed transparent;
+      transition: color 0.2s ease, border-color 0.2s ease;
+    }
+
+    .screen a:hover,
+    .screen a:focus-visible {
+      color: var(--accent-color);
+      border-bottom-color: var(--accent-color);
+      outline: none;
+    }
+
+    .home-link {
+      font-weight: 700;
+    }
+
+    .cursor {
+      display: inline-block;
+      width: 0.6em;
+      height: 1.1em;
+      vertical-align: text-bottom;
+      background: var(--primary-color);
+      animation: blink 1.1s steps(1) infinite;
+    }
+
+    @keyframes blink {
+      50% { opacity: 0; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .cursor { animation: none; }
     }
   </style>
   <!-- Analytics: cookieless page views + goals, see src/analytics.js -->
@@ -169,30 +160,60 @@
 </head>
 
 <body>
-  <main class="wrap">
-    <p class="code">404</p>
-    <h1>This page doesn't exist</h1>
-    <p class="lead">The link may be broken, or the page may have moved. Everything below still works.</p>
-
-    <div class="actions">
-      <a class="btn btn-primary" href="/">Portfolio home</a>
-      <a class="btn" href="/blog/">Blog</a>
-      <a class="btn" href="/#projects">Projects</a>
-      <a class="btn" href="/#contact">Contact</a>
+  <main class="terminal" aria-labelledby="error-heading">
+    <div class="titlebar" aria-hidden="true">
+      <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+      <span class="titlebar-text">vikram@portfolio: ~</span>
     </div>
 
-    <section class="reads">
-      <p class="reads-title">Recent posts</p>
-      <a class="read" href="/blog/sql-vs-nosql/">
-        <span class="read-title">SQL vs NoSQL: I've Shipped Both, Here's How I Actually Decide</span>
-        <span class="read-meta">Backend · 10 min read</span>
-      </a>
-      <a class="read" href="/blog/library-vs-framework/">
-        <span class="read-title">Library vs Framework: The Real Difference Every Developer Should Know</span>
-        <span class="read-meta">Web Development · 8 min read</span>
-      </a>
-    </section>
+    <div class="screen">
+      <p class="line">
+        <span class="user">vikram@portfolio</span><span class="sigil">:</span><span class="path">~</span><span class="sigil">$</span>
+        cd <span class="requested-path">/page</span>
+      </p>
+      <h1 id="error-heading" class="line error">
+        bash: cd: <span class="requested-path">/page</span>: No such file or directory
+      </h1>
+
+      <p class="line gap">
+        <span class="user">vikram@portfolio</span><span class="sigil">:</span><span class="path">~</span><span class="sigil">$</span>
+        ls
+      </p>
+      <nav class="line listing" aria-label="Site sections">
+        <a href="/">home/</a>
+        <a href="/blog/">blog/</a>
+        <a href="/#projects">projects/</a>
+        <a href="/#contact">contact/</a>
+      </nav>
+
+      <p class="line gap">
+        <span class="user">vikram@portfolio</span><span class="sigil">:</span><span class="path">~</span><span class="sigil">$</span>
+        ls blog/
+      </p>
+      <p class="line"><a href="/blog/sql-vs-nosql/">sql-vs-nosql/</a> <span class="comment"># SQL vs NoSQL: how I actually decide</span></p>
+      <p class="line"><a href="/blog/library-vs-framework/">library-vs-framework/</a> <span class="comment"># Library vs Framework</span></p>
+
+      <p class="line gap">
+        <span class="user">vikram@portfolio</span><span class="sigil">:</span><span class="path">~</span><span class="sigil">$</span>
+        <a class="home-link" href="/">cd ~</a> <span class="comment"># take me home</span>
+      </p>
+      <p class="line">
+        <span class="user">vikram@portfolio</span><span class="sigil">:</span><span class="path">~</span><span class="sigil">$</span>
+        <span class="cursor" aria-hidden="true"></span>
+      </p>
+    </div>
   </main>
+
+  <script>
+    // Show the path the visitor actually asked for. textContent keeps it inert.
+    (function () {
+      var path = location.pathname;
+      try { path = decodeURIComponent(path); } catch (e) { /* malformed escape, keep raw */ }
+      if (path.length > 80) path = path.slice(0, 77) + "...";
+      var nodes = document.querySelectorAll(".requested-path");
+      for (var i = 0; i < nodes.length; i++) nodes[i].textContent = path;
+    })();
+  </script>
 </body>
 
 </html>

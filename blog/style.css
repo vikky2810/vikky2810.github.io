@@ -61,9 +61,9 @@ body {
   overflow-x: hidden;
 }
 
-/* Teal highlight when selecting text - matches portfolio home */
+/* Amber highlight when selecting text - matches portfolio home */
 ::selection {
-  background-color: var(--primary-color);
+  background-color: var(--accent-color);
   color: var(--bg-primary);
   -webkit-text-fill-color: var(--bg-primary);
 }

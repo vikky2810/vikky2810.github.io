@@ -86,6 +86,37 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
+    // Underline the nav link for the section being read. The active section is
+    // the last one whose top has scrolled past a line just below the sticky nav.
+    const navLinks = document.querySelectorAll('#desktop-nav a[href^="#"], #mobile-menu a[href^="#"]');
+    const navSections = [...new Set([...navLinks].map(a => a.getAttribute('href')))]
+        .map(href => document.querySelector(href))
+        .filter(Boolean);
+    if (navSections.length) {
+        const updateActiveNav = () => {
+            const line = window.innerHeight * 0.3;
+            const atBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2;
+            let current = null;
+            if (atBottom) {
+                current = navSections[navSections.length - 1];
+            } else {
+                navSections.forEach(section => {
+                    if (section.getBoundingClientRect().top <= line) current = section;
+                });
+            }
+            const id = current ? '#' + current.id : null;
+            navLinks.forEach(a => {
+                const active = a.getAttribute('href') === id;
+                a.classList.toggle('is-active', active);
+                if (active) a.setAttribute('aria-current', 'true');
+                else a.removeAttribute('aria-current');
+            });
+        };
+        updateActiveNav();
+        window.addEventListener('scroll', updateActiveNav, { passive: true });
+        window.addEventListener('resize', updateActiveNav, { passive: true });
+    }
+
     // Keep the footer copyright year current
     const footerYear = document.getElementById('footer-year');
     if (footerYear) {

@@ -884,6 +884,10 @@ section {
   transition: var(--transition-fast);
 }
 
+.contact-link-row:last-child {
+  border-bottom: none;
+}
+
 .contact-link-row:hover {
   padding-left: 0.5rem;
 }

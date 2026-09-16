@@ -1,0 +1,34 @@
+{
+    "slug": "library-vs-framework",
+    "title": "Library vs Framework: The Real Difference Every Developer Should Know",
+    "description": "Understanding the difference between a library and a framework is crucial for developers. This guide breaks it down with beginner-friendly explanations, real-world analogies, and practical React and Next.js examples.",
+    "category": "Web Development",
+    "publishedDate": "2025-10-18",
+    "modifiedDate": "2026-09-12",
+    "breadcrumbLabel": "Library vs Framework",
+    "readTimeMinutes": 8,
+    "includeReadingSchema": true,
+    "image": {
+        "ogFile": "frameworkVSlibrary.png",
+        "pageFile": "frameworkVSlibrary.webp",
+        "width": 1905,
+        "height": 928,
+        "ogAlt": "Library vs framework control-flow diagram",
+        "pageAlt": "Side-by-side flowchart of library vs framework control flow: your project calls a library like React, so you decide structure, flow and logic; a framework like Next.js calls your project's code and defines structure, routing and rules."
+    },
+    "authorBio": "Full-stack developer working with React, Next.js, Flask and Node.js. I write about the decisions behind the code, not just the syntax.",
+    "related": [
+        {
+            "href": "/blog/sql-vs-nosql/",
+            "label": "Related post",
+            "title": "SQL vs NoSQL: I've Shipped Both, Here's How I Actually Decide",
+            "desc": "The same \"which tool do I pick\" problem one layer down, worked through with real MySQL and MongoDB projects and a flowchart."
+        },
+        {
+            "href": "/#projects",
+            "label": "Projects",
+            "title": "The projects behind this post",
+            "desc": "AI Explains Repo (Next.js) and the Health-Aware Recipe Modifier (Flask) — source code and live demos for both."
+        }
+    ]
+}

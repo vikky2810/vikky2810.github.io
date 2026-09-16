@@ -21,31 +21,7 @@ function copyEmail(btn, email) {
     }).catch(() => {});
 }
 
-// Handle image loading errors and provide fallbacks
 document.addEventListener('DOMContentLoaded', function() {
-    const images = document.querySelectorAll('img');
-    
-    images.forEach(img => {
-        img.addEventListener('error', function() {
-            console.log('Image failed to load:', this.src);
-            // If the image fails to load, try to load the PNG version
-            const currentSrc = this.src;
-            if (currentSrc.includes('.webp')) {
-                this.src = currentSrc.replace('.webp', '.png');
-            } else if (currentSrc.includes('project-')) {
-                // For project images, try fallback to PNG version
-                this.src = currentSrc.replace('.webp', '.png');
-            } else {
-                // If still fails, try alternative paths
-                if (currentSrc.includes('../assets/')) {
-                    this.src = currentSrc.replace('../assets/', 'src/assets/');
-                } else if (currentSrc.includes('src/assets/')) {
-                    this.src = currentSrc.replace('src/assets/', '../assets/');
-                }
-            }
-        });
-    });
-
     // Fade out the bottom blur strip once the footer is in view, so the
     // footer itself never sits underneath it.
     const scrollFade = document.querySelector('.scroll-fade');

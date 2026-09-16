@@ -1,0 +1,34 @@
+{
+    "slug": "building-with-gemini-api",
+    "title": "Building With the Gemini API: The Part the Docs Don't Cover",
+    "description": "The Gemini quickstart gets you a working call in ten lines. Everything that actually broke in my repo-analysis app happened somewhere else: choosing what to send, reading real error bodies, and handling a response that came back empty.",
+    "category": "AI",
+    "publishedDate": "2026-09-12",
+    "modifiedDate": "2026-09-12",
+    "breadcrumbLabel": "Building With the Gemini API",
+    "readTimeMinutes": 8,
+    "includeReadingSchema": false,
+    "image": {
+        "ogFile": "gemini-api.png",
+        "pageFile": "gemini-api.webp",
+        "width": 1200,
+        "height": 630,
+        "ogAlt": "Building with the Gemini API",
+        "pageAlt": "Building with the Gemini API"
+    },
+    "authorBio": "Full-stack developer working with Next.js, Flask, MySQL and MongoDB. I write about the decisions behind the code, not just the syntax.",
+    "related": [
+        {
+            "href": "/blog/sql-vs-nosql/",
+            "label": "Related post",
+            "title": "SQL vs NoSQL: I've Shipped Both, Here's How I Actually Decide",
+            "desc": "Where the AI output from this project gets stored, and why it lives in a JSON column instead of its own schema."
+        },
+        {
+            "href": "/#projects",
+            "label": "Projects",
+            "title": "The projects behind this post",
+            "desc": "AI Explains Repo and the Health-Aware Recipe Modifier, both built on the Gemini API. Source code and live demos for both."
+        }
+    ]
+}

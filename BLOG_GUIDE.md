@@ -1,85 +1,107 @@
 # Blog Management Guide
 
-Every blog post is its own static HTML page in `blog/`. There is no JSON file and no JavaScript rendering: the full post (title, meta tags, content) is written directly in the HTML, so search engines see everything on the first load.
+Each blog post's page in `blog/` is generated, not hand-written. The source lives in
+`content/blog/<slug>/` as a `post.json` (title, dates, image, category, related posts —
+everything that varies) and a `body.html` (the article content). Running
+`node scripts/build-blog.mjs` combines those with `content/blog/template.html` and writes
+`blog/<slug>/index.html`, and also regenerates the post entries in `feed.xml` and
+`sitemap.xml`. The generation happens once, ahead of time, not in the browser — search
+engines still see the full post (title, meta tags, content) on first load, exactly as
+before.
 
 Current posts:
 
-| Post | File | URL |
-|------|------|-----|
-| SQL vs NoSQL | `blog/sql-vs-nosql/` | https://vikky2810.github.io/blog/sql-vs-nosql/ |
-| Library vs Framework | `blog/library-vs-framework/` | https://vikky2810.github.io/blog/library-vs-framework/ |
+| Post | Source | URL |
+|------|--------|-----|
+| SQL vs NoSQL | `content/blog/sql-vs-nosql/` | https://vikky2810.github.io/blog/sql-vs-nosql/ |
+| Library vs Framework | `content/blog/library-vs-framework/` | https://vikky2810.github.io/blog/library-vs-framework/ |
+| Building With the Gemini API | `content/blog/building-with-gemini-api/` | https://vikky2810.github.io/blog/building-with-gemini-api/ |
 
 ## ➕ Adding a New Blog Post
 
-### 1. Create the page
-1. Copy an existing post, e.g. `blog/sql-vs-nosql/`.
-2. Name the copy after the post using lowercase words and hyphens, e.g. `blog/react-hooks-explained.html`. The file name becomes the URL, so keep it short and descriptive.
+### 1. Create the source files
+1. Make a folder under `content/blog/<slug>/`, e.g. `content/blog/react-hooks-explained/`.
+   Use lowercase words and hyphens — this becomes the URL, so keep it short and
+   descriptive, and never rename it once published (the URL would change and Google
+   would have to start over).
+2. Add `body.html`: the article content exactly as it should render inside
+   `.blog-content`, using the elements under "Available Styling" below. Write real
+   contextual links wherever the post names a project or another post — see "Link out
+   of it", which still applies.
+3. Add `post.json`. Copy an existing one, e.g. `content/blog/sql-vs-nosql/post.json`,
+   and fill in:
+   - `title`, `description` (keep it under ~160 characters so Google doesn't cut it
+     off), `category`, `breadcrumbLabel`
+   - `publishedDate` / `modifiedDate` (`YYYY-MM-DD`) — only bump `modifiedDate` when the
+     page's content genuinely changed, the same rule as before
+   - `readTimeMinutes`, shown as "N min read" and, when `includeReadingSchema` is
+     `true`, also written into the JSON-LD as `wordCount`/`timeRequired`. The build
+     script estimates a read time from the body's word count (~200 wpm, rounded up)
+     and logs a note when its estimate disagrees with this value — that's expected,
+     not a bug; either keep the value you set or update it to match the note
+   - `image`: `ogFile` and `pageFile` (filenames already in `src/assets/`, usually a
+     `.png` for `og:image` and a `.webp` for the on-page cover), `width`/`height`,
+     `ogAlt`, `pageAlt`
+   - `authorBio` (copy the wording from the post it's closest to)
+   - `related`: two cards — the most relevant other post, then a card pointing at
+     `/#projects`
 
-### 2. Update the `<head>`
-Replace these with the new post's details:
-- `<title>`: the post title followed by ` - Vikram Kamble`. This is the heading Google shows in search results.
-- `<meta name="description">`: a 1–2 sentence summary.
-- `<link rel="canonical">`, `og:url`, `twitter:url`: the new page's full URL, e.g. `https://vikky2810.github.io/blog/react-hooks-explained.html`.
-- `og:title`, `og:description`, `og:image`, `twitter:*`: the same title, summary and image.
-- `article:published_time`: the publish date (`YYYY-MM-DD`).
-- The `application/ld+json` block: `headline`, `description`, `image`, `datePublished`, `dateModified`, `articleSection` and `@id`.
+### 2. Build the page
+```
+node scripts/build-blog.mjs
+```
+This writes `blog/<slug>/index.html` from the template and regenerates the post
+`<item>` entries in `feed.xml` and the post `<url>` entries in `sitemap.xml` (newest
+post first by `publishedDate`; `lastmod` is each post's `modifiedDate`). It's safe to
+re-run — with no source changes, running it again produces byte-identical output. It
+does not touch `llms.txt`, `blog/index.html`, or `index.html`.
 
-### 3. Update the page body
-- `.blog-category`, `<h1>`, the date (`<time datetime="YYYY-MM-DD">`), read time and category.
-- The cover image: put it in `src/assets/` and set `src`, `alt`, `width` and `height`.
-- Write the post inside `<div class="blog-content">`.
+Asset `?v=<hash>` query strings (`style.css`, `post.css`, `analytics.js`, `post.js`)
+are copied verbatim from `content/blog/template.html`; if one of those files changed,
+re-run whatever stamps the new hash into the template, then rebuild.
 
-### 4. Link to it
-1. `blog/index.html`: add a `.blog-row` card (copy an existing one) at the top of the list.
+### 3. What's still manual
+1. `blog/index.html`: add a `.blog-row` card (copy an existing one) at the top of the
+   list.
 2. `index.html`: add the same card to the Blog section on the home page.
-3. `sitemap.xml`: add a `<url>` entry with the new URL and a `<lastmod>` of the
-   publish date. Only bump an existing `<lastmod>` when the page's *content*
-   really changed - not for a favicon, meta tag or styling edit. Google discounts
-   `lastmod` entirely on sites where the dates turn out to be unreliable, and a
-   post's `lastmod` should match its `dateModified` in the JSON-LD.
-4. `llms.txt`: add the post under "Blog posts".
-5. `feed.xml`: add an `<item>` at the top of the list and update `<lastBuildDate>`.
-   The feed is hand-maintained, so a post that is missing here never reaches
-   subscribers. `pubDate` is RFC-822 (`Sat, 20 Jun 2026 00:00:00 +0000`), not the
-   ISO-8601 format the sitemap and JSON-LD use.
+3. `llms.txt`: add the post under "Blog posts".
 
-### 5. Link out of it (don't skip this)
+### 4. After publishing
+In Google Search Console, open **URL Inspection**, paste the new URL and click **Request Indexing**.
+
+### 5. Analytics
+Nothing to do. The template carries the `<script defer src="/src/analytics.js">` tag
+into every generated post, and read-depth tracking keys off the `.blog-content`
+wrapper, so a new post is measured the moment it ships.
+
+To see how the post lands, open Plausible and filter by its page: `Read 50%` and
+`Read 90%` tell you whether people finished it, which the view count on its own
+cannot.
+
+## Link out of it (don't skip this)
+
 A post with no outgoing links is a dead end: it passes no authority to the rest of the
 site and gives Google nothing to connect it to. Every post needs all four:
 
-1. **Breadcrumb** at the top of `<main>` (Home / Blog / this post) plus the matching
-   `BreadcrumbList` block in the `<head>`. Copy both from an existing post and change
-   the last crumb.
-2. **Contextual links in the body.** Wherever the post names one of the projects, link
-   it: `<a href="../../#ai-explains-repo">AI Explains Repo</a>`. The anchor
-   ids are the project title, lowercased and hyphenated — `src/script.js` generates the
-   same slug when it re-renders the cards, so keep the two in sync.
-3. **`.post-related` section** after `.blog-content`, with a card for the most closely
-   related post and one for the projects page.
-4. **`.post-author` box** at the end, linking home, projects, the blog index and contact.
+1. **Breadcrumb**, generated from `breadcrumbLabel` in `post.json` — no HTML to write.
+2. **Contextual links in the body**, still your responsibility in `body.html`. Wherever
+   the post names one of the projects, link it:
+   `<a href="../../#ai-explains-repo">AI Explains Repo</a>`. The anchor ids are the
+   project title, lowercased and hyphenated — `src/script.js` generates the same slug
+   when it re-renders the cards, so keep the two in sync.
+3. **Related-posts cards**, generated from the `related` array in `post.json`.
+4. **Author box**, generated from `authorBio` in `post.json`.
 
 Use real anchor text ("SQL vs NoSQL: how I actually decide"), never "click here" or a
 bare URL, and only link where the connection is genuine.
 
 **Always link to the canonical URL.** A page's canonical is the one in its
 `<link rel="canonical">` tag, and for the two index pages that URL ends in a slash, not
-in `index.html`. From inside `blog/`, write `../../` for the home page (canonical
-`https://vikky2810.github.io/`), `../../#projects` for a home page section, and `./` for
-the blog listing (canonical `https://vikky2810.github.io/blog/`). Linking to
-`index.html` instead points at a duplicate of the canonical URL and splits its signals.
-
-### 6. After publishing
-In Google Search Console, open **URL Inspection**, paste the new URL and click **Request Indexing**.
-
-### 7. Analytics
-Nothing to do. Copying an existing post carries the
-`<script defer src="/src/analytics.js">` tag over with it, and read-depth tracking
-keys off the `.blog-content` wrapper, so a new post is measured the moment it ships.
-Just don't delete either one.
-
-To see how the post lands, open Plausible and filter by its page: `Read 50%` and
-`Read 90%` tell you whether people finished it, which the view count on its own
-cannot.
+in `index.html`. From inside a post's `body.html`, write `../../` for the home page
+(canonical `https://vikky2810.github.io/`), `../../#projects` for a home page section,
+and `./` for the blog listing (canonical `https://vikky2810.github.io/blog/`). Linking
+to `index.html` instead points at a duplicate of the canonical URL and splits its
+signals.
 
 ## 🎨 Available Styling
 
@@ -97,5 +119,8 @@ Styles live in `blog/post.css` and are shared by every post.
 ## 💡 Tips
 
 - Keep the summary under ~160 characters so Google doesn't cut it off.
-- Never rename a published post's file: its URL would change and Google would have to start over.
+- Never rename a published post's folder: its URL would change and Google would have to start over.
 - Test locally with `python -m http.server 8000` and open `http://localhost:8000/blog/`.
+- Don't hand-edit `blog/<slug>/index.html`, `feed.xml`'s `<item>`s, or `sitemap.xml`'s
+  post `<url>`s directly — they're overwritten the next time `build-blog.mjs` runs.
+  Edit the source in `content/blog/` instead.

@@ -1,0 +1,87 @@
+name: Site checks
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: checks-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  links:
+    name: Link check
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Restore lychee cache
+        uses: actions/cache@v6
+        with:
+          path: .lycheecache
+          key: lychee-${{ github.sha }}
+          restore-keys: lychee-
+
+      - name: Check links
+        uses: lycheeverse/lychee-action@v2
+        with:
+          # root-dir resolves root-relative links (/src/...) against the checkout;
+          # the remap checks absolute links to the live site against local files,
+          # so pages added in this change are validated before they deploy.
+          args: >-
+            --config .lychee.toml
+            --no-progress
+            --root-dir "${{ github.workspace }}"
+            --remap "^https://vikky2810.github.io/ file://${{ github.workspace }}/"
+            './**/*.html'
+            feed.xml
+            sitemap.xml
+            llms.txt
+          fail: true
+          jobSummary: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  html:
+    name: HTML validation
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+
+      - name: Validate HTML
+        run: |
+          git ls-files -z '*.html' ':!:googled0149627dfb021ad.html' ':!:content/**' \
+            | xargs -0 npx --yes html-validate@11
+
+  lighthouse:
+    name: Lighthouse CI
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+
+      - name: Run Lighthouse CI
+        run: npx --yes @lhci/cli@0.15 autorun --config=./lighthouserc.json
+
+      - name: Upload Lighthouse reports
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: lighthouse-reports
+          path: .lighthouseci/
+          if-no-files-found: ignore

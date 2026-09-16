@@ -1,0 +1,55 @@
+# lychee link checker configuration (lychee v0.24.x)
+# https://github.com/lycheeverse/lychee/blob/master/lychee.example.toml
+#
+# NOTE: `root_dir` must be an absolute path, so the workflow passes it on the
+# command line (`--root-dir "$GITHUB_WORKSPACE"`) instead of hard-coding it
+# here. The workflow also remaps https://vikky2810.github.io/ to the local
+# checkout so pages added in a PR are validated before they are deployed.
+
+# Resolve directory links (/blog/, /blog/sql-vs-nosql/) to their index.html,
+# the same way GitHub Pages serves them.
+index_files = ["index.html"]
+fallback_extensions = ["html"]
+
+# Networking
+timeout = 20
+max_retries = 3
+retry_wait_time = 2
+max_concurrency = 16
+max_redirects = 10
+user_agent = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0 Safari/537.36"
+
+# 429 = rate limited: the link exists, the host is just throttling us.
+accept = ["200..=204", "206", "429"]
+
+# Cache results between runs (the workflow restores .lycheecache).
+cache = true
+max_cache_age = "1d"
+cache_exclude_status = ["429", "500..=599"]
+
+# Don't check email addresses.
+include_mail = false
+
+# Fragment (#anchor) checking disabled.
+include_fragments = "none"
+
+exclude = [
+  # LinkedIn blocks automated clients (HTTP 999).
+  '^https?://([a-z]+\.)?linkedin\.com',
+  # Preconnect-only font hosts: bare origins return 404 by design.
+  '^https?://fonts\.googleapis\.com/?$',
+  '^https?://fonts\.gstatic\.com/?$',
+  # Analytics.
+  '^https?://([a-z]+\.)?plausible\.io',
+  # XML namespace identifiers in feed.xml / sitemap.xml, not real links.
+  '^https?://www\.w3\.org/',
+  '^https?://purl\.org/',
+  '^https?://www\.sitemaps\.org/',
+  '^mailto:',
+]
+
+exclude_path = [
+  'node_modules',
+  'googled0149627dfb021ad\.html',
+  'content.blog.template.html',  # blog template with {{placeholders}}
+]

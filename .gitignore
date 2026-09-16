@@ -63,3 +63,7 @@ temp/
 
 # Yarn Integrity file
 .yarn-integrity
+
+# CI caches
+.lycheecache
+.lighthouseci/

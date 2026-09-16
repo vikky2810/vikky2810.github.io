@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{TITLE}} - Vikram Kamble</title>
+    <meta name="description" content="{{DESCRIPTION}}" />
+    <meta name="author" content="Vikram Kamble" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="{{CANONICAL_URL}}" />
+    <link rel="alternate" type="application/rss+xml" title="Vikram Kamble's Blog" href="/feed.xml" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="{{CANONICAL_URL}}" />
+    <meta property="og:title" content="{{TITLE}} - Vikram Kamble" />
+    <meta property="og:description" content="{{DESCRIPTION}}" />
+    <meta property="og:image" content="{{OG_IMAGE_URL}}" />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="{{IMAGE_WIDTH}}" />
+    <meta property="og:image:height" content="{{IMAGE_HEIGHT}}" />
+    <meta property="og:image:alt" content="{{OG_IMAGE_ALT}}" />
+    <meta property="og:site_name" content="Vikram Kamble Portfolio" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="article:published_time" content="{{PUBLISHED_DATE}}" />
+    <meta name="theme-color" content="#000000" />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="{{CANONICAL_URL}}" />
+    <meta property="twitter:title" content="{{TITLE}} - Vikram Kamble" />
+    <meta property="twitter:description" content="{{DESCRIPTION}}" />
+    <meta property="twitter:image" content="{{OG_IMAGE_URL}}" />
+    <meta property="twitter:image:alt" content="{{OG_IMAGE_ALT}}" />
+
+    <link rel="stylesheet" href="/src/style.css?v=1111b80a">
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
+    <link rel="icon" type="image/png" href="/src/assets/favicon-32x32.png" sizes="32x32" />
+    <link rel="apple-touch-icon" href="/src/assets/apple-touch-icon.png" sizes="180x180" />
+    <!-- PrismJS CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/blog/post.css?v=807d37b7">
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": "{{TITLE}}",
+        "description": "{{DESCRIPTION}}",
+        "image": "{{OG_IMAGE_URL}}",
+        "datePublished": "{{PUBLISHED_DATE}}",
+        "dateModified": "{{MODIFIED_DATE}}",
+        "articleSection": "{{CATEGORY}}",
+{{SCHEMA_EXTRA}}        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "{{CANONICAL_URL}}"
+        },
+        "author": {
+            "@type": "Person",
+            "name": "Vikram Kamble",
+            "url": "https://vikky2810.github.io/"
+        },
+        "publisher": {
+            "@type": "Person",
+            "name": "Vikram Kamble",
+            "url": "https://vikky2810.github.io/"
+        }
+    }
+    </script>
+
+    <!-- Breadcrumbs -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://vikky2810.github.io/" },
+            { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://vikky2810.github.io/blog/" },
+            { "@type": "ListItem", "position": 3, "name": "{{BREADCRUMB_LABEL}}", "item": "{{CANONICAL_URL}}" }
+        ]
+    }
+    </script>
+    <!-- Analytics: cookieless page views + goals, see src/analytics.js -->
+    <script defer src="/src/analytics.js?v=e91a8940"></script>
+</head>
+
+<body>
+    <main class="blog-post">
+        <nav class="post-breadcrumb" aria-label="Breadcrumb">
+            <a href="/">Home</a>
+            <span class="crumb-sep">/</span>
+            <a href="/blog/">Blog</a>
+            <span class="crumb-sep">/</span>
+            <span class="crumb-current" aria-current="page">{{BREADCRUMB_LABEL}}</span>
+        </nav>
+
+        <header class="blog-header">
+            <div class="blog-category">{{CATEGORY}}</div>
+            <h1>{{TITLE}}</h1>
+            <div class="blog-meta">
+                <span>📅 <time datetime="{{PUBLISHED_DATE}}">{{PUBLISHED_DATE_DISPLAY}}</time></span>
+                <span>⏱️ {{READ_TIME}}</span>
+                <span>🏷️ {{CATEGORY}}</span>
+            </div>
+            <img src="{{PAGE_IMAGE_SRC}}" alt="{{PAGE_IMAGE_ALT}}" class="blog-image" width="{{IMAGE_WIDTH}}" height="{{IMAGE_HEIGHT}}">
+        </header>
+
+        <div class="blog-content">
+{{BODY}}
+        </div>
+
+        <section class="post-related">
+            <h2>Keep reading</h2>
+            <div class="related-grid">
+{{RELATED_CARDS}}
+            </div>
+        </section>
+
+        <aside class="post-author">
+            <img src="/src/assets/profile-pic.webp" alt="Vikram Kamble" width="56" height="56" loading="lazy">
+            <div class="post-author-body">
+                <h2 class="post-author-name">Vikram Kamble</h2>
+                <p class="post-author-bio">{{AUTHOR_BIO}}</p>
+                <div class="post-author-links">
+                    <a href="/">Portfolio home</a>
+                    <a href="/#projects">Projects</a>
+                    <a href="/blog/">All blog posts</a>
+                    <a href="/#contact">Get in touch</a>
+                </div>
+            </div>
+        </aside>
+    </main>
+
+    <!-- Prism.js syntax highlighting -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-jsx.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-sql.min.js"></script>
+    <script src="/blog/post.js?v=fdad0a90"></script>
+</body>
+
+</html>

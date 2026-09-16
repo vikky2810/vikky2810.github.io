@@ -91,8 +91,7 @@ p {
 
 /* TRANSITION */
 
-a,
-.btn {
+a {
   transition: all 300ms ease;
 }
 
@@ -283,19 +282,6 @@ a:hover {
 
 .menu-links a.is-active {
   color: var(--primary-color);
-}
-
-.logo {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: var(--text-primary);
-  letter-spacing: -0.025em;
-  transition: var(--transition-normal);
-}
-
-.logo:hover {
-  cursor: pointer;
-  opacity: 0.8;
 }
 
 /* HAMBURGER MENU */
@@ -954,77 +940,11 @@ section {
 /* Profile picture container styling */
 
 
-.title {
-  font-size: 4.5rem;
-  line-height: 1.1;
-  letter-spacing: -0.05em;
-  color: var(--text-primary);
-  font-weight: 800;
-  margin-bottom: 1.5rem;
-  max-width: 900px;
-}
-
-#profile .title {
-  font-size: 3.25rem;
-  margin-bottom: 0.5rem;
-  max-width: 760px;
-}
-
-
-/* ICONS */
-
-.icon {
-  cursor: pointer;
-  height: 2.5rem;
-  transition: var(--transition-normal);
-  opacity: 0.8;
-  filter: brightness(0) invert(1);
-}
-
-.icon:hover {
-  transform: translateY(-3px) scale(1.1);
-  opacity: 1;
-  filter: brightness(1.5) contrast(1.2);
-}
-
-
-/* BUTTONS */
-
-
-.btn {
-  font-weight: 600;
-  font-size: 1rem;
-  transition: var(--transition-normal);
-  padding: 0.8rem 2rem;
-  border-radius: var(--radius-md);
-  border: none;
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-}
-
-
 /* ABOUT SECTION */
 
 #about {
   position: relative;
   padding: var(--section-gap) 2rem;
-}
-
-
-.about-pic {
-  border-radius: 50%;
-  object-fit: cover;
-}
-
-.profile-pic {
-  border-radius: 50%;
-  object-fit: cover;
-  width: 100%;
-  height: 100%;
-  display: block;
 }
 
 
@@ -1036,32 +956,6 @@ section {
 }
 
 
-article {
-  display: flex;
-  width: auto;
-  min-width: 120px;
-  justify-content: flex-start;
-  align-items: center;
-  gap: 1rem;
-  padding: 0.75rem 1rem;
-  background: rgba(255, 255, 255, 0.03);
-  border-radius: var(--radius-md);
-  border: 1px solid transparent;
-  transition: var(--transition-fast);
-}
-
-article:hover {
-  background: rgba(255, 255, 255, 0.05);
-  border-color: var(--border-color);
-  transform: translateX(5px);
-}
-
-article .icon {
-  cursor: default;
-  filter: brightness(1.5) contrast(1.2);
-  opacity: 0.9;
-}
-
 /* PROJECTS SECTION */
 
 #projects {
@@ -1071,24 +965,11 @@ article .icon {
 }
 
 
-/* Project card specific styles */
-
-
-/* Image optimization styles */
-
-
 /* Responsive images */
 img {
   max-width: 100%;
   height: auto;
 }
-
-/* Optimize icon images */
-.icon {
-  object-fit: contain;
-  filter: brightness(0) invert(1);
-}
-
 
 /* CONTACT */
 
@@ -1113,25 +994,6 @@ footer p {
   font-weight: 500;
 }
 
-footer nav {
-  margin-bottom: 2rem;
-}
-
-footer .nav-links {
-  justify-content: center;
-  gap: 3rem;
-}
-
-footer .nav-links a {
-  color: var(--text-secondary);
-  font-weight: 500;
-  transition: var(--transition-normal);
-}
-
-footer .nav-links a:hover {
-  color: var(--primary-color);
-}
-
 /* Dark Theme Base Styling */
 html {
   background-color: var(--bg-primary) !important;
@@ -1142,20 +1004,11 @@ body {
   color: var(--text-primary) !important;
 }
 
-/* Profile picture styling */
-
-
 /* Image styles */
 img {
   max-width: 100%;
   height: auto;
   display: block;
-}
-
-/* Image fallbacks */
-.icon {
-  min-height: 50px;
-  min-width: 50px;
 }
 
 /* BLOG SECTION */
@@ -1267,15 +1120,6 @@ img {
   position: relative;
 }
 
-.blog-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: var(--transition-normal);
-  border-radius: var(--radius-xl) var(--radius-xl) 0 0;
-}
-
-
 .blog-content {
   padding: 1.5rem;
   display: flex;
@@ -1376,4 +1220,1372 @@ img {
   transform: none;
   transition: opacity 0.6s ease-out, transform 0.6s ease-out;
   transition-delay: calc(var(--i, 0) * 70ms);
+}
+
+/* ===== Responsive rules (formerly mediaqueries.css) ===== */
+
+/* ============================================
+   COMPREHENSIVE MEDIA QUERIES
+   Responsive Design for All Devices
+   ============================================ */
+
+/* ============================================
+   SPECIFIC FIX FOR 360x800 RESOLUTION
+   Common mobile phone size
+   ============================================ */
+
+
+/* ============================================
+   EXTRA SMALL DEVICES (Mobile Portrait)
+   320px - 480px
+   ============================================ */
+@media screen and (max-width: 480px) {
+
+  /* Navigation */
+  #desktop-nav {
+    display: none;
+  }
+
+  #hamburger-nav {
+    display: flex !important;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 1rem;
+    height: auto;
+    min-height: 60px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: rgba(15, 23, 42, 0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border-color);
+  }
+
+
+  /* Hamburger Icon - Make it clearly visible */
+  .hamburger-menu {
+    position: relative;
+    display: inline-block !important;
+    z-index: 1001;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+
+  .hamburger-icon {
+    display: flex !important;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 28px;
+    width: 32px;
+    cursor: pointer;
+    padding: 0;
+    background: transparent;
+    border: none;
+    z-index: 1002;
+    visibility: visible !important;
+    opacity: 1 !important;
+    position: relative;
+    align-items: center;
+  }
+
+  .hamburger-icon span {
+    display: block !important;
+    width: 100%;
+    height: 3px;
+    background-color: var(--text-primary) !important;
+    border-radius: 2px;
+    transition: all 0.3s ease-in-out !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    position: absolute !important;
+    left: 0;
+    right: 0;
+    z-index: 1003;
+    transform-origin: center center;
+  }
+
+  .hamburger-icon span:first-child {
+    top: 0 !important;
+    margin-bottom: 0 !important;
+  }
+
+  .hamburger-icon span:nth-child(2) {
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    margin-bottom: 0 !important;
+  }
+
+  .hamburger-icon span:last-child {
+    bottom: 0 !important;
+  }
+
+  /* Ensure hamburger icon is visible on dark background */
+  #hamburger-nav .hamburger-icon span {
+    background-color: #f1f5f9 !important;
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
+  }
+
+  /* Hamburger Icon X Animation for Mobile */
+  .hamburger-icon.open span:first-child {
+    top: 50% !important;
+    transform: translateY(-50%) rotate(45deg) !important;
+  }
+
+  .hamburger-icon.open span:nth-child(2) {
+    opacity: 0 !important;
+    transform: translateY(-50%) scaleX(0) !important;
+    visibility: hidden !important;
+  }
+
+  .hamburger-icon.open span:last-child {
+    top: 50% !important;
+    transform: translateY(-50%) rotate(-45deg) !important;
+  }
+
+  /* Reset transforms when not open */
+  .hamburger-icon span:first-child {
+    transition: all 0.3s ease-in-out !important;
+  }
+
+  .hamburger-icon span:nth-child(2) {
+    opacity: 1 !important;
+    transform: translateY(-50%) scaleX(1) !important;
+    visibility: visible !important;
+    transition: all 0.3s ease-in-out !important;
+  }
+
+  .hamburger-icon span:last-child {
+    transition: all 0.3s ease-in-out !important;
+  }
+
+  .menu-links {
+    position: fixed;
+    top: 60px;
+    left: 0;
+    right: 0;
+    width: 100vw;
+    background-color: var(--bg-secondary);
+    border-top: 1px solid var(--border-color);
+    box-shadow: var(--shadow-lg);
+    z-index: 999;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-in-out;
+  }
+
+  .menu-links.open {
+    max-height: 400px;
+  }
+
+  .menu-links a {
+    display: block;
+    padding: 1rem 1.5rem;
+    font-size: 1.1rem;
+    border-bottom: 1px solid var(--border-color);
+    color: var(--text-primary);
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+  }
+
+  .menu-links a:hover {
+    background-color: var(--bg-tertiary);
+    color: var(--primary-color);
+  }
+
+  /* Sections */
+  section {
+    padding: 2.5rem 1rem;
+  }
+
+  /* Profile Section */
+  #profile {
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 2rem 1rem;
+    min-height: auto;
+    text-align: center;
+  }
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  /* About Section */
+  #about {
+    padding: 2.5rem 1rem;
+  }
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  /* Experience Section */
+  #experience {
+    padding: 2.5rem 1rem;
+  }
+
+  
+
+  
+
+  
+
+  
+
+  /* Projects Section */
+  #projects {
+    padding: 2.5rem 1rem;
+  }
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  /* Blogs Section */
+  #blogs {
+    padding: 2.5rem 1rem;
+  }
+
+  .blogs-container {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+    margin-top: 1.5rem;
+  }
+
+  
+
+  .blog-image {
+    height: 160px;
+  }
+
+  .blog-content {
+    padding: 1rem;
+  }
+
+  
+
+  
+
+  
+
+  .blog-meta {
+    margin-bottom: 0.5rem;
+  }
+
+  .blog-category {
+    font-size: 0.7rem;
+    padding: 0.2rem 0.6rem;
+  }
+
+  
+
+  /* Contact Section */
+  #contact {
+    padding: 2.5rem 1rem;
+    min-height: auto;
+  }
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  /* Footer */
+  footer {
+    height: auto;
+    padding: 1.5rem 1rem;
+    margin: 0;
+  }
+
+  footer p {
+    font-size: 0.75rem;
+    margin: 0;
+  }
+
+  /* Ensure proper spacing between sections */
+  section+section {
+    margin-top: 0;
+  }
+}
+
+/* ============================================
+   SPECIFIC FIX FOR 360x800 RESOLUTION
+   Common mobile phone size
+   ============================================ */
+@media screen and (max-width: 360px) {
+
+  /* Navigation */
+  #hamburger-nav {
+    padding: 0.5rem 0.75rem;
+    min-height: 55px;
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 1000 !important;
+    background: rgba(15, 23, 42, 0.95) !important;
+    backdrop-filter: blur(10px) !important;
+    border-bottom: 1px solid var(--border-color) !important;
+    overflow: visible !important;
+  }
+
+  /* Hamburger Icon - Ensure visibility */
+  .hamburger-menu {
+    display: inline-block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    position: relative !important;
+    overflow: visible !important;
+  }
+
+  .hamburger-icon {
+    display: flex !important;
+    height: 26px;
+    width: 30px;
+    visibility: visible !important;
+    opacity: 1 !important;
+    position: relative;
+    align-items: center;
+  }
+
+  .hamburger-icon span {
+    display: block !important;
+    height: 2.5px;
+    background-color: #f1f5f9 !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease-in-out !important;
+    position: absolute !important;
+    left: 0;
+    right: 0;
+    transform-origin: center center;
+  }
+
+  .hamburger-icon span:first-child {
+    top: 0 !important;
+  }
+
+  .hamburger-icon span:nth-child(2) {
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+  }
+
+  .hamburger-icon span:last-child {
+    bottom: 0 !important;
+  }
+
+  /* Hamburger Icon X Animation for 360px screens */
+  .hamburger-icon.open span:first-child {
+    top: 50% !important;
+    transform: translateY(-50%) rotate(45deg) !important;
+  }
+
+  .hamburger-icon.open span:nth-child(2) {
+    opacity: 0 !important;
+    transform: translateY(-50%) scaleX(0) !important;
+    visibility: hidden !important;
+  }
+
+  .hamburger-icon.open span:last-child {
+    top: 50% !important;
+    transform: translateY(-50%) rotate(-45deg) !important;
+  }
+
+  /* Menu Links - Fixed position for mobile */
+  #hamburger-nav .menu-links {
+    position: fixed !important;
+    top: 55px !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: 100vw !important;
+    max-width: 100vw !important;
+    background-color: #1e293b !important;
+    border-top: 1px solid #334155 !important;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.4), 0 4px 6px -4px rgba(0, 0, 0, 0.4) !important;
+    z-index: 999 !important;
+    max-height: 0 !important;
+    overflow: hidden !important;
+    transition: max-height 0.3s ease-in-out !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    display: block !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    transform: translateZ(0) !important;
+    -webkit-transform: translateZ(0) !important;
+  }
+
+  #hamburger-nav .menu-links.open {
+    max-height: 400px !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    display: block !important;
+  }
+
+  #hamburger-nav .menu-links a {
+    display: block !important;
+    padding: 1rem 1.5rem !important;
+    font-size: 1rem !important;
+    border-bottom: 1px solid #334155 !important;
+    color: #f1f5f9 !important;
+    text-decoration: none !important;
+    transition: background-color 0.3s ease !important;
+    width: 100% !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    font-weight: 500 !important;
+  }
+
+  #hamburger-nav .menu-links a:hover,
+#hamburger-nav .menu-links a:focus {
+    background-color: #334155 !important;
+    color: #3b82f6 !important;
+  }
+
+  #hamburger-nav .menu-links li {
+    list-style: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    display: block !important;
+  }
+
+  /* Sections */
+  section {
+    padding: 2rem 0.75rem;
+  }
+
+  /* Profile Section */
+  #profile {
+    padding: 1.5rem 0.75rem;
+    gap: 1.25rem;
+  }
+
+  
+
+  
+
+  /* About Section */
+  #about {
+    padding: 2rem 0.75rem;
+  }
+
+  
+
+  /* Experience Section */
+  #experience {
+    padding: 2rem 0.75rem;
+  }
+
+  
+
+  /* Experience Section Fixes for 360px */
+  
+
+  
+
+  /* Projects Section */
+  #projects {
+    padding: 2rem 0.75rem;
+  }
+
+  
+
+  /* Prevent horizontal scroll */
+  html,
+body {
+    overflow-x: hidden !important;
+    max-width: 100vw !important;
+    width: 100% !important;
+    position: relative;
+  }
+
+  /* Navigation - prevent overflow */
+  nav,
+#desktop-nav,
+#hamburger-nav {
+    max-width: 100vw;
+    width: 100%;
+    overflow-x: hidden;
+    box-sizing: border-box;
+  }
+
+  /* Ensure all sections respect viewport width */
+  section {
+    max-width: 100vw;
+    overflow-x: hidden;
+    width: 100%;
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+    box-sizing: border-box;
+  }
+
+  /* Prevent all containers from overflowing */
+  
+
+  /* Footer */
+  footer {
+    max-width: 100vw;
+    width: 100%;
+    overflow-x: hidden;
+    box-sizing: border-box;
+  }
+
+  /* Ensure images don't cause overflow */
+  img {
+    max-width: 100% !important;
+    height: auto !important;
+    display: block;
+  }
+
+  /* Code blocks should wrap */
+  .code-block,
+pre,
+code {
+    max-width: 100%;
+    overflow-x: auto;
+    word-wrap: break-word;
+    white-space: pre-wrap;
+    box-sizing: border-box;
+  }
+
+  /* Blogs Section */
+  #blogs {
+    padding: 2rem 0.75rem;
+    max-width: 100vw;
+    overflow-x: hidden;
+  }
+
+  
+
+  .blogs-container {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    margin-top: 1.5rem;
+    padding: 0;
+    max-width: 100%;
+    width: 100%;
+  }
+
+  
+
+  .blog-image {
+    height: 140px;
+    width: 100%;
+  }
+
+  .blog-content {
+    padding: 1rem;
+    gap: 0.75rem;
+  }
+
+  .blog-meta {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .blog-category {
+    font-size: 0.65rem;
+    padding: 0.2rem 0.5rem;
+  }
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  /* Table Styles for Mobile - Scrollable wrapper approach */
+  table,
+.blog-content table {
+    width: 100% !important;
+    max-width: 100% !important;
+    display: table;
+    font-size: 0.7rem;
+    margin: 1rem 0;
+    border-collapse: collapse;
+    table-layout: auto;
+  }
+
+  /* Wrap tables in blog content for scrolling */
+  .blog-content table {
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    -ms-overflow-style: -ms-autohiding-scrollbar;
+  }
+
+  .blog-content table thead,
+.blog-content table tbody,
+.blog-content table tr {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+  }
+
+  table thead th,
+.blog-content table thead th {
+    padding: 0.5rem 0.4rem;
+    font-size: 0.65rem;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    min-width: 60px;
+  }
+
+  table tbody td,
+.blog-content table tbody td {
+    padding: 0.5rem 0.4rem;
+    font-size: 0.65rem;
+    word-wrap: break-word;
+    white-space: normal;
+    max-width: 120px;
+  }
+
+  /* Table wrapper for scrollable tables */
+  .blog-content>table,
+.blog-content table {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    display: block;
+    margin: 1rem 0;
+    max-width: 100%;
+  }
+
+  .blog-content>table table,
+.blog-content table table {
+    width: max-content;
+    min-width: 100%;
+    display: table;
+  }
+
+  /* Contact Section */
+  #contact {
+    padding: 2rem 0.75rem;
+  }
+
+  
+
+  
+
+  /* Footer */
+  footer {
+    padding: 1.25rem 0.75rem;
+  }
+}
+
+/* ============================================
+   SMALL DEVICES (Mobile Landscape / Small Tablets)
+   481px - 768px
+   ============================================ */
+@media screen and (min-width: 481px) and (max-width: 768px) {
+
+  /* Navigation */
+  #desktop-nav {
+    display: none;
+  }
+
+  #hamburger-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    height: auto;
+    min-height: 56px;
+  }
+
+  .menu-links {
+    width: 100vw;
+    left: 0;
+    right: 0;
+    background-color: var(--bg-secondary);
+    border-top: 1px solid var(--border-color);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .menu-links a {
+    padding: 1rem 2rem;
+    font-size: 1.3rem;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  /* Hamburger Icon X Animation for Small Devices */
+  .hamburger-icon.open span:first-child {
+    top: 50% !important;
+    transform: translateY(-50%) rotate(45deg) !important;
+  }
+
+  .hamburger-icon.open span:nth-child(2) {
+    opacity: 0 !important;
+    transform: translateY(-50%) scaleX(0) !important;
+    visibility: hidden !important;
+  }
+
+  .hamburger-icon.open span:last-child {
+    top: 50% !important;
+    transform: translateY(-50%) rotate(-45deg) !important;
+  }
+
+  /* Sections */
+  section {
+    padding: 4rem 2rem;
+  }
+
+  /* Profile Section */
+  #profile {
+    flex-direction: column;
+    gap: 3rem;
+    padding: 4rem 2rem;
+    min-height: auto;
+  }
+
+  
+
+  
+
+  
+
+  
+
+  /* About Section */
+  #about {
+    padding: 4rem 2rem;
+  }
+
+  
+
+  
+
+  
+
+  /* Experience Section */
+  #experience {
+    padding: 4rem 2rem;
+  }
+
+  
+
+  
+
+  /* Projects Section */
+  #projects {
+    padding: 4rem 2rem;
+  }
+
+  
+
+  
+
+  /* Blogs Section */
+  #blogs {
+    padding: 4rem 2rem;
+  }
+
+  .blogs-container {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .blog-image {
+    height: 200px;
+  }
+
+  /* Contact Section */
+  #contact {
+    padding: 4rem 2rem;
+  }
+
+  
+
+  
+
+  /* Footer */
+  footer {
+    padding: 2rem;
+  }
+
+}
+
+/* ============================================
+   MEDIUM DEVICES (Tablets)
+   769px - 1024px
+   ============================================ */
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+
+  /* Navigation */
+  nav {
+    padding: 0 2rem;
+    height: 56px;
+  }
+
+  .nav-links {
+    gap: 1.5rem;
+    font-size: 0.975rem;
+  }
+
+  /* Sections */
+  section {
+    padding: 5rem 3rem;
+  }
+
+  /* Profile Section */
+  #profile {
+    gap: 4rem;
+    padding: 5rem 3rem;
+  }
+
+  
+
+  
+
+  
+
+  
+
+  /* About Section */
+  #about {
+    padding: 5rem 3rem;
+  }
+
+  
+
+  
+
+  /* Experience Section */
+  #experience {
+    padding: 5rem 3rem;
+  }
+
+  
+
+  
+
+  /* Projects Section */
+  #projects {
+    padding: 5rem 3rem;
+  }
+
+  
+
+  
+
+  /* Blogs Section */
+  #blogs {
+    padding: 5rem 3rem;
+  }
+
+  .blogs-container {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+  }
+
+  /* Contact Section */
+  #contact {
+    padding: 5rem 3rem;
+  }
+
+  
+
+  /* Footer */
+  footer {
+    padding: 2rem 3rem;
+  }
+
+}
+
+/* ============================================
+   LARGE DEVICES (Small Desktops / Laptops)
+   1025px - 1200px
+   ============================================ */
+@media screen and (min-width: 1025px) and (max-width: 1200px) {
+
+  /* Navigation */
+  nav {
+    padding: 0 3rem;
+  }
+
+  .nav-links {
+    gap: 1.75rem;
+    font-size: 0.975rem;
+  }
+
+  /* Sections */
+  section {
+    padding: 5rem 5rem;
+  }
+
+  /* Profile Section */
+  #profile {
+    gap: 4.5rem;
+    padding: 6rem 5rem;
+  }
+
+  
+
+  
+
+  /* About Section */
+  #about {
+    padding: 6rem 5rem;
+  }
+
+  
+
+  /* Experience Section */
+  #experience {
+    padding: 6rem 5rem;
+  }
+
+  /* Projects Section */
+  #projects {
+    padding: 6rem 5rem;
+  }
+
+  
+
+  /* Blogs Section */
+  #blogs {
+    padding: 6rem 5rem;
+  }
+
+  .blogs-container {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+
+  /* Contact Section */
+  #contact {
+    padding: 6rem 5rem;
+  }
+
+}
+
+/* ============================================
+   EXTRA LARGE DEVICES (Large Desktops)
+   1201px and above
+   ============================================ */
+@media screen and (min-width: 1201px) {
+
+  /* Navigation */
+  nav {
+    padding: 0 4rem;
+  }
+
+  .nav-links {
+    gap: 2rem;
+    font-size: 0.975rem;
+  }
+
+  /* Sections */
+  section {
+    padding: 6rem 10rem;
+  }
+
+  /* Profile Section */
+  #profile {
+    gap: 5rem;
+    padding: 6rem 10rem;
+  }
+
+  /* All other sections maintain default desktop styles */
+}
+
+/* ============================================
+   LANDSCAPE ORIENTATION (Mobile & Tablet)
+   ============================================ */
+@media screen and (max-width: 1024px) and (orientation: landscape) {
+
+  /* Profile Section */
+  #profile {
+    min-height: auto;
+    padding: 3rem 2rem;
+  }
+
+  /* Navigation */
+  nav {
+    height: 56px;
+  }
+
+  #hamburger-nav {
+    min-height: 56px;
+  }
+
+  /* Sections */
+  section {
+    padding: 3rem 2rem;
+  }
+}
+
+/* ============================================
+   TOUCH DEVICE OPTIMIZATIONS
+   ============================================ */
+@media (hover: none) and (pointer: coarse) {
+
+  .nav-links a {
+    padding: 0.75rem 1rem;
+  }
+}
+
+/* ============================================
+   PRINT STYLES
+   ============================================ */
+@media print {
+
+  nav,
+#hamburger-nav,
+footer {
+    display: none;
+  }
+
+  section {
+    padding: 2rem;
+    page-break-inside: avoid;
+  }
+
+  body {
+    background: #fff;
+    color: #000;
+  }
+}
+
+/* ============================================
+   ACCESSIBILITY - REDUCED MOTION
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+*::before,
+*::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* ============================================
+   CONTAINER MAX-WIDTHS FOR BETTER READABILITY
+   ============================================ */
+@media screen and (min-width: 1400px) {
+
+  .blogs-container {
+    max-width: 1400px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+
+/* ============================================
+   SPECIFIC FOOTER FIX FOR 360x800 RESOLUTION
+   ============================================ */
+@media screen and (max-width: 360px) {
+
+  /* Footer - Single line nav for 360px */
+  footer {
+    padding: 1rem 0.5rem;
+    height: auto;
+  }
+
+  footer p {
+    font-size: 0.65rem;
+    margin-top: 0.5rem;
+  }
+}
+
+/* Comfortable extra breathing room on wide screens */
+@media screen and (min-width: 1100px) {
+  #profile {
+    gap: 5rem;
+  }
+
+  
+}
+
+/* ============================================
+   RAMX-STYLE COMPACT PROFILE + EXPERIENCE
+   Appended last so it overrides all the legacy
+   per-breakpoint #profile rules above.
+   ============================================ */
+#profile,
+#work {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media screen and (min-width: 769px) {
+  #profile {
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 1.25rem;
+    text-align: left;
+    min-height: auto;
+    padding: 4rem 2rem 2rem;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  #profile,
+#work {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+
+  .profile-header {
+    gap: 1rem;
+  }
+
+  .profile-avatar {
+    height: 72px;
+    width: 72px;
+  }
+
+  .profile-name {
+    font-size: 1.6rem;
+  }
+
+  .profile-subtitle {
+    font-size: 0.85rem;
+  }
+
+  .exp-top {
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+
+  .exp-right {
+    text-align: left;
+    flex-direction: row;
+    gap: 0.75rem;
+  }
+}
+
+/* Blog list overrides - force the ramx-style list at every breakpoint */
+.blogs-container {
+  display: flex !important;
+  flex-direction: column !important;
+  grid-template-columns: none !important;
+  max-width: 100% !important;
+  gap: 0 !important;
+}
+
+@media screen and (max-width: 768px) {
+  #blogs {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+
+  .blog-row {
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+}
+
+/* Compact section overrides - keep About/Skills/Projects/Contact
+   left-aligned in the 760px column at every breakpoint */
+#about,
+#experience,
+#projects,
+#contact {
+  max-width: 760px;
+  margin-left: auto;
+  margin-right: auto;
+  align-items: stretch;
+  text-align: left;
+}
+
+@media screen and (max-width: 768px) {
+  #about,
+#experience,
+#projects,
+#contact {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+
+  .project-row {
+    align-items: flex-start;
+  }
+}
+
+/* ============================================
+   USE THE HORIZONTAL MENU ON EVERY SCREEN
+   Drop the hamburger entirely.
+   ============================================ */
+#hamburger-nav {
+  display: none !important;
+}
+
+#desktop-nav {
+  display: flex !important;
+}
+
+@media screen and (max-width: 768px) {
+  #desktop-nav {
+    height: auto;
+    min-height: 0;
+    padding: 0.7rem 0;
+  }
+
+  #desktop-nav > div {
+    padding: 0 1.25rem;
+    overflow-x: auto;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  #desktop-nav > div::-webkit-scrollbar {
+    display: none;
+  }
+
+  .nav-links {
+    flex-wrap: nowrap;
+    gap: 0.9rem;
+    font-size: 0.6rem;
+    white-space: nowrap;
+  }
+
+  .nav-links li {
+    flex-shrink: 0;
+  }
+
+  /* Keep the hero left-aligned and tidy on mobile */
+  #profile {
+    align-items: flex-start;
+    text-align: left;
+    padding: 2.5rem 1.5rem 1.5rem;
+    max-width: 100%;
+  }
+
+  .profile-header {
+    gap: 1rem;
+    align-items: center;
+  }
+
+  .profile-avatar {
+    height: 68px;
+    width: 68px;
+  }
+
+  .profile-name {
+    font-size: 1.5rem;
+    margin-bottom: 0.35rem;
+  }
+
+  .profile-subtitle {
+    font-size: 0.82rem;
+    gap: 0.3rem 0.45rem;
+  }
+
+  .profile-bio {
+    font-size: 0.95rem;
+    text-align: left;
+    max-width: 100%;
+  }
+
+  .profile-socials {
+    flex-wrap: wrap;
+  }
+
+  /* Consistent section rhythm on mobile */
+  #work,
+#blogs {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+
+  .section-heading {
+    font-size: 1.35rem;
+  }
+}
+
+/* ============================================
+   CONTACT SECTION
+   Merged from the former src/contact.css, whose
+   .contact-card / .social-icon layout no longer
+   exists in the markup. Order preserved: the
+   360px block first, the override after it, so
+   the override still wins at every width.
+   ============================================ */
+@media screen and (max-width: 360px) {
+  #contact {
+    padding: 2.5rem 0.75rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: auto;
+    position: relative;
+    overflow: hidden;
+  }
+}
+
+#contact {
+  display: block;
+  align-items: stretch;
+  text-align: left;
+  overflow: visible;
+  padding-top: 3rem;
+}
+
+/* Project screenshot thumbnails */
+.project-row-thumb {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  object-position: top;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  background: var(--bg-tertiary);
+  margin-bottom: 0.25rem;
+  display: block;
+}
+
+@media screen and (max-width: 768px) {
+  .project-row-thumb {
+    aspect-ratio: 16 / 11;
+  }
 }

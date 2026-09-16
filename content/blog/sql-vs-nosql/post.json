@@ -1,0 +1,34 @@
+{
+    "slug": "sql-vs-nosql",
+    "title": "SQL vs NoSQL: I've Shipped Both, Here's How I Actually Decide",
+    "description": "Most SQL vs NoSQL posts are a comparison chart someone copied from the docs. This one is a decision process, built from shipping real projects on both MySQL and MongoDB, with code, trade-offs, and a flowchart you can actually follow.",
+    "category": "Backend",
+    "publishedDate": "2026-06-20",
+    "modifiedDate": "2026-09-12",
+    "breadcrumbLabel": "SQL vs NoSQL",
+    "readTimeMinutes": 10,
+    "includeReadingSchema": true,
+    "image": {
+        "ogFile": "sqlVSnosql.png",
+        "pageFile": "sqlVSnosql.webp",
+        "width": 1571,
+        "height": 885,
+        "ogAlt": "SQL vs NoSQL guide cover illustration",
+        "pageAlt": "Cover illustration for this SQL vs NoSQL guide: the words &quot;SQL vs NoSQL&quot; hand-lettered inside a sketched frame."
+    },
+    "authorBio": "Full-stack developer working with Next.js, Flask, MySQL and MongoDB. I write about the decisions behind the code, not just the syntax.",
+    "related": [
+        {
+            "href": "/blog/library-vs-framework/",
+            "label": "Next post",
+            "title": "Library vs Framework: The Real Difference Every Developer Should Know",
+            "desc": "The other \"which tool do I pick\" question, answered the same way: with React and Next.js examples instead of a feature table."
+        },
+        {
+            "href": "/#projects",
+            "label": "Projects",
+            "title": "The projects behind this post",
+            "desc": "AI Explains Repo, the Health-Aware Recipe Modifier and the Online Python Code Editor — source code and live demos for all three."
+        }
+    ]
+}

@@ -32,18 +32,43 @@ This is a **static site** that can be deployed to any static hosting service:
 ```
 vikky2810.github.io/
 ├── index.html              # Main HTML file
+├── 404.html                # Not-found page
+├── blog/                   # Blog: index + one folder per post (canonical URLs)
+│   ├── index.html
+│   ├── <post-slug>/index.html
+│   ├── post.css / post.js  # Shared post styles and scripts
+│   └── style.css           # Blog index styles
 ├── src/
 │   ├── style.css           # Main stylesheet
 │   ├── mediaqueries.css    # Responsive design
 │   ├── script.js           # JavaScript functionality
-│   └── assets/             # Images and resources
-│       ├── profile-pic.png
-│       ├── about-pic.png
-│       ├── project-*.png
-│       └── *.png (icons)
+│   ├── analytics.js        # Plausible analytics (see below)
+│   ├── assets/             # Images, resume PDF, icons
+│   ├── blog/               # Redirect bridges for old blog URLs - do not delete
+│   └── Projects/           # Noindexed placeholder page
+├── sitemap.xml, feed.xml, robots.txt, llms.txt
 ├── package.json            # Project configuration
 └── README.md              # This file
 ```
+
+### Old URL redirects (keep these files)
+The blog used to live under `src/blog/`. It moved to `/blog/`, but GitHub Pages
+cannot send real 301 redirects, so the old URLs are kept alive with small bridge
+pages instead:
+
+- `src/blog/index.html`, `src/blog/library-vs-framework.html` and
+  `src/blog/sql-vs-nosql.html` each carry a `rel="canonical"` pointing at the new
+  URL plus a `meta http-equiv="refresh"` that sends visitors there. The canonical
+  moves the search ranking over, the refresh moves people. They are deliberately
+  not `noindex`, since that would stop the canonical from doing its job.
+- `src/blog/blog.html` handles the older `blog.html?id=N` links with a tiny
+  script that maps the id to the right post.
+
+They look like dead files but they are not. Deleting them breaks every old link
+and bookmark that still points at `src/blog/`.
+
+`src/Projects/index.html` is not a redirect - it is a placeholder page marked
+`noindex`.
 
 ## 🎯 Features
 

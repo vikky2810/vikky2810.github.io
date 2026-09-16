@@ -6,13 +6,13 @@
   "scripts": {
     "dev": "python -m http.server 8000",
     "serve": "npx http-server -p 8000",
-    "build": "echo 'Static site ready for deployment'"
+    "stamp": "node scripts/stamp-assets.mjs",
+    "check:html": "npx --yes html-validate@11 \"**/*.html\"",
+    "build:blog": "node scripts/build-blog.mjs && node scripts/stamp-assets.mjs"
   },
   "keywords": [
     "portfolio",
     "web-development",
-    "react",
-    "nodejs",
     "fullstack",
     "static-site"
   ],

@@ -1,6 +1,6 @@
 # Vikram Kamble
 
-> Full Stack Developer and B.Tech Computer Science graduate based in India. This is my personal portfolio and technical blog, covering full-stack web development, Python, and building applications on top of LLM APIs.
+> Full Stack Developer based in India. This is my personal portfolio and technical blog, covering full-stack web development, Python, and building applications on top of LLM APIs.
 
 I build full-stack web applications — React and Next.js on the frontend, Node.js/Express and Flask on the backend, with MySQL and MongoDB for storage. Several of my recent projects are AI-powered tools built on the Gemini API. I currently work as a Software Engineer Intern at RegiKart Private Limited, and have been freelancing since 2023.
 
@@ -33,5 +33,5 @@ The site is a static site hosted on GitHub Pages. Every blog post is a standalon
 
 ## Optional
 
-- [Resume (PDF)](https://vikky2810.github.io/src/assets/Vikram-Kamble-Resume.pdf): Detailed experience, education, and skills.
+- [Resume (PDF)](https://vikky2810.github.io/src/assets/Vikram-Kamble-Resume.pdf): Detailed experience and skills.
 - [Sitemap](https://vikky2810.github.io/sitemap.xml): XML sitemap for the site.

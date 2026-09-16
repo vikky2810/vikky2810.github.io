@@ -99,7 +99,7 @@ and bookmark that still points at `src/blog/`.
 
 ### About
 - Personal background
-- Education and experience summary
+- Experience summary
 - Professional interests
 
 ### Experience

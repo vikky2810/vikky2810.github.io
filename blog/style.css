@@ -12,7 +12,7 @@
   /* Neutral Colors - Ultra Dark Theme */
   --text-primary: #ffffff;
   --text-secondary: #94a3b8;
-  --text-muted: #64748b;
+  --text-muted: #6e7e94; /* 5.07:1 on black (WCAG AA) */
 
   /* Background Colors - Deep Space */
   --bg-primary: #000000;

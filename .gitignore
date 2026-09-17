@@ -67,3 +67,6 @@ temp/
 # CI caches
 .lycheecache
 .lighthouseci/
+
+# Wrangler local state
+.wrangler/

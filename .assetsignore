@@ -1,0 +1,30 @@
+# Files Wrangler should NOT upload as static assets
+
+# Dependencies installed during the Cloudflare build (includes the ~148 MB workerd binary)
+node_modules
+
+# Repo / tooling
+.git
+.github
+.claude
+.vscode
+.wrangler
+.gitignore
+.assetsignore
+.htmlvalidate.json
+.lychee.toml
+.lycheecache
+.nojekyll
+wrangler.jsonc
+wrangler.json
+wrangler.toml
+package.json
+package-lock.json
+lighthouserc.json
+
+# Build sources and docs (not served)
+scripts
+content
+README.md
+BLOG_GUIDE.md
+deploy.md

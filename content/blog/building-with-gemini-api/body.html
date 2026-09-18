@@ -43,9 +43,7 @@
             <p>Read that loop carefully, because there are two bugs in it and neither one throws.</p>
             <p>The first: it walks files in whatever order the GitHub contents API hands them back, glues them together, and stops at five thousand characters. Nothing ranks them. For a repo whose root happens to start with a <code>LICENSE</code> and a long <code>.eslintrc</code>, the model never reaches the README, and it will still write you a confident four-section summary. It just writes one about the linter configuration. The output looks fine. That's the worst kind of bug, because it doesn't announce itself: you only catch it by reading the summaries and noticing one of them describes a project that doesn't exist.</p>
             <p>The second is quieter. <code>getRepoContents</code> hits <code>/repos/{owner}/{repo}/contents</code> with no path, which returns the root directory and nothing below it, and then <code>file.type === "file"</code> drops every directory on the floor. So for any project that keeps its code in <code>src/</code> or <code>app/</code>, and that's most of them, the actual source never reaches the model at all. It's summarising config files and a readme.</p>
-            <div class="warning">
-                <p>Truncation bugs don't look like bugs. They look like mediocre output, which is very easy to blame on the model.</p>
-            </div>
+            <p>Truncation bugs don't look like bugs. They look like mediocre output, which is very easy to blame on the model.</p>
             <p>The fix isn't a bigger limit. Sending more tokens costs more, takes longer, and on a large repo you'll blow the window no matter where you set the number. What you want is to decide what deserves the budget before you start spending it: README first, then the manifest (<code>package.json</code>, <code>requirements.txt</code>), then whatever the entry point is, then fill the remainder with source files by some sensible ordering. Truncate what's left over, not what happened to be last.</p>
             <p>I spent my planning time on the prompt. The prompt was never the problem.</p>
 

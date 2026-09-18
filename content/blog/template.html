@@ -42,7 +42,7 @@
     <link rel="apple-touch-icon" href="/src/assets/apple-touch-icon.png" sizes="180x180" />
     <!-- PrismJS CSS -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="/blog/post.css?v=807d37b7">
+    <link rel="stylesheet" href="/blog/post.css?v=605a64ae">
 
     <!-- Structured Data -->
     <script type="application/ld+json">
@@ -102,9 +102,11 @@
             <div class="blog-category">{{CATEGORY}}</div>
             <h1>{{TITLE}}</h1>
             <div class="blog-meta">
-                <span>📅 <time datetime="{{PUBLISHED_DATE}}">{{PUBLISHED_DATE_DISPLAY}}</time></span>
-                <span>⏱️ {{READ_TIME}}</span>
-                <span>🏷️ {{CATEGORY}}</span>
+                <span><time datetime="{{PUBLISHED_DATE}}">{{PUBLISHED_DATE_DISPLAY}}</time></span>
+                <span class="meta-sep">·</span>
+                <span>{{READ_TIME}}</span>
+                <span class="meta-sep">·</span>
+                <span>{{CATEGORY}}</span>
             </div>
             <img src="{{PAGE_IMAGE_SRC}}" alt="{{PAGE_IMAGE_ALT}}" class="blog-image" width="{{IMAGE_WIDTH}}" height="{{IMAGE_HEIGHT}}">
         </header>

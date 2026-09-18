@@ -4,7 +4,7 @@
     max-width: 800px;
     margin: 0 auto;
     padding: 2rem;
-    line-height: 1.8;
+    line-height: 1.7;
 }
 
 .blog-header {
@@ -13,14 +13,14 @@
 }
 
 .blog-header h1 {
-    font-size: 1.65rem;
-    line-height: 1.3;
+    font-size: 2.25rem;
+    line-height: 1.2;
     letter-spacing: -0.02em;
 }
 
 @media (max-width: 600px) {
     .blog-header h1 {
-        font-size: 1.35rem;
+        font-size: 1.75rem;
     }
 }
 
@@ -58,45 +58,65 @@
 
 
 .code-block {
-    border-radius: 8px;
-    overflow: auto;
-    padding: 1rem;
-    background: #0f172a !important;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+    overflow-x: auto;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 0.9rem;
+    line-height: 1.65;
+}
+
+.code-block code {
+    font-family: inherit;
 }
 
 .blog-meta {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 2rem;
+    gap: 0.75rem;
     margin: 1rem 0;
-    color: var(--text-secondary);
+    color: var(--text-muted);
+    font-size: 0.9rem;
     flex-wrap: wrap;
     width: 100%;
     text-align: center;
 }
 
 .blog-meta span {
-    display: flex;
+    display: inline-flex;
     align-items: center;
     gap: 0.5rem;
 }
 
+.blog-meta .meta-sep {
+    opacity: 0.5;
+}
+
 .blog-content {
-    color: var(--text-secondary);
+    color: #cbd5e1;
     font-size: 1.1rem;
+    line-height: 1.75;
+    display: block;
+    padding: 0;
 }
 
 .blog-content h2 {
     color: var(--text-primary);
     margin: 2rem 0 1rem 0;
-    font-size: 1.8rem;
+    font-size: 1.5rem;
+    line-height: 1.35;
+    letter-spacing: -0.01em;
 }
 
 .blog-content h3 {
     color: var(--text-primary);
     margin: 1.5rem 0 0.5rem 0;
-    font-size: 1.4rem;
+    font-size: 1.25rem;
+    line-height: 1.4;
 }
 
 .blog-content p {
@@ -130,18 +150,8 @@
     white-space: pre;
 }
 
-.code-block {
-    background: var(--bg-secondary);
-    border: 1px solid var(--border-color);
-    border-radius: var(--radius-lg);
-    padding: 1.5rem;
-    margin: 1.5rem 0;
-    overflow-x: auto;
-}
-
 .code-block pre {
     color: var(--text-primary);
-    font-family: 'Courier New', monospace;
     margin: 0;
 }
 
@@ -316,6 +326,9 @@
 .post-related {
     margin-top: 3.5rem;
     padding-top: 2rem;
+    padding-left: 0;
+    padding-right: 0;
+    max-width: none;
     border-top: 1px solid var(--border-color);
 }
 
@@ -327,7 +340,7 @@
 
 .related-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    grid-template-columns: 1fr;
     gap: 1rem;
 }
 

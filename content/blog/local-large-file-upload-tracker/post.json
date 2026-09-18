@@ -1,0 +1,34 @@
+{
+    "slug": "local-large-file-upload-tracker",
+    "title": "Trying to Build a Local Large File Upload Tracker",
+    "description": "Sending a 1-2 GB file in one request fails at 98% with no resume. Here's how I split it into 5MB chunks with Express, multer, and retry logic.",
+    "category": "Backend",
+    "publishedDate": "2026-09-18",
+    "modifiedDate": "2026-09-18",
+    "breadcrumbLabel": "Large File Upload Tracker",
+    "readTimeMinutes": 5,
+    "includeReadingSchema": false,
+    "image": {
+        "ogFile": "large-file-upload-tracker.png",
+        "pageFile": "large-file-upload-tracker.gif",
+        "width": 864,
+        "height": 864,
+        "ogAlt": "Upload progress tracker UI with Choose file and Upload File buttons",
+        "pageAlt": "Demo of the local large file upload tracker UI showing Choose file and Upload File buttons"
+    },
+    "authorBio": "Full-stack developer working with Next.js, Flask, MySQL and MongoDB. I write about the decisions behind the code, not just the syntax.",
+    "related": [
+        {
+            "href": "/blog/building-with-gemini-api/",
+            "label": "Related post",
+            "title": "Building With the Gemini API: The Part the Docs Don't Cover",
+            "desc": "Same lesson from a different project: read the real error body, don't trust statusText, and expect empty-but-successful responses."
+        },
+        {
+            "href": "/#projects",
+            "label": "Projects",
+            "title": "The projects behind this blog",
+            "desc": "AI Explains Repo, the Health-Aware Recipe Modifier and the Online Python Code Editor — source code and live demos for all three."
+        }
+    ]
+}

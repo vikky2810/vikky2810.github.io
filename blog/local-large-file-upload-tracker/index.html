@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trying to Build a Local Large File Upload Tracker - Vikram Kamble</title>
+    <meta name="description" content="Sending a 1-2 GB file in one request fails at 98% with no resume. Here's how I split it into 5MB chunks with Express, multer, and retry logic." />
+    <meta name="author" content="Vikram Kamble" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://vikky2810.github.io/blog/local-large-file-upload-tracker/" />
+    <link rel="alternate" type="application/rss+xml" title="Vikram Kamble's Blog" href="/feed.xml" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://vikky2810.github.io/blog/local-large-file-upload-tracker/" />
+    <meta property="og:title" content="Trying to Build a Local Large File Upload Tracker - Vikram Kamble" />
+    <meta property="og:description" content="Sending a 1-2 GB file in one request fails at 98% with no resume. Here's how I split it into 5MB chunks with Express, multer, and retry logic." />
+    <meta property="og:image" content="https://vikky2810.github.io/src/assets/large-file-upload-tracker.png" />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="864" />
+    <meta property="og:image:height" content="864" />
+    <meta property="og:image:alt" content="Upload progress tracker UI with Choose file and Upload File buttons" />
+    <meta property="og:site_name" content="Vikram Kamble Portfolio" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="article:published_time" content="2026-09-18" />
+    <meta name="theme-color" content="#000000" />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://vikky2810.github.io/blog/local-large-file-upload-tracker/" />
+    <meta property="twitter:title" content="Trying to Build a Local Large File Upload Tracker - Vikram Kamble" />
+    <meta property="twitter:description" content="Sending a 1-2 GB file in one request fails at 98% with no resume. Here's how I split it into 5MB chunks with Express, multer, and retry logic." />
+    <meta property="twitter:image" content="https://vikky2810.github.io/src/assets/large-file-upload-tracker.png" />
+    <meta property="twitter:image:alt" content="Upload progress tracker UI with Choose file and Upload File buttons" />
+
+    <link rel="preload" href="/src/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="stylesheet" href="/src/fonts/fonts.css?v=774cff5c" />
+    <link rel="stylesheet" href="/src/style.css?v=5d898a38">
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
+    <link rel="icon" type="image/png" href="/src/assets/favicon-32x32.png" sizes="32x32" />
+    <link rel="apple-touch-icon" href="/src/assets/apple-touch-icon.png" sizes="180x180" />
+    <!-- PrismJS CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/blog/post.css?v=605a64ae">
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Trying to Build a Local Large File Upload Tracker",
+        "description": "Sending a 1-2 GB file in one request fails at 98% with no resume. Here's how I split it into 5MB chunks with Express, multer, and retry logic.",
+        "image": "https://vikky2810.github.io/src/assets/large-file-upload-tracker.png",
+        "datePublished": "2026-09-18",
+        "dateModified": "2026-09-18",
+        "articleSection": "Backend",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://vikky2810.github.io/blog/local-large-file-upload-tracker/"
+        },
+        "author": {
+            "@type": "Person",
+            "name": "Vikram Kamble",
+            "url": "https://vikky2810.github.io/"
+        },
+        "publisher": {
+            "@type": "Person",
+            "name": "Vikram Kamble",
+            "url": "https://vikky2810.github.io/"
+        }
+    }
+    </script>
+
+    <!-- Breadcrumbs -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://vikky2810.github.io/" },
+            { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://vikky2810.github.io/blog/" },
+            { "@type": "ListItem", "position": 3, "name": "Large File Upload Tracker", "item": "https://vikky2810.github.io/blog/local-large-file-upload-tracker/" }
+        ]
+    }
+    </script>
+    <!-- Analytics: cookieless page views + goals, see src/analytics.js -->
+    <script defer src="/src/analytics.js?v=e91a8940"></script>
+</head>
+
+<body>
+    <main class="blog-post">
+        <nav class="post-breadcrumb" aria-label="Breadcrumb">
+            <a href="/">Home</a>
+            <span class="crumb-sep">/</span>
+            <a href="/blog/">Blog</a>
+            <span class="crumb-sep">/</span>
+            <span class="crumb-current" aria-current="page">Large File Upload Tracker</span>
+        </nav>
+
+        <header class="blog-header">
+            <div class="blog-category">Backend</div>
+            <h1>Trying to Build a Local Large File Upload Tracker</h1>
+            <div class="blog-meta">
+                <span><time datetime="2026-09-18">September 18, 2026</time></span>
+                <span class="meta-sep">·</span>
+                <span>5 min read</span>
+                <span class="meta-sep">·</span>
+                <span>Backend</span>
+            </div>
+            <img src="/src/assets/large-file-upload-tracker.gif" alt="Demo of the local large file upload tracker UI showing Choose file and Upload File buttons" class="blog-image" width="864" height="864">
+        </header>
+
+        <div class="blog-content">
+            <p>Last night I tried to build a “Local Large File Upload Tracker”. Why local? My answer is my free will. I just wanted to see if I can push a 1–2 GB file without the browser giving up on me.</p>
+            <p>Normal upload sends the whole file in one request. If it fails at 98% you start from zero and you get no real progress. That annoyed me, so I cut the file into pieces. The full code lives in <a href="https://github.com/vikky2810/larger_file_upload">larger_file_upload on GitHub</a>.</p>
+
+            <h2>Why One Big Request Doesn't Work</h2>
+            <p>A single <code>POST</code> with a 2 GB body gives you two problems: no useful progress, and no resume. One dropped connection and you re-send everything. Chunking fixes both, because each piece is small, retryable, and countable.</p>
+
+            <h2>Frontend: One HTML File, 5MB Slices</h2>
+            <p>Frontend is one HTML file. I set chunk size to 5MB and used <code>file.slice</code> in a loop:</p>
+            <pre class="code-block"><code class="language-js">const CHUNK_SIZE = 5 * 1024 * 1024;
+const totalChunks = Math.ceil(file.size / CHUNK_SIZE);
+const chunk = file.slice(start, end);</code></pre>
+            <p>For each piece I make a <code>FormData</code> with <code>uploadId</code>, <code>chunkIndex</code>, <code>chunk</code> and POST it to <code>/api/upload/chunk</code>. Progress is dumb math:</p>
+            <pre class="code-block"><code class="language-js">const progress = Math.round(((i + 1) / totalChunks) * 100);</code></pre>
+
+            <h2>Backend: Init, Chunk, Complete</h2>
+            <p>Backend is Express with multer, cors, fs-extra. It has three routes: init, chunk, complete. That was the smallest thing that worked.</p>
+            <p>Init makes an <code>uploadId</code> from filename + filesize with base64:</p>
+            <pre class="code-block"><code class="language-js">const uploadId = Buffer.from(`${filename} - ${fileSize}`).toString('base64').replace(/=/g, '');</code></pre>
+            <p>If that id already lives in my <code>uploadDatabase</code> object I return <code>nextChunkIndex</code> so frontend skips what it already sent. That's my resume logic, just an array called <code>uploadedChunks</code> that I keep sorting.</p>
+
+            <h2>Storing Chunks by Index</h2>
+            <p>Chunk route saves each part as <code>chunks/&lt;uploadId&gt;/0, 1, 2</code> and so on with multer diskStorage. My storage functions look like this:</p>
+            <pre class="code-block"><code class="language-js">destination: (req, file, cb) =&gt; {
+  const chunkFolder = path.join(CHUNKS_DIR, req.body.uploadId);
+  fs.ensureDirSync(chunkFolder);
+  cb(null, chunkFolder);
+},
+filename: (req, file, cb) =&gt; {
+  cb(null, String(req.body.chunkIndex));
+}</code></pre>
+            <p>I use <code>chunkIndex</code> as filename so stitching is just a 0-to-N loop, no sorting of files on disk. On each hit I push the index into <code>uploadedChunks</code> only if it is not already there, then sort that array. That check matters because if frontend retries, I don't want double counting. My session record is plain:</p>
+            <pre class="code-block"><code class="language-js">uploadDatabase[uploadId] = { filename, fileSize, totalChunks, uploadedChunks: [] };</code></pre>
+            <p>No DB, just an object that dies if Node restarts. That's why resume only works in the same run.</p>
+
+            <h2>Stitching Without Corrupting Big Files</h2>
+            <p>Complete route first loops 0 to <code>totalChunks - 1</code> and calls <code>fs.pathExists</code> for each piece. If one is gone it returns <code>Missing chunk i</code> and stops, it doesn't try to guess. Then it opens one writeStream to <code>uploads/&lt;filename&gt;</code> and appends each chunk buffer in order:</p>
+            <pre class="code-block"><code class="language-js">const chunkBuffer = await fs.readFile(chunkPath);
+if (!writeStream.write(chunkBuffer)) {
+  await new Promise((r) =&gt; writeStream.once('drain', r));
+}</code></pre>
+            <p>That <code>drain</code> wait took me a while to get. Without it big files came out corrupt because I was stuffing buffers faster than disk could take. I also log every 10th chunk while stitching because otherwise the terminal sits quiet and I can't tell if it hung. After finish it does <code>fs.remove</code> on the chunk folder and deletes the session.</p>
+            <p>One weak spot: <code>totalChunks</code> comes from the client in init, server just trusts it. A mismatched count would break the stitch loop.</p>
+
+            <h2>Retries and Timeouts on the Frontend</h2>
+            <p>Frontend also retries each chunk 5 times with longer waits each time and aborts if one chunk hangs more than 30 seconds with <code>AbortController</code>:</p>
+            <pre class="code-block"><code class="language-js">const ctrl = new AbortController();
+const t = setTimeout(() =&gt; ctrl.abort(), 30000);
+const r = await fetch(`${BACKEND_URL}/api/upload/chunk`, {
+  method: 'POST', body: formData, signal: ctrl.signal
+});</code></pre>
+            <p>Each retry builds a fresh <code>FormData</code> with <code>uploadId</code>, <code>chunkIndex</code>, <code>chunk</code>. A single failed piece should not kill a full run. It's the same lesson I hit in <a href="/blog/building-with-gemini-api/">Building With the Gemini API</a>: read the real error, don't trust the generic status, and treat a failed piece as retryable instead of fatal.</p>
+            <p>Uploads go one by one in order, no parallel sends yet; that keeps progress math and resume simple but slower than it could be.</p>
+
+            <h2>To Run It</h2>
+            <pre class="code-block"><code>cd backend
+node server.js</code></pre>
+            <p>Open <code>frontend/index.html</code>, pick a file, click Upload File. Files land in <code>backend/uploads</code>. When testing I kept running <code>rm -rf backend/chunks/* backend/uploads/*</code> to clean up, I even left that in <code>note.txt</code>.</p>
+            <p>It works. It shows percent, it resumes, it stitches.</p>
+
+            <h2>What It Doesn't Have Yet</h2>
+            <p>What it doesn't have yet is pause button, speed display, real DB instead of an object that dies on restart. Similar to how my <a href="/#online-python-code-editor">Online Python Code Editor</a> streams output back while keeping the server simple, the next step here would be parallel chunk uploads with honest progress.</p>
+            <p>I built this because I like to mess around. That's it. Thanks for reading until this now — if you have something to say, you can say to me at <a href="mailto:kamblevikram2810@gmail.com">kamblevikram2810@gmail.com</a>.</p>
+
+        </div>
+
+        <section class="post-related">
+            <h2>Keep reading</h2>
+            <div class="related-grid">
+                <a class="related-card" href="/blog/building-with-gemini-api/">
+                    <span class="related-card-label">Related post</span>
+                    <h3 class="related-card-title">Building With the Gemini API: The Part the Docs Don't Cover</h3>
+                    <p class="related-card-desc">Same lesson from a different project: read the real error body, don't trust statusText, and expect empty-but-successful responses.</p>
+                </a>
+                <a class="related-card" href="/#projects">
+                    <span class="related-card-label">Projects</span>
+                    <h3 class="related-card-title">The projects behind this blog</h3>
+                    <p class="related-card-desc">AI Explains Repo, the Health-Aware Recipe Modifier and the Online Python Code Editor — source code and live demos for all three.</p>
+                </a>
+            </div>
+        </section>
+
+        <aside class="post-author">
+            <img src="/src/assets/profile-pic.webp" alt="Vikram Kamble" width="56" height="56" loading="lazy">
+            <div class="post-author-body">
+                <h2 class="post-author-name">Vikram Kamble</h2>
+                <p class="post-author-bio">Full-stack developer working with Next.js, Flask, MySQL and MongoDB. I write about the decisions behind the code, not just the syntax.</p>
+                <div class="post-author-links">
+                    <a href="/">Portfolio home</a>
+                    <a href="/#projects">Projects</a>
+                    <a href="/blog/">All blog posts</a>
+                    <a href="/#contact">Get in touch</a>
+                </div>
+            </div>
+        </aside>
+    </main>
+
+    <!-- Prism.js syntax highlighting -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-jsx.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-sql.min.js"></script>
+    <script src="/blog/post.js?v=fdad0a90"></script>
+</body>
+
+</html>

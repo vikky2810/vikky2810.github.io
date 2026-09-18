@@ -21,6 +21,10 @@
   <!-- Posts: both gained in-body internal links, a related-posts section and an
        author block on 2026-09-12; matches dateModified in each page's JSON-LD -->
   <url>
+    <loc>https://vikky2810.github.io/blog/local-large-file-upload-tracker/</loc>
+    <lastmod>2026-09-18</lastmod>
+  </url>
+  <url>
     <loc>https://vikky2810.github.io/blog/building-with-gemini-api/</loc>
     <lastmod>2026-09-12</lastmod>
   </url>

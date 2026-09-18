@@ -1,0 +1,62 @@
+            <p>Last night I tried to build a “Local Large File Upload Tracker”. Why local? My answer is my free will. I just wanted to see if I can push a 1–2 GB file without the browser giving up on me.</p>
+            <p>Normal upload sends the whole file in one request. If it fails at 98% you start from zero and you get no real progress. That annoyed me, so I cut the file into pieces. The full code lives in <a href="https://github.com/vikky2810/larger_file_upload">larger_file_upload on GitHub</a>.</p>
+
+            <h2>Why One Big Request Doesn't Work</h2>
+            <p>A single <code>POST</code> with a 2 GB body gives you two problems: no useful progress, and no resume. One dropped connection and you re-send everything. Chunking fixes both, because each piece is small, retryable, and countable.</p>
+
+            <h2>Frontend: One HTML File, 5MB Slices</h2>
+            <p>Frontend is one HTML file. I set chunk size to 5MB and used <code>file.slice</code> in a loop:</p>
+            <pre class="code-block"><code class="language-js">const CHUNK_SIZE = 5 * 1024 * 1024;
+const totalChunks = Math.ceil(file.size / CHUNK_SIZE);
+const chunk = file.slice(start, end);</code></pre>
+            <p>For each piece I make a <code>FormData</code> with <code>uploadId</code>, <code>chunkIndex</code>, <code>chunk</code> and POST it to <code>/api/upload/chunk</code>. Progress is dumb math:</p>
+            <pre class="code-block"><code class="language-js">const progress = Math.round(((i + 1) / totalChunks) * 100);</code></pre>
+
+            <h2>Backend: Init, Chunk, Complete</h2>
+            <p>Backend is Express with multer, cors, fs-extra. It has three routes: init, chunk, complete. That was the smallest thing that worked.</p>
+            <p>Init makes an <code>uploadId</code> from filename + filesize with base64:</p>
+            <pre class="code-block"><code class="language-js">const uploadId = Buffer.from(`${filename} - ${fileSize}`).toString('base64').replace(/=/g, '');</code></pre>
+            <p>If that id already lives in my <code>uploadDatabase</code> object I return <code>nextChunkIndex</code> so frontend skips what it already sent. That's my resume logic, just an array called <code>uploadedChunks</code> that I keep sorting.</p>
+
+            <h2>Storing Chunks by Index</h2>
+            <p>Chunk route saves each part as <code>chunks/&lt;uploadId&gt;/0, 1, 2</code> and so on with multer diskStorage. My storage functions look like this:</p>
+            <pre class="code-block"><code class="language-js">destination: (req, file, cb) =&gt; {
+  const chunkFolder = path.join(CHUNKS_DIR, req.body.uploadId);
+  fs.ensureDirSync(chunkFolder);
+  cb(null, chunkFolder);
+},
+filename: (req, file, cb) =&gt; {
+  cb(null, String(req.body.chunkIndex));
+}</code></pre>
+            <p>I use <code>chunkIndex</code> as filename so stitching is just a 0-to-N loop, no sorting of files on disk. On each hit I push the index into <code>uploadedChunks</code> only if it is not already there, then sort that array. That check matters because if frontend retries, I don't want double counting. My session record is plain:</p>
+            <pre class="code-block"><code class="language-js">uploadDatabase[uploadId] = { filename, fileSize, totalChunks, uploadedChunks: [] };</code></pre>
+            <p>No DB, just an object that dies if Node restarts. That's why resume only works in the same run.</p>
+
+            <h2>Stitching Without Corrupting Big Files</h2>
+            <p>Complete route first loops 0 to <code>totalChunks - 1</code> and calls <code>fs.pathExists</code> for each piece. If one is gone it returns <code>Missing chunk i</code> and stops, it doesn't try to guess. Then it opens one writeStream to <code>uploads/&lt;filename&gt;</code> and appends each chunk buffer in order:</p>
+            <pre class="code-block"><code class="language-js">const chunkBuffer = await fs.readFile(chunkPath);
+if (!writeStream.write(chunkBuffer)) {
+  await new Promise((r) =&gt; writeStream.once('drain', r));
+}</code></pre>
+            <p>That <code>drain</code> wait took me a while to get. Without it big files came out corrupt because I was stuffing buffers faster than disk could take. I also log every 10th chunk while stitching because otherwise the terminal sits quiet and I can't tell if it hung. After finish it does <code>fs.remove</code> on the chunk folder and deletes the session.</p>
+            <p>One weak spot: <code>totalChunks</code> comes from the client in init, server just trusts it. A mismatched count would break the stitch loop.</p>
+
+            <h2>Retries and Timeouts on the Frontend</h2>
+            <p>Frontend also retries each chunk 5 times with longer waits each time and aborts if one chunk hangs more than 30 seconds with <code>AbortController</code>:</p>
+            <pre class="code-block"><code class="language-js">const ctrl = new AbortController();
+const t = setTimeout(() =&gt; ctrl.abort(), 30000);
+const r = await fetch(`${BACKEND_URL}/api/upload/chunk`, {
+  method: 'POST', body: formData, signal: ctrl.signal
+});</code></pre>
+            <p>Each retry builds a fresh <code>FormData</code> with <code>uploadId</code>, <code>chunkIndex</code>, <code>chunk</code>. A single failed piece should not kill a full run. It's the same lesson I hit in <a href="/blog/building-with-gemini-api/">Building With the Gemini API</a>: read the real error, don't trust the generic status, and treat a failed piece as retryable instead of fatal.</p>
+            <p>Uploads go one by one in order, no parallel sends yet; that keeps progress math and resume simple but slower than it could be.</p>
+
+            <h2>To Run It</h2>
+            <pre class="code-block"><code>cd backend
+node server.js</code></pre>
+            <p>Open <code>frontend/index.html</code>, pick a file, click Upload File. Files land in <code>backend/uploads</code>. When testing I kept running <code>rm -rf backend/chunks/* backend/uploads/*</code> to clean up, I even left that in <code>note.txt</code>.</p>
+            <p>It works. It shows percent, it resumes, it stitches.</p>
+
+            <h2>What It Doesn't Have Yet</h2>
+            <p>What it doesn't have yet is pause button, speed display, real DB instead of an object that dies on restart. Similar to how my <a href="/#online-python-code-editor">Online Python Code Editor</a> streams output back while keeping the server simple, the next step here would be parallel chunk uploads with honest progress.</p>
+            <p>I built this because I like to mess around. That's it. Thanks for reading until this now — if you have something to say, you can say to me at <a href="mailto:kamblevikram2810@gmail.com">kamblevikram2810@gmail.com</a>.</p>

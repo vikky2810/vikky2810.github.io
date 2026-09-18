@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>I Tried to Beat Node.js with C++. It Didn't Go as Expected. - Vikram Kamble</title>
+    <meta name="description" content="Crow gave me 5k req/sec. Node gave me 12k. Then uWebSockets gave me 57k. A benchmark story about C++, Node.js, and picking the right library." />
+    <meta name="author" content="Vikram Kamble" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://vikky2810.github.io/blog/cpp-vs-node/" />
+    <link rel="alternate" type="application/rss+xml" title="Vikram Kamble's Blog" href="/feed.xml" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://vikky2810.github.io/blog/cpp-vs-node/" />
+    <meta property="og:title" content="I Tried to Beat Node.js with C++. It Didn't Go as Expected. - Vikram Kamble" />
+    <meta property="og:description" content="Crow gave me 5k req/sec. Node gave me 12k. Then uWebSockets gave me 57k. A benchmark story about C++, Node.js, and picking the right library." />
+    <meta property="og:image" content="https://vikky2810.github.io/src/assets/cpp-vs-node.png" />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="734" />
+    <meta property="og:image:height" content="452" />
+    <meta property="og:image:alt" content="Side by side terminal benchmarks showing uWebSockets at 57k vs Node at 12k requests per second" />
+    <meta property="og:site_name" content="Vikram Kamble Portfolio" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="article:published_time" content="2026-09-15" />
+    <meta name="theme-color" content="#000000" />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://vikky2810.github.io/blog/cpp-vs-node/" />
+    <meta property="twitter:title" content="I Tried to Beat Node.js with C++. It Didn't Go as Expected. - Vikram Kamble" />
+    <meta property="twitter:description" content="Crow gave me 5k req/sec. Node gave me 12k. Then uWebSockets gave me 57k. A benchmark story about C++, Node.js, and picking the right library." />
+    <meta property="twitter:image" content="https://vikky2810.github.io/src/assets/cpp-vs-node.png" />
+    <meta property="twitter:image:alt" content="Side by side terminal benchmarks showing uWebSockets at 57k vs Node at 12k requests per second" />
+
+    <link rel="preload" href="/src/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="stylesheet" href="/src/fonts/fonts.css?v=774cff5c" />
+    <link rel="stylesheet" href="/src/style.css?v=5d898a38">
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
+    <link rel="icon" type="image/png" href="/src/assets/favicon-32x32.png" sizes="32x32" />
+    <link rel="apple-touch-icon" href="/src/assets/apple-touch-icon.png" sizes="180x180" />
+    <!-- PrismJS CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/blog/post.css?v=605a64ae">
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": "I Tried to Beat Node.js with C++. It Didn't Go as Expected.",
+        "description": "Crow gave me 5k req/sec. Node gave me 12k. Then uWebSockets gave me 57k. A benchmark story about C++, Node.js, and picking the right library.",
+        "image": "https://vikky2810.github.io/src/assets/cpp-vs-node.png",
+        "datePublished": "2026-09-15",
+        "dateModified": "2026-09-15",
+        "articleSection": "Backend",
+        "wordCount": 747,
+        "timeRequired": "PT5M",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://vikky2810.github.io/blog/cpp-vs-node/"
+        },
+        "author": {
+            "@type": "Person",
+            "name": "Vikram Kamble",
+            "url": "https://vikky2810.github.io/"
+        },
+        "publisher": {
+            "@type": "Person",
+            "name": "Vikram Kamble",
+            "url": "https://vikky2810.github.io/"
+        }
+    }
+    </script>
+
+    <!-- Breadcrumbs -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://vikky2810.github.io/" },
+            { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://vikky2810.github.io/blog/" },
+            { "@type": "ListItem", "position": 3, "name": "C++ vs Node.js", "item": "https://vikky2810.github.io/blog/cpp-vs-node/" }
+        ]
+    }
+    </script>
+    <!-- Analytics: cookieless page views + goals, see src/analytics.js -->
+    <script defer src="/src/analytics.js?v=e91a8940"></script>
+</head>
+
+<body>
+    <main class="blog-post">
+        <nav class="post-breadcrumb" aria-label="Breadcrumb">
+            <a href="/">Home</a>
+            <span class="crumb-sep">/</span>
+            <a href="/blog/">Blog</a>
+            <span class="crumb-sep">/</span>
+            <span class="crumb-current" aria-current="page">C++ vs Node.js</span>
+        </nav>
+
+        <header class="blog-header">
+            <div class="blog-category">Backend</div>
+            <h1>I Tried to Beat Node.js with C++. It Didn't Go as Expected.</h1>
+            <div class="blog-meta">
+                <span><time datetime="2026-09-15">September 15, 2026</time></span>
+                <span class="meta-sep">·</span>
+                <span>5 min read</span>
+                <span class="meta-sep">·</span>
+                <span>Backend</span>
+            </div>
+        </header>
+
+        <div class="blog-content">
+            <p>Today I decided to make an HTTP route in C++. You can ask — why C++? My answer is: my free will. I just felt like it. I like to mess around, and that's the whole reason.</p>
+            <p>So I did a little search and found a way: a library called <a href="https://crowcpp.org/master/">Crow</a>. It looks like Python's Flask, but for C++. A simple GET route that takes a custom name in the URL and returns <code>hello &lt;name&gt;!</code></p>
+            <h2>Attempt One: Crow</h2>
+            <p>This is the entire server. Eleven lines:</p>
+            <pre class="code-block"><code class="language-cpp">#include &lt;crow.h&gt;
+
+int main() {
+    crow::SimpleApp app;
+    CROW_ROUTE(app, "/hello/&lt;string&gt;")([](std::string name){
+        return crow::response("Hello, " + name);
+    });
+    app.bindaddr("127.0.0.1").port(18000).multithreaded().run();
+    return 0;
+}</code></pre>
+            <p>It worked. But I wanted to know how <em>much</em> it could handle. So I ran the classic hammer:</p>
+            <pre class="code-block"><code>wrk -t12 -c400 -d30s http://localhost:18000/hello/vikram</code></pre>
+            <p>12 threads, 400 connections, 30 seconds. Here's what Crow gave me:</p>
+            <img src="/src/assets/cpp-vs-node-crow.png" alt="wrk benchmark of the Crow C++ server showing 5470 requests per second" class="blog-image" loading="lazy" width="743" height="234">
+            <p><em>Crow: 164,457 requests in 30.06s · 5,470 req/sec · avg latency 76.34ms.</em></p>
+            <blockquote>
+                <p>"I hear C++ is a thousand times faster. So why am I only getting 5k requests per second?"</p>
+            </blockquote>
+            <p>I was confused. I'd heard "C++ is so much faster" a thousand times. 5k didn't feel fast at all.</p>
+            <h2>Wait — Node Is Faster?</h2>
+            <p>So, yes — I built the same route in Node. Half of this code is from Google, I won't lie:</p>
+            <pre class="code-block"><code class="language-js">const http = require("http");
+const server = http.createServer((req, res) =&gt; {
+  const path = req.url.toLowerCase();
+  const method = req.method;
+  if (path.startsWith("/hello/") &amp;&amp; method == "GET") {
+    const name = path.split("/")[2];
+    res.end("Hello, " + name + "!");
+  }
+  if (path == "/" &amp;&amp; method == "GET") {
+    res.end("Hello, World!");
+  }
+});
+server.listen(18000, () =&gt; {
+  console.log("Server is running on http://localhost:18000");
+});</code></pre>
+            <p>I ran the exact same <code>wrk</code> test again. The result:</p>
+            <img src="/src/assets/cpp-vs-node-node.png" alt="wrk benchmark of the Node.js server showing 12052 requests per second" class="blog-image" loading="lazy" width="742" height="244">
+            <p><em>Node.js (built-in http): 362,045 requests in 30.04s · 12,052 req/sec · avg latency 37.39ms.</em></p>
+            <p>Now I was <em>more</em> confused. 12k req/sec on Node, 5k on C++? That's backwards from everything I'd been told.</p>
+            <p>So I did a little search about <em>why</em>. What I found: the Crow library I was using doesn't handle requests the way Node's built-in <code>http</code> does. Node processes requests asynchronously — non-blocking I/O, event loop, all of that. Crow, in the way I was using it, doesn't. That's the gap. It's the same kind of lesson I hit while <a href="/blog/local-large-file-upload-tracker/">building a local large-file upload tracker</a>: the I/O model and the retry plumbing matter more than the language name on the tin.</p>
+            <p><strong>The lesson:</strong> "C++ vs Node" is never just language vs language. It's which library, which I/O model, which defaults. Async I/O beats naive threads for tiny hello-world routes.</p>
+            <h2>Attempt Two: uWebSockets</h2>
+            <p>More research led me to a new library: <a href="https://github.com/uNetworking/uWebSockets">uWebSockets</a>. So I cloned the repo. It took a lot longer than usual to download. I checked the size:</p>
+            <img src="/src/assets/cpp-vs-node-uwebsockets-size.png" alt="Terminal showing the uWebSockets folder is 1.4GB" class="blog-image" loading="lazy" width="703" height="69">
+            <p><em>Yes. 1.4 GB just to make a simple route. That's okay, I'm not complaining. But seriously — 1.4 GB?</em></p>
+            <p>Moving on. Here's the same route in uWebSockets:</p>
+            <pre class="code-block"><code class="language-cpp">#include &lt;App.h&gt;
+#include &lt;iostream&gt;
+
+int main() {
+    uWS::App()
+    .get("/hello/:name", [](auto* res, auto* req) {
+        std::string name(req-&gt;getParameter(0));
+        res-&gt;end("Hello, " + name + "!");
+    })
+    .get("/", [](auto* res, auto* req) {
+        res-&gt;end("Hello, World!");
+    })
+    .listen(18000, [](auto* token) {
+        if (token) std::cout &lt;&lt; "listening on 18000" &lt;&lt; std::endl;
+        else std::cout &lt;&lt; "Failed to listen" &lt;&lt; std::endl;
+    })
+    .run();
+    return 0;
+}</code></pre>
+            <p>And it turned out…</p>
+            <img src="/src/assets/cpp-vs-node-uwebsockets.png" alt="wrk benchmark of the uWebSockets server showing 57439 requests per second" class="blog-image" loading="lazy" width="740" height="232">
+            <p><em>uWebSockets (C++): 1,728,986 requests in 30.10s · 57,439 req/sec · avg latency 6.82ms.</em> Very great. 50k+ requests per second.</p>
+            <p>Compared to Node, see this — both bars from the same machine, same test, back to back:</p>
+            <img src="/src/assets/cpp-vs-node-final.png" alt="Side by side terminal showing uWebSockets 57k vs Node 12k requests per second" class="blog-image" loading="lazy" width="734" height="452">
+            <p><em>Final showdown: uWebSockets ≈ 57.4k req/sec vs Node ≈ 12.9k req/sec on re-run. C++ is ~4.5x faster — when you pick the right library.</em></p>
+            <h2>The Scoreboard</h2>
+            <div class="table-scroll">
+                <table>
+                    <thead>
+                        <tr><th>Server</th><th>Req/sec</th><th>Avg latency</th><th>Transfer</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Crow (C++)</td><td>5,470</td><td>76.34 ms</td><td>0.51 MB/s</td></tr>
+                        <tr><td>Node built-in http</td><td>12,052 – 12,895</td><td>~36 ms</td><td>~1.6 MB/s</td></tr>
+                        <tr><td>uWebSockets (C++)</td><td>57,439</td><td>6.82 ms</td><td>5.86 MB/s</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <p>Test: <code>wrk -t12 -c400 -d30s http://localhost:18000/hello/vikram</code> · same laptop, same route, same day.</p>
+            <h2>So… What's the Use of This Information?</h2>
+            <p>In the end there is a question that remains: <em>"Yes, you found a way to prove C++ is faster than Node… but now what? What is the use of this information?"</em></p>
+            <p>I'll answer it the way I feel it: I did what I felt like. I didn't do it to prove something. I did this because I like it. I like to mess around. And I did. That's it.</p>
+            <p>Thanks for reading till here. If you have something to say, you can say it to me here: <a href="mailto:kamblevikram2810@gmail.com">kamblevikram2810@gmail.com</a></p>
+
+        </div>
+
+        <section class="post-related">
+            <h2>Keep reading</h2>
+            <div class="related-grid">
+                <a class="related-card" href="/blog/local-large-file-upload-tracker/">
+                    <span class="related-card-label">Related post</span>
+                    <h3 class="related-card-title">Trying to Build a Local Large File Upload Tracker</h3>
+                    <p class="related-card-desc">Another build log from the same bench: chunked uploads with Express, multer, retry logic, and the drain handling that keeps big files intact.</p>
+                </a>
+                <a class="related-card" href="/#projects">
+                    <span class="related-card-label">Projects</span>
+                    <h3 class="related-card-title">The projects behind this blog</h3>
+                    <p class="related-card-desc">AI Explains Repo, the Health-Aware Recipe Modifier and the Online Python Code Editor — source code and live demos for all three.</p>
+                </a>
+            </div>
+        </section>
+
+        <aside class="post-author">
+            <img src="/src/assets/profile-pic.webp" alt="Vikram Kamble" width="56" height="56" loading="lazy">
+            <div class="post-author-body">
+                <h2 class="post-author-name">Vikram Kamble</h2>
+                <p class="post-author-bio">Full-stack developer working with Next.js, Flask, MySQL and MongoDB. I write about the decisions behind the code, not just the syntax.</p>
+                <div class="post-author-links">
+                    <a href="/">Portfolio home</a>
+                    <a href="/#projects">Projects</a>
+                    <a href="/blog/">All blog posts</a>
+                    <a href="/#contact">Get in touch</a>
+                </div>
+            </div>
+        </aside>
+    </main>
+
+    <!-- Prism.js syntax highlighting -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-jsx.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-sql.min.js"></script>
+    <script src="/blog/post.js?v=fdad0a90"></script>
+</body>
+
+</html>

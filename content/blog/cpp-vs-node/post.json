@@ -1,0 +1,35 @@
+{
+    "slug": "cpp-vs-node",
+    "title": "I Tried to Beat Node.js with C++. It Didn't Go as Expected.",
+    "description": "Crow gave me 5k req/sec. Node gave me 12k. Then uWebSockets gave me 57k. A benchmark story about C++, Node.js, and picking the right library.",
+    "category": "Backend",
+    "publishedDate": "2026-09-15",
+    "modifiedDate": "2026-09-15",
+    "breadcrumbLabel": "C++ vs Node.js",
+    "readTimeMinutes": 5,
+    "includeReadingSchema": true,
+    "noCoverImage": true,
+    "image": {
+        "ogFile": "cpp-vs-node.png",
+        "pageFile": "cpp-vs-node-final.png",
+        "width": 734,
+        "height": 452,
+        "ogAlt": "Side by side terminal benchmarks showing uWebSockets at 57k vs Node at 12k requests per second",
+        "pageAlt": "Cover image for the C++ vs Node.js benchmark post: side by side terminals showing uWebSockets at 57k and Node at 12k requests per second"
+    },
+    "authorBio": "Full-stack developer working with Next.js, Flask, MySQL and MongoDB. I write about the decisions behind the code, not just the syntax.",
+    "related": [
+        {
+            "href": "/blog/local-large-file-upload-tracker/",
+            "label": "Related post",
+            "title": "Trying to Build a Local Large File Upload Tracker",
+            "desc": "Another build log from the same bench: chunked uploads with Express, multer, retry logic, and the drain handling that keeps big files intact."
+        },
+        {
+            "href": "/#projects",
+            "label": "Projects",
+            "title": "The projects behind this blog",
+            "desc": "AI Explains Repo, the Health-Aware Recipe Modifier and the Online Python Code Editor — source code and live demos for all three."
+        }
+    ]
+}

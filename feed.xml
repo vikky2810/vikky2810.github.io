@@ -25,6 +25,15 @@
       <description>Sending a 1-2 GB file in one request fails at 98% with no resume. Here's how I split it into 5MB chunks with Express, multer, and retry logic.</description>
     </item>
     <item>
+      <title>I Tried to Beat Node.js with C++. It Didn't Go as Expected.</title>
+      <link>https://vikky2810.github.io/blog/cpp-vs-node/</link>
+      <guid isPermaLink="true">https://vikky2810.github.io/blog/cpp-vs-node/</guid>
+      <pubDate>Tue, 15 Sep 2026 00:00:00 +0000</pubDate>
+      <category>Backend</category>
+      <dc:creator>Vikram Kamble</dc:creator>
+      <description>Crow gave me 5k req/sec. Node gave me 12k. Then uWebSockets gave me 57k. A benchmark story about C++, Node.js, and picking the right library.</description>
+    </item>
+    <item>
       <title>Building With the Gemini API: The Part the Docs Don't Cover</title>
       <link>https://vikky2810.github.io/blog/building-with-gemini-api/</link>
       <guid isPermaLink="true">https://vikky2810.github.io/blog/building-with-gemini-api/</guid>

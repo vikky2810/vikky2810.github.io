@@ -108,6 +108,11 @@ function renderPost(post) {
   for (const [key, value] of Object.entries(replacements)) {
     html = html.split(key).join(value);
   }
+  if (post.noCoverImage) {
+    // Remove the header cover <img> (first .blog-image in the page, which
+    // lives in .blog-header). Inline images inside the body are untouched.
+    html = html.replace(/^[ \t]*<img src="[^"]*" alt="[^"]*" class="blog-image"[^>]*>\n?/m, '');
+  }
   return html;
 }
 

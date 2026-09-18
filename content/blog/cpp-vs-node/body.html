@@ -1,0 +1,94 @@
+            <p>Today I decided to make an HTTP route in C++. You can ask — why C++? My answer is: my free will. I just felt like it. I like to mess around, and that's the whole reason.</p>
+            <p>So I did a little search and found a way: a library called <a href="https://crowcpp.org/master/">Crow</a>. It looks like Python's Flask, but for C++. A simple GET route that takes a custom name in the URL and returns <code>hello &lt;name&gt;!</code></p>
+            <h2>Attempt One: Crow</h2>
+            <p>This is the entire server. Eleven lines:</p>
+            <pre class="code-block"><code class="language-cpp">#include &lt;crow.h&gt;
+
+int main() {
+    crow::SimpleApp app;
+    CROW_ROUTE(app, "/hello/&lt;string&gt;")([](std::string name){
+        return crow::response("Hello, " + name);
+    });
+    app.bindaddr("127.0.0.1").port(18000).multithreaded().run();
+    return 0;
+}</code></pre>
+            <p>It worked. But I wanted to know how <em>much</em> it could handle. So I ran the classic hammer:</p>
+            <pre class="code-block"><code>wrk -t12 -c400 -d30s http://localhost:18000/hello/vikram</code></pre>
+            <p>12 threads, 400 connections, 30 seconds. Here's what Crow gave me:</p>
+            <img src="/src/assets/cpp-vs-node-crow.png" alt="wrk benchmark of the Crow C++ server showing 5470 requests per second" class="blog-image" loading="lazy" width="743" height="234">
+            <p><em>Crow: 164,457 requests in 30.06s · 5,470 req/sec · avg latency 76.34ms.</em></p>
+            <blockquote>
+                <p>"I hear C++ is a thousand times faster. So why am I only getting 5k requests per second?"</p>
+            </blockquote>
+            <p>I was confused. I'd heard "C++ is so much faster" a thousand times. 5k didn't feel fast at all.</p>
+            <h2>Wait — Node Is Faster?</h2>
+            <p>So, yes — I built the same route in Node. Half of this code is from Google, I won't lie:</p>
+            <pre class="code-block"><code class="language-js">const http = require("http");
+const server = http.createServer((req, res) =&gt; {
+  const path = req.url.toLowerCase();
+  const method = req.method;
+  if (path.startsWith("/hello/") &amp;&amp; method == "GET") {
+    const name = path.split("/")[2];
+    res.end("Hello, " + name + "!");
+  }
+  if (path == "/" &amp;&amp; method == "GET") {
+    res.end("Hello, World!");
+  }
+});
+server.listen(18000, () =&gt; {
+  console.log("Server is running on http://localhost:18000");
+});</code></pre>
+            <p>I ran the exact same <code>wrk</code> test again. The result:</p>
+            <img src="/src/assets/cpp-vs-node-node.png" alt="wrk benchmark of the Node.js server showing 12052 requests per second" class="blog-image" loading="lazy" width="742" height="244">
+            <p><em>Node.js (built-in http): 362,045 requests in 30.04s · 12,052 req/sec · avg latency 37.39ms.</em></p>
+            <p>Now I was <em>more</em> confused. 12k req/sec on Node, 5k on C++? That's backwards from everything I'd been told.</p>
+            <p>So I did a little search about <em>why</em>. What I found: the Crow library I was using doesn't handle requests the way Node's built-in <code>http</code> does. Node processes requests asynchronously — non-blocking I/O, event loop, all of that. Crow, in the way I was using it, doesn't. That's the gap. It's the same kind of lesson I hit while <a href="/blog/local-large-file-upload-tracker/">building a local large-file upload tracker</a>: the I/O model and the retry plumbing matter more than the language name on the tin.</p>
+            <p><strong>The lesson:</strong> "C++ vs Node" is never just language vs language. It's which library, which I/O model, which defaults. Async I/O beats naive threads for tiny hello-world routes.</p>
+            <h2>Attempt Two: uWebSockets</h2>
+            <p>More research led me to a new library: <a href="https://github.com/uNetworking/uWebSockets">uWebSockets</a>. So I cloned the repo. It took a lot longer than usual to download. I checked the size:</p>
+            <img src="/src/assets/cpp-vs-node-uwebsockets-size.png" alt="Terminal showing the uWebSockets folder is 1.4GB" class="blog-image" loading="lazy" width="703" height="69">
+            <p><em>Yes. 1.4 GB just to make a simple route. That's okay, I'm not complaining. But seriously — 1.4 GB?</em></p>
+            <p>Moving on. Here's the same route in uWebSockets:</p>
+            <pre class="code-block"><code class="language-cpp">#include &lt;App.h&gt;
+#include &lt;iostream&gt;
+
+int main() {
+    uWS::App()
+    .get("/hello/:name", [](auto* res, auto* req) {
+        std::string name(req-&gt;getParameter(0));
+        res-&gt;end("Hello, " + name + "!");
+    })
+    .get("/", [](auto* res, auto* req) {
+        res-&gt;end("Hello, World!");
+    })
+    .listen(18000, [](auto* token) {
+        if (token) std::cout &lt;&lt; "listening on 18000" &lt;&lt; std::endl;
+        else std::cout &lt;&lt; "Failed to listen" &lt;&lt; std::endl;
+    })
+    .run();
+    return 0;
+}</code></pre>
+            <p>And it turned out…</p>
+            <img src="/src/assets/cpp-vs-node-uwebsockets.png" alt="wrk benchmark of the uWebSockets server showing 57439 requests per second" class="blog-image" loading="lazy" width="740" height="232">
+            <p><em>uWebSockets (C++): 1,728,986 requests in 30.10s · 57,439 req/sec · avg latency 6.82ms.</em> Very great. 50k+ requests per second.</p>
+            <p>Compared to Node, see this — both bars from the same machine, same test, back to back:</p>
+            <img src="/src/assets/cpp-vs-node-final.png" alt="Side by side terminal showing uWebSockets 57k vs Node 12k requests per second" class="blog-image" loading="lazy" width="734" height="452">
+            <p><em>Final showdown: uWebSockets ≈ 57.4k req/sec vs Node ≈ 12.9k req/sec on re-run. C++ is ~4.5x faster — when you pick the right library.</em></p>
+            <h2>The Scoreboard</h2>
+            <div class="table-scroll">
+                <table>
+                    <thead>
+                        <tr><th>Server</th><th>Req/sec</th><th>Avg latency</th><th>Transfer</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Crow (C++)</td><td>5,470</td><td>76.34 ms</td><td>0.51 MB/s</td></tr>
+                        <tr><td>Node built-in http</td><td>12,052 – 12,895</td><td>~36 ms</td><td>~1.6 MB/s</td></tr>
+                        <tr><td>uWebSockets (C++)</td><td>57,439</td><td>6.82 ms</td><td>5.86 MB/s</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <p>Test: <code>wrk -t12 -c400 -d30s http://localhost:18000/hello/vikram</code> · same laptop, same route, same day.</p>
+            <h2>So… What's the Use of This Information?</h2>
+            <p>In the end there is a question that remains: <em>"Yes, you found a way to prove C++ is faster than Node… but now what? What is the use of this information?"</em></p>
+            <p>I'll answer it the way I feel it: I did what I felt like. I didn't do it to prove something. I did this because I like it. I like to mess around. And I did. That's it.</p>
+            <p>Thanks for reading till here. If you have something to say, you can say it to me here: <a href="mailto:kamblevikram2810@gmail.com">kamblevikram2810@gmail.com</a></p>

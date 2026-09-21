@@ -83,6 +83,9 @@ function renderPost(post) {
   const pageImageSrc = `/src/assets/${post.image.pageFile}`;
 
   const replacements = {
+    // <title> is what searchers see in results, so it can be query-led (seoTitle)
+    // while the H1 and og:title keep the post's own headline.
+    '{{SEO_TITLE}}': post.seoTitle || `${post.title} - Vikram Kamble`,
     '{{TITLE}}': post.title,
     '{{DESCRIPTION}}': post.description,
     '{{CANONICAL_URL}}': canonicalUrl,

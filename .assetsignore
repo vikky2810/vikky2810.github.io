@@ -25,6 +25,7 @@ lighthouserc.json
 # Build sources and docs (not served)
 scripts
 content
+crosspost
 README.md
 BLOG_GUIDE.md
 deploy.md

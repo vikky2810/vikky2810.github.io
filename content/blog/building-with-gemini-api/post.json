@@ -1,7 +1,8 @@
 {
     "slug": "building-with-gemini-api",
     "title": "Building With the Gemini API: The Part the Docs Don't Cover",
-    "description": "The Gemini quickstart gets you a working call in ten lines. Everything that actually broke in my repo-analysis app happened somewhere else: choosing what to send, reading real error bodies, and handling a response that came back empty.",
+    "seoTitle": "Gemini API Empty Response and Error Handling in JavaScript",
+    "description": "Why the Gemini API returns an empty response with status 200 (finishReason SAFETY, MAX_TOKENS), how to read real 400/429 error bodies, and what to send it.",
     "category": "AI",
     "publishedDate": "2026-09-12",
     "modifiedDate": "2026-09-12",

@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trying to Build a Local Large File Upload Tracker - Vikram Kamble</title>
-    <meta name="description" content="Sending a 1-2 GB file in one request fails at 98% with no resume. Here's how I split it into 5MB chunks with Express, multer, and retry logic." />
+    <title>Upload Large Files in Chunks with Express and Multer (Resume)</title>
+    <meta name="description" content="Chunked upload for 1-2 GB files in Node: 5MB chunks, Express + multer, resume, retries, progress, and stitching with a writeStream drain so files stay intact." />
     <meta name="author" content="Vikram Kamble" />
     <meta name="robots" content="index, follow" />
     <link rel="canonical" href="https://vikky2810.github.io/blog/local-large-file-upload-tracker/" />
@@ -15,7 +15,7 @@
     <meta property="og:type" content="article" />
     <meta property="og:url" content="https://vikky2810.github.io/blog/local-large-file-upload-tracker/" />
     <meta property="og:title" content="Trying to Build a Local Large File Upload Tracker - Vikram Kamble" />
-    <meta property="og:description" content="Sending a 1-2 GB file in one request fails at 98% with no resume. Here's how I split it into 5MB chunks with Express, multer, and retry logic." />
+    <meta property="og:description" content="Chunked upload for 1-2 GB files in Node: 5MB chunks, Express + multer, resume, retries, progress, and stitching with a writeStream drain so files stay intact." />
     <meta property="og:image" content="https://vikky2810.github.io/src/assets/large-file-upload-tracker.png" />
     <meta property="og:image:type" content="image/png" />
     <meta property="og:image:width" content="864" />
@@ -30,7 +30,7 @@
     <meta property="twitter:card" content="summary_large_image" />
     <meta property="twitter:url" content="https://vikky2810.github.io/blog/local-large-file-upload-tracker/" />
     <meta property="twitter:title" content="Trying to Build a Local Large File Upload Tracker - Vikram Kamble" />
-    <meta property="twitter:description" content="Sending a 1-2 GB file in one request fails at 98% with no resume. Here's how I split it into 5MB chunks with Express, multer, and retry logic." />
+    <meta property="twitter:description" content="Chunked upload for 1-2 GB files in Node: 5MB chunks, Express + multer, resume, retries, progress, and stitching with a writeStream drain so files stay intact." />
     <meta property="twitter:image" content="https://vikky2810.github.io/src/assets/large-file-upload-tracker.png" />
     <meta property="twitter:image:alt" content="Upload progress tracker UI with Choose file and Upload File buttons" />
 
@@ -42,7 +42,7 @@
     <link rel="apple-touch-icon" href="/src/assets/apple-touch-icon.png" sizes="180x180" />
     <!-- PrismJS CSS -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="/blog/post.css?v=605a64ae">
+    <link rel="stylesheet" href="/blog/post.css?v=1e044d1a">
 
     <!-- Structured Data -->
     <script type="application/ld+json">
@@ -50,7 +50,7 @@
         "@context": "https://schema.org",
         "@type": "BlogPosting",
         "headline": "Trying to Build a Local Large File Upload Tracker",
-        "description": "Sending a 1-2 GB file in one request fails at 98% with no resume. Here's how I split it into 5MB chunks with Express, multer, and retry logic.",
+        "description": "Chunked upload for 1-2 GB files in Node: 5MB chunks, Express + multer, resume, retries, progress, and stitching with a writeStream drain so files stay intact.",
         "image": "https://vikky2810.github.io/src/assets/large-file-upload-tracker.png",
         "datePublished": "2026-09-18",
         "dateModified": "2026-09-18",

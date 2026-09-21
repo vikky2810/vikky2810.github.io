@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>I Tried to Beat Node.js with C++. It Didn't Go as Expected. - Vikram Kamble</title>
-    <meta name="description" content="Crow gave me 5k req/sec. Node gave me 12k. Then uWebSockets gave me 57k. A benchmark story about C++, Node.js, and picking the right library." />
+    <title>Node.js vs C++ Benchmark: Crow vs uWebSockets (57k req/s)</title>
+    <meta name="description" content="C++ vs Node.js HTTP benchmark with wrk: Crow 5.4k req/s, Node http 12k, uWebSockets 57k. Same route, same laptop, with code and why Crow lost to Node." />
     <meta name="author" content="Vikram Kamble" />
     <meta name="robots" content="index, follow" />
     <link rel="canonical" href="https://vikky2810.github.io/blog/cpp-vs-node/" />
@@ -15,7 +15,7 @@
     <meta property="og:type" content="article" />
     <meta property="og:url" content="https://vikky2810.github.io/blog/cpp-vs-node/" />
     <meta property="og:title" content="I Tried to Beat Node.js with C++. It Didn't Go as Expected. - Vikram Kamble" />
-    <meta property="og:description" content="Crow gave me 5k req/sec. Node gave me 12k. Then uWebSockets gave me 57k. A benchmark story about C++, Node.js, and picking the right library." />
+    <meta property="og:description" content="C++ vs Node.js HTTP benchmark with wrk: Crow 5.4k req/s, Node http 12k, uWebSockets 57k. Same route, same laptop, with code and why Crow lost to Node." />
     <meta property="og:image" content="https://vikky2810.github.io/src/assets/cpp-vs-node.png" />
     <meta property="og:image:type" content="image/png" />
     <meta property="og:image:width" content="734" />
@@ -30,7 +30,7 @@
     <meta property="twitter:card" content="summary_large_image" />
     <meta property="twitter:url" content="https://vikky2810.github.io/blog/cpp-vs-node/" />
     <meta property="twitter:title" content="I Tried to Beat Node.js with C++. It Didn't Go as Expected. - Vikram Kamble" />
-    <meta property="twitter:description" content="Crow gave me 5k req/sec. Node gave me 12k. Then uWebSockets gave me 57k. A benchmark story about C++, Node.js, and picking the right library." />
+    <meta property="twitter:description" content="C++ vs Node.js HTTP benchmark with wrk: Crow 5.4k req/s, Node http 12k, uWebSockets 57k. Same route, same laptop, with code and why Crow lost to Node." />
     <meta property="twitter:image" content="https://vikky2810.github.io/src/assets/cpp-vs-node.png" />
     <meta property="twitter:image:alt" content="Side by side terminal benchmarks showing uWebSockets at 57k vs Node at 12k requests per second" />
 
@@ -42,7 +42,7 @@
     <link rel="apple-touch-icon" href="/src/assets/apple-touch-icon.png" sizes="180x180" />
     <!-- PrismJS CSS -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="/blog/post.css?v=605a64ae">
+    <link rel="stylesheet" href="/blog/post.css?v=1e044d1a">
 
     <!-- Structured Data -->
     <script type="application/ld+json">
@@ -50,7 +50,7 @@
         "@context": "https://schema.org",
         "@type": "BlogPosting",
         "headline": "I Tried to Beat Node.js with C++. It Didn't Go as Expected.",
-        "description": "Crow gave me 5k req/sec. Node gave me 12k. Then uWebSockets gave me 57k. A benchmark story about C++, Node.js, and picking the right library.",
+        "description": "C++ vs Node.js HTTP benchmark with wrk: Crow 5.4k req/s, Node http 12k, uWebSockets 57k. Same route, same laptop, with code and why Crow lost to Node.",
         "image": "https://vikky2810.github.io/src/assets/cpp-vs-node.png",
         "datePublished": "2026-09-15",
         "dateModified": "2026-09-15",

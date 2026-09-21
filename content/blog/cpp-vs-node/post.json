@@ -1,7 +1,8 @@
 {
     "slug": "cpp-vs-node",
     "title": "I Tried to Beat Node.js with C++. It Didn't Go as Expected.",
-    "description": "Crow gave me 5k req/sec. Node gave me 12k. Then uWebSockets gave me 57k. A benchmark story about C++, Node.js, and picking the right library.",
+    "seoTitle": "Node.js vs C++ Benchmark: Crow vs uWebSockets (57k req/s)",
+    "description": "C++ vs Node.js HTTP benchmark with wrk: Crow 5.4k req/s, Node http 12k, uWebSockets 57k. Same route, same laptop, with code and why Crow lost to Node.",
     "category": "Backend",
     "publishedDate": "2026-09-15",
     "modifiedDate": "2026-09-15",

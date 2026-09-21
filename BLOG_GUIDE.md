@@ -32,6 +32,13 @@ Current posts:
    and fill in:
    - `title`, `description` (keep it under ~160 characters so Google doesn't cut it
      off), `category`, `breadcrumbLabel`
+   - `seoTitle` (optional but do it): the `<title>` searchers see in Google, written
+     around what people actually type — the stack, the error message, the numbers.
+     Keep it under ~60 characters. `title` stays the catchy headline for the H1,
+     `og:title` and the feed. Without it the `<title>` falls back to
+     `<title> - Vikram Kamble`. Example: title "I Tried to Beat Node.js with C++. It
+     Didn't Go as Expected." → seoTitle "Node.js vs C++ Benchmark: Crow vs uWebSockets
+     (57k req/s)"
    - `publishedDate` / `modifiedDate` (`YYYY-MM-DD`) — only bump `modifiedDate` when the
      page's content genuinely changed, the same rule as before
    - `readTimeMinutes`, shown as "N min read" and, when `includeReadingSchema` is

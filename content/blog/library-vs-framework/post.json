@@ -1,7 +1,8 @@
 {
     "slug": "library-vs-framework",
     "title": "Library vs Framework: The Real Difference Every Developer Should Know",
-    "description": "Understanding the difference between a library and a framework is crucial for developers. This guide breaks it down with beginner-friendly explanations, real-world analogies, and practical React and Next.js examples.",
+    "seoTitle": "Library vs Framework: Difference Explained (React vs Next.js)",
+    "description": "The difference between a library and a framework is inversion of control. Explained with React vs Next.js code, a comparison table and a cooking analogy.",
     "category": "Web Development",
     "publishedDate": "2025-10-18",
     "modifiedDate": "2026-09-12",

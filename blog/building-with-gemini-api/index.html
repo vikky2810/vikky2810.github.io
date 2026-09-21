@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Building With the Gemini API: The Part the Docs Don't Cover - Vikram Kamble</title>
-    <meta name="description" content="The Gemini quickstart gets you a working call in ten lines. Everything that actually broke in my repo-analysis app happened somewhere else: choosing what to send, reading real error bodies, and handling a response that came back empty." />
+    <title>Gemini API Empty Response and Error Handling in JavaScript</title>
+    <meta name="description" content="Why the Gemini API returns an empty response with status 200 (finishReason SAFETY, MAX_TOKENS), how to read real 400/429 error bodies, and what to send it." />
     <meta name="author" content="Vikram Kamble" />
     <meta name="robots" content="index, follow" />
     <link rel="canonical" href="https://vikky2810.github.io/blog/building-with-gemini-api/" />
@@ -15,7 +15,7 @@
     <meta property="og:type" content="article" />
     <meta property="og:url" content="https://vikky2810.github.io/blog/building-with-gemini-api/" />
     <meta property="og:title" content="Building With the Gemini API: The Part the Docs Don't Cover - Vikram Kamble" />
-    <meta property="og:description" content="The Gemini quickstart gets you a working call in ten lines. Everything that actually broke in my repo-analysis app happened somewhere else: choosing what to send, reading real error bodies, and handling a response that came back empty." />
+    <meta property="og:description" content="Why the Gemini API returns an empty response with status 200 (finishReason SAFETY, MAX_TOKENS), how to read real 400/429 error bodies, and what to send it." />
     <meta property="og:image" content="https://vikky2810.github.io/src/assets/gemini-api.png" />
     <meta property="og:image:type" content="image/png" />
     <meta property="og:image:width" content="1200" />
@@ -30,7 +30,7 @@
     <meta property="twitter:card" content="summary_large_image" />
     <meta property="twitter:url" content="https://vikky2810.github.io/blog/building-with-gemini-api/" />
     <meta property="twitter:title" content="Building With the Gemini API: The Part the Docs Don't Cover - Vikram Kamble" />
-    <meta property="twitter:description" content="The Gemini quickstart gets you a working call in ten lines. Everything that actually broke in my repo-analysis app happened somewhere else: choosing what to send, reading real error bodies, and handling a response that came back empty." />
+    <meta property="twitter:description" content="Why the Gemini API returns an empty response with status 200 (finishReason SAFETY, MAX_TOKENS), how to read real 400/429 error bodies, and what to send it." />
     <meta property="twitter:image" content="https://vikky2810.github.io/src/assets/gemini-api.png" />
     <meta property="twitter:image:alt" content="Building with the Gemini API" />
 
@@ -42,7 +42,7 @@
     <link rel="apple-touch-icon" href="/src/assets/apple-touch-icon.png" sizes="180x180" />
     <!-- PrismJS CSS -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="/blog/post.css?v=605a64ae">
+    <link rel="stylesheet" href="/blog/post.css?v=1e044d1a">
 
     <!-- Structured Data -->
     <script type="application/ld+json">
@@ -50,7 +50,7 @@
         "@context": "https://schema.org",
         "@type": "BlogPosting",
         "headline": "Building With the Gemini API: The Part the Docs Don't Cover",
-        "description": "The Gemini quickstart gets you a working call in ten lines. Everything that actually broke in my repo-analysis app happened somewhere else: choosing what to send, reading real error bodies, and handling a response that came back empty.",
+        "description": "Why the Gemini API returns an empty response with status 200 (finishReason SAFETY, MAX_TOKENS), how to read real 400/429 error bodies, and what to send it.",
         "image": "https://vikky2810.github.io/src/assets/gemini-api.png",
         "datePublished": "2026-09-12",
         "dateModified": "2026-09-12",

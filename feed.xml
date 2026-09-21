@@ -22,7 +22,7 @@
       <pubDate>Fri, 18 Sep 2026 00:00:00 +0000</pubDate>
       <category>Backend</category>
       <dc:creator>Vikram Kamble</dc:creator>
-      <description>Sending a 1-2 GB file in one request fails at 98% with no resume. Here's how I split it into 5MB chunks with Express, multer, and retry logic.</description>
+      <description>Chunked upload for 1-2 GB files in Node: 5MB chunks, Express + multer, resume, retries, progress, and stitching with a writeStream drain so files stay intact.</description>
     </item>
     <item>
       <title>I Tried to Beat Node.js with C++. It Didn't Go as Expected.</title>
@@ -31,7 +31,7 @@
       <pubDate>Tue, 15 Sep 2026 00:00:00 +0000</pubDate>
       <category>Backend</category>
       <dc:creator>Vikram Kamble</dc:creator>
-      <description>Crow gave me 5k req/sec. Node gave me 12k. Then uWebSockets gave me 57k. A benchmark story about C++, Node.js, and picking the right library.</description>
+      <description>C++ vs Node.js HTTP benchmark with wrk: Crow 5.4k req/s, Node http 12k, uWebSockets 57k. Same route, same laptop, with code and why Crow lost to Node.</description>
     </item>
     <item>
       <title>Building With the Gemini API: The Part the Docs Don't Cover</title>
@@ -40,7 +40,7 @@
       <pubDate>Sat, 12 Sep 2026 00:00:00 +0000</pubDate>
       <category>AI</category>
       <dc:creator>Vikram Kamble</dc:creator>
-      <description>The Gemini quickstart gets you a working call in ten lines. Everything that actually broke in my repo-analysis app happened somewhere else: choosing what to send, reading real error bodies, and handling a response that came back empty.</description>
+      <description>Why the Gemini API returns an empty response with status 200 (finishReason SAFETY, MAX_TOKENS), how to read real 400/429 error bodies, and what to send it.</description>
     </item>
     <item>
       <title>SQL vs NoSQL: I've Shipped Both, Here's How I Actually Decide</title>
@@ -49,7 +49,7 @@
       <pubDate>Sat, 20 Jun 2026 00:00:00 +0000</pubDate>
       <category>Backend</category>
       <dc:creator>Vikram Kamble</dc:creator>
-      <description>Most SQL vs NoSQL posts are a comparison chart someone copied from the docs. This one is a decision process, built from shipping real projects on both MySQL and MongoDB, with code, trade-offs, and a flowchart you can actually follow.</description>
+      <description>When to use SQL vs NoSQL, from shipping real apps on MySQL and MongoDB: the actual trade-offs, code examples, common misconceptions, and a decision flowchart.</description>
     </item>
     <item>
       <title>Library vs Framework: The Real Difference Every Developer Should Know</title>
@@ -58,7 +58,7 @@
       <pubDate>Sat, 18 Oct 2025 00:00:00 +0000</pubDate>
       <category>Web Development</category>
       <dc:creator>Vikram Kamble</dc:creator>
-      <description>Understanding the difference between a library and a framework is crucial for developers. This guide breaks it down with beginner-friendly explanations, real-world analogies, and practical React and Next.js examples.</description>
+      <description>The difference between a library and a framework is inversion of control. Explained with React vs Next.js code, a comparison table and a cooking analogy.</description>
     </item>
   </channel>
 </rss>

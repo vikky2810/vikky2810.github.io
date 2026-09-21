@@ -1,7 +1,8 @@
 {
     "slug": "local-large-file-upload-tracker",
     "title": "Trying to Build a Local Large File Upload Tracker",
-    "description": "Sending a 1-2 GB file in one request fails at 98% with no resume. Here's how I split it into 5MB chunks with Express, multer, and retry logic.",
+    "seoTitle": "Upload Large Files in Chunks with Express and Multer (Resume)",
+    "description": "Chunked upload for 1-2 GB files in Node: 5MB chunks, Express + multer, resume, retries, progress, and stitching with a writeStream drain so files stay intact.",
     "category": "Backend",
     "publishedDate": "2026-09-18",
     "modifiedDate": "2026-09-18",

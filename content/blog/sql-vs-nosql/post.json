@@ -1,7 +1,8 @@
 {
     "slug": "sql-vs-nosql",
     "title": "SQL vs NoSQL: I've Shipped Both, Here's How I Actually Decide",
-    "description": "Most SQL vs NoSQL posts are a comparison chart someone copied from the docs. This one is a decision process, built from shipping real projects on both MySQL and MongoDB, with code, trade-offs, and a flowchart you can actually follow.",
+    "seoTitle": "SQL vs NoSQL: When to Use MySQL vs MongoDB (With Flowchart)",
+    "description": "When to use SQL vs NoSQL, from shipping real apps on MySQL and MongoDB: the actual trade-offs, code examples, common misconceptions, and a decision flowchart.",
     "category": "Backend",
     "publishedDate": "2026-06-20",
     "modifiedDate": "2026-09-12",

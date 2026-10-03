@@ -26,6 +26,7 @@ The site is a static site hosted on GitHub Pages. Every blog post is a standalon
 - [Health-Aware Recipe Modifier](https://github.com/vikky2810/Recipe-Modifier): Full-stack Flask app that generates recipes tailored to user-specified medical conditions using the Gemini API — flags harmful ingredients, recommends safe substitutes, and generates PDF summary reports. [Live demo](https://recipe-modifier-app.vercel.app).
 - [AI Explains Repo](https://github.com/vikky2810/ai-explains-repo): Full-stack Next.js app that ingests GitHub repository data and generates AI-powered reports on code quality, architecture, security risks, and performance via the Gemini API, with authenticated session history. [Live demo](https://ai-explains-repo.vercel.app/).
 - [Online Python Code Editor](https://github.com/vikky2810/OnlineCodeEditor): Browser-based Python editor built with Flask and CodeMirror that executes user code server-side and streams output back in real time, with syntax highlighting, error handling, and a responsive dark UI. [Live demo](https://viks-online-code-editor.vercel.app/).
+- [VArch: DSL to Architecture Diagrams](https://github.com/vikky2810/dsl-to-diagrams): A small text DSL for software architecture diagrams. Declare databases, services, UIs and queues in plain text, connect them with arrows, and the React app renders an auto-laid-out diagram in the browser using dagre. [Live demo](https://dsl-to-diagrams.vercel.app/).
 
 ## Contact and profiles
 

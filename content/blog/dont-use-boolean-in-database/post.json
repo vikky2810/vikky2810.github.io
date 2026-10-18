@@ -9,14 +9,13 @@
     "breadcrumbLabel": "Don't Use Booleans in Your Database",
     "readTimeMinutes": 2,
     "includeReadingSchema": true,
-    "noCoverImage": true,
     "image": {
-        "ogFile": "dont-use-boolean-in-database.png",
-        "pageFile": "dont-use-boolean-in-database.png",
-        "width": 1200,
-        "height": 630,
-        "ogAlt": "Four boolean payment columns replaced by a single payment_status column",
-        "pageAlt": "Cover image for the post on boolean columns: four boolean payment flags replaced by one payment_status column"
+        "ogFile": "dont-use-boolean-in-database-banner.jpg",
+        "pageFile": "dont-use-boolean-in-database-banner.webp",
+        "width": 735,
+        "height": 414,
+        "ogAlt": "Pam from The Office holding up a cardboard sign that says Please Don't",
+        "pageAlt": "Pam from The Office holding up a cardboard sign that says Please Don't, the banner for a post about not using boolean columns in a database"
     },
     "authorBio": "Full-stack developer working with Next.js, Flask, MySQL and MongoDB. I write about the decisions behind the code, not just the syntax.",
     "related": [

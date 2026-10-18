@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boolean vs Status Column in SQL: Why isPaid Breaks</title>
+    <meta name="description" content="isPaid works until a payment is pending, refunded or half paid. Why one status column with a CHECK constraint beats a pile of boolean flags." />
+    <meta name="author" content="Vikram Kamble" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://vikky2810.github.io/blog/dont-use-boolean-in-database/" />
+    <link rel="alternate" type="application/rss+xml" title="Vikram Kamble's Blog" href="/feed.xml" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://vikky2810.github.io/blog/dont-use-boolean-in-database/" />
+    <meta property="og:title" content="Don't Use Boolean Values in Your Database - Vikram Kamble" />
+    <meta property="og:description" content="isPaid works until a payment is pending, refunded or half paid. Why one status column with a CHECK constraint beats a pile of boolean flags." />
+    <meta property="og:image" content="https://vikky2810.github.io/src/assets/dont-use-boolean-in-database.png" />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Four boolean payment columns replaced by a single payment_status column" />
+    <meta property="og:site_name" content="Vikram Kamble Portfolio" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="article:published_time" content="2026-10-19" />
+    <meta name="theme-color" content="#000000" />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://vikky2810.github.io/blog/dont-use-boolean-in-database/" />
+    <meta property="twitter:title" content="Don't Use Boolean Values in Your Database - Vikram Kamble" />
+    <meta property="twitter:description" content="isPaid works until a payment is pending, refunded or half paid. Why one status column with a CHECK constraint beats a pile of boolean flags." />
+    <meta property="twitter:image" content="https://vikky2810.github.io/src/assets/dont-use-boolean-in-database.png" />
+    <meta property="twitter:image:alt" content="Four boolean payment columns replaced by a single payment_status column" />
+
+    <link rel="preload" href="/src/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="stylesheet" href="/src/fonts/fonts.css?v=774cff5c" />
+    <link rel="stylesheet" href="/src/style.css?v=40c68327">
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
+    <link rel="icon" type="image/png" href="/src/assets/favicon-32x32.png" sizes="32x32" />
+    <link rel="apple-touch-icon" href="/src/assets/apple-touch-icon.png" sizes="180x180" />
+    <!-- PrismJS CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/blog/post.css?v=b97ed6ba">
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Don't Use Boolean Values in Your Database",
+        "description": "isPaid works until a payment is pending, refunded or half paid. Why one status column with a CHECK constraint beats a pile of boolean flags.",
+        "image": "https://vikky2810.github.io/src/assets/dont-use-boolean-in-database.png",
+        "datePublished": "2026-10-19",
+        "dateModified": "2026-10-19",
+        "articleSection": "Backend",
+        "wordCount": 389,
+        "timeRequired": "PT2M",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://vikky2810.github.io/blog/dont-use-boolean-in-database/"
+        },
+        "author": {
+            "@type": "Person",
+            "name": "Vikram Kamble",
+            "url": "https://vikky2810.github.io/"
+        },
+        "publisher": {
+            "@type": "Person",
+            "name": "Vikram Kamble",
+            "url": "https://vikky2810.github.io/"
+        }
+    }
+    </script>
+
+    <!-- Breadcrumbs -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://vikky2810.github.io/" },
+            { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://vikky2810.github.io/blog/" },
+            { "@type": "ListItem", "position": 3, "name": "Don't Use Booleans in Your Database", "item": "https://vikky2810.github.io/blog/dont-use-boolean-in-database/" }
+        ]
+    }
+    </script>
+    <!-- Analytics: cookieless page views + goals, see src/analytics.js -->
+    <script defer src="/src/analytics.js?v=e91a8940"></script>
+</head>
+
+<body>
+    <main class="blog-post">
+        <nav class="post-breadcrumb" aria-label="Breadcrumb">
+            <a href="/">Home</a>
+            <span class="crumb-sep">/</span>
+            <a href="/blog/">Blog</a>
+            <span class="crumb-sep">/</span>
+            <span class="crumb-current" aria-current="page">Don't Use Booleans in Your Database</span>
+        </nav>
+
+        <header class="blog-header">
+            <div class="blog-category">Backend</div>
+            <h1>Don't Use Boolean Values in Your Database</h1>
+            <div class="blog-meta">
+                <span><time datetime="2026-10-19">October 19, 2026</time></span>
+                <span class="meta-sep">·</span>
+                <span>2 min read</span>
+                <span class="meta-sep">·</span>
+                <span>Backend</span>
+            </div>
+        </header>
+
+        <div class="blog-content">
+            <div class="note">
+                <p>Disclaimer: I am not an expert-level software engineer. I am still learning and sharing what I know.</p>
+            </div>
+            <p>After reading the title, the first question that comes to your mind is: why??</p>
+            <p>So let me try to answer that.</p>
+            <p>First, let's understand what happens when we put boolean values in a production database. A junior developer won't see any problem with it. But when a senior developer sees it, they will ask one question:</p>
+            <blockquote>
+                <p>"What if, instead of true and false, we get a third situation?"</p>
+            </blockquote>
+            <h2>An Example: isPaid</h2>
+            <p>Imagine you are tracking <code>isPaid</code>, which can be either <code>true</code> or <code>false</code>.</p>
+            <ul>
+                <li><code>true</code> means paid</li>
+                <li><code>false</code> means unpaid</li>
+            </ul>
+            <p>That's great. But what if the payment is pending? What if the payment is refunded? What if only half the amount is paid? Then what?</p>
+            <p>Then you start adding more columns like <code>isPending</code>, <code>isFailed</code>, <code>isRefunded</code>, and so on. You just wanted to track one payment, and now you have 4 boolean columns for a single thing.</p>
+            <p>And it gets worse. What if <code>isPaid</code> is true and <code>isRefunded</code> is also true? Was the payment paid or refunded? Now your database is telling you two different stories, and you have no idea which one is correct.</p>
+            <p>That's why booleans are a terrible idea for things like this.</p>
+            <h2>The Fix: One Status Column</h2>
+            <p>So what is the solution? It's simple: use a single <code>payment_status</code> column with values like <code>unpaid</code>, <code>pending</code>, <code>paid</code>, <code>partially_paid</code>, <code>refunded</code>, and <code>failed</code>.</p>
+            <p>Instead of this:</p>
+            <pre class="code-block"><code class="language-sql">is_paid     BOOLEAN,
+is_pending  BOOLEAN,
+is_failed   BOOLEAN,
+is_refunded BOOLEAN</code></pre>
+            <p>Do this:</p>
+            <pre class="code-block"><code class="language-sql">payment_status VARCHAR(20) NOT NULL DEFAULT 'unpaid'
+  CHECK (payment_status IN ('unpaid', 'pending', 'paid', 'partially_paid', 'refunded', 'failed'))</code></pre>
+            <p>One column. One clear answer. And if tomorrow you need a new state, you just add a new value instead of a new column.</p>
+            <p>The <code>CHECK</code> constraint also means the database itself rejects a typo like <code>'payed'</code>. It's the same idea from <a href="/blog/sql-vs-nosql/">SQL vs NoSQL: how I actually decide</a>: let the database enforce the shape of your data.</p>
+            <h2>When a Boolean Is Fine</h2>
+            <p>Sure, if you only have a dark and a light theme and you want a toggle option, then a boolean is totally fine there.</p>
+            <div class="success">
+                <p>So the simple rule is: if it's a switch (on/off), use a boolean. If it's a status that can change over time, don't.</p>
+            </div>
+
+        </div>
+
+        <section class="post-related">
+            <h2>Keep reading</h2>
+            <div class="related-grid">
+                <a class="related-card" href="/blog/sql-vs-nosql/">
+                    <span class="related-card-label">Related post</span>
+                    <h3 class="related-card-title">SQL vs NoSQL: I've Shipped Both, Here's How I Actually Decide</h3>
+                    <p class="related-card-desc">More on letting the database enforce the shape of your data, with a decision flowchart and lessons from getting it wrong.</p>
+                </a>
+                <a class="related-card" href="/#projects">
+                    <span class="related-card-label">Projects</span>
+                    <h3 class="related-card-title">The projects behind this blog</h3>
+                    <p class="related-card-desc">AI Explains Repo, the Health-Aware Recipe Modifier and the Online Python Code Editor — source code and live demos for all three.</p>
+                </a>
+            </div>
+        </section>
+
+        <aside class="post-author">
+            <img src="/src/assets/profile-pic.webp" alt="Vikram Kamble" width="56" height="56" loading="lazy">
+            <div class="post-author-body">
+                <h2 class="post-author-name">Vikram Kamble</h2>
+                <p class="post-author-bio">Full-stack developer working with Next.js, Flask, MySQL and MongoDB. I write about the decisions behind the code, not just the syntax.</p>
+                <div class="post-author-links">
+                    <a href="/">Portfolio home</a>
+                    <a href="/#projects">Projects</a>
+                    <a href="/blog/">All blog posts</a>
+                    <a href="/#contact">Get in touch</a>
+                </div>
+            </div>
+        </aside>
+    </main>
+
+    <!-- Prism.js syntax highlighting -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-jsx.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-sql.min.js"></script>
+    <script src="/blog/post.js?v=fdad0a90"></script>
+</body>
+
+</html>

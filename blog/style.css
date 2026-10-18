@@ -9,18 +9,18 @@
 
   /* Neutral Colors - Ultra Dark Theme */
   --text-primary: #ffffff;
-  --text-secondary: #94a3b8;
-  --text-muted: #6e7e94; /* 5.07:1 on black (WCAG AA) */
+  --text-secondary: #a3a3a3;
+  --text-muted: #7a7a7a; /* 4.9:1 on black (WCAG AA) */
 
   /* Background Colors - Deep Space */
   --bg-primary: #000000;
-  --bg-secondary: #0f172a;
-  --bg-tertiary: #1e293b;
-  --bg-card: rgba(15, 23, 42, 0.5);
+  --bg-secondary: #0a0a0a;
+  --bg-tertiary: #171717;
+  --bg-card: rgba(20, 20, 20, 0.5);
 
   /* Border Colors */
-  --border-color: rgba(51, 65, 85, 0.5);
-  --border-hover: rgba(100, 116, 139, 0.8);
+  --border-color: rgba(64, 64, 64, 0.5);
+  --border-hover: rgba(115, 115, 115, 0.8);
 
   /* Shadow Colors */
   --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.5);

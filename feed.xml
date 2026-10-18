@@ -8,13 +8,22 @@
     <description>Posts about web development, backend engineering, and the decisions behind them - written from shipping real projects.</description>
     <language>en-us</language>
     <copyright>Vikram Kamble</copyright>
-    <lastBuildDate>Fri, 18 Sep 2026 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 19 Oct 2026 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://vikky2810.github.io/feed.xml" rel="self" type="application/rss+xml" />
     <image>
       <url>https://vikky2810.github.io/src/assets/og-image.png</url>
       <title>Vikram Kamble's Blog</title>
       <link>https://vikky2810.github.io/blog/</link>
     </image>
+    <item>
+      <title>Don't Use Boolean Values in Your Database</title>
+      <link>https://vikky2810.github.io/blog/dont-use-boolean-in-database/</link>
+      <guid isPermaLink="true">https://vikky2810.github.io/blog/dont-use-boolean-in-database/</guid>
+      <pubDate>Mon, 19 Oct 2026 00:00:00 +0000</pubDate>
+      <category>Backend</category>
+      <dc:creator>Vikram Kamble</dc:creator>
+      <description>isPaid works until a payment is pending, refunded or half paid. Why one status column with a CHECK constraint beats a pile of boolean flags.</description>
+    </item>
     <item>
       <title>Trying to Build a Local Large File Upload Tracker</title>
       <link>https://vikky2810.github.io/blog/local-large-file-upload-tracker/</link>

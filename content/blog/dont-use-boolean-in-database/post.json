@@ -1,0 +1,36 @@
+{
+    "slug": "dont-use-boolean-in-database",
+    "title": "Don't Use Boolean Values in Your Database",
+    "seoTitle": "Boolean vs Status Column in SQL: Why isPaid Breaks",
+    "description": "isPaid works until a payment is pending, refunded or half paid. Why one status column with a CHECK constraint beats a pile of boolean flags.",
+    "category": "Backend",
+    "publishedDate": "2026-10-19",
+    "modifiedDate": "2026-10-19",
+    "breadcrumbLabel": "Don't Use Booleans in Your Database",
+    "readTimeMinutes": 2,
+    "includeReadingSchema": true,
+    "noCoverImage": true,
+    "image": {
+        "ogFile": "dont-use-boolean-in-database.png",
+        "pageFile": "dont-use-boolean-in-database.png",
+        "width": 1200,
+        "height": 630,
+        "ogAlt": "Four boolean payment columns replaced by a single payment_status column",
+        "pageAlt": "Cover image for the post on boolean columns: four boolean payment flags replaced by one payment_status column"
+    },
+    "authorBio": "Full-stack developer working with Next.js, Flask, MySQL and MongoDB. I write about the decisions behind the code, not just the syntax.",
+    "related": [
+        {
+            "href": "/blog/sql-vs-nosql/",
+            "label": "Related post",
+            "title": "SQL vs NoSQL: I've Shipped Both, Here's How I Actually Decide",
+            "desc": "More on letting the database enforce the shape of your data, with a decision flowchart and lessons from getting it wrong."
+        },
+        {
+            "href": "/#projects",
+            "label": "Projects",
+            "title": "The projects behind this blog",
+            "desc": "AI Explains Repo, the Health-Aware Recipe Modifier and the Online Python Code Editor — source code and live demos for all three."
+        }
+    ]
+}

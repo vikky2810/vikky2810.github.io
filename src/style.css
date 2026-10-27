@@ -2576,7 +2576,7 @@ footer {
 /* Project screenshot thumbnails */
 .project-row-thumb {
   width: 100%;
-  aspect-ratio: 16 / 10;
+  aspect-ratio: 2 / 1;
   object-fit: cover;
   object-position: top;
   border: 1px solid var(--border-color);
@@ -2586,8 +2586,3 @@ footer {
   display: block;
 }
 
-@media screen and (max-width: 768px) {
-  .project-row-thumb {
-    aspect-ratio: 16 / 11;
-  }
-}

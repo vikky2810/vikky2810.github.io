@@ -612,9 +612,9 @@ section {
 .exp-badge {
   font-size: 0.7rem;
   font-weight: 600;
-  color: var(--primary-color);
-  background: rgba(20, 184, 166, 0.12);
-  border: 1px solid rgba(20, 184, 166, 0.25);
+  color: #fbbf24;
+  background: rgba(245, 158, 11, 0.12);
+  border: 1px solid rgba(245, 158, 11, 0.3);
   padding: 0.1rem 0.5rem;
   border-radius: var(--radius-full);
   display: inline-flex;
@@ -628,7 +628,7 @@ section {
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: #10b981;
+  background: var(--accent-color);
   animation: pulse 2s infinite;
 }
 
@@ -1179,15 +1179,15 @@ img {
 @keyframes pulse {
   0% {
     transform: scale(0.95);
-    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+    box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.7);
   }
   70% {
     transform: scale(1);
-    box-shadow: 0 0 0 10px rgba(16, 185, 129, 0);
+    box-shadow: 0 0 0 10px rgba(245, 158, 11, 0);
   }
   100% {
     transform: scale(0.95);
-    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
+    box-shadow: 0 0 0 0 rgba(245, 158, 11, 0);
   }
 }
 
@@ -2272,6 +2272,8 @@ code {
    ============================================ */
 @media print {
 
+  body::before,
+  body::after,
   nav,
 #hamburger-nav,
 footer {
@@ -2624,6 +2626,36 @@ main.framed > section + section::before {
   height: 2.5rem;
 }
 
+/* Hatched patch in the nav bar, left of the column. Fixed and above the
+   sticky nav so the stripes stay crisp instead of going through its blur. */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: calc(50% - 379px); /* through the column's 1px left rule (760px column) */
+  height: 55px; /* nav height, minus its bottom border */
+  background:
+    /* solid rule on the column's left edge, from the top to the nav border */
+    linear-gradient(rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0.14)) 100% 0 / 1px 100% no-repeat,
+    repeating-linear-gradient(315deg, rgba(255, 255, 255, 0.07) 0 1px, transparent 0 50%) 0 0 / 10px 10px;
+  pointer-events: none;
+  z-index: 1001;
+}
+
+/* Matching solid rule on the column's right edge in the nav, no hatching */
+body::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: calc(50% + 380px);
+  width: 1px;
+  height: 55px;
+  background: rgba(255, 255, 255, 0.14);
+  pointer-events: none;
+  z-index: 1001;
+}
+
 main.framed > section + section::after {
   --arm: calc((var(--mark) - 1px) / 2);
   content: "";
@@ -2643,6 +2675,8 @@ main.framed > section + section::after {
 }
 
 @media (max-width: 840px) {
+  body::before,
+  body::after,
   main.framed::before,
   main.framed::after {
     display: none;

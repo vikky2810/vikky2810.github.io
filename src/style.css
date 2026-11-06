@@ -2586,3 +2586,78 @@ footer {
   display: block;
 }
 
+
+/* DRAFTING FRAME
+   Dashed rules trace the content column's edges and each section boundary,
+   with a plus mark where they meet. */
+main.framed {
+  --column: 760px;
+  --dash: rgba(255, 255, 255, 0.14);
+  --mark: 15px;
+  --mark-color: rgba(255, 255, 255, 0.7);
+  position: relative;
+}
+
+main.framed::before,
+main.framed::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: repeating-linear-gradient(180deg, var(--dash) 0 6px, transparent 6px 12px);
+  pointer-events: none;
+  z-index: 1;
+}
+
+main.framed::before {
+  left: calc(50% - var(--column) / 2);
+}
+
+main.framed::after {
+  left: calc(50% + var(--column) / 2);
+}
+
+main.framed > section + section::before {
+  content: "";
+  display: block;
+  height: 2.5rem;
+}
+
+main.framed > section + section::after {
+  --arm: calc((var(--mark) - 1px) / 2);
+  content: "";
+  position: absolute;
+  top: calc(-1 * var(--arm));
+  left: calc(50% - var(--column) / 2 - var(--arm));
+  width: calc(var(--column) + var(--mark));
+  height: var(--mark);
+  background:
+    repeating-linear-gradient(90deg, var(--dash) 0 6px, transparent 6px 12px) var(--arm) var(--arm) / calc(100% - 2 * var(--arm)) 1px no-repeat,
+    linear-gradient(var(--mark-color), var(--mark-color)) 0 var(--arm) / var(--mark) 1px no-repeat,
+    linear-gradient(var(--mark-color), var(--mark-color)) var(--arm) 0 / 1px 100% no-repeat,
+    linear-gradient(var(--mark-color), var(--mark-color)) 100% var(--arm) / var(--mark) 1px no-repeat,
+    linear-gradient(var(--mark-color), var(--mark-color)) calc(100% - var(--arm)) 0 / 1px 100% no-repeat;
+  pointer-events: none;
+  z-index: 2;
+}
+
+@media (max-width: 840px) {
+  main.framed::before,
+  main.framed::after {
+    display: none;
+  }
+
+  main.framed > section + section::after {
+    --mark: 1px;
+    --mark-color: transparent;
+    left: 0;
+    width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  main.framed > section + section::before {
+    height: 1.5rem;
+  }
+}

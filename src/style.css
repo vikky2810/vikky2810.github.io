@@ -1096,6 +1096,8 @@ img {
   display: flex;
   justify-content: center;
   margin-top: 2rem;
+  /* sections have no bottom padding; match the 2.5rem gap above the next heading */
+  padding-bottom: 2.5rem;
 }
 
 .showall-btn {
@@ -2497,6 +2499,13 @@ footer {
     flex-shrink: 0;
   }
 
+  /* The touch-screen rule pads links sideways by 1rem each, which pushes
+     Blog and Contact past the edge of a 360px phone. Keep the taller tap
+     area, drop the side padding. */
+  .nav-links a {
+    padding: 0.75rem 0;
+  }
+
   /* Keep the hero left-aligned and tidy on mobile */
   #profile {
     align-items: flex-start;
@@ -2693,5 +2702,9 @@ main.framed > section + section::after {
 @media (max-width: 768px) {
   main.framed > section + section::before {
     height: 1.5rem;
+  }
+
+  .blogs-showall {
+    padding-bottom: 1.5rem;
   }
 }

@@ -1,0 +1,136 @@
+/* Blog list, shared by the homepage and /blog/. One quiet line per post:
+   title on the left, read time and date on the right, hairline rules between.
+   Hover turns the title amber. Each page's stylesheet supplies the colour
+   tokens; the rest have fallbacks here. */
+.blog-list {
+  --rule: var(--dash, rgba(255, 255, 255, 0.14));
+  --bl-fast: var(--transition-fast, 0.2s ease);
+  margin: 1.75rem 0 2.5rem; /* homepage sections have no bottom padding */
+}
+
+.blog-index {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.blog-index > li + li {
+  border-top: 1px solid var(--rule);
+}
+
+.blog-entry {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding: 0.9rem 0;
+  color: inherit;
+  text-decoration: none;
+}
+
+.blog-entry-title {
+  min-width: 0;
+  font-size: 0.975rem;
+  font-weight: 500;
+  line-height: 1.45;
+  color: var(--text-primary);
+  transition: color var(--bl-fast);
+}
+
+.blog-entry-meta {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  flex-shrink: 0;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+/* Fixed width so the dates line up in a column */
+.blog-entry-meta time {
+  min-width: 3.25rem;
+  text-align: right;
+}
+
+.blog-entry-read {
+  opacity: 0;
+  transition: opacity var(--bl-fast);
+}
+
+.blog-entry:hover .blog-entry-title,
+.blog-entry:focus-visible .blog-entry-title {
+  color: var(--accent-color, #f59e0b);
+}
+
+.blog-entry:hover .blog-entry-read,
+.blog-entry:focus-visible .blog-entry-read {
+  opacity: 1;
+}
+
+.blog-entry:focus-visible {
+  outline: 1px solid var(--accent-color, #f59e0b);
+  outline-offset: 4px;
+}
+
+/* /blog/: posts grouped under their year */
+.blog-year + .blog-year {
+  margin-top: 2rem;
+}
+
+.blog-year-label {
+  display: block;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--rule);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.blog-index-all {
+  display: inline-block;
+  margin-top: 1.25rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  text-decoration: underline;
+  text-decoration-color: var(--rule);
+  text-underline-offset: 4px;
+  transition: color var(--bl-fast), text-decoration-color var(--bl-fast);
+}
+
+.blog-index-all:hover,
+.blog-index-all:focus-visible {
+  color: var(--accent-color, #f59e0b);
+  text-decoration-color: currentColor;
+}
+
+@media (hover: none) {
+  .blog-entry-read {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .blog-entry-title,
+  .blog-entry-read,
+  .blog-index-all {
+    transition: none;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .blog-list {
+    margin-bottom: 1.5rem;
+  }
+
+  .blog-entry {
+    gap: 1rem;
+  }
+
+  .blog-entry-read {
+    display: none;
+  }
+}

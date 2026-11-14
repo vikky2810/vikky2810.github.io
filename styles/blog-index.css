@@ -213,8 +213,24 @@ html {
 
 /* Blog Cards Section */
 #blog-cards {
-  padding: 4rem 2rem;
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 3.5rem 2rem 4rem;
   min-height: 60vh;
+}
+
+.blog-page-title {
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+}
+
+.blog-page-intro {
+  margin-top: 0.75rem;
+  font-size: 1rem;
+  line-height: 1.65;
+  color: var(--text-secondary);
 }
 
 .blog-cards-container {
@@ -599,7 +615,7 @@ html {
 
 
   #blog-cards {
-    padding: 3rem 1rem;
+    padding: 2.5rem 1.5rem 3rem;
   }
 
   .blog-card {
@@ -854,9 +870,8 @@ tbody td:first-child {
 
 /* Outbound links from the blog listing into the rest of the site */
 .blog-index-footnote {
-  max-width: 640px;
-  margin: 2.25rem auto 0;
-  text-align: center;
+  max-width: 62ch;
+  margin: 0;
   font-size: 0.88rem;
   line-height: 1.7;
   color: var(--text-secondary);

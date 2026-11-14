@@ -2816,6 +2816,13 @@ main.framed > section + section::before {
   height: 2.5rem;
 }
 
+/* The ::before spacer above is the whole gap under each divider; drop the
+   older per-section top padding so every section sits the same distance
+   below its divider */
+main.framed > section:is(#about, #work, #experience, #projects, #blogs, #contact) {
+  padding-top: 0;
+}
+
 /* Hatched patch in the nav bar, left of the column. Fixed and above the
    sticky nav so the stripes stay crisp instead of going through its blur. */
 body::before {

@@ -1,6 +1,8 @@
 import type { Metadata } from 'next';
 import { preload } from 'react-dom';
 import { JsonLd, OG_IMAGE, SITE_URL, pageMetadata } from '@/lib/seo';
+import { BlogList } from '@/components/blog-list';
+import { getPosts } from '@/lib/posts';
 import '@/styles/blog-index.css';
 
 const TITLE = 'Node.js, C++ & Gemini API Dev Blog - Vikram Kamble';
@@ -49,81 +51,13 @@ export default function BlogIndexPage() {
       {/* Blog Cards Section */}
       <main>
         <section id="blog-cards">
-          <h1 style={{ textAlign: "center" }}>Blog — Vikram Kamble</h1>
-          <p style={{ textAlign: "center", maxWidth: "640px", margin: "0 auto 2rem" }}>
-            Practical guides on web development: SQL vs NoSQL decisions from real MySQL and MongoDB projects, and library vs framework differences with React and Next.js examples.
+          <h1 className="blog-page-title">Blog</h1>
+          <p className="blog-page-intro">
+            Notes from things I've built: what I measured, what broke, and what I'd do differently.
           </p>
-          <div className="blog-cards-container" id="blog-cards-container">
-            <a className="blog-row" data-category="backend" href="/blog/dont-use-boolean-in-database/">
-              <div className="blog-row-main">
-                <h2 className="blog-row-title">Don't Use Boolean Values in Your Database</h2>
-                <p className="blog-row-desc">
-                  isPaid works until a payment is pending, refunded or half paid. Why one status column with a CHECK constraint beats a pile of boolean flags.
-                </p>
-                <span className="blog-row-date">Oct 19, 2026 · Backend · 2 min read</span>
-              </div>
-              <span className="blog-row-more">Read more</span>
-            </a>
-            {' '}
-            <a className="blog-row" data-category="backend" href="/blog/local-large-file-upload-tracker/">
-              <div className="blog-row-main">
-                <h2 className="blog-row-title">Trying to Build a Local Large File Upload Tracker</h2>
-                <p className="blog-row-desc">
-                  Sending a 1-2 GB file in one request fails at 98% with no resume. Here's how I split it into 5MB chunks with Express, multer, and retry logic.
-                </p>
-                <span className="blog-row-date">Sep 18, 2026 · Backend · 5 min read</span>
-              </div>
-              <span className="blog-row-more">Read more</span>
-            </a>
-            {' '}
-            <a className="blog-row" data-category="backend" href="/blog/cpp-vs-node/">
-              <div className="blog-row-main">
-                <h2 className="blog-row-title">I Tried to Beat Node.js with C++. It Didn't Go as Expected.</h2>
-                <p className="blog-row-desc">
-                  Crow gave me 5k req/sec. Node gave me 12k. Then uWebSockets gave me 57k. A benchmark story about C++, Node.js, and picking the right library.
-                </p>
-                <span className="blog-row-date">Sep 15, 2026 · Backend · 5 min read</span>
-              </div>
-              <span className="blog-row-more">Read more</span>
-            </a>
-            {' '}
-            <a className="blog-row" data-category="ai" href="/blog/building-with-gemini-api/">
-              <div className="blog-row-main">
-                <h2 className="blog-row-title">Building With the Gemini API: The Part the Docs Don't Cover</h2>
-                <p className="blog-row-desc">
-                  The Gemini quickstart gets you a working call in ten lines. Everything that actually broke in my repo-analysis app happened somewhere else: choosing what to send, reading real error bodies, and handling a response that came back empty.
-                </p>
-                <span className="blog-row-date">Sep 12, 2026 · AI · 8 min read</span>
-              </div>
-              <span className="blog-row-more">Read more</span>
-            </a>
-            {' '}
-            <a className="blog-row" data-category="backend" href="/blog/sql-vs-nosql/">
-              <div className="blog-row-main">
-                <h2 className="blog-row-title">SQL vs NoSQL: I've Shipped Both, Here's How I Actually Decide</h2>
-                <p className="blog-row-desc">
-                  Most SQL vs NoSQL posts are a comparison chart someone copied from the docs. This one is a decision process, built from shipping real projects on both MySQL and MongoDB, with code, trade-offs, and a flowchart you can actually follow.
-                </p>
-                <span className="blog-row-date">Jun 20, 2026 · Backend · 10 min read</span>
-              </div>
-              <span className="blog-row-more">Read more</span>
-            </a>
-            {' '}
-            <a className="blog-row" data-category="web development" href="/blog/library-vs-framework/">
-              <div className="blog-row-main">
-                <h2 className="blog-row-title">
-                  Library vs Framework: The Real Difference Every Developer Should Know
-                </h2>
-                <p className="blog-row-desc">
-                  Understanding the difference between a library and a framework is crucial for developers. This guide breaks it down with beginner-friendly explanations, real-world analogies, and practical React and Next.js examples.
-                </p>
-                <span className="blog-row-date">Oct 18, 2025 · Web Development · 8 min read</span>
-              </div>
-              <span className="blog-row-more">Read more</span>
-            </a>
-          </div>
+          <BlogList posts={getPosts()} titleTag="h2" byYear />
           <p className="blog-index-footnote">
-            {"Both posts come out of real projects — see "}
+            {"These posts come out of real projects. See "}
             <a href="/#ai-explains-repo">AI Explains Repo</a>
             {" and the "}
             <a href="/#online-python-code-editor">Online Python Code Editor</a>

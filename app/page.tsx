@@ -6,6 +6,8 @@ import { HomeEffects } from '@/components/home-effects';
 import { LinkPreview, LinkPreviewProvider } from '@/components/link-preview';
 import { MobileNav } from '@/components/mobile-nav';
 import { NAV_LINKS } from '@/components/nav-links';
+import { BlogList } from '@/components/blog-list';
+import { getPosts } from '@/lib/posts';
 import { JsonLd, OG_IMAGE, SITE_URL, pageMetadata } from '@/lib/seo';
 import '@/styles/style.css';
 
@@ -75,6 +77,7 @@ const SKILLS: { title: string; items: [string, string, string][] }[] = [
   },
 ];
 
+const ALL_POSTS = getPosts();
 const TITLE = 'Vikram Kamble - Full Stack Developer Portfolio';
 
 export const metadata: Metadata = {
@@ -418,86 +421,9 @@ export default function HomePage() {
         <section id="blogs">
           <h2 className="section-heading">Blog</h2>
           <p className="section-subtext">
-            Technical notes on web development, Python, SQL vs NoSQL, and building AI-powered apps.
+            What I learn while building: benchmarks, database design, and the parts the docs skip.
           </p>
-          <div className="blogs-container" id="blogs-container">
-            <a className="blog-row" href="blog/dont-use-boolean-in-database/">
-              <div className="blog-row-main">
-                <h3 className="blog-row-title">Don't Use Boolean Values in Your Database</h3>
-                <p className="blog-row-desc">
-                  isPaid works until a payment is pending, refunded or half paid. Why one status column with a CHECK constraint beats a pile of boolean flags.
-                </p>
-                <span className="blog-row-date">Oct 19, 2026 · Backend · 2 min read</span>
-              </div>
-              <span className="blog-row-more">Read more</span>
-            </a>
-            {' '}
-            <a className="blog-row" href="blog/local-large-file-upload-tracker/">
-              <div className="blog-row-main">
-                <h3 className="blog-row-title">Trying to Build a Local Large File Upload Tracker</h3>
-                <p className="blog-row-desc">
-                  Sending a 1-2 GB file in one request fails at 98% with no resume. Here's how I split it into 5MB chunks with Express, multer, and retry logic.
-                </p>
-                <span className="blog-row-date">Sep 18, 2026 · Backend · 5 min read</span>
-              </div>
-              <span className="blog-row-more">Read more</span>
-            </a>
-            {' '}
-            <a className="blog-row" href="blog/cpp-vs-node/">
-              <div className="blog-row-main">
-                <h3 className="blog-row-title">I Tried to Beat Node.js with C++. It Didn't Go as Expected.</h3>
-                <p className="blog-row-desc">
-                  Crow gave me 5k req/sec. Node gave me 12k. Then uWebSockets gave me 57k. A benchmark story about C++, Node.js, and picking the right library.
-                </p>
-                <span className="blog-row-date">Sep 15, 2026 · Backend · 5 min read</span>
-              </div>
-              <span className="blog-row-more">Read more</span>
-            </a>
-            {' '}
-            <a className="blog-row" href="blog/building-with-gemini-api/">
-              <div className="blog-row-main">
-                <h3 className="blog-row-title">Building With the Gemini API: The Part the Docs Don't Cover</h3>
-                <p className="blog-row-desc">
-                  The quickstart gets you a working call in ten lines. Everything that actually broke happened somewhere else: what to send, reading real error bodies, and a response that came back empty.
-                </p>
-                <span className="blog-row-date">Sep 12, 2026 · AI · 8 min read</span>
-              </div>
-              <span className="blog-row-more">Read more</span>
-            </a>
-            {' '}
-            <a className="blog-row" href="blog/sql-vs-nosql/">
-              <div className="blog-row-main">
-                <h3 className="blog-row-title">SQL vs NoSQL: I've Shipped Both, Here's How I Actually Decide</h3>
-                <p className="blog-row-desc">
-                  Most SQL vs NoSQL posts are a comparison chart copied from the docs. This one is a decision process, built from shipping real projects on both MySQL and MongoDB, with code, trade-offs, and a flowchart you can follow.
-                </p>
-                <span className="blog-row-date">Jun 20, 2026 · Backend · 10 min read</span>
-              </div>
-              <span className="blog-row-more">Read more</span>
-            </a>
-            {' '}
-            <a className="blog-row" href="blog/library-vs-framework/">
-              <div className="blog-row-main">
-                <h3 className="blog-row-title">
-                  Library vs Framework: The Real Difference Every Developer Should Know
-                </h3>
-                <p className="blog-row-desc">
-                  Understanding the difference between a library and a framework is crucial for developers. Beginner-friendly explanations, real-world analogies, and practical React and Next.js examples.
-                </p>
-                <span className="blog-row-date">Oct 18, 2025 · Web Development · 8 min read</span>
-              </div>
-              <span className="blog-row-more">Read more</span>
-            </a>
-            <noscript>
-              <p>
-                <a href="blog/">Read all blog posts</a>
-                : SQL vs NoSQL decision guide (MySQL vs MongoDB) and Library vs Framework explained with React and Next.js examples.
-              </p>
-            </noscript>
-          </div>
-          <div className="blogs-showall">
-            <a href="blog/" className="showall-btn">Show all blogs</a>
-          </div>
+          <BlogList posts={ALL_POSTS.slice(0, 3)} titleTag="h3" more={{ href: '/blog/', total: ALL_POSTS.length }} />
         </section>
         {/* TODO (Certifications): reuse the .exp-list / .exp-row pattern from Experience — add only real, verifiable items
            with issuer + year, e.g. <span class="exp-role">Issuer · Year</span>. */}

@@ -828,100 +828,141 @@ section {
 }
 
 
-/* SKILLS */
-.skills-group {
-  margin-bottom: 1.75rem;
+/* SKILLS
+   A spec sheet: each group is a row with its label on the left and a ruled
+   grid of cells on the right. Logos rest in monochrome and take their brand
+   colour on hover/focus; leftover space at the end of a row is hatched, the
+   same pattern as the nav patch. */
+.skills-sheet {
+  --rule: var(--dash, rgba(255, 255, 255, 0.14));
+  border-top: 1px solid var(--rule);
 }
 
-.skills-group:last-child {
-  margin-bottom: 0;
+.skills-row {
+  display: grid;
+  grid-template-columns: 10rem 1fr;
+  border-bottom: 1px solid var(--rule);
+  overflow: hidden;
 }
 
 .skills-group-title {
-  font-size: 0.8rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--text-muted);
-  margin-bottom: 0.85rem;
-}
-
-.skill-tags {
   display: flex;
-  flex-wrap: wrap;
-  gap: 0.6rem;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding: 0.9rem 1rem 0.9rem 0;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  white-space: nowrap;
+  border-right: 1px solid var(--rule);
 }
 
-/* Hidden <symbol> library the skill tags pull their logos from */
+.skills-count {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.skill-grid {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(8.25rem, 1fr));
+  margin: 0 -1px -1px 0;
+  background: repeating-linear-gradient(315deg, rgba(255, 255, 255, 0.07) 0 1px, transparent 0 50%) 0 0 / 10px 10px;
+}
+
+/* Hidden <symbol> library the skill cells pull their logos from */
 .icon-sprite {
   display: none;
 }
 
-/* A tag is a logo tile until it's hovered or focused, when the name
-   slides out beside the logo. The name stays in the DOM throughout so
-   screen readers and search engines still see it. */
-.skill-tag {
-  display: inline-flex;
+.skill-cell {
+  position: relative;
+  display: flex;
   align-items: center;
-  justify-content: center;
-  min-width: 2.6rem;
-  height: 2.6rem;
+  gap: 0.6rem;
+  min-height: 3rem;
+  padding: 0 0.9rem;
+  background: var(--bg-primary);
+  /* right and bottom rules; the grid's negative margin tucks the outer ones
+     under the row's own border */
+  box-shadow: inset -1px -1px 0 var(--rule);
   font-size: 0.85rem;
-  font-weight: 500;
-  color: var(--text-primary);
-  background: var(--bg-tertiary);
-  border: 1px solid var(--border-color);
-  padding: 0 0.7rem;
-  border-radius: var(--radius-md);
+  color: var(--text-secondary);
   cursor: default;
-  transition: border-color var(--transition-fast), box-shadow var(--transition-fast),
-    transform var(--transition-fast);
+  transition: color var(--transition-fast), background-color var(--transition-fast);
+}
+
+/* Brand-coloured bar along the cell's top edge, drawn in on hover */
+.skill-cell::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 2px;
+  background: var(--brand);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--transition-normal);
 }
 
 .skill-icon {
-  width: 1.3rem;
-  height: 1.3rem;
+  width: 1.15rem;
+  height: 1.15rem;
   flex-shrink: 0;
-  fill: var(--brand, currentColor);
-  transition: transform var(--transition-fast);
+  fill: var(--text-muted);
+  transition: fill var(--transition-fast);
 }
 
 .skill-name {
-  max-width: 0;
-  overflow: hidden;
   white-space: nowrap;
-  opacity: 0;
-  transition: max-width var(--transition-normal), margin-left var(--transition-normal),
-    opacity var(--transition-fast);
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-.skill-tag:hover,
-.skill-tag:focus-visible {
-  border-color: var(--brand, var(--primary-color));
-  outline: none;
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-sm);
-  box-shadow: 0 6px 16px -8px color-mix(in srgb, var(--brand, var(--primary-color)) 75%, transparent);
+.skill-cell:hover {
+  color: var(--text-primary);
+  background: color-mix(in srgb, var(--brand) 7%, var(--bg-primary));
 }
 
-.skill-tag:hover .skill-icon,
-.skill-tag:focus-visible .skill-icon {
-  transform: scale(1.1);
+.skill-cell:hover::before {
+  transform: scaleX(1);
 }
 
-.skill-tag:hover .skill-name,
-.skill-tag:focus-visible .skill-name {
-  max-width: 10rem;
-  margin-left: 0.5rem;
-  opacity: 1;
+.skill-cell:hover .skill-icon {
+  fill: var(--brand);
 }
 
-/* Touch devices never get a hover, so keep every name on show there */
+/* No hover on touch screens, so show the brand colours at rest there */
 @media (hover: none) {
-  .skill-name {
-    max-width: 10rem;
-    margin-left: 0.5rem;
-    opacity: 1;
+  .skill-icon {
+    fill: var(--brand);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skill-cell,
+  .skill-cell::before,
+  .skill-icon {
+    transition: none;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .skills-row {
+    grid-template-columns: 1fr;
+  }
+
+  .skills-group-title {
+    justify-content: flex-start;
+    padding: 0.8rem 0 0.6rem;
+    border-right: 0;
+  }
+
+  .skill-grid {
+    grid-template-columns: repeat(2, 1fr);
+    border-top: 1px solid var(--rule);
   }
 }
 

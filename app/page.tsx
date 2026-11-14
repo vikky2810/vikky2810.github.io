@@ -48,6 +48,33 @@ const EXPERIENCE = [
   },
 ];
 
+// [name, sprite id, brand colour]. Icons sit in the sprite inside the Skills section.
+const SKILLS: { title: string; items: [string, string, string][] }[] = [
+  {
+    title: 'Frontend',
+    items: [
+      ['HTML', 'html5', '#E34F26'], ['CSS', 'css', '#1572B6'], ['JavaScript', 'js', '#F7DF1E'],
+      ['TypeScript', 'ts', '#3178C6'], ['React', 'react', '#61DAFB'], ['Next.js', 'next', '#FFFFFF'],
+      ['Angular', 'angular', '#DD0031'],
+    ],
+  },
+  {
+    title: 'Backend',
+    items: [
+      ['Node.js', 'node', '#5FA04E'], ['Express.js', 'express', '#E8EAED'], ['Python', 'python', '#4B8BBE'],
+      ['Flask', 'flask', '#3BABC3'], ['Java', 'java', '#EA2D2E'], ['MySQL', 'mysql', '#5A9BD5'],
+      ['MongoDB', 'mongodb', '#47A248'],
+    ],
+  },
+  {
+    title: 'Tools & platforms',
+    items: [
+      ['Git', 'git', '#F03C2E'], ['GitHub', 'github', '#E8EAED'], ['VS Code', 'vscode', '#22A6F1'],
+      ['Linux', 'linux', '#FCC624'], ['Vercel', 'vercel', '#FFFFFF'], ['Gemini API', 'gemini', '#A78BFA'],
+    ],
+  },
+];
+
 const TITLE = 'Vikram Kamble - Full Stack Developer Portfolio';
 
 export const metadata: Metadata = {
@@ -265,157 +292,25 @@ export default function HomePage() {
               </symbol>
             </defs>
           </svg>
-          <div className="skills-group">
-            <h3 className="skills-group-title">Frontend</h3>
-            <div className="skill-tags">
-              <span className="skill-tag" style={{ "--brand": "#E34F26" }}>
-                <svg className="skill-icon" aria-hidden="true" focusable="false">
-                  <use href="#si-html5"></use>
-                </svg>
-                <span className="skill-name">HTML</span>
-              </span>
-              {' '}
-              <span className="skill-tag" style={{ "--brand": "#1572B6" }}>
-                <svg className="skill-icon" aria-hidden="true" focusable="false">
-                  <use href="#si-css"></use>
-                </svg>
-                <span className="skill-name">CSS</span>
-              </span>
-              {' '}
-              <span className="skill-tag" style={{ "--brand": "#F7DF1E" }}>
-                <svg className="skill-icon" aria-hidden="true" focusable="false">
-                  <use href="#si-js"></use>
-                </svg>
-                <span className="skill-name">JavaScript</span>
-              </span>
-              {' '}
-              <span className="skill-tag" style={{ "--brand": "#3178C6" }}>
-                <svg className="skill-icon" aria-hidden="true" focusable="false">
-                  <use href="#si-ts"></use>
-                </svg>
-                <span className="skill-name">TypeScript</span>
-              </span>
-              {' '}
-              <span className="skill-tag" style={{ "--brand": "#61DAFB" }}>
-                <svg className="skill-icon" aria-hidden="true" focusable="false">
-                  <use href="#si-react"></use>
-                </svg>
-                <span className="skill-name">React</span>
-              </span>
-              {' '}
-              <span className="skill-tag" style={{ "--brand": "#FFFFFF" }}>
-                <svg className="skill-icon" aria-hidden="true" focusable="false">
-                  <use href="#si-next"></use>
-                </svg>
-                <span className="skill-name">Next.js</span>
-              </span>
-              {' '}
-              <span className="skill-tag" style={{ "--brand": "#DD0031" }}>
-                <svg className="skill-icon" aria-hidden="true" focusable="false">
-                  <use href="#si-angular"></use>
-                </svg>
-                <span className="skill-name">Angular</span>
-              </span>
-            </div>
-          </div>
-          <div className="skills-group">
-            <h3 className="skills-group-title">Backend</h3>
-            <div className="skill-tags">
-              <span className="skill-tag" style={{ "--brand": "#5FA04E" }}>
-                <svg className="skill-icon" aria-hidden="true" focusable="false">
-                  <use href="#si-node"></use>
-                </svg>
-                <span className="skill-name">Node.js</span>
-              </span>
-              {' '}
-              <span className="skill-tag" style={{ "--brand": "#E8EAED" }}>
-                <svg className="skill-icon" aria-hidden="true" focusable="false">
-                  <use href="#si-express"></use>
-                </svg>
-                <span className="skill-name">Express.js</span>
-              </span>
-              {' '}
-              <span className="skill-tag" style={{ "--brand": "#4B8BBE" }}>
-                <svg className="skill-icon" aria-hidden="true" focusable="false">
-                  <use href="#si-python"></use>
-                </svg>
-                <span className="skill-name">Python</span>
-              </span>
-              {' '}
-              <span className="skill-tag" style={{ "--brand": "#3BABC3" }}>
-                <svg className="skill-icon" aria-hidden="true" focusable="false">
-                  <use href="#si-flask"></use>
-                </svg>
-                <span className="skill-name">Flask</span>
-              </span>
-              {' '}
-              <span className="skill-tag" style={{ "--brand": "#EA2D2E" }}>
-                <svg className="skill-icon" aria-hidden="true" focusable="false">
-                  <use href="#si-java"></use>
-                </svg>
-                <span className="skill-name">Java</span>
-              </span>
-              {' '}
-              <span className="skill-tag" style={{ "--brand": "#5A9BD5" }}>
-                <svg className="skill-icon" aria-hidden="true" focusable="false">
-                  <use href="#si-mysql"></use>
-                </svg>
-                <span className="skill-name">MySQL</span>
-              </span>
-              {' '}
-              <span className="skill-tag" style={{ "--brand": "#47A248" }}>
-                <svg className="skill-icon" aria-hidden="true" focusable="false">
-                  <use href="#si-mongodb"></use>
-                </svg>
-                <span className="skill-name">MongoDB</span>
-              </span>
-            </div>
-          </div>
-          <div className="skills-group">
-            <h3 className="skills-group-title">Tools &amp; Platforms</h3>
-            <div className="skill-tags">
-              <span className="skill-tag" style={{ "--brand": "#F03C2E" }}>
-                <svg className="skill-icon" aria-hidden="true" focusable="false">
-                  <use href="#si-git"></use>
-                </svg>
-                <span className="skill-name">Git</span>
-              </span>
-              {' '}
-              <span className="skill-tag" style={{ "--brand": "#E8EAED" }}>
-                <svg className="skill-icon" aria-hidden="true" focusable="false">
-                  <use href="#si-github"></use>
-                </svg>
-                <span className="skill-name">GitHub</span>
-              </span>
-              {' '}
-              <span className="skill-tag" style={{ "--brand": "#22A6F1" }}>
-                <svg className="skill-icon" aria-hidden="true" focusable="false">
-                  <use href="#si-vscode"></use>
-                </svg>
-                <span className="skill-name">VS Code</span>
-              </span>
-              {' '}
-              <span className="skill-tag" style={{ "--brand": "#FCC624" }}>
-                <svg className="skill-icon" aria-hidden="true" focusable="false">
-                  <use href="#si-linux"></use>
-                </svg>
-                <span className="skill-name">Linux</span>
-              </span>
-              {' '}
-              <span className="skill-tag" style={{ "--brand": "#FFFFFF" }}>
-                <svg className="skill-icon" aria-hidden="true" focusable="false">
-                  <use href="#si-vercel"></use>
-                </svg>
-                <span className="skill-name">Vercel</span>
-              </span>
-              {' '}
-              <span className="skill-tag" style={{ "--brand": "#A78BFA" }}>
-                <svg className="skill-icon" aria-hidden="true" focusable="false">
-                  <use href="#si-gemini"></use>
-                </svg>
-                <span className="skill-name">Gemini API</span>
-              </span>
-            </div>
+          <div className="skills-sheet">
+            {SKILLS.map((group) => (
+              <div className="skills-row" key={group.title}>
+                <h3 className="skills-group-title">
+                  {group.title}
+                  <span className="skills-count">{group.items.length}</span>
+                </h3>
+                <ul className="skill-grid">
+                  {group.items.map(([name, icon, brand]) => (
+                    <li className="skill-cell" key={name} style={{ '--brand': brand }}>
+                      <svg className="skill-icon" aria-hidden="true" focusable="false">
+                        <use href={`#si-${icon}`}></use>
+                      </svg>
+                      <span className="skill-name">{name}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
           </div>
         </section>
         <section id="projects">

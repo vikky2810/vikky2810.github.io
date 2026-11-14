@@ -618,39 +618,103 @@ section {
   margin-bottom: 1.5rem;
 }
 
+/* Timeline: dates | dashed rail with a node per role | role details.
+   The rail is each row's ::before, so it runs through the row gap into the
+   next node and stops at the last one. */
 .exp-list {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
+  --period-w: 6.5rem;
+  --rail-w: 1.5rem;
+  --node: 11px;
+  --node-top: 0.45rem;
+  list-style: none;
+  display: grid;
+  gap: 2rem;
 }
 
 .exp-row {
+  position: relative;
+  display: grid;
+  grid-template-columns: var(--period-w) var(--rail-w) minmax(0, 1fr);
+  grid-template-areas: "period node body";
+  column-gap: 0.85rem;
+}
+
+.exp-row::before {
+  content: "";
+  position: absolute;
+  left: calc(var(--period-w) + 0.85rem + var(--rail-w) / 2);
+  top: calc(var(--node-top) + var(--node));
+  bottom: calc(-2rem - var(--node-top));
+  border-left: 1px dashed var(--dash, rgba(255, 255, 255, 0.14));
+}
+
+.exp-row:last-child::before {
+  display: none;
+}
+
+.exp-period {
+  grid-area: period;
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
+  align-items: flex-end;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.35;
+  padding-top: 0.1rem;
 }
 
-.exp-top {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 1rem;
-}
-
-
-.exp-left {
-  display: flex;
-  flex-direction: column;
-  gap: 0.2rem;
-}
-
-.exp-company {
-  font-size: 1rem;
-  font-weight: 700;
+.exp-start {
+  font-size: 0.9rem;
+  font-weight: 600;
   color: var(--text-primary);
-  display: inline-flex;
+}
+
+.exp-end {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.exp-node {
+  grid-area: node;
+  justify-self: center;
+  position: relative;
+  width: var(--node);
+  height: var(--node);
+  margin-top: var(--node-top);
+  border-radius: 50%;
+  border: 1.5px solid var(--border-hover);
+  background: var(--bg-primary);
+  transition: border-color var(--transition-fast), background-color var(--transition-fast);
+}
+
+.exp-row:hover .exp-node {
+  border-color: var(--primary-color);
+}
+
+.is-current .exp-node,
+.is-current:hover .exp-node {
+  border-color: var(--accent-color);
+  background: var(--accent-color);
+  animation: pulse 2s infinite;
+}
+
+.exp-body {
+  grid-area: body;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.exp-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  line-height: 1.4;
+  letter-spacing: -0.005em;
+  color: var(--text-primary);
+  display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.25rem 0.6rem;
 }
 
 .exp-badge {
@@ -659,44 +723,86 @@ section {
   color: #fbbf24;
   background: rgba(245, 158, 11, 0.12);
   border: 1px solid rgba(245, 158, 11, 0.3);
-  padding: 0.1rem 0.5rem;
+  padding: 0.05rem 0.5rem;
   border-radius: var(--radius-full);
-  display: inline-flex;
-  align-items: center;
-  gap: 0.35rem;
 }
 
-/* Status light: decorative, so it lives in CSS rather than the markup */
-.exp-badge::before {
-  content: "";
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--accent-color);
-  animation: pulse 2s infinite;
-}
-
-.exp-role {
-  font-size: 0.9rem;
+.exp-org {
+  font-size: 0.92rem;
   color: var(--text-secondary);
 }
 
-.exp-right {
-  display: flex;
-  flex-direction: column;
-  gap: 0.2rem;
-  text-align: right;
-  flex-shrink: 0;
+.exp-org a {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: var(--border-hover);
+  text-underline-offset: 3px;
 }
 
-.exp-date {
-  font-size: 0.9rem;
-  color: var(--text-secondary);
+.exp-org a:hover {
+  color: var(--text-primary);
+  text-decoration-color: var(--primary-color);
 }
 
 .exp-loc {
-  font-size: 0.85rem;
+  font-size: 0.82rem;
   color: var(--text-muted);
+}
+
+.exp-points {
+  list-style: none;
+  display: grid;
+  gap: 0.35rem;
+  margin-top: 0.65rem;
+  max-width: 62ch;
+}
+
+.exp-points li {
+  position: relative;
+  padding-left: 1rem;
+  font-size: 0.9rem;
+  line-height: 1.55;
+  color: var(--text-secondary);
+}
+
+.exp-points li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.72em;
+  width: 0.45rem;
+  border-top: 1px solid var(--text-muted);
+}
+
+.is-current .exp-points li::before {
+  border-color: rgba(245, 158, 11, 0.6);
+}
+
+/* Narrow screens: dates move above the role, rail stays on the left */
+@media screen and (max-width: 600px) {
+  .exp-list {
+    --rail-w: 1rem;
+  }
+
+  .exp-row {
+    grid-template-columns: var(--rail-w) minmax(0, 1fr);
+    grid-template-areas:
+      "node period"
+      ". body";
+    row-gap: 0.25rem;
+  }
+
+  .exp-row::before {
+    left: calc(var(--rail-w) / 2);
+  }
+
+  .exp-period {
+    flex-direction: row;
+    align-items: baseline;
+    gap: 0.4rem;
+    text-align: left;
+    padding-top: 0;
+  }
 }
 
 /* ============================================
@@ -1249,7 +1355,7 @@ img {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .exp-badge::before,
+  .is-current .exp-node,
   .profile-name {
     animation: none;
   }
@@ -2442,16 +2548,6 @@ footer {
     font-size: 0.85rem;
   }
 
-  .exp-top {
-    flex-direction: column;
-    gap: 0.3rem;
-  }
-
-  .exp-right {
-    text-align: left;
-    flex-direction: row;
-    gap: 0.75rem;
-  }
 }
 
 /* Blog list overrides - force the ramx-style list at every breakpoint */

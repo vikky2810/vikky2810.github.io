@@ -23,6 +23,31 @@ const BIO_TOOLS = {
 
 const tool = (name: keyof typeof BIO_TOOLS) => <LinkPreview {...BIO_TOOLS[name]}>{name}</LinkPreview>;
 
+// Newest first. Points come from the resume PDF in public/src/assets.
+const EXPERIENCE = [
+  {
+    title: 'Software Engineer Intern', org: 'RegiKart Private Limited', start: 'Jun 2026', end: 'Present', location: 'Kolkata, India · Remote', current: true,
+    points: [
+      'Build, test and debug features on the company’s web applications, working in Git with code reviews.',
+      'Research and ship changes that improve app performance and usability, and streamline internal workflows.',
+    ],
+  },
+  {
+    title: 'Python Development Intern', org: 'Malleable Software Private Limited', orgUrl: 'https://malleablesoft.in/', start: 'Jun 2024', end: 'Dec 2024', location: 'Kolhapur, Maharashtra', current: false,
+    points: [
+      'Wrote and deployed Python automation scripts that cut manual steps out of repetitive internal workflows.',
+      'Built reusable utility modules (file I/O, data structures) under senior developers’ code review.',
+    ],
+  },
+  {
+    title: 'Freelance Developer', org: 'Full Stack Web Development', start: '2023', end: 'Present', location: 'Remote', current: false,
+    points: [
+      'Build full-stack web apps for clients with React and Next.js, backed by Node.js, Express or Flask.',
+      'Store data in MySQL or MongoDB, and add AI features with the Gemini API where they help.',
+    ],
+  },
+];
+
 const TITLE = 'Vikram Kamble - Full Stack Developer Portfolio';
 
 export const metadata: Metadata = {
@@ -145,64 +170,30 @@ export default function HomePage() {
         </section>
         <section id="work">
           <h2 className="section-heading">Experience</h2>
-          <div className="exp-list">
-            <div className="exp-row">
-              <div className="exp-top">
-                <div className="exp-left">
-                  <span className="exp-company">
-                    {"Software Engineer Intern "}
-                    <span className="exp-badge">Working</span>
-                  </span>
-                  {' '}
-                  <span className="exp-role">
-                    {"RegiKart Private Limited "}
-                  </span>
+          <ol className="exp-list">
+            {EXPERIENCE.map(role => (
+              <li key={role.title} className={role.current ? 'exp-row is-current' : 'exp-row'}>
+                <p className="exp-period">
+                  <span className="exp-start">{role.start}</span>
+                  <span className="exp-end">to {role.end}</span>
+                </p>
+                <span className="exp-node" aria-hidden="true" />
+                <div className="exp-body">
+                  <h3 className="exp-title">
+                    {role.title}
+                    {role.current && <span className="exp-badge">Working</span>}
+                  </h3>
+                  <p className="exp-org">
+                    {'orgUrl' in role ? <a href={role.orgUrl} target="_blank" rel="noopener">{role.org}</a> : role.org}
+                  </p>
+                  <p className="exp-loc">{role.location}</p>
+                  <ul className="exp-points">
+                    {role.points.map(point => <li key={point}>{point}</li>)}
+                  </ul>
                 </div>
-                <div className="exp-right">
-                  <span className="exp-date">Jun 2026 – Present</span>
-                  {' '}
-                  <span className="exp-loc">Kolkata, India · Remote</span>
-                </div>
-              </div>
-              {/* TODO: add 2-3 bullets for this role — what you built, stack used, measurable outcome.
-                 Example: <ul class="exp-points"><li>Shipped ...</li></ul> (style .exp-points in CSS when you add it) */}
-            </div>
-            {/* Duplicate an .exp-row block below to add more roles */}
-            <div className="exp-row">
-              <div className="exp-top">
-                <div className="exp-left">
-                  <span className="exp-company">
-                    {"Python Development Intern "}
-                  </span>
-                  {' '}
-                  <span className="exp-role">6-Month Internship</span>
-                </div>
-                <div className="exp-right">
-                  <span className="exp-date">
-                    {"June 2024 - Dec 2024 "}
-                  </span>
-                  {' '}
-                  <span className="exp-loc">Kolhapur, Maharashtra</span>
-                </div>
-              </div>
-              {/* TODO: add 2-3 bullets for this internship — projects, Python libraries used, outcome */}
-            </div>
-            <div className="exp-row">
-              <div className="exp-top">
-                <div className="exp-left">
-                  <span className="exp-company">Freelance Developer</span>
-                  {' '}
-                  <span className="exp-role">Full Stack Web Development</span>
-                </div>
-                <div className="exp-right">
-                  <span className="exp-date">2023 – Present</span>
-                  {' '}
-                  <span className="exp-loc">Remote</span>
-                </div>
-              </div>
-              {/* TODO: add 2-3 bullets — client/project types, stack, results delivered */}
-            </div>
-          </div>
+              </li>
+            ))}
+          </ol>
         </section>
         <section id="experience">
           <h2 className="section-heading">Skills</h2>

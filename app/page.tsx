@@ -130,23 +130,10 @@ export default function HomePage() {
         <section id="about">
           <h2 className="section-heading">About</h2>
           <p className="about-text">
-            Hi, I'm Vikram Kamble, a Full Stack Developer based in India.
-            I build full-stack web applications with React, Next.js, Node.js, Express, Flask and Python, using MySQL and MongoDB.
-            I currently work as a Software Engineer Intern at RegiKart Private Limited and have freelanced since 2023.
-            My recent work focuses on AI-powered tools built with the Gemini API, including repo analysis and browser-based code editors.
+            {"Hi, I am Vikram, a full stack developer who knows a little bit of backend, frontend, databases, a little bit of AI and is constantly trying to learn new things."}
           </p>
           <p className="about-text">
-            {"I write about web development, SQL vs NoSQL decisions, and library vs framework trade-offs on my "}
-            <a href="blog/">blog</a>
-            {". Explore my "}
-            <a href="#projects">projects</a>
-            {", "}
-            <a href="#experience">skills</a>
-            {", and "}
-            <a href="#work">experience</a>
-            {" below, or "}
-            <a href="#contact">get in touch</a>
-            {" for collaboration and freelance work."}
+            {"I have almost 2 years of experience (freelance + job) in software engineering."}
           </p>
         </section>
         <section id="work">

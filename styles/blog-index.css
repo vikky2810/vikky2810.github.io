@@ -86,38 +86,46 @@ html {
   padding: 0 2rem;
 }
 
+/* Quiet text link back home: chevron + label, aligned to the content column */
 .back-btn {
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
-  padding: 0.5rem 1.1rem;
-  background: transparent;
+  gap: 0.35rem;
+  margin-left: -4px; /* the chevron's tip sits 5px into its box; line the tip up with the heading */
+  padding: 0.35rem 0;
   color: var(--text-secondary);
   text-decoration: none;
-  border-radius: var(--radius-full);
-  font-weight: 600;
-  font-size: 0.85rem;
-  transition: var(--transition-normal);
-  border: 1px solid var(--border-color);
-}
-
-.back-btn:hover {
-  border-color: var(--primary-color);
-  color: var(--primary-color);
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: color 0.2s ease;
 }
 
 .back-icon {
-  font-size: 1.2rem;
-  transition: var(--transition-normal);
+  width: 1rem;
+  height: 1rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.75;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: transform 0.2s ease;
 }
 
-.back-btn:hover .back-icon {
+.back-btn:hover,
+.back-btn:focus-visible {
+  color: var(--accent-color);
+}
+
+.back-btn:hover .back-icon,
+.back-btn:focus-visible .back-icon {
   transform: translateX(-3px);
 }
 
-.back-text {
-  font-weight: 600;
-  letter-spacing: 0.025em;
+@media (prefers-reduced-motion: reduce) {
+  .back-btn,
+  .back-icon {
+    transition: none;
+  }
 }
 
 /* Hamburger Navigation - Used by JavaScript */
@@ -550,11 +558,6 @@ html {
     padding: 0 1.5rem;
   }
 
-  .back-btn {
-    padding: 0.625rem 1.25rem;
-    font-size: 0.9rem;
-  }
-
   .filter-buttons {
     gap: 0.75rem;
   }
@@ -596,21 +599,9 @@ html {
 
 @media screen and (max-width: 480px) {
   .header-container {
-    padding: 0 1rem;
+    padding: 0 1.5rem;
   }
 
-  .back-btn {
-    padding: 0.5rem 1rem;
-    font-size: 0.875rem;
-  }
-
-  .back-text {
-    display: none;
-  }
-
-  .back-icon {
-    font-size: 1.5rem;
-  }
 
 
 
@@ -887,4 +878,15 @@ tbody td:first-child {
 .blog-index-footnote a:hover {
   color: var(--secondary-color);
   text-decoration-color: currentColor;
+}
+
+/* Keep the header link on the same left edge as the page content */
+.blog-header .header-container {
+  padding: 0 2rem;
+}
+
+@media screen and (max-width: 480px) {
+  .blog-header .header-container {
+    padding: 0 1.5rem;
+  }
 }

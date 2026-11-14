@@ -42,9 +42,10 @@ export default function BlogIndexPage() {
       <header className="blog-header">
         <div className="header-container">
           <a href="/" className="back-btn">
-            <span className="back-icon">←</span>
-            {' '}
-            <span className="back-text">Back to Portfolio</span>
+            <svg className="back-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+              <path d="M10 3 5 8l5 5" />
+            </svg>
+            Back to portfolio
           </a>
         </div>
       </header>

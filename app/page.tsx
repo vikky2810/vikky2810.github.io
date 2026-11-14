@@ -103,6 +103,13 @@ export default function HomePage() {
             </p>
           </LinkPreviewProvider>
           <div className="profile-socials">
+            <span className="follow-note" aria-hidden="true">
+              <span className="follow-note-text">follow me</span>
+              <svg className="follow-note-arrow" width="40" height="30" viewBox="0 0 40 30" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M4 3c1 9 8 18 30 21" />
+                <path d="M27 18l7 6-8 3" />
+              </svg>
+            </span>
             <a href="https://linkedin.com/in/vikram-kamble-888933264" target="_blank" rel="noopener" aria-label="LinkedIn">
               <svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.63-1.85 3.36-1.85 3.59 0 4.25 2.36 4.25 5.43v6.31zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.55V9h3.57v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z"></path>

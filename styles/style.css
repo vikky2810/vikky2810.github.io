@@ -531,6 +531,50 @@ section {
   margin-top: 0.25rem;
 }
 
+/* Handwritten "follow me" note: hangs in the left gutter on wide screens,
+   sits inline before the icons on narrow ones. */
+.profile-socials {
+  position: relative;
+}
+
+.follow-note {
+  display: inline-flex;
+  align-items: flex-end;
+  gap: 0.15rem;
+  color: var(--text-secondary);
+  pointer-events: none;
+  user-select: none;
+}
+
+.follow-note-text {
+  font-family: "Caveat", cursive;
+  font-weight: 500;
+  font-size: 1.35rem;
+  line-height: 1;
+  transform: rotate(-8deg);
+}
+
+@media screen and (min-width: 1000px) {
+  .follow-note {
+    position: absolute;
+    right: calc(100% + 2.25rem);
+    bottom: 0.4rem;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .follow-note-arrow {
+    margin-left: 2.6rem;
+    margin-top: 0.1rem;
+  }
+}
+
+@media screen and (max-width: 999px) {
+  .follow-note-arrow {
+    transform: rotate(-35deg) translateY(4px);
+  }
+}
+
 .profile-socials a {
   color: var(--text-secondary);
   display: inline-flex;

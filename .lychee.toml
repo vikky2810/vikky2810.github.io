@@ -51,5 +51,4 @@ exclude = [
 exclude_path = [
   'node_modules',
   'googled0149627dfb021ad\.html',
-  'content.blog.template.html',  # blog template with {{placeholders}}
 ]

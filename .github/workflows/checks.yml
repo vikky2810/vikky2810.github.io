@@ -21,6 +21,15 @@ jobs:
     steps:
       - uses: actions/checkout@v7
 
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      - run: npm run build
+
       - name: Restore lychee cache
         uses: actions/cache@v6
         with:
@@ -31,18 +40,18 @@ jobs:
       - name: Check links
         uses: lycheeverse/lychee-action@v2
         with:
-          # root-dir resolves root-relative links (/src/...) against the checkout;
+          # root-dir resolves root-relative links (/src/...) against the exported site;
           # the remap checks absolute links to the live site against local files,
           # so pages added in this change are validated before they deploy.
           args: >-
             --config .lychee.toml
             --no-progress
-            --root-dir "${{ github.workspace }}"
-            --remap "^https://vikky2810.github.io/ file://${{ github.workspace }}/"
-            './**/*.html'
-            feed.xml
-            sitemap.xml
-            llms.txt
+            --root-dir "${{ github.workspace }}/out"
+            --remap "^https://vikky2810.github.io/ file://${{ github.workspace }}/out/"
+            './out/**/*.html'
+            out/feed.xml
+            out/sitemap.xml
+            out/llms.txt
           fail: true
           jobSummary: true
         env:
@@ -58,10 +67,15 @@ jobs:
       - uses: actions/setup-node@v7
         with:
           node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      - run: npm run build
 
       - name: Validate HTML
         run: |
-          git ls-files -z '*.html' ':!:googled0149627dfb021ad.html' ':!:content/**' \
+          find out -name '*.html' ! -name 'googled0149627dfb021ad.html' -print0 \
             | xargs -0 npx --yes html-validate@11
 
   lighthouse:
@@ -74,6 +88,11 @@ jobs:
       - uses: actions/setup-node@v7
         with:
           node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      - run: npm run build
 
       - name: Run Lighthouse CI
         run: npx --yes @lhci/cli@0.15 autorun --config=./lighthouserc.json

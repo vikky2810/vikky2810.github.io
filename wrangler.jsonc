@@ -2,9 +2,10 @@
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "vikky2810-github-io",
   "compatibility_date": "2026-09-17",
+  // next build exports the whole site to out/
+  "build": { "command": "npm run build" },
   "assets": {
-    // Static site lives at the repo root; files to skip are listed in .assetsignore
-    "directory": ".",
+    "directory": "./out",
     "not_found_handling": "404-page"
   }
 }

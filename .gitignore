@@ -70,3 +70,8 @@ temp/
 
 # Wrangler local state
 .wrangler/
+.next/
+out/
+next-env.d.ts
+*.tsbuildinfo
+AGENTS.md

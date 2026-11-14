@@ -6,6 +6,10 @@
     "no-trailing-whitespace": "off",
     "no-inline-style": "off",
     "long-title": "off",
-    "no-raw-characters": ["error", { "relaxed": true }]
+    "no-raw-characters": ["error", { "relaxed": true }],
+    "attr-case": "off",
+    "attribute-boolean-style": "off",
+    "attribute-empty-style": "off",
+    "valid-id": ["error", { "relaxed": true }]
   }
 }

@@ -1,26 +1,37 @@
 {
   "name": "vikram-kamble-portfolio",
   "version": "1.0.0",
-  "description": "Vikram Kamble's Personal Portfolio Website - Static Site",
-  "main": "index.html",
-  "scripts": {
-    "dev": "python -m http.server 8000",
-    "serve": "npx http-server -p 8000",
-    "stamp": "node scripts/stamp-assets.mjs",
-    "check:html": "npx --yes html-validate@11 \"**/*.html\"",
-    "build:blog": "node scripts/build-blog.mjs && node scripts/stamp-assets.mjs"
+  "private": true,
+  "description": "Vikram Kamble's Personal Portfolio Website, built with Next.js and exported as a static site",
+  "engines": {
+    "node": ">=22"
   },
-  "keywords": [
-    "portfolio",
-    "web-development",
-    "fullstack",
-    "static-site"
-  ],
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "npx --yes serve@14 out",
+    "typecheck": "tsc --noEmit",
+    "check:html": "npx --yes html-validate@11 \"out/**/*.html\""
+  },
   "author": "Vikram Kamble",
   "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/vikky2810/vikky2810.github.io"
   },
-  "homepage": "https://vikky2810.github.io"
+  "homepage": "https://vikky2810.github.io",
+  "dependencies": {
+    "next": "16.4.6",
+    "parse5": "8.0.0",
+    "prismjs": "1.30.0",
+    "react": "19.3.1",
+    "react-dom": "19.3.1"
+  },
+  "devDependencies": {
+    "@types/node": "22.20.5",
+    "@types/prismjs": "1.26.6",
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.2.3",
+    "typescript": "5.9.3"
+  }
 }

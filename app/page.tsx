@@ -1,0 +1,691 @@
+import type { Metadata } from 'next';
+import { preload } from 'react-dom';
+import { CopyEmailButton } from '@/components/copy-email-button';
+import { FooterYear } from '@/components/footer-year';
+import { HomeEffects } from '@/components/home-effects';
+import { LinkPreview, LinkPreviewProvider } from '@/components/link-preview';
+import { MobileNav } from '@/components/mobile-nav';
+import { NAV_LINKS } from '@/components/nav-links';
+import { JsonLd, OG_IMAGE, SITE_URL, pageMetadata } from '@/lib/seo';
+import '@/styles/style.css';
+
+const EMAIL = 'kamblevikram2810@gmail.com';
+
+const BIO_TOOLS = {
+  'Next.js': { href: 'https://nextjs.org', preview: '/src/assets/previews/nextjs.webp' },
+  React: { href: 'https://react.dev', preview: '/src/assets/previews/react.webp' },
+  Python: { href: 'https://www.python.org', preview: '/src/assets/previews/python.webp' },
+  Postgres: { href: 'https://www.postgresql.org', preview: '/src/assets/previews/postgres.webp' },
+  Claude: { href: 'https://claude.com', preview: '/src/assets/previews/claude.webp' },
+  OpenCode: { href: 'https://opencode.ai', preview: '/src/assets/previews/opencode.webp' },
+  Cursor: { href: 'https://cursor.com', preview: '/src/assets/previews/cursor.webp' },
+} as const;
+
+const tool = (name: keyof typeof BIO_TOOLS) => <LinkPreview {...BIO_TOOLS[name]}>{name}</LinkPreview>;
+
+const TITLE = 'Vikram Kamble - Full Stack Developer Portfolio';
+
+export const metadata: Metadata = {
+  ...pageMetadata({
+    title: TITLE,
+    description:
+      'Vikram Kamble is a passionate Full Stack Developer. Explore my projects, skills in React, Node.js, and experience in web development.',
+    socialTitle: TITLE,
+    socialDescription: 'Passionate Full Stack Developer. Specializing in React, Node.js, and modern web technologies.',
+    url: `${SITE_URL}/`,
+    type: 'website',
+    image: { url: OG_IMAGE, width: 1200, height: 630, alt: 'Vikram Kamble - Full Stack Developer' },
+  }),
+  keywords:
+    'Vikram Kamble, Full Stack Developer, Web Developer, React Developer, Node.js Developer, Portfolio, Frontend Developer, Backend Developer, JavaScript, Python',
+  verification: { google: '7XUW60TZ1i03BjjOoQobe_gSJPzzzfd7pHZfQW1feDM' },
+  other: {
+    title: TITLE,
+    'twitter:url': `${SITE_URL}/`,
+    'msapplication-TileColor': '#000000',
+    'apple-mobile-web-app-title': 'Vikram Kamble Portfolio',
+  },
+};
+
+const PERSON = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'Vikram Kamble',
+  jobTitle: 'Full Stack Developer',
+  description: 'Passionate Full Stack Developer',
+  url: `${SITE_URL}/`,
+  image: `${SITE_URL}/src/assets/profile-pic.webp`,
+  sameAs: ['https://linkedin.com/in/vikram-kamble-888933264', 'https://github.com/vikky2810'],
+  knowsAbout: ['React', 'Next.js', 'Node.js', 'JavaScript', 'TypeScript', 'Python', 'HTML', 'CSS', 'MongoDB', 'MySQL',
+    'Express.js', 'Flask', 'Java', 'Git'],
+  worksFor: { '@type': 'Organization', name: 'RegiKart Private Limited' },
+};
+
+export default function HomePage() {
+  preload('/src/fonts/inter-latin.woff2', { as: 'font', type: 'font/woff2', crossOrigin: 'anonymous' });
+  return (
+    <>
+      <JsonLd data={PERSON} />
+      <a className="skip-link" href="#profile">Skip to content</a>
+      <nav id="desktop-nav" aria-label="Primary">
+        <div>
+          <ul className="nav-links">
+            {NAV_LINKS.map(({ href, label }) => (
+              <li key={href}>
+                <a href={href}>{label}</a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </nav>
+      <MobileNav />
+      <main className="framed">
+        <section id="profile">
+          <div className="profile-header">
+            <img src="src/assets/profile-pic.webp" alt="Vikram Kamble profile picture" className="profile-avatar" width="96" height="96" fetchPriority="high" decoding="async" />
+            <div className="profile-intro">
+              <h1 className="profile-name">Vikram Kamble</h1>
+              <p className="profile-subtitle">
+                {"Full Stack Developer "}
+                <span className="dot">·</span>
+                {' '}
+                <span className="profile-email">
+                  <a href="mailto:kamblevikram2810@gmail.com">kamblevikram2810@gmail.com</a>
+                  {' '}
+                  <CopyEmailButton email={EMAIL} />
+                </span>
+              </p>
+            </div>
+          </div>
+          <LinkPreviewProvider previews={Object.values(BIO_TOOLS).map(t => t.preview)}>
+            <p className="profile-bio">
+              Full stack developer working across different technologies: {tool('Next.js')}, {tool('React')}, {tool('Python')}, {tool('Postgres')}, and AI tools like {tool('Claude')}, {tool('OpenCode')} and {tool('Cursor')}.
+            </p>
+          </LinkPreviewProvider>
+          <div className="profile-socials">
+            <a href="https://linkedin.com/in/vikram-kamble-888933264" target="_blank" rel="noopener" aria-label="LinkedIn">
+              <svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.63-1.85 3.36-1.85 3.59 0 4.25 2.36 4.25 5.43v6.31zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.55V9h3.57v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z"></path>
+              </svg>
+            </a>
+            {' '}
+            <a href="https://github.com/vikky2810" target="_blank" rel="noopener" aria-label="GitHub">
+              <svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 .3a12 12 0 0 0-3.8 23.38c.6.12.83-.26.83-.57v-2c-3.34.72-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.08-.75.09-.73.09-.73 1.2.09 1.83 1.24 1.83 1.24 1.07 1.83 2.81 1.3 3.5.99.1-.78.42-1.3.76-1.6-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.14-.3-.54-1.52.1-3.18 0 0 1-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.28-1.55 3.29-1.23 3.29-1.23.65 1.66.24 2.88.12 3.18.77.84 1.23 1.91 1.23 3.22 0 4.61-2.8 5.63-5.48 5.92.42.36.81 1.1.81 2.22v3.29c0 .31.21.69.83.57A12 12 0 0 0 12 .3z"></path>
+              </svg>
+            </a>
+            {' '}
+            <a href="mailto:kamblevikram2810@gmail.com" aria-label="Email">
+              <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+                <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+              </svg>
+            </a>
+            {' '}
+            <a href="./src/assets/Vikram-Kamble-Resume.pdf" target="_blank" rel="noopener" className="resume-pill">
+              Resume
+            </a>
+          </div>
+        </section>
+        <section id="about">
+          <h2 className="section-heading">About</h2>
+          <p className="about-text">
+            Hi, I'm Vikram Kamble, a Full Stack Developer based in India.
+            I build full-stack web applications with React, Next.js, Node.js, Express, Flask and Python, using MySQL and MongoDB.
+            I currently work as a Software Engineer Intern at RegiKart Private Limited and have freelanced since 2023.
+            My recent work focuses on AI-powered tools built with the Gemini API, including repo analysis and browser-based code editors.
+          </p>
+          <p className="about-text">
+            {"I write about web development, SQL vs NoSQL decisions, and library vs framework trade-offs on my "}
+            <a href="blog/">blog</a>
+            {". Explore my "}
+            <a href="#projects">projects</a>
+            {", "}
+            <a href="#experience">skills</a>
+            {", and "}
+            <a href="#work">experience</a>
+            {" below, or "}
+            <a href="#contact">get in touch</a>
+            {" for collaboration and freelance work."}
+          </p>
+        </section>
+        <section id="work">
+          <h2 className="section-heading">Experience</h2>
+          <div className="exp-list">
+            <div className="exp-row">
+              <div className="exp-top">
+                <div className="exp-left">
+                  <span className="exp-company">
+                    {"Software Engineer Intern "}
+                    <span className="exp-badge">Working</span>
+                  </span>
+                  {' '}
+                  <span className="exp-role">
+                    {"RegiKart Private Limited "}
+                  </span>
+                </div>
+                <div className="exp-right">
+                  <span className="exp-date">Jun 2026 – Present</span>
+                  {' '}
+                  <span className="exp-loc">Kolkata, India · Remote</span>
+                </div>
+              </div>
+              {/* TODO: add 2-3 bullets for this role — what you built, stack used, measurable outcome.
+                 Example: <ul class="exp-points"><li>Shipped ...</li></ul> (style .exp-points in CSS when you add it) */}
+            </div>
+            {/* Duplicate an .exp-row block below to add more roles */}
+            <div className="exp-row">
+              <div className="exp-top">
+                <div className="exp-left">
+                  <span className="exp-company">
+                    {"Python Development Intern "}
+                  </span>
+                  {' '}
+                  <span className="exp-role">6-Month Internship</span>
+                </div>
+                <div className="exp-right">
+                  <span className="exp-date">
+                    {"June 2024 - Dec 2024 "}
+                  </span>
+                  {' '}
+                  <span className="exp-loc">Kolhapur, Maharashtra</span>
+                </div>
+              </div>
+              {/* TODO: add 2-3 bullets for this internship — projects, Python libraries used, outcome */}
+            </div>
+            <div className="exp-row">
+              <div className="exp-top">
+                <div className="exp-left">
+                  <span className="exp-company">Freelance Developer</span>
+                  {' '}
+                  <span className="exp-role">Full Stack Web Development</span>
+                </div>
+                <div className="exp-right">
+                  <span className="exp-date">2023 – Present</span>
+                  {' '}
+                  <span className="exp-loc">Remote</span>
+                </div>
+              </div>
+              {/* TODO: add 2-3 bullets — client/project types, stack, results delivered */}
+            </div>
+          </div>
+        </section>
+        <section id="experience">
+          <h2 className="section-heading">Skills</h2>
+          {/* Brand logo sprite (Simple Icons, CC0) */}
+          <svg className="icon-sprite" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <symbol id="si-html5" viewBox="0 0 24 24">
+                <path d="M1.5 0h21l-1.91 21.563L11.977 24l-8.564-2.438L1.5 0zm7.031 9.75l-.232-2.718 10.059.003.23-2.622L5.412 4.41l.698 8.01h9.126l-.326 3.426-2.91.804-2.955-.81-.188-2.11H6.248l.33 4.171L12 19.351l5.379-1.443.744-8.157H8.531z"></path>
+              </symbol>
+              <symbol id="si-css" viewBox="0 0 24 24">
+                <path d="M1.5 0h21l-1.91 21.563L11.977 24l-8.565-2.438L1.5 0zm17.09 4.413L5.41 4.41l.213 2.622 10.125.002-.255 2.716h-6.64l.24 2.573h6.182l-.366 3.523-2.91.804-2.956-.81-.188-2.11h-2.61l.29 3.855L12 19.288l5.373-1.53L18.59 4.414z"></path>
+              </symbol>
+              <symbol id="si-js" viewBox="0 0 24 24">
+                <path d="M0 0h24v24H0V0zm22.034 18.276c-.175-1.095-.888-2.015-3.003-2.873-.736-.345-1.554-.585-1.797-1.14-.091-.33-.105-.51-.046-.705.15-.646.915-.84 1.515-.66.39.12.75.42.976.9 1.034-.676 1.034-.676 1.755-1.125-.27-.42-.404-.601-.586-.78-.63-.705-1.469-1.065-2.834-1.034l-.705.089c-.676.165-1.32.525-1.71 1.005-1.14 1.291-.811 3.541.569 4.471 1.365 1.02 3.361 1.244 3.616 2.205.24 1.17-.87 1.545-1.966 1.41-.811-.18-1.26-.586-1.755-1.336l-1.83 1.051c.21.48.45.689.81 1.109 1.74 1.756 6.09 1.666 6.871-1.004.029-.09.24-.705.074-1.65l.046.067zm-8.983-7.245h-2.248c0 1.938-.009 3.864-.009 5.805 0 1.232.063 2.363-.138 2.711-.33.689-1.18.601-1.566.48-.396-.196-.597-.466-.83-.855-.063-.105-.11-.196-.127-.196l-1.825 1.125c.305.63.75 1.172 1.324 1.517.855.51 2.004.675 3.207.405.783-.226 1.458-.691 1.811-1.411.51-.93.402-2.07.397-3.346.012-2.054 0-4.109 0-6.179l.004-.056z"></path>
+              </symbol>
+              <symbol id="si-ts" viewBox="0 0 24 24">
+                <path d="M1.125 0C.502 0 0 .502 0 1.125v21.75C0 23.498.502 24 1.125 24h21.75c.623 0 1.125-.502 1.125-1.125V1.125C24 .502 23.498 0 22.875 0zm17.363 9.75c.612 0 1.154.037 1.627.111a6.38 6.38 0 0 1 1.306.34v2.458a3.95 3.95 0 0 0-.643-.361 5.093 5.093 0 0 0-.717-.26 5.453 5.453 0 0 0-1.426-.2c-.3 0-.573.028-.819.086a2.1 2.1 0 0 0-.623.242c-.17.104-.3.229-.393.374a.888.888 0 0 0-.14.49c0 .196.053.373.156.529.104.156.252.304.443.444s.423.276.696.41c.273.135.582.274.926.416.47.197.892.407 1.266.628.374.222.695.473.963.753.268.279.472.598.614.957.142.359.214.776.214 1.253 0 .657-.125 1.21-.373 1.656a3.033 3.033 0 0 1-1.012 1.085 4.38 4.38 0 0 1-1.487.596c-.566.12-1.163.18-1.79.18a9.916 9.916 0 0 1-1.84-.164 5.544 5.544 0 0 1-1.512-.493v-2.63a5.033 5.033 0 0 0 3.237 1.2c.333 0 .624-.03.872-.09.249-.06.456-.144.623-.25.166-.108.29-.234.373-.38a1.023 1.023 0 0 0-.074-1.089 2.12 2.12 0 0 0-.537-.5 5.597 5.597 0 0 0-.807-.444 27.72 27.72 0 0 0-1.007-.436c-.918-.383-1.602-.852-2.053-1.405-.45-.553-.676-1.222-.676-2.005 0-.614.123-1.141.369-1.582.246-.441.58-.804 1.004-1.089a4.494 4.494 0 0 1 1.47-.629 7.536 7.536 0 0 1 1.77-.201zm-15.113.188h9.563v2.166H9.506v9.646H6.789v-9.646H3.375z"></path>
+              </symbol>
+              <symbol id="si-react" viewBox="0 0 24 24">
+                <path d="M14.23 12.004a2.236 2.236 0 0 1-2.235 2.236 2.236 2.236 0 0 1-2.236-2.236 2.236 2.236 0 0 1 2.235-2.236 2.236 2.236 0 0 1 2.236 2.236zm2.648-10.69c-1.346 0-3.107.96-4.888 2.622-1.78-1.653-3.542-2.602-4.887-2.602-.41 0-.783.093-1.106.278-1.375.793-1.683 3.264-.973 6.365C1.98 8.917 0 10.42 0 12.004c0 1.59 1.99 3.097 5.043 4.03-.704 3.113-.39 5.588.988 6.38.32.187.69.275 1.102.275 1.345 0 3.107-.96 4.888-2.624 1.78 1.654 3.542 2.603 4.887 2.603.41 0 .783-.09 1.106-.275 1.374-.792 1.683-3.263.973-6.365C22.02 15.096 24 13.59 24 12.004c0-1.59-1.99-3.097-5.043-4.032.704-3.11.39-5.587-.988-6.38-.318-.184-.688-.277-1.092-.278zm-.005 1.09v.006c.225 0 .406.044.558.127.666.382.955 1.835.73 3.704-.054.46-.142.945-.25 1.44-.96-.236-2.006-.417-3.107-.534-.66-.905-1.345-1.727-2.035-2.447 1.592-1.48 3.087-2.292 4.105-2.295zm-9.77.02c1.012 0 2.514.808 4.11 2.28-.686.72-1.37 1.537-2.02 2.442-1.107.117-2.154.298-3.113.538-.112-.49-.195-.964-.254-1.42-.23-1.868.054-3.32.714-3.707.19-.09.4-.127.563-.132zm4.882 3.05c.455.468.91.992 1.36 1.564-.44-.02-.89-.034-1.345-.034-.46 0-.915.01-1.36.034.44-.572.895-1.096 1.345-1.565zM12 8.1c.74 0 1.477.034 2.202.093.406.582.802 1.203 1.183 1.86.372.64.71 1.29 1.018 1.946-.308.655-.646 1.31-1.013 1.95-.38.66-.773 1.288-1.18 1.87-.728.063-1.466.098-2.21.098-.74 0-1.477-.035-2.202-.093-.406-.582-.802-1.204-1.183-1.86-.372-.64-.71-1.29-1.018-1.946.303-.657.646-1.313 1.013-1.954.38-.66.773-1.286 1.18-1.868.728-.064 1.466-.098 2.21-.098zm-3.635.254c-.24.377-.48.763-.704 1.16-.225.39-.435.782-.635 1.174-.265-.656-.49-1.31-.676-1.947.64-.15 1.315-.283 2.015-.386zm7.26 0c.695.103 1.365.23 2.006.387-.18.632-.405 1.282-.66 1.933-.2-.39-.41-.783-.64-1.174-.225-.392-.465-.774-.705-1.146zm3.063.675c.484.15.944.317 1.375.498 1.732.74 2.852 1.708 2.852 2.476-.005.768-1.125 1.74-2.857 2.475-.42.18-.88.342-1.355.493-.28-.958-.646-1.956-1.1-2.98.45-1.017.81-2.01 1.085-2.964zm-13.395.004c.278.96.645 1.957 1.1 2.98-.45 1.017-.812 2.01-1.086 2.964-.484-.15-.944-.318-1.37-.5-1.732-.737-2.852-1.706-2.852-2.474 0-.768 1.12-1.742 2.852-2.476.42-.18.88-.342 1.356-.494zm11.678 4.28c.265.657.49 1.312.676 1.948-.64.157-1.316.29-2.016.39.24-.375.48-.762.705-1.158.225-.39.435-.788.636-1.18zm-9.945.02c.2.392.41.783.64 1.175.23.39.465.772.705 1.143-.695-.102-1.365-.23-2.006-.386.18-.63.406-1.282.66-1.933zM17.92 16.32c.112.493.2.968.254 1.423.23 1.868-.054 3.32-.714 3.708-.147.09-.338.128-.563.128-1.012 0-2.514-.807-4.11-2.28.686-.72 1.37-1.536 2.02-2.44 1.107-.118 2.154-.3 3.113-.54zm-11.83.01c.96.234 2.006.415 3.107.532.66.905 1.345 1.727 2.035 2.446-1.595 1.483-3.092 2.295-4.11 2.295-.22-.005-.406-.05-.553-.132-.666-.38-.955-1.834-.73-3.703.054-.46.142-.944.25-1.438zm4.56.64c.44.02.89.034 1.345.034.46 0 .915-.01 1.36-.034-.44.572-.895 1.095-1.345 1.565-.455-.47-.91-.993-1.36-1.565z"></path>
+              </symbol>
+              <symbol id="si-next" viewBox="0 0 24 24">
+                <path d="M18.665 21.978C16.758 23.255 14.465 24 12 24 5.377 24 0 18.623 0 12S5.377 0 12 0s12 5.377 12 12c0 3.583-1.574 6.801-4.067 9.001L9.219 7.2H7.2v9.596h1.615V9.251l9.85 12.727Zm-3.332-8.533 1.6 2.061V7.2h-1.6v6.245Z"></path>
+              </symbol>
+              <symbol id="si-angular" viewBox="0 0 24 24">
+                <path d="M16.712 17.711H7.288l-1.204 2.916L12 24l5.916-3.373-1.204-2.916ZM14.692 0l7.832 16.855.814-12.856L14.692 0ZM9.308 0 .662 3.999l.814 12.856L9.308 0Zm-.405 13.93h6.198L12 6.396 8.903 13.93Z"></path>
+              </symbol>
+              <symbol id="si-node" viewBox="0 0 24 24">
+                <path d="M11.998,24c-0.321,0-0.641-0.084-0.922-0.247l-2.936-1.737c-0.438-0.245-0.224-0.332-0.08-0.383 c0.585-0.203,0.703-0.25,1.328-0.604c0.065-0.037,0.151-0.023,0.218,0.017l2.256,1.339c0.082,0.045,0.197,0.045,0.272,0l8.795-5.076 c0.082-0.047,0.134-0.141,0.134-0.238V6.921c0-0.099-0.053-0.192-0.137-0.242l-8.791-5.072c-0.081-0.047-0.189-0.047-0.271,0 L3.075,6.68C2.99,6.729,2.936,6.825,2.936,6.921v10.15c0,0.097,0.054,0.189,0.139,0.235l2.409,1.392 c1.307,0.654,2.108-0.116,2.108-0.89V7.787c0-0.142,0.114-0.253,0.256-0.253h1.115c0.139,0,0.255,0.112,0.255,0.253v10.021 c0,1.745-0.95,2.745-2.604,2.745c-0.508,0-0.909,0-2.026-0.551L2.28,18.675c-0.57-0.329-0.922-0.945-0.922-1.604V6.921 c0-0.659,0.353-1.275,0.922-1.603l8.795-5.082c0.557-0.315,1.296-0.315,1.848,0l8.794,5.082c0.57,0.329,0.924,0.944,0.924,1.603 v10.15c0,0.659-0.354,1.273-0.924,1.604l-8.794,5.078C12.643,23.916,12.324,24,11.998,24z M19.099,13.993 c0-1.9-1.284-2.406-3.987-2.763c-2.731-0.361-3.009-0.548-3.009-1.187c0-0.528,0.235-1.233,2.258-1.233 c1.807,0,2.473,0.389,2.747,1.607c0.024,0.115,0.129,0.199,0.247,0.199h1.141c0.071,0,0.138-0.031,0.186-0.081 c0.048-0.054,0.074-0.123,0.067-0.196c-0.177-2.098-1.571-3.076-4.388-3.076c-2.508,0-4.004,1.058-4.004,2.833 c0,1.925,1.488,2.457,3.895,2.695c2.88,0.282,3.103,0.703,3.103,1.269c0,0.983-0.789,1.402-2.642,1.402 c-2.327,0-2.839-0.584-3.011-1.742c-0.02-0.124-0.126-0.215-0.253-0.215h-1.137c-0.141,0-0.254,0.112-0.254,0.253 c0,1.482,0.806,3.248,4.655,3.248C17.501,17.007,19.099,15.91,19.099,13.993z"></path>
+              </symbol>
+              <symbol id="si-express" viewBox="0 0 24 24">
+                <path d="M12.262 16.666h1.146l6.975-9.325H19.22zm9.778 1.441v.004l-4.334-5.706-.557.74 4.873 6.682H.945V4.173h9.505l5.026 6.7.574-.772-4.374-5.928h.003l-.719-.945H0v17.544h24zM10.917 8.705a3.8 3.8 0 0 0-1.292-1.183q-.796-.45-1.916-.45c-.746 0-1.37.14-1.906.424a3.76 3.76 0 0 0-1.31 1.12 4.9 4.9 0 0 0-.75 1.581 7.17 7.17 0 0 0 0 3.696c.148.567.402 1.101.75 1.573a3.5 3.5 0 0 0 1.31 1.066q.803.39 1.906.389 1.77 0 2.739-.868.966-.867 1.328-2.457h-1.139q-.271 1.084-.977 1.734-.704.651-1.952.65-.812 0-1.392-.342a3.1 3.1 0 0 1-.957-.869 3.5 3.5 0 0 1-.551-1.182 5 5 0 0 1-.17-1.133 9 9 0 0 0-.015-.286 4.5 4.5 0 0 1 .015-.829c.047-.418.147-.83.296-1.223A3.7 3.7 0 0 1 5.54 9.05a2.9 2.9 0 0 1 .922-.742q.541-.28 1.246-.28c.47 0 .869.093 1.23.28q.541.281.922.742.379.461.587 1.057t.225 1.246H5.625l.004.957h6.182a7.3 7.3 0 0 0-.18-1.924 4.9 4.9 0 0 0-.715-1.68z"></path>
+              </symbol>
+              {/* MySQL's own mark carries its wordmark, which turns to mush at 19px - generic DB cylinder instead */}
+              <symbol id="si-mysql" viewBox="0 0 24 24">
+                <path d="M12 2c4.42 0 8 1.34 8 3s-3.58 3-8 3-8-1.34-8-3 3.58-3 8-3Z"></path>
+                <path d="M20 8.6v3.1c0 1.66-3.58 3-8 3s-8-1.34-8-3V8.6c1.63 1.3 4.63 2 8 2s6.37-.7 8-2Z"></path>
+                <path d="M20 15v3c0 1.66-3.58 3-8 3s-8-1.34-8-3v-3c1.63 1.3 4.63 2 8 2s6.37-.7 8-2Z"></path>
+              </symbol>
+              <symbol id="si-mongodb" viewBox="0 0 24 24">
+                <path d="M17.193 9.555c-1.264-5.58-4.252-7.414-4.573-8.115-.28-.394-.53-.954-.735-1.44-.036.495-.055.685-.523 1.184-.723.566-4.438 3.682-4.74 10.02-.282 5.912 4.27 9.435 4.888 9.884l.07.05A73.49 73.49 0 0111.91 24h.481c.114-1.032.284-2.056.51-3.07.417-.296.604-.463.85-.693a11.342 11.342 0 003.639-8.464c.01-.814-.103-1.662-.197-2.218zm-5.336 8.195s0-8.291.275-8.29c.213 0 .49 10.695.49 10.695-.381-.045-.765-1.76-.765-2.405z"></path>
+              </symbol>
+              <symbol id="si-git" viewBox="0 0 24 24">
+                <path d="M13.09 23.549a1.54 1.54 0 0 1-2.18 0L.451 13.089a1.54 1.54 0 0 1 0-2.179l7.191-7.19 2.733 2.733a1.85 1.85 0 0 0 .964 2.326v6.66a1.849 1.849 0 1 0 1.54 0V8.957l2.508 2.508a1.85 1.85 0 1 0 1.09-1.09l-2.634-2.634a1.85 1.85 0 0 0-2.378-2.377L8.73 2.63 10.91.451a1.54 1.54 0 0 1 2.179 0l10.459 10.46a1.54 1.54 0 0 1 0 2.179z"></path>
+              </symbol>
+              <symbol id="si-python" viewBox="0 0 24 24">
+                <path d="M14.25.18l.9.2.73.26.59.3.45.32.34.34.25.34.16.33.1.3.04.26.02.2-.01.13V8.5l-.05.63-.13.55-.21.46-.26.38-.3.31-.33.25-.35.19-.35.14-.33.1-.3.07-.26.04-.21.02H8.77l-.69.05-.59.14-.5.22-.41.27-.33.32-.27.35-.2.36-.15.37-.1.35-.07.32-.04.27-.02.21v3.06H3.17l-.21-.03-.28-.07-.32-.12-.35-.18-.36-.26-.36-.36-.35-.46-.32-.59-.28-.73-.21-.88-.14-1.05-.05-1.23.06-1.22.16-1.04.24-.87.32-.71.36-.57.4-.44.42-.33.42-.24.4-.16.36-.1.32-.05.24-.01h.16l.06.01h8.16v-.83H6.18l-.01-2.75-.02-.37.05-.34.11-.31.17-.28.25-.26.31-.23.38-.2.44-.18.51-.15.58-.12.64-.1.71-.06.77-.04.84-.02 1.27.05zm-6.3 1.98l-.23.33-.08.41.08.41.23.34.33.22.41.09.41-.09.33-.22.23-.34.08-.41-.08-.41-.23-.33-.33-.22-.41-.09-.41.09zm13.09 3.95l.28.06.32.12.35.18.36.27.36.35.35.47.32.59.28.73.21.88.14 1.04.05 1.23-.06 1.23-.16 1.04-.24.86-.32.71-.36.57-.4.45-.42.33-.42.24-.4.16-.36.09-.32.05-.24.02-.16-.01h-8.22v.82h5.84l.01 2.76.02.36-.05.34-.11.31-.17.29-.25.25-.31.24-.38.2-.44.17-.51.15-.58.13-.64.09-.71.07-.77.04-.84.01-1.27-.04-1.07-.14-.9-.2-.73-.25-.59-.3-.45-.33-.34-.34-.25-.34-.16-.33-.1-.3-.04-.25-.02-.2.01-.13v-5.34l.05-.64.13-.54.21-.46.26-.38.3-.32.33-.24.35-.2.35-.14.33-.1.3-.06.26-.04.21-.02.13-.01h5.84l.69-.05.59-.14.5-.21.41-.28.33-.32.27-.35.2-.36.15-.36.1-.35.07-.32.04-.28.02-.21V6.07h2.09l.14.01zm-6.47 14.25l-.23.33-.08.41.08.41.23.33.33.23.41.08.41-.08.33-.23.23-.33.08-.41-.08-.41-.23-.33-.33-.23-.41-.08-.41.08z"></path>
+              </symbol>
+              <symbol id="si-flask" viewBox="0 0 24 24">
+                <path d="M10.773 2.878c-.013 1.434.322 4.624.445 5.734l-8.558 3.83c-.56-.959-.98-2.304-1.237-3.38l-.06.027c-.205.09-.406.053-.494-.088l-.011-.018-.82-1.506c-.058-.105-.05-.252.024-.392a.78.78 0 0 1 .358-.331l9.824-4.207c.146-.064.299-.063.4.004.106.062.127.128.13.327Zm.68 7c.523 1.97.675 2.412.832 2.818l-7.263 3.7a19.35 19.35 0 0 1-1.81-2.83l8.24-3.689Zm12.432 8.786h.003c.283.402-.047.657-.153.698l-.947.37c.037.125.035.319-.217.414l-.736.287c-.229.09-.398-.059-.42-.2l-.025-.125c-4.427 1.784-7.94 1.685-10.696.647-1.981-.745-3.576-1.983-4.846-3.379l6.948-3.54c.721 1.431 1.586 2.454 2.509 3.178 2.086 1.638 4.415 1.712 5.793 1.563l-.047-.233c-.015-.077.007-.135.086-.165l.734-.288a.302.302 0 0 1 .342.086l.748-.288a.306.306 0 0 1 .341.086l.583.89Z"></path>
+              </symbol>
+              <symbol id="si-java" viewBox="0 0 128 128">
+                <path d="M47.617 98.12c-19.192 5.362 11.677 16.439 36.115 5.969-4.003-1.556-6.874-3.351-6.874-3.351-10.897 2.06-15.952 2.222-25.844 1.092-8.164-.935-3.397-3.71-3.397-3.71zm33.189-10.46c-14.444 2.779-22.787 2.69-33.354 1.6-8.171-.845-2.822-4.805-2.822-4.805-21.137 7.016 11.767 14.977 41.309 6.336-3.14-1.106-5.133-3.131-5.133-3.131zm11.319-60.575c.001 0-42.731 10.669-22.323 34.187 6.024 6.935-1.58 13.17-1.58 13.17s15.289-7.891 8.269-17.777c-6.559-9.215-11.587-13.793 15.634-29.58zm9.998 81.144s3.529 2.91-3.888 5.159c-14.102 4.272-58.706 5.56-71.095.171-4.45-1.938 3.899-4.625 6.526-5.192 2.739-.593 4.303-.485 4.303-.485-4.952-3.487-32.013 6.85-13.742 9.815 49.821 8.076 90.817-3.637 77.896-9.468zM85 77.896c2.395-1.634 5.703-3.053 5.703-3.053s-9.424 1.685-18.813 2.474c-11.494.964-23.823 1.154-30.012.326-14.652-1.959 8.033-7.348 8.033-7.348s-8.812-.596-19.644 4.644C17.455 81.134 61.958 83.958 85 77.896zm5.609 15.145c-.108.29-.468.616-.468.616 31.273-8.221 19.775-28.979 4.822-23.725-1.312.464-2 1.543-2 1.543s.829-.334 2.678-.72c7.559-1.575 18.389 10.119-5.032 22.286zM64.181 70.069c-4.614-10.429-20.26-19.553.007-35.559C89.459 14.563 76.492 1.587 76.492 1.587c5.23 20.608-18.451 26.833-26.999 39.667-5.821 8.745 2.857 18.142 14.688 28.815zm27.274 51.748c-19.187 3.612-42.854 3.191-56.887.874 0 0 2.874 2.38 17.646 3.331 22.476 1.437 57-.8 57.816-11.436.001 0-1.57 4.032-18.575 7.231z"></path>
+              </symbol>
+              <symbol id="si-github" viewBox="0 0 24 24">
+                <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path>
+              </symbol>
+              <symbol id="si-vscode" viewBox="0 0 128 128">
+                <path fillRule="evenodd" d="M90.767 127.126a7.968 7.968 0 0 0 6.35-.244l26.353-12.681a8 8 0 0 0 4.53-7.209V21.009a8 8 0 0 0-4.53-7.21L97.117 1.12a7.97 7.97 0 0 0-9.093 1.548l-50.45 46.026L15.6 32.013a5.328 5.328 0 0 0-6.807.302l-7.048 6.411a5.335 5.335 0 0 0-.006 7.888L20.796 64 1.74 81.387a5.336 5.336 0 0 0 .006 7.887l7.048 6.411a5.327 5.327 0 0 0 6.807.303l21.974-16.68 50.45 46.025a7.96 7.96 0 0 0 2.743 1.793Zm5.252-92.183L57.74 64l38.28 29.058V34.943Z" clipRule="evenodd"></path>
+              </symbol>
+              <symbol id="si-linux" viewBox="0 0 24 24">
+                <path d="M12.504 0c-.155 0-.315.008-.48.021-4.226.333-3.105 4.807-3.17 6.298-.076 1.092-.3 1.953-1.05 3.02-.885 1.051-2.127 2.75-2.716 4.521-.278.832-.41 1.684-.287 2.489a.424.424 0 00-.11.135c-.26.268-.45.6-.663.839-.199.199-.485.267-.797.4-.313.136-.658.269-.864.68-.09.189-.136.394-.132.602 0 .199.027.4.055.536.058.399.116.728.04.97-.249.68-.28 1.145-.106 1.484.174.334.535.47.94.601.81.2 1.91.135 2.774.6.926.466 1.866.67 2.616.47.526-.116.97-.464 1.208-.946.587-.003 1.23-.269 2.26-.334.699-.058 1.574.267 2.577.2.025.134.063.198.114.333l.003.003c.391.778 1.113 1.132 1.884 1.071.771-.06 1.592-.536 2.257-1.306.631-.765 1.683-1.084 2.378-1.503.348-.199.629-.469.649-.853.023-.4-.2-.811-.714-1.376v-.097l-.003-.003c-.17-.2-.25-.535-.338-.926-.085-.401-.182-.786-.492-1.046h-.003c-.059-.054-.123-.067-.188-.135a.357.357 0 00-.19-.064c.431-1.278.264-2.55-.173-3.694-.533-1.41-1.465-2.638-2.175-3.483-.796-1.005-1.576-1.957-1.56-3.368.026-2.152.236-6.133-3.544-6.139zm.529 3.405h.013c.213 0 .396.062.584.198.19.135.33.332.438.533.105.259.158.459.166.724 0-.02.006-.04.006-.06v.105a.086.086 0 01-.004-.021l-.004-.024a1.807 1.807 0 01-.15.706.953.953 0 01-.213.335.71.71 0 00-.088-.042c-.104-.045-.198-.064-.284-.133a1.312 1.312 0 00-.22-.066c.05-.06.146-.133.183-.198.053-.128.082-.264.088-.402v-.02a1.21 1.21 0 00-.061-.4c-.045-.134-.101-.2-.183-.333-.084-.066-.167-.132-.267-.132h-.016c-.093 0-.176.03-.262.132a.8.8 0 00-.205.334 1.18 1.18 0 00-.09.4v.019c.002.089.008.179.02.267-.193-.067-.438-.135-.607-.202a1.635 1.635 0 01-.018-.2v-.02a1.772 1.772 0 01.15-.768c.082-.22.232-.406.43-.533a.985.985 0 01.594-.2zm-2.962.059h.036c.142 0 .27.048.399.135.146.129.264.288.344.465.09.199.14.4.153.667v.004c.007.134.006.2-.002.266v.08c-.03.007-.056.018-.083.024-.152.055-.274.135-.393.2.012-.09.013-.18.003-.267v-.015c-.012-.133-.04-.2-.082-.333a.613.613 0 00-.166-.267.248.248 0 00-.183-.064h-.021c-.071.006-.13.04-.186.132a.552.552 0 00-.12.27.944.944 0 00-.023.33v.015c.012.135.037.2.08.334.046.134.098.2.166.268.01.009.02.018.034.024-.07.057-.117.07-.176.136a.304.304 0 01-.131.068 2.62 2.62 0 01-.275-.402 1.772 1.772 0 01-.155-.667 1.759 1.759 0 01.08-.668 1.43 1.43 0 01.283-.535c.128-.133.26-.2.418-.2zm1.37 1.706c.332 0 .733.065 1.216.399.293.2.523.269 1.052.468h.003c.255.136.405.266.478.399v-.131a.571.571 0 01.016.47c-.123.31-.516.643-1.063.842v.002c-.268.135-.501.333-.775.465-.276.135-.588.292-1.012.267a1.139 1.139 0 01-.448-.067 3.566 3.566 0 01-.322-.198c-.195-.135-.363-.332-.612-.465v-.005h-.005c-.4-.246-.616-.512-.686-.71-.07-.268-.005-.47.193-.6.224-.135.38-.271.483-.336.104-.074.143-.102.176-.131h.002v-.003c.169-.202.436-.47.839-.601.139-.036.294-.065.466-.065zm2.8 2.142c.358 1.417 1.196 3.475 1.735 4.473.286.534.855 1.659 1.102 3.024.156-.005.33.018.513.064.646-1.671-.546-3.467-1.089-3.966-.22-.2-.232-.335-.123-.335.59.534 1.365 1.572 1.646 2.757.13.535.16 1.104.021 1.67.067.028.135.06.205.067 1.032.534 1.413.938 1.23 1.537v-.043c-.06-.003-.12 0-.18 0h-.016c.151-.467-.182-.825-1.065-1.224-.915-.4-1.646-.336-1.77.465-.008.043-.013.066-.018.135-.068.023-.139.053-.209.064-.43.268-.662.669-.793 1.187-.13.533-.17 1.156-.205 1.869v.003c-.02.334-.17.838-.319 1.35-1.5 1.072-3.58 1.538-5.348.334a2.645 2.645 0 00-.402-.533 1.45 1.45 0 00-.275-.333c.182 0 .338-.03.465-.067a.615.615 0 00.314-.334c.108-.267 0-.697-.345-1.163-.345-.467-.931-.995-1.788-1.521-.63-.4-.986-.87-1.15-1.396-.165-.534-.143-1.085-.015-1.645.245-1.07.873-2.11 1.274-2.763.107-.065.037.135-.408.974-.396.751-1.14 2.497-.122 3.854a8.123 8.123 0 01.647-2.876c.564-1.278 1.743-3.504 1.836-5.268.048.036.217.135.289.202.218.133.38.333.59.465.21.201.477.335.876.335.039.003.075.006.11.006.412 0 .73-.134.997-.268.29-.134.52-.334.74-.4h.005c.467-.135.835-.402 1.044-.7zm2.185 8.958c.037.6.343 1.245.882 1.377.588.134 1.434-.333 1.791-.765l.211-.01c.315-.007.577.01.847.268l.003.003c.208.199.305.53.391.876.085.4.154.78.409 1.066.486.527.645.906.636 1.14l.003-.007v.018l-.003-.012c-.015.262-.185.396-.498.595-.63.401-1.746.712-2.457 1.57-.618.737-1.37 1.14-2.036 1.191-.664.053-1.237-.2-1.574-.898l-.005-.003c-.21-.4-.12-1.025.056-1.69.176-.668.428-1.344.463-1.897.037-.714.076-1.335.195-1.814.12-.465.308-.797.641-.984l.045-.022zm-10.814.049h.01c.053 0 .105.005.157.014.376.055.706.333 1.023.752l.91 1.664.003.003c.243.533.754 1.064 1.189 1.637.434.598.77 1.131.729 1.57v.006c-.057.744-.48 1.148-1.125 1.294-.645.135-1.52.002-2.395-.464-.968-.536-2.118-.469-2.857-.602-.369-.066-.61-.2-.723-.4-.11-.2-.113-.602.123-1.23v-.004l.002-.003c.117-.334.03-.752-.027-1.118-.055-.401-.083-.71.043-.94.16-.334.396-.4.69-.533.294-.135.64-.202.915-.47h.002v-.002c.256-.268.445-.601.668-.838.19-.201.38-.336.663-.336zm7.159-9.074c-.435.201-.945.535-1.488.535-.542 0-.97-.267-1.28-.466-.154-.134-.28-.268-.373-.335-.164-.134-.144-.333-.074-.333.109.016.129.134.199.2.096.066.215.2.36.333.292.2.68.467 1.167.467.485 0 1.053-.267 1.398-.466.195-.135.445-.334.648-.467.156-.136.149-.267.279-.267.128.016.034.134-.147.332a8.097 8.097 0 01-.69.468zm-1.082-1.583V5.64c-.006-.02.013-.042.029-.05.074-.043.18-.027.26.004.063 0 .16.067.15.135-.006.049-.085.066-.135.066-.055 0-.092-.043-.141-.068-.052-.018-.146-.008-.163-.065zm-.551 0c-.02.058-.113.049-.166.066-.047.025-.086.068-.14.068-.05 0-.13-.02-.136-.068-.01-.066.088-.133.15-.133.08-.031.184-.047.259-.005.019.009.036.03.03.05v.02h.003z"></path>
+              </symbol>
+              <symbol id="si-vercel" viewBox="0 0 24 24">
+                <path d="m12 1.608 12 20.784H0Z"></path>
+              </symbol>
+              <symbol id="si-gemini" viewBox="0 0 24 24">
+                <path d="M11.04 19.32Q12 21.51 12 24q0-2.49.93-4.68.96-2.19 2.58-3.81t3.81-2.55Q21.51 12 24 12q-2.49 0-4.68-.93a12.3 12.3 0 0 1-3.81-2.58 12.3 12.3 0 0 1-2.58-3.81Q12 2.49 12 0q0 2.49-.96 4.68-.93 2.19-2.55 3.81a12.3 12.3 0 0 1-3.81 2.58Q2.49 12 0 12q2.49 0 4.68.96 2.19.93 3.81 2.55t2.55 3.81"></path>
+              </symbol>
+            </defs>
+          </svg>
+          <div className="skills-group">
+            <h3 className="skills-group-title">Frontend</h3>
+            <div className="skill-tags">
+              <span className="skill-tag" style={{ "--brand": "#E34F26" }}>
+                <svg className="skill-icon" aria-hidden="true" focusable="false">
+                  <use href="#si-html5"></use>
+                </svg>
+                <span className="skill-name">HTML</span>
+              </span>
+              {' '}
+              <span className="skill-tag" style={{ "--brand": "#1572B6" }}>
+                <svg className="skill-icon" aria-hidden="true" focusable="false">
+                  <use href="#si-css"></use>
+                </svg>
+                <span className="skill-name">CSS</span>
+              </span>
+              {' '}
+              <span className="skill-tag" style={{ "--brand": "#F7DF1E" }}>
+                <svg className="skill-icon" aria-hidden="true" focusable="false">
+                  <use href="#si-js"></use>
+                </svg>
+                <span className="skill-name">JavaScript</span>
+              </span>
+              {' '}
+              <span className="skill-tag" style={{ "--brand": "#3178C6" }}>
+                <svg className="skill-icon" aria-hidden="true" focusable="false">
+                  <use href="#si-ts"></use>
+                </svg>
+                <span className="skill-name">TypeScript</span>
+              </span>
+              {' '}
+              <span className="skill-tag" style={{ "--brand": "#61DAFB" }}>
+                <svg className="skill-icon" aria-hidden="true" focusable="false">
+                  <use href="#si-react"></use>
+                </svg>
+                <span className="skill-name">React</span>
+              </span>
+              {' '}
+              <span className="skill-tag" style={{ "--brand": "#FFFFFF" }}>
+                <svg className="skill-icon" aria-hidden="true" focusable="false">
+                  <use href="#si-next"></use>
+                </svg>
+                <span className="skill-name">Next.js</span>
+              </span>
+              {' '}
+              <span className="skill-tag" style={{ "--brand": "#DD0031" }}>
+                <svg className="skill-icon" aria-hidden="true" focusable="false">
+                  <use href="#si-angular"></use>
+                </svg>
+                <span className="skill-name">Angular</span>
+              </span>
+            </div>
+          </div>
+          <div className="skills-group">
+            <h3 className="skills-group-title">Backend</h3>
+            <div className="skill-tags">
+              <span className="skill-tag" style={{ "--brand": "#5FA04E" }}>
+                <svg className="skill-icon" aria-hidden="true" focusable="false">
+                  <use href="#si-node"></use>
+                </svg>
+                <span className="skill-name">Node.js</span>
+              </span>
+              {' '}
+              <span className="skill-tag" style={{ "--brand": "#E8EAED" }}>
+                <svg className="skill-icon" aria-hidden="true" focusable="false">
+                  <use href="#si-express"></use>
+                </svg>
+                <span className="skill-name">Express.js</span>
+              </span>
+              {' '}
+              <span className="skill-tag" style={{ "--brand": "#4B8BBE" }}>
+                <svg className="skill-icon" aria-hidden="true" focusable="false">
+                  <use href="#si-python"></use>
+                </svg>
+                <span className="skill-name">Python</span>
+              </span>
+              {' '}
+              <span className="skill-tag" style={{ "--brand": "#3BABC3" }}>
+                <svg className="skill-icon" aria-hidden="true" focusable="false">
+                  <use href="#si-flask"></use>
+                </svg>
+                <span className="skill-name">Flask</span>
+              </span>
+              {' '}
+              <span className="skill-tag" style={{ "--brand": "#EA2D2E" }}>
+                <svg className="skill-icon" aria-hidden="true" focusable="false">
+                  <use href="#si-java"></use>
+                </svg>
+                <span className="skill-name">Java</span>
+              </span>
+              {' '}
+              <span className="skill-tag" style={{ "--brand": "#5A9BD5" }}>
+                <svg className="skill-icon" aria-hidden="true" focusable="false">
+                  <use href="#si-mysql"></use>
+                </svg>
+                <span className="skill-name">MySQL</span>
+              </span>
+              {' '}
+              <span className="skill-tag" style={{ "--brand": "#47A248" }}>
+                <svg className="skill-icon" aria-hidden="true" focusable="false">
+                  <use href="#si-mongodb"></use>
+                </svg>
+                <span className="skill-name">MongoDB</span>
+              </span>
+            </div>
+          </div>
+          <div className="skills-group">
+            <h3 className="skills-group-title">Tools &amp; Platforms</h3>
+            <div className="skill-tags">
+              <span className="skill-tag" style={{ "--brand": "#F03C2E" }}>
+                <svg className="skill-icon" aria-hidden="true" focusable="false">
+                  <use href="#si-git"></use>
+                </svg>
+                <span className="skill-name">Git</span>
+              </span>
+              {' '}
+              <span className="skill-tag" style={{ "--brand": "#E8EAED" }}>
+                <svg className="skill-icon" aria-hidden="true" focusable="false">
+                  <use href="#si-github"></use>
+                </svg>
+                <span className="skill-name">GitHub</span>
+              </span>
+              {' '}
+              <span className="skill-tag" style={{ "--brand": "#22A6F1" }}>
+                <svg className="skill-icon" aria-hidden="true" focusable="false">
+                  <use href="#si-vscode"></use>
+                </svg>
+                <span className="skill-name">VS Code</span>
+              </span>
+              {' '}
+              <span className="skill-tag" style={{ "--brand": "#FCC624" }}>
+                <svg className="skill-icon" aria-hidden="true" focusable="false">
+                  <use href="#si-linux"></use>
+                </svg>
+                <span className="skill-name">Linux</span>
+              </span>
+              {' '}
+              <span className="skill-tag" style={{ "--brand": "#FFFFFF" }}>
+                <svg className="skill-icon" aria-hidden="true" focusable="false">
+                  <use href="#si-vercel"></use>
+                </svg>
+                <span className="skill-name">Vercel</span>
+              </span>
+              {' '}
+              <span className="skill-tag" style={{ "--brand": "#A78BFA" }}>
+                <svg className="skill-icon" aria-hidden="true" focusable="false">
+                  <use href="#si-gemini"></use>
+                </svg>
+                <span className="skill-name">Gemini API</span>
+              </span>
+            </div>
+          </div>
+        </section>
+        <section id="projects">
+          <h2 className="section-heading">Projects</h2>
+          <p className="section-subtext">
+            Selected full-stack and AI-powered projects. Full details, source code and live demos linked.
+          </p>
+          <div className="projects-list" id="projects-container">
+            <div className="project-row" id="ai-explains-repo">
+              <img src="src/assets/projects/ai-explains-repo.webp?v=a556ecf7" alt="Screenshot of AI Explains Repo home page" className="project-row-thumb" width="640" height="400" loading="lazy" decoding="async" />
+              <div className="project-row-top">
+                <h3 className="project-row-title">AI Explains Repo</h3>
+                <div className="project-row-links">
+                  <a href="https://github.com/vikky2810/ai-explains-repo" target="_blank" rel="noopener" className="project-code" aria-label="GitHub repository for AI Explains Repo">
+                    {" GitHub "}
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                      <path d="M12 .3a12 12 0 0 0-3.8 23.38c.6.12.83-.26.83-.57v-2c-3.34.72-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.08-.75.09-.73.09-.73 1.2.09 1.83 1.24 1.83 1.24 1.07 1.83 2.81 1.3 3.5.99.1-.78.42-1.3.76-1.6-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.14-.3-.54-1.52.1-3.18 0 0 1-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.28-1.55 3.29-1.23 3.29-1.23.65 1.66.24 2.88.12 3.18.77.84 1.23 1.91 1.23 3.22 0 4.61-2.8 5.63-5.48 5.92.42.36.81 1.1.81 2.22v3.29c0 .31.21.69.83.57A12 12 0 0 0 12 .3z"></path>
+                    </svg>
+                  </a>
+                  {' '}
+                  <a href="https://ai-explains-repo.vercel.app/" target="_blank" rel="noopener" className="project-live" aria-label="Live demo of AI Explains Repo">
+                    {" Live "}
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                      <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                      <polyline points="15 3 21 3 21 9"></polyline>
+                      <line x1="10" y1="14" x2="21" y2="3"></line>
+                    </svg>
+                  </a>
+                </div>
+              </div>
+              <p className="project-row-desc">
+                Full-stack Next.js app that ingests GitHub repository data and generates AI-powered reports on code quality, architecture, security risks, and performance via the Gemini API, with authenticated session history.
+              </p>
+              <div className="project-row-tags">
+                <span className="project-tag">Next.js</span>
+                {' '}
+                <span className="project-tag">Gemini API</span>
+              </div>
+            </div>
+            <div className="project-row" id="online-python-code-editor">
+              <img src="src/assets/projects/online-python-code-editor.webp?v=df6fe76b" alt="Screenshot of Online Python Code Editor home page" className="project-row-thumb" width="640" height="400" loading="lazy" decoding="async" />
+              <div className="project-row-top">
+                <h3 className="project-row-title">Online Python Code Editor</h3>
+                <div className="project-row-links">
+                  <a href="https://github.com/vikky2810/OnlineCodeEditor" target="_blank" rel="noopener" className="project-code" aria-label="GitHub repository for Online Python Code Editor">
+                    {" GitHub "}
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                      <path d="M12 .3a12 12 0 0 0-3.8 23.38c.6.12.83-.26.83-.57v-2c-3.34.72-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.08-.75.09-.73.09-.73 1.2.09 1.83 1.24 1.83 1.24 1.07 1.83 2.81 1.3 3.5.99.1-.78.42-1.3.76-1.6-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.14-.3-.54-1.52.1-3.18 0 0 1-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.28-1.55 3.29-1.23 3.29-1.23.65 1.66.24 2.88.12 3.18.77.84 1.23 1.91 1.23 3.22 0 4.61-2.8 5.63-5.48 5.92.42.36.81 1.1.81 2.22v3.29c0 .31.21.69.83.57A12 12 0 0 0 12 .3z"></path>
+                    </svg>
+                  </a>
+                  {' '}
+                  <a href="https://viks-online-code-editor.vercel.app/" target="_blank" rel="noopener" className="project-live" aria-label="Live demo of Online Python Code Editor">
+                    {" Live "}
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                      <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                      <polyline points="15 3 21 3 21 9"></polyline>
+                      <line x1="10" y1="14" x2="21" y2="3"></line>
+                    </svg>
+                  </a>
+                </div>
+              </div>
+              <p className="project-row-desc">
+                Browser-based Python editor built with Flask and CodeMirror that executes user code server-side and streams output back in real time, with syntax highlighting, error handling, and a responsive dark UI.
+              </p>
+              <div className="project-row-tags">
+                <span className="project-tag">Python</span>
+                {' '}
+                <span className="project-tag">Flask</span>
+                {' '}
+                <span className="project-tag">CodeMirror</span>
+              </div>
+            </div>
+            <div className="project-row" id="varch-dsl-to-diagrams">
+              <img src="src/assets/projects/varch-dsl-to-diagrams.webp?v=0d6fe241" alt="Screenshot of the VArch home page with a live DSL editor rendering an architecture diagram" className="project-row-thumb" width="640" height="400" loading="lazy" decoding="async" />
+              <div className="project-row-top">
+                <h3 className="project-row-title">VArch: DSL to Architecture Diagrams</h3>
+                <div className="project-row-links">
+                  <a href="https://dsl-to-diagrams.vercel.app/" target="_blank" rel="noopener" className="project-live" aria-label="Live demo of VArch">
+                    {" Live "}
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                      <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                      <polyline points="15 3 21 3 21 9"></polyline>
+                      <line x1="10" y1="14" x2="21" y2="3"></line>
+                    </svg>
+                  </a>
+                </div>
+              </div>
+              <p className="project-row-desc">
+                {"A small text DSL for software architecture diagrams. Write lines like "}
+                <code>db userDB</code>
+                {" or "}
+                <code>api -&gt; db1 "Read/Write"</code>
+                {" and the browser renders a clean, auto-laid-out diagram with dagre. No boxes to drag, and diagrams can be exported."}
+              </p>
+              <div className="project-row-tags">
+                <span className="project-tag">React</span>
+                {' '}
+                <span className="project-tag">TypeScript</span>
+                {' '}
+                <span className="project-tag">Dagre</span>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section id="blogs">
+          <h2 className="section-heading">Blog</h2>
+          <p className="section-subtext">
+            Technical notes on web development, Python, SQL vs NoSQL, and building AI-powered apps.
+          </p>
+          <div className="blogs-container" id="blogs-container">
+            <a className="blog-row" href="blog/dont-use-boolean-in-database/">
+              <div className="blog-row-main">
+                <h3 className="blog-row-title">Don't Use Boolean Values in Your Database</h3>
+                <p className="blog-row-desc">
+                  isPaid works until a payment is pending, refunded or half paid. Why one status column with a CHECK constraint beats a pile of boolean flags.
+                </p>
+                <span className="blog-row-date">Oct 19, 2026 · Backend · 2 min read</span>
+              </div>
+              <span className="blog-row-more">Read more</span>
+            </a>
+            {' '}
+            <a className="blog-row" href="blog/local-large-file-upload-tracker/">
+              <div className="blog-row-main">
+                <h3 className="blog-row-title">Trying to Build a Local Large File Upload Tracker</h3>
+                <p className="blog-row-desc">
+                  Sending a 1-2 GB file in one request fails at 98% with no resume. Here's how I split it into 5MB chunks with Express, multer, and retry logic.
+                </p>
+                <span className="blog-row-date">Sep 18, 2026 · Backend · 5 min read</span>
+              </div>
+              <span className="blog-row-more">Read more</span>
+            </a>
+            {' '}
+            <a className="blog-row" href="blog/cpp-vs-node/">
+              <div className="blog-row-main">
+                <h3 className="blog-row-title">I Tried to Beat Node.js with C++. It Didn't Go as Expected.</h3>
+                <p className="blog-row-desc">
+                  Crow gave me 5k req/sec. Node gave me 12k. Then uWebSockets gave me 57k. A benchmark story about C++, Node.js, and picking the right library.
+                </p>
+                <span className="blog-row-date">Sep 15, 2026 · Backend · 5 min read</span>
+              </div>
+              <span className="blog-row-more">Read more</span>
+            </a>
+            {' '}
+            <a className="blog-row" href="blog/building-with-gemini-api/">
+              <div className="blog-row-main">
+                <h3 className="blog-row-title">Building With the Gemini API: The Part the Docs Don't Cover</h3>
+                <p className="blog-row-desc">
+                  The quickstart gets you a working call in ten lines. Everything that actually broke happened somewhere else: what to send, reading real error bodies, and a response that came back empty.
+                </p>
+                <span className="blog-row-date">Sep 12, 2026 · AI · 8 min read</span>
+              </div>
+              <span className="blog-row-more">Read more</span>
+            </a>
+            {' '}
+            <a className="blog-row" href="blog/sql-vs-nosql/">
+              <div className="blog-row-main">
+                <h3 className="blog-row-title">SQL vs NoSQL: I've Shipped Both, Here's How I Actually Decide</h3>
+                <p className="blog-row-desc">
+                  Most SQL vs NoSQL posts are a comparison chart copied from the docs. This one is a decision process, built from shipping real projects on both MySQL and MongoDB, with code, trade-offs, and a flowchart you can follow.
+                </p>
+                <span className="blog-row-date">Jun 20, 2026 · Backend · 10 min read</span>
+              </div>
+              <span className="blog-row-more">Read more</span>
+            </a>
+            {' '}
+            <a className="blog-row" href="blog/library-vs-framework/">
+              <div className="blog-row-main">
+                <h3 className="blog-row-title">
+                  Library vs Framework: The Real Difference Every Developer Should Know
+                </h3>
+                <p className="blog-row-desc">
+                  Understanding the difference between a library and a framework is crucial for developers. Beginner-friendly explanations, real-world analogies, and practical React and Next.js examples.
+                </p>
+                <span className="blog-row-date">Oct 18, 2025 · Web Development · 8 min read</span>
+              </div>
+              <span className="blog-row-more">Read more</span>
+            </a>
+            <noscript>
+              <p>
+                <a href="blog/">Read all blog posts</a>
+                : SQL vs NoSQL decision guide (MySQL vs MongoDB) and Library vs Framework explained with React and Next.js examples.
+              </p>
+            </noscript>
+          </div>
+          <div className="blogs-showall">
+            <a href="blog/" className="showall-btn">Show all blogs</a>
+          </div>
+        </section>
+        {/* TODO (Certifications): reuse the .exp-list / .exp-row pattern from Experience — add only real, verifiable items
+           with issuer + year, e.g. <span class="exp-role">Issuer · Year</span>. */}
+        <section id="contact">
+          <h2 className="section-heading">Get in touch</h2>
+          <p className="contact-lead">
+            Have a project in mind, or just want to say hi? My inbox is always open, and I'll try to get back to you.
+          </p>
+          <div className="contact-links">
+            <a href="mailto:kamblevikram2810@gmail.com" className="contact-link-row">
+              <span className="contact-link-label">
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+                  <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+                </svg>
+                {" Email "}
+              </span>
+              {' '}
+              <span className="contact-link-value">kamblevikram2810@gmail.com</span>
+            </a>
+            {' '}
+            <a href="https://linkedin.com/in/vikram-kamble-888933264" target="_blank" rel="noopener" className="contact-link-row">
+              <span className="contact-link-label">
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.63-1.85 3.36-1.85 3.59 0 4.25 2.36 4.25 5.43v6.31zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.55V9h3.57v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z"></path>
+                </svg>
+                {" LinkedIn "}
+              </span>
+              {' '}
+              <span className="contact-link-value">@vikram-kamble</span>
+            </a>
+            {' '}
+            <a href="https://github.com/vikky2810" target="_blank" rel="noopener" className="contact-link-row">
+              <span className="contact-link-label">
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 .3a12 12 0 0 0-3.8 23.38c.6.12.83-.26.83-.57v-2c-3.34.72-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.08-.75.09-.73.09-.73 1.2.09 1.83 1.24 1.83 1.24 1.07 1.83 2.81 1.3 3.5.99.1-.78.42-1.3.76-1.6-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.14-.3-.54-1.52.1-3.18 0 0 1-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.28-1.55 3.29-1.23 3.29-1.23.65 1.66.24 2.88.12 3.18.77.84 1.23 1.91 1.23 3.22 0 4.61-2.8 5.63-5.48 5.92.42.36.81 1.1.81 2.22v3.29c0 .31.21.69.83.57A12 12 0 0 0 12 .3z"></path>
+                </svg>
+                {" GitHub "}
+              </span>
+              {' '}
+              <span className="contact-link-value">@vikky2810</span>
+            </a>
+          </div>
+        </section>
+      </main>
+      <footer className="site-footer">
+        <div className="footer-inner">
+          <span className="footer-name">Vikram Kamble</span>
+          <p className="footer-copy">
+            {"© "}
+            <FooterYear buildYear={new Date().getFullYear()} />
+            {" · Built with "}
+            <span style={{ color: "#ef4444" }}>♥</span>
+            {" and code."}
+          </p>
+        </div>
+      </footer>
+      {/* Progressive blur/fade at the bottom edge of the viewport */}
+      <div className="scroll-fade" aria-hidden="true">
+        <div className="scroll-fade__layer"></div>
+        <div className="scroll-fade__layer"></div>
+        <div className="scroll-fade__layer"></div>
+        <div className="scroll-fade__layer"></div>
+        <div className="scroll-fade__layer"></div>
+        <div className="scroll-fade__layer"></div>
+        <div className="scroll-fade__tint"></div>
+      </div>
+      <HomeEffects />
+    </>
+  );
+}

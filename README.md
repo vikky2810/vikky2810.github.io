@@ -1,149 +1,99 @@
-# Vikram Kamble's Portfolio 🤓
+# Vikram Kamble's Portfolio
 
-Welcome to Vikram Kamble's portfolio! This is a **static website** showcasing Vikram's skills, experiences, and projects.
+The source for https://vikky2810.github.io: a portfolio and blog built with Next.js
+(App Router) and exported as a static site to GitHub Pages.
 
-## 🚀 Quick Start
+## Local development
 
-### Local Development
+Requires Node.js 22.
+
 ```bash
-# Option 1: Using Python (if you have Python installed)
-python -m http.server 8000
-
-# Option 2: Using Node.js (if you have Node.js installed)
-npx http-server -p 8000
-
-# Option 3: Using npm script
-npm run serve
+npm install
+npm run dev        # http://localhost:3000, reloads as you edit
+npm run build      # static export to out/
+npm start          # serve out/ locally (close to GitHub Pages, not identical)
+npm run typecheck
+npm run check:html # validate the HTML in out/ (run after a build)
 ```
 
-Then open `http://localhost:8000` in your browser.
+## Deployment
 
-### Deployment
-This is a **static site** that can be deployed to any static hosting service:
+Every push to `main` runs `.github/workflows/deploy.yml`. It builds the site and
+publishes `out/` to GitHub Pages, so the domain stays https://vikky2810.github.io.
+The repository's Pages source must be set to **GitHub Actions** (Settings > Pages >
+Build and deployment > Source).
 
-- **GitHub Pages** (already configured)
-- **Netlify** - Drag and drop the folder
-- **Vercel** - Connect your GitHub repository
-- **Firebase Hosting**
-- **AWS S3 + CloudFront**
+`next.config.ts` sets `output: 'export'`, so there is no server: every page is
+prerendered at build time. It also sets `trailingSlash: true`, which keeps every URL a
+directory with its own `index.html` (`/blog/sql-vs-nosql/`), matching the URLs search
+engines already know.
 
-## 📁 Project Structure
+`wrangler.jsonc` deploys the same `out/` directory to Cloudflare. Its `build.command`
+runs `npm run build` first.
+
+`.github/workflows/checks.yml` builds the site and then checks links (lychee), HTML
+validity (html-validate) and Lighthouse scores against `out/` on every pull request.
+
+## Project structure
 
 ```
-vikky2810.github.io/
-├── index.html              # Main HTML file
-├── 404.html                # Not-found page
-├── blog/                   # Blog: index + one folder per post (canonical URLs)
-│   ├── index.html
-│   ├── <post-slug>/index.html
-│   ├── post.css / post.js  # Shared post styles and scripts
-│   └── style.css           # Blog index styles
-├── src/
-│   ├── style.css           # Main stylesheet
-│   ├── mediaqueries.css    # Responsive design
-│   ├── script.js           # JavaScript functionality
-│   ├── analytics.js        # Plausible analytics (see below)
-│   ├── assets/             # Images, resume PDF, icons
-│   ├── blog/               # Redirect bridges for old blog URLs - do not delete
-│   └── Projects/           # Noindexed placeholder page
-├── sitemap.xml, feed.xml, robots.txt, llms.txt
-├── package.json            # Project configuration
-└── README.md              # This file
+app/
+  layout.tsx              Root layout: fonts, analytics
+  page.tsx                Home page
+  blog/page.tsx           Blog listing
+  blog/[slug]/page.tsx    One page per post in content/blog/
+  global-not-found.tsx    404 page (exported as out/404.html)
+  feed.xml/route.ts       RSS feed, generated from the posts
+  sitemap.ts              sitemap.xml, generated from the posts
+components/               Client components: mobile menu, copy-email button,
+                          link previews, code copy buttons, scroll effects
+lib/
+  posts.ts                Loads and validates content/blog/<slug>/post.json + body.html
+  code-blocks.ts          Build-time Prism highlighting and Copy-button markup
+  seo.tsx                 Shared head metadata and JSON-LD helper
+styles/                   Global CSS, imported by the page that uses it
+content/blog/<slug>/      Blog post sources (see BLOG_GUIDE.md)
+public/                   Served as-is: images, fonts, resume, robots.txt, llms.txt,
+                          analytics.js and the old-URL bridge pages under src/
+crosspost/                Post copies for dev.to and Medium (not deployed)
 ```
 
-### Old URL redirects (keep these files)
+Asset URLs did not change in the migration. Files under `public/src/assets/` are
+still served at `/src/assets/`.
+
+Pages link to each other with plain `<a>` tags, not `next/link`. Each page imports
+its own global stylesheet (`styles/style.css`, `styles/blog-index.css`,
+`styles/post.css`), and a full page load keeps those stylesheets from stacking up
+across pages.
+
+## Old URL redirects (keep these files)
 The blog used to live under `src/blog/`. It moved to `/blog/`, but GitHub Pages
 cannot send real 301 redirects, so the old URLs are kept alive with small bridge
 pages instead:
 
-- `src/blog/index.html`, `src/blog/library-vs-framework.html` and
-  `src/blog/sql-vs-nosql.html` each carry a `rel="canonical"` pointing at the new
+- `public/src/blog/index.html`, `public/src/blog/library-vs-framework.html` and
+  `public/src/blog/sql-vs-nosql.html` each carry a `rel="canonical"` pointing at the new
   URL plus a `meta http-equiv="refresh"` that sends visitors there. The canonical
   moves the search ranking over, the refresh moves people. They are deliberately
   not `noindex`, since that would stop the canonical from doing its job.
-- `src/blog/blog.html` handles the older `blog.html?id=N` links with a tiny
+- `public/src/blog/blog.html` handles the older `blog.html?id=N` links with a tiny
   script that maps the id to the right post.
 
-They look like dead files but they are not. Deleting them breaks every old link
+They are plain HTML files, copied into the build as they are. They look like dead files but they are not. Deleting them breaks every old link
 and bookmark that still points at `src/blog/`.
 
-`src/Projects/index.html` is not a redirect - it is a placeholder page marked
+`public/src/Projects/index.html` is not a redirect - it is a placeholder page marked
 `noindex`.
 
-## 🎯 Features
-
-### ✅ Static Site Benefits
-- **No server required** - Pure HTML, CSS, and JavaScript
-- **Fast loading** - No backend processing
-- **Easy deployment** - Works on any static hosting
-- **SEO optimized** - Search engine friendly
-- **Mobile responsive** - Works on all devices
-
-### 📱 Responsive Design
-- Desktop navigation
-- Mobile hamburger menu
-- Optimized for all screen sizes
-
-### 🎨 Modern UI/UX
-- Clean, professional design
-- Smooth scrolling navigation
-- Hover effects and animations
-- Professional color scheme
-
-## 📋 Sections
-
-### Profile
-- Introduction and social links
-- Download CV functionality
-- Professional photo
-
-### About
-- Personal background
-- Experience summary
-- Professional interests
-
-### Experience
-- Frontend Development skills (HTML, CSS, JavaScript, React, Angular)
-- Backend Development skills (Node.js, Express.js, MySQL, MongoDB, Git)
-
-### Projects
-- Alpaca Image Generator (with live demo)
-- TicTacToe Game
-- Project in development
-
-### Contact
-- Email: kamblevikram2810@gmail.com
-- LinkedIn: [Vikram Kamble](https://linkedin.com/in/vikram-kamble-888933264)
-- GitHub: [vikky2810](https://github.com/vikky2810)
-
-## 🔧 Technical Details
-
-### Technologies Used
-- **HTML5** - Semantic markup
-- **CSS3** - Modern styling with Flexbox
-- **JavaScript** - Interactive functionality
-- **Responsive Design** - Mobile-first approach
-
-### Performance Optimizations
-- **Lazy loading** for images
-- **Optimized images** with proper sizing
-- **Minimal JavaScript** for fast loading
-- **CSS optimizations** for smooth animations
-
-### SEO Features
-- **Meta tags** for search engines
-- **Open Graph** tags for social sharing
-- **Structured data** (JSON-LD)
-- **Semantic HTML** structure
-
-### Analytics
-Plausible, configured in `src/analytics.js` and pulled in by every page with one
-`<script defer src="/src/analytics.js">` tag. It is cookieless, so the site needs
+## Analytics
+Plausible, configured in `public/src/analytics.js`. The root layout (`app/layout.tsx`)
+loads it on every page, and the static bridge pages in `public/src/` load it with their
+own `<script>` tag. It is cookieless, so the site needs
 no consent banner, and it ignores localhost so local testing does not skew the
 numbers.
 
 Page views, resume downloads and outbound clicks are tracked automatically. Three
-more goals are fired from `src/analytics.js`: `Contact Click` for `mailto:` links,
+more goals are fired from `public/src/analytics.js`: `Contact Click` for `mailto:` links,
 which Plausible does not count as outbound, and `Read 50%` / `Read 90%` for how far
 visitors actually get through a blog post. Views alone cannot tell a read from a
 bounce, so those two are what answer "which post is working" - filter either goal
@@ -161,69 +111,8 @@ otherwise they are collected but never charted:
 | `Read 90%` | Custom event |
 
 Swapping providers, or pasting in a newer Plausible snippet, is an edit to
-`src/analytics.js` alone - no page markup changes.
+`public/src/analytics.js` alone - no page markup changes.
 
-## 🌐 Deployment Options
-
-### GitHub Pages (Current)
-Your site is already deployed at: https://vikky2810.github.io
-
-### Netlify
-1. Go to [netlify.com](https://netlify.com)
-2. Drag and drop your project folder
-3. Get instant deployment
-
-### Vercel
-1. Connect your GitHub repository
-2. Automatic deployment on push
-3. Custom domain support
-
-### Firebase Hosting
-```bash
-npm install -g firebase-tools
-firebase login
-firebase init hosting
-firebase deploy
-```
-
-## 📈 Performance
-
-### PageSpeed Insights
-- **Mobile**: 90+ score
-- **Desktop**: 95+ score
-- **First Contentful Paint**: < 1.5s
-- **Largest Contentful Paint**: < 2.5s
-
-### Optimization Tips
-1. **Image optimization** - Use WebP format when possible
-2. **Minify CSS/JS** - Reduce file sizes
-3. **Enable compression** - Gzip/Brotli
-4. **Use CDN** - Faster global delivery
-
-## 🔄 Maintenance
-
-### Regular Updates
-- Keep project information current
-- Update skills and experience
-- Add new projects
-- Refresh design periodically
-
-### Version Control
-- All changes tracked in Git
-- Easy rollback if needed
-- Collaboration friendly
-
-## 📞 Support
-
-If you'd like to contribute or have questions:
-1. Fork the repository
-2. Make your changes
-3. Submit a pull request
-
-## 📄 License
+## License
 
 This project is open source and available under the [MIT License](LICENSE).
-
----
-
-**Thank you for visiting Vikram's portfolio!** 🚀

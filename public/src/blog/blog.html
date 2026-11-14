@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Post Moved - Vikram Kamble</title>
+    <meta name="robots" content="noindex, follow" />
+    <!-- Old blog.html?id=N links: every post now has its own page, so send visitors there -->
+    <script>
+        (function () {
+            var pages = { '1': '/blog/library-vs-framework/', '2': '/blog/sql-vs-nosql/' };
+            var id = new URLSearchParams(window.location.search).get('id');
+            window.location.replace(pages[id] || '/blog/');
+        })();
+    </script>
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
+    <link rel="icon" type="image/png" href="/src/assets/favicon-32x32.png" sizes="32x32" />
+    <link rel="apple-touch-icon" href="/src/assets/apple-touch-icon.png" sizes="180x180" />
+</head>
+
+<body>
+    <main class="blog-post">
+        <a href="/blog/" class="back-btn">← Back to Blog</a>
+        <div class="blog-content">
+            <p>This post has moved to its own page:</p>
+            <ul>
+                <li><a href="/blog/sql-vs-nosql/">SQL vs NoSQL: I've Shipped Both, Here's How I Actually Decide</a></li>
+                <li><a href="/blog/library-vs-framework/">Library vs Framework: The Real Difference Every Developer Should Know</a></li>
+            </ul>
+        </div>
+    </main>
+</body>
+
+</html>

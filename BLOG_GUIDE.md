@@ -1,13 +1,13 @@
 # Blog Management Guide
 
-Each blog post's page in `blog/` is generated, not hand-written. The source lives in
+Each blog post's page is generated, not hand-written. The source lives in
 `content/blog/<slug>/` as a `post.json` (title, dates, image, category, related posts —
-everything that varies) and a `body.html` (the article content). Running
-`node scripts/build-blog.mjs` combines those with `content/blog/template.html` and writes
-`blog/<slug>/index.html`, and also regenerates the post entries in `feed.xml` and
-`sitemap.xml`. The generation happens once, ahead of time, not in the browser — search
-engines still see the full post (title, meta tags, content) on first load, exactly as
-before.
+everything that varies) and a `body.html` (the article content). `npm run build` reads
+every folder there (`lib/posts.ts`), renders each post with `app/blog/[slug]/page.tsx`
+into `out/blog/<slug>/index.html`, and generates `feed.xml` (`app/feed.xml/route.ts`) and
+`sitemap.xml` (`app/sitemap.ts`) from the same data. The generation happens once, at
+build time, not in the browser — search engines still see the full post (title, meta
+tags, content) on first load.
 
 Current posts:
 
@@ -16,6 +16,9 @@ Current posts:
 | SQL vs NoSQL | `content/blog/sql-vs-nosql/` | https://vikky2810.github.io/blog/sql-vs-nosql/ |
 | Library vs Framework | `content/blog/library-vs-framework/` | https://vikky2810.github.io/blog/library-vs-framework/ |
 | Building With the Gemini API | `content/blog/building-with-gemini-api/` | https://vikky2810.github.io/blog/building-with-gemini-api/ |
+| I Tried to Beat Node.js with C++ | `content/blog/cpp-vs-node/` | https://vikky2810.github.io/blog/cpp-vs-node/ |
+| Local Large File Upload Tracker | `content/blog/local-large-file-upload-tracker/` | https://vikky2810.github.io/blog/local-large-file-upload-tracker/ |
+| Don't Use Boolean Values in Your Database | `content/blog/dont-use-boolean-in-database/` | https://vikky2810.github.io/blog/dont-use-boolean-in-database/ |
 
 ## ➕ Adding a New Blog Post
 
@@ -43,42 +46,39 @@ Current posts:
      page's content genuinely changed, the same rule as before
    - `readTimeMinutes`, shown as "N min read" and, when `includeReadingSchema` is
      `true`, also written into the JSON-LD as `wordCount`/`timeRequired`. The build
-     script estimates a read time from the body's word count (~200 wpm, rounded up)
+     estimates a read time from the body's word count (~200 wpm, rounded up)
      and logs a note when its estimate disagrees with this value — that's expected,
      not a bug; either keep the value you set or update it to match the note
    - `image`: `ogFile` and `pageFile` (filenames already in `src/assets/`, usually a
      `.png` for `og:image` and a `.webp` for the on-page cover), `width`/`height`,
-     `ogAlt`, `pageAlt`
+     `ogAlt`, `pageAlt`. Set `"noCoverImage": true` to leave the cover out of the page.
+     Images live in `public/src/assets/` and are served at `/src/assets/`
    - `authorBio` (copy the wording from the post it's closest to)
    - `related`: two cards — the most relevant other post, then a card pointing at
      `/#projects`
 
-### 2. Build the page
+### 2. Preview and build
 ```
-node scripts/build-blog.mjs
+npm run dev      # http://localhost:3000/blog/<slug>/, reloads as you edit
+npm run build    # writes the whole site to out/
 ```
-This writes `blog/<slug>/index.html` from the template and regenerates the post
-`<item>` entries in `feed.xml` and the post `<url>` entries in `sitemap.xml` (newest
-post first by `publishedDate`; `lastmod` is each post's `modifiedDate`). It's safe to
-re-run — with no source changes, running it again produces byte-identical output. It
-does not touch `llms.txt`, `blog/index.html`, or `index.html`.
-
-Asset `?v=<hash>` query strings (`style.css`, `post.css`, `analytics.js`, `post.js`)
-are copied verbatim from `content/blog/template.html`; if one of those files changed,
-re-run whatever stamps the new hash into the template, then rebuild.
+Posts are sorted newest first by `publishedDate`; each post's sitemap `lastmod` is its
+`modifiedDate`. Nothing generated is committed: `out/` is rebuilt by the deploy
+workflow on every push to `main`. The build does not touch `public/llms.txt`, the blog
+listing, or the home page.
 
 ### 3. What's still manual
-1. `blog/index.html`: add a `.blog-row` card (copy an existing one) at the top of the
+1. `app/blog/page.tsx`: add a `.blog-row` card (copy an existing one) at the top of the
    list.
-2. `index.html`: add the same card to the Blog section on the home page.
-3. `llms.txt`: add the post under "Blog posts".
+2. `app/page.tsx`: add the same card to the Blog section on the home page.
+3. `public/llms.txt`: add the post under "Blog posts".
 
 ### 4. After publishing
 In Google Search Console, open **URL Inspection**, paste the new URL and click **Request Indexing**.
 
 ### 5. Analytics
-Nothing to do. The template carries the `<script defer src="/src/analytics.js">` tag
-into every generated post, and read-depth tracking keys off the `.blog-content`
+Nothing to do. The root layout (`app/layout.tsx`) loads `/src/analytics.js` on every
+page, and read-depth tracking keys off the `.blog-content`
 wrapper, so a new post is measured the moment it ships.
 
 To see how the post lands, open Plausible and filter by its page: `Read 50%` and
@@ -94,8 +94,8 @@ site and gives Google nothing to connect it to. Every post needs all four:
 2. **Contextual links in the body**, still your responsibility in `body.html`. Wherever
    the post names one of the projects, link it:
    `<a href="../../#ai-explains-repo">AI Explains Repo</a>`. The anchor ids are the
-   project title, lowercased and hyphenated — `src/script.js` generates the same slug
-   when it re-renders the cards, so keep the two in sync.
+   project title, lowercased and hyphenated, set on each `.project-row` in
+   `app/page.tsx`, so keep the two in sync.
 3. **Related-posts cards**, generated from the `related` array in `post.json`.
 4. **Author box**, generated from `authorBio` in `post.json`.
 
@@ -112,22 +112,21 @@ signals.
 
 ## 🎨 Available Styling
 
-Styles live in `blog/post.css` and are shared by every post.
+Styles live in `styles/post.css` and are shared by every post.
 
 - `<h2>` for main sections, `<h3>` for subsections
-- **Code blocks**: `<pre class="code-block"><code class="language-js">...</code></pre>` (also `language-jsx`, `language-sql`). Escape `<` as `&lt;` and `>` as `&gt;` inside code.
+- **Code blocks**: `<pre class="code-block"><code class="language-js">...</code></pre>` (also `language-jsx`, `language-sql`). Highlighting happens at build time with Prism (`lib/code-blocks.ts`), which knows Prism's defaults plus `jsx` and `sql`; any other language, such as `language-cpp`, renders as plain text. Escape `<` as `&lt;` and `>` as `&gt;` inside code.
 - **Diagrams / plain text blocks**: `<pre class="code-block"><code>...</code></pre>` with no language class
 - **Tables**: wrap in `<div class="table-scroll">...</div>` so they scroll on mobile
 - **Callout boxes**: `<div class="warning">`, `<div class="info">`, `<div class="success">`, each with a `<p>` inside
 - **Quotes**: `<blockquote><p>...</p></blockquote>`
 
-`blog/post.js` adds a "Copy" button to code blocks; the post content does not depend on it.
+Every `<pre><code>` block gets a "Copy" button. `lib/code-blocks.ts` adds the button at build time and `components/code-copy.tsx` makes it copy; the post content does not depend on either.
 
 ## 💡 Tips
 
 - Keep the summary under ~160 characters so Google doesn't cut it off.
 - Never rename a published post's folder: its URL would change and Google would have to start over.
-- Test locally with `python -m http.server 8000` and open `http://localhost:8000/blog/`.
-- Don't hand-edit `blog/<slug>/index.html`, `feed.xml`'s `<item>`s, or `sitemap.xml`'s
-  post `<url>`s directly — they're overwritten the next time `build-blog.mjs` runs.
-  Edit the source in `content/blog/` instead.
+- Test locally with `npm run dev` and open `http://localhost:3000/blog/`.
+- Post pages, `feed.xml` and `sitemap.xml` only exist in `out/` after a build. Edit the
+  source in `content/blog/`, never the build output.

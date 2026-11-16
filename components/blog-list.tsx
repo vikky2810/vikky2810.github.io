@@ -64,7 +64,7 @@ export function BlogList({ posts, titleTag, byYear = false, more }: Props) {
       )}
       {more && (
         <a href={more.href} className="blog-index-all">
-          Read all {more.total} posts
+          Read all {more.total} posts →
         </a>
       )}
     </div>

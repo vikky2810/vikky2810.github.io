@@ -77,7 +77,15 @@ html {
   position: sticky;
   top: 0;
   z-index: 1000;
-  padding: 0.75rem 0;
+  /* Same 56px as the homepage nav, so the hatched side patches fit it */
+  box-sizing: border-box;
+  height: 56px;
+  display: flex;
+  align-items: center;
+}
+
+.blog-header .header-container {
+  width: 100%;
 }
 
 .header-container {
@@ -889,4 +897,9 @@ tbody td:first-child {
   .blog-header .header-container {
     padding: 0 1.5rem;
   }
+}
+
+/* Run the homepage's dashed column frame down the whole page, not just the list */
+main.framed {
+  min-height: calc(100vh - 56px);
 }

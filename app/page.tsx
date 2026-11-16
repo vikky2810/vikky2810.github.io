@@ -299,10 +299,7 @@ export default function HomePage() {
           <div className="skills-sheet">
             {SKILLS.map((group) => (
               <div className="skills-row" key={group.title}>
-                <h3 className="skills-group-title">
-                  {group.title}
-                  <span className="skills-count">{group.items.length}</span>
-                </h3>
+                <h3 className="skills-group-title">{group.title}</h3>
                 <ul className="skill-grid">
                   {group.items.map(([name, icon, brand]) => (
                     <li className="skill-cell" key={name} style={{ '--brand': brand }}>

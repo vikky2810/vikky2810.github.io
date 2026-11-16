@@ -65,6 +65,8 @@
 
 html {
   scroll-behavior: smooth;
+  /* Anchor jumps land below the 56px sticky nav, not under it */
+  scroll-padding-top: 56px;
 }
 
 body {
@@ -873,13 +875,6 @@ section {
   color: var(--text-primary);
   white-space: nowrap;
   border-right: 1px solid var(--rule);
-}
-
-.skills-count {
-  font-size: 0.75rem;
-  font-weight: 500;
-  color: var(--text-muted);
-  font-variant-numeric: tabular-nums;
 }
 
 .skill-grid {
@@ -2806,6 +2801,25 @@ footer {
   background: var(--bg-tertiary);
   margin-bottom: 0.25rem;
   display: block;
+}
+
+/* Screenshots rest in greyscale so three different app palettes read as one
+   set, and take their colour on hover, like the skills logos */
+.project-row-thumb {
+  filter: grayscale(1) brightness(0.9);
+  transition: filter 0.35s ease;
+}
+
+.project-row:hover .project-row-thumb,
+.project-row:focus-within .project-row-thumb {
+  filter: none;
+}
+
+/* No hover on touch screens: keep the colour */
+@media (hover: none) {
+  .project-row-thumb {
+    filter: none;
+  }
 }
 
 

@@ -558,7 +558,7 @@ section {
   .follow-note {
     position: absolute;
     right: calc(100% + 2.25rem);
-    bottom: 0.4rem;
+    bottom: 0.9rem;
     flex-direction: column;
     align-items: flex-start;
   }

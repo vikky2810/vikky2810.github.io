@@ -10,6 +10,7 @@ import { BlogList } from '@/components/blog-list';
 import { getPosts } from '@/lib/posts';
 import { JsonLd, OG_IMAGE, SITE_URL, pageMetadata } from '@/lib/seo';
 import '@/styles/style.css';
+import '@/styles/frame.css';
 
 const EMAIL = 'kamblevikram2810@gmail.com';
 
@@ -192,7 +193,7 @@ export default function HomePage() {
         <section id="about">
           <h2 className="section-heading">About</h2>
           <p className="about-text">
-            {"Hi, I am Vikram, a full stack developer who knows a little bit of backend, frontend, databases, a little bit of AI and is constantly trying to learn new things."}
+            {"Hi, I'm Vikram, a full stack developer working across the frontend, backend, databases and AI. I learn best by building, so most of what I know came from shipping something and fixing what broke."}
           </p>
           <p className="about-text">
             {"I have almost 2 years of experience (freelance + job) in software engineering."}

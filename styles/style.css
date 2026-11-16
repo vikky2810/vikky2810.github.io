@@ -115,12 +115,15 @@ a {
 
 /* DESKTOP NAV */
 
-nav,
+/* Scoped to the site navs: a bare `nav` would also catch the post breadcrumb */
+#desktop-nav,
+#hamburger-nav,
 .nav-links {
   display: flex;
 }
 
-nav {
+#desktop-nav,
+#hamburger-nav {
   justify-content: space-around;
   align-items: center;
   height: 56px;
@@ -136,7 +139,8 @@ nav {
 
 /* Browsers without backdrop-filter get the opaque bar instead of a see-through one */
 @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
-  nav {
+  #desktop-nav,
+  #hamburger-nav {
     background: var(--bg-primary);
   }
 }
@@ -254,6 +258,12 @@ a {
 
 a:hover {
   color: var(--text-primary);
+}
+
+/* One brand focus ring for keyboard users, instead of each browser's default */
+:focus-visible {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 3px;
 }
 
 /* Modern underline effect */
@@ -505,8 +515,8 @@ section {
   justify-content: center;
   background: none;
   border: none;
-  padding: 2px;
-  color: var(--text-muted);
+  padding: 4px;
+  color: var(--text-secondary);
   cursor: pointer;
   border-radius: 4px;
   transition: var(--transition-fast);
@@ -579,6 +589,9 @@ section {
   color: var(--text-secondary);
   display: inline-flex;
   align-items: center;
+  /* bigger tap area without moving the icons */
+  padding: 0.4rem;
+  margin: -0.4rem;
   transition: var(--transition-fast);
 }
 
@@ -588,18 +601,22 @@ section {
 }
 
 .profile-socials .resume-pill {
+  gap: 0.4rem;
   font-size: 0.85rem;
   font-weight: 600;
-  color: var(--text-primary);
-  border: 1px solid var(--border-color);
-  padding: 0.35rem 0.9rem;
+  color: var(--bg-primary);
+  background: var(--text-primary);
+  border: 1px solid var(--text-primary);
+  padding: 0.4rem 1rem;
   border-radius: var(--radius-full);
-  margin-left: 0.25rem;
+  margin: 0 0 0 0.25rem;
 }
 
-.profile-socials .resume-pill:hover {
+.profile-socials .resume-pill:hover,
+.profile-socials .resume-pill:focus-visible {
+  background: var(--primary-color);
   border-color: var(--primary-color);
-  color: var(--primary-color);
+  color: var(--bg-primary);
   transform: none;
 }
 
@@ -1038,7 +1055,7 @@ section {
   align-items: center;
   gap: 0.35rem;
   color: var(--text-secondary);
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   transition: var(--transition-fast);
 }
 
@@ -1105,12 +1122,14 @@ section {
 .site-footer {
   border-top: 1px solid var(--border-color);
   background: var(--bg-primary);
-  padding: 1.25rem 2rem;
+  padding: 1.25rem 0;
 }
 
+/* Same inset as the sections, so the footer text lines up with the content */
 .footer-inner {
   max-width: 760px;
   margin: 0 auto;
+  padding: 0 2rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -2466,6 +2485,8 @@ code {
 @media print {
 
   body::before,
+  body:has(main.framed)::before,
+  body:has(main.framed)::after,
   body::after,
   nav,
 #hamburger-nav,
@@ -2671,8 +2692,8 @@ footer {
 
   .nav-links {
     flex-wrap: nowrap;
-    gap: 0.9rem;
-    font-size: 0.6rem;
+    gap: 1.25rem;
+    font-size: 0.7rem;
     white-space: nowrap;
   }
 
@@ -2713,6 +2734,15 @@ footer {
   .profile-subtitle {
     font-size: 0.82rem;
     gap: 0.3rem 0.45rem;
+  }
+
+  /* The email wraps to its own line here, which would strand the dot */
+  .profile-subtitle .dot {
+    display: none;
+  }
+
+  .profile-email {
+    flex-basis: 100%;
   }
 
   .profile-bio {
@@ -2779,124 +2809,6 @@ footer {
 }
 
 
-/* DRAFTING FRAME
-   Dashed rules trace the content column's edges and each section boundary,
-   with a plus mark where they meet. */
-main.framed {
-  --column: 760px;
-  --dash: rgba(255, 255, 255, 0.14);
-  --mark: 15px;
-  --mark-color: rgba(255, 255, 255, 0.7);
-  position: relative;
-}
-
-main.framed::before,
-main.framed::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  width: 1px;
-  background: repeating-linear-gradient(180deg, var(--dash) 0 6px, transparent 6px 12px);
-  pointer-events: none;
-  z-index: 1;
-}
-
-main.framed::before {
-  left: calc(50% - var(--column) / 2);
-}
-
-main.framed::after {
-  left: calc(50% + var(--column) / 2);
-}
-
-main.framed > section + section::before {
-  content: "";
-  display: block;
-  height: 2.5rem;
-}
-
-/* The ::before spacer above is the whole gap under each divider; drop the
-   older per-section top padding so every section sits the same distance
-   below its divider */
-main.framed > section:is(#about, #work, #experience, #projects, #blogs, #contact) {
-  padding-top: 0;
-}
-
-/* Hatched patch in the nav bar, left of the column. Fixed and above the
-   sticky nav so the stripes stay crisp instead of going through its blur. */
-body::before {
-  content: "";
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: calc(50% - 379px); /* through the column's 1px left rule (760px column) */
-  height: 55px; /* nav height, minus its bottom border */
-  background:
-    /* solid rule on the column's left edge, from the top to the nav border */
-    linear-gradient(rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0.14)) 100% 0 / 1px 100% no-repeat,
-    repeating-linear-gradient(315deg, rgba(255, 255, 255, 0.07) 0 1px, transparent 0 50%) 0 0 / 10px 10px;
-  pointer-events: none;
-  z-index: 1001;
-}
-
-/* Matching solid rule on the column's right edge in the nav, no hatching */
-body::after {
-  content: "";
-  position: fixed;
-  top: 0;
-  left: calc(50% + 380px);
-  width: 1px;
-  height: 55px;
-  background: rgba(255, 255, 255, 0.14);
-  pointer-events: none;
-  z-index: 1001;
-}
-
-main.framed > section + section::after {
-  --arm: calc((var(--mark) - 1px) / 2);
-  content: "";
-  position: absolute;
-  top: calc(-1 * var(--arm));
-  left: calc(50% - var(--column) / 2 - var(--arm));
-  width: calc(var(--column) + var(--mark));
-  height: var(--mark);
-  background:
-    repeating-linear-gradient(90deg, var(--dash) 0 6px, transparent 6px 12px) var(--arm) var(--arm) / calc(100% - 2 * var(--arm)) 1px no-repeat,
-    linear-gradient(var(--mark-color), var(--mark-color)) 0 var(--arm) / var(--mark) 1px no-repeat,
-    linear-gradient(var(--mark-color), var(--mark-color)) var(--arm) 0 / 1px 100% no-repeat,
-    linear-gradient(var(--mark-color), var(--mark-color)) 100% var(--arm) / var(--mark) 1px no-repeat,
-    linear-gradient(var(--mark-color), var(--mark-color)) calc(100% - var(--arm)) 0 / 1px 100% no-repeat;
-  pointer-events: none;
-  z-index: 2;
-}
-
-@media (max-width: 840px) {
-  body::before,
-  body::after,
-  main.framed::before,
-  main.framed::after {
-    display: none;
-  }
-
-  main.framed > section + section::after {
-    --mark: 1px;
-    --mark-color: transparent;
-    left: 0;
-    width: 100%;
-  }
-}
-
-@media (max-width: 768px) {
-  main.framed > section + section::before {
-    height: 1.5rem;
-  }
-
-  .blogs-showall {
-    padding-bottom: 1.5rem;
-  }
-}
-
 /* LINK PREVIEW: hovering a tech name in the bio floats a screenshot of its site above it */
 .link-preview {
   color: var(--text-primary);
@@ -2959,5 +2871,11 @@ main.framed > section + section::after {
 @media (hover: none) {
   .link-preview-card {
     display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .footer-inner {
+    padding: 0 1.5rem;
   }
 }

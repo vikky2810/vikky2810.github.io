@@ -4,6 +4,7 @@ import { JsonLd, OG_IMAGE, SITE_URL, pageMetadata } from '@/lib/seo';
 import { BlogList } from '@/components/blog-list';
 import { getPosts } from '@/lib/posts';
 import '@/styles/blog-index.css';
+import '@/styles/frame.css';
 
 const TITLE = 'Node.js, C++ & Gemini API Dev Blog - Vikram Kamble';
 const DESCRIPTION =
@@ -50,7 +51,7 @@ export default function BlogIndexPage() {
         </div>
       </header>
       {/* Blog Cards Section */}
-      <main>
+      <main className="framed">
         <section id="blog-cards">
           <h1 className="blog-page-title">Blog</h1>
           <p className="blog-page-intro">

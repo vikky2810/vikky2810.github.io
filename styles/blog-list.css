@@ -94,7 +94,7 @@
   margin-top: 1.25rem;
   font-size: 0.875rem;
   font-weight: 500;
-  color: var(--text-secondary);
+  color: var(--text-primary);
   text-decoration: underline;
   text-decoration-color: var(--rule);
   text-underline-offset: 4px;

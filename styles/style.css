@@ -585,21 +585,22 @@ section {
   color: var(--danger-color);
 }
 
-/* Copy notification: a floating pill under the sticky nav, styled like the
-   link preview card (raised surface, hairline, xl shadow) */
+/* Copy notification: a small card under the sticky nav, with a solid status
+   dot, a title and a sentence that may wrap */
 .toast {
   position: fixed;
   top: calc(56px + 1rem);
   left: 50%;
   z-index: 1100;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 0.7rem;
-  max-width: calc(100vw - 2rem);
-  padding: 0.55rem 1.1rem 0.55rem 0.6rem;
-  border: 1px solid var(--border-hover);
-  border-radius: var(--radius-full);
-  background: var(--bg-tertiary);
+  width: max-content;
+  max-width: min(22rem, calc(100vw - 2rem));
+  padding: 0.85rem 1.1rem 0.85rem 0.9rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-md);
+  background: var(--bg-secondary);
   box-shadow: var(--shadow-xl);
   pointer-events: none;
   opacity: 0;
@@ -621,43 +622,42 @@ section {
     visibility 0s;
 }
 
+/* Sits on the title's first line */
 .toast-icon {
   display: grid;
   place-items: center;
-  width: 1.6rem;
-  height: 1.6rem;
+  width: 1.15rem;
+  height: 1.15rem;
+  margin-top: 0.05rem;
   flex-shrink: 0;
   border-radius: var(--radius-full);
-  color: var(--primary-color);
-  background: rgba(20, 184, 166, 0.12);
-  border: 1px solid rgba(20, 184, 166, 0.3);
+  color: var(--bg-primary);
+  background: var(--primary-color);
 }
 
 .toast[data-result="failed"] .toast-icon {
-  color: var(--danger-color);
-  background: rgba(248, 113, 113, 0.12);
-  border-color: rgba(248, 113, 113, 0.3);
+  background: var(--danger-color);
 }
 
 .toast-body {
   display: flex;
   flex-direction: column;
+  gap: 0.2rem;
   min-width: 0;
-  line-height: 1.25;
 }
 
 .toast-title {
-  font-size: 0.85rem;
+  font-size: 0.9rem;
   font-weight: 600;
+  line-height: 1.3;
   color: var(--text-primary);
 }
 
 .toast-detail {
-  overflow: hidden;
-  font-size: 0.78rem;
-  color: var(--text-muted);
-  white-space: nowrap;
-  text-overflow: ellipsis;
+  font-size: 0.82rem;
+  line-height: 1.45;
+  color: var(--text-secondary);
+  overflow-wrap: anywhere;
 }
 
 @media (prefers-reduced-motion: reduce) {

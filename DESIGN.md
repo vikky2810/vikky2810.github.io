@@ -136,7 +136,7 @@ Named motion:
 - **Current-role pulse:** the amber timeline node pulses a ring every 2s.
 - **Scroll reveal:** `.reveal` elements rise 16px and fade in over 0.6s, staggered 70ms by `--i`. JS adds `.reveal` only when motion is allowed, so content is never hidden without it.
 - **Link preview:** the card scales from 0.6 with a slight overshoot (`cubic-bezier(0.34, 1.56, 0.64, 1)`, 0.45s).
-- **Copy notification:** a pill drops 12px into place under the nav with the link preview's overshoot curve, holds for 2.2s, then fades out over 0.2s.
+- **Copy notification:** the card drops 12px into place under the nav with the link preview's overshoot curve, holds for 2.2s, then fades out over 0.2s.
 - **Small nudges:** social icons lift 2px on hover; blog arrow shifts 3px; contact rows indent 0.5rem.
 
 Every one of these is turned off or reduced to a plain fade under `prefers-reduced-motion: reduce`.
@@ -176,7 +176,7 @@ Tech names in the bio are white with a translucent teal underline. Hovering floa
 `--bg-secondary` fill, 1px border, `--radius-lg`, 1.5rem padding, monospace 0.9rem at 1.65 line-height. A small "Copy" button sits top right and turns green (`#22c55e`) after copying.
 
 ### Copy notification
-`.toast`, rendered into `body` by `components/email-actions.tsx` so no transformed ancestor traps its fixed position. A centred pill 1rem below the sticky nav: `--bg-tertiary` fill, `--border-hover` hairline, `--shadow-xl`, like the link preview card. A 1.6rem icon disc tinted teal at `0.12`/`0.3` (red for a failure), then a 0.85rem/600 white title and a 0.78rem muted detail line. Screen readers get the same text through a status region; the pill itself is `aria-hidden`.
+`.toast`, rendered into `body` by `components/email-actions.tsx` so no transformed ancestor traps its fixed position. A centred card 1rem below the sticky nav, up to 22rem wide: `--bg-secondary` fill, `rgba(255,255,255,0.1)` hairline, `--radius-md` corners, `--shadow-xl`. A solid 1.15rem teal disc with a black check (red with a cross for a failure) sits on the title line, then a 0.9rem/600 white title and a 0.82rem `--text-secondary` sentence that wraps. Screen readers get the same text through a status region; the pill itself is `aria-hidden`.
 
 ### Footer
 `components/site-footer.tsx`, shared by the home, blog and post pages. 1px top border, 760px inner row (800px under a post): name in bold white linking home on the left; copyright, Blog and RSS links in 0.85rem on the right.

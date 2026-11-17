@@ -22,9 +22,25 @@ const STATE_ICON: Record<IconState, React.ReactNode> = {
 };
 
 const TOAST: Record<Result, { title: string; detail: (email: string) => string }> = {
-  copied: { title: 'Email copied', detail: email => email },
-  failed: { title: "Couldn't copy", detail: () => 'Select the address instead' },
+  copied: { title: 'Email copied', detail: email => `${email} copied to clipboard.` },
+  failed: { title: "Couldn't copy email", detail: () => 'Your browser blocked the clipboard. Select the address instead.' },
 };
+
+// navigator.clipboard only exists on HTTPS and localhost; a phone on the dev
+// server's LAN address gets plain HTTP, so fall back to the legacy copy command
+function writeClipboard(text: string): Promise<void> {
+  if (navigator.clipboard) return navigator.clipboard.writeText(text);
+  const field = document.createElement('textarea');
+  field.value = text;
+  field.setAttribute('readonly', '');
+  field.style.cssText = 'position:fixed;top:0;left:0;opacity:0';
+  document.body.append(field);
+  field.select();
+  field.setSelectionRange(0, text.length);
+  const ok = document.execCommand('copy');
+  field.remove();
+  return ok ? Promise.resolve() : Promise.reject(new Error('copy command refused'));
+}
 
 export function EmailActions({ email }: { email: string }) {
   const [result, setResult] = useState<Result>('copied');
@@ -38,7 +54,7 @@ export function EmailActions({ email }: { email: string }) {
   }, []);
 
   const copy = () => {
-    navigator.clipboard.writeText(email).then(() => 'copied' as const, () => 'failed' as const).then(next => {
+    writeClipboard(email).then(() => 'copied' as const, () => 'failed' as const).then(next => {
       setResult(next);
       setOpen(true);
       clearTimeout(timer.current);
@@ -61,7 +77,7 @@ export function EmailActions({ email }: { email: string }) {
       {mounted && createPortal(
         <div className="toast" data-open={open} data-result={result} aria-hidden="true">
           <span className="toast-icon">
-            <svg {...ICON} width={13} height={13} strokeWidth={2.5}>{STATE_ICON[result]}</svg>
+            <svg {...ICON} width={11} height={11} strokeWidth={3.5}>{STATE_ICON[result]}</svg>
           </span>
           <span className="toast-body">
             <span className="toast-title">{toast.title}</span>

@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { preload } from 'react-dom';
 import { JsonLd, OG_IMAGE, SITE_URL, pageMetadata } from '@/lib/seo';
 import { BlogList } from '@/components/blog-list';
+import { SiteFooter } from '@/components/site-footer';
 import { getPosts } from '@/lib/posts';
 import '@/styles/blog-index.css';
 import '@/styles/frame.css';
@@ -64,7 +65,7 @@ export default function BlogIndexPage() {
             {" and the "}
             <a href="/#online-python-code-editor">Online Python Code Editor</a>
             {" on the "}
-            <a href="/#projects">projects page</a>
+            <a href="/#projects">homepage</a>
             {", or "}
             <a href="/#contact">get in touch</a>
             {". New posts land in the "}
@@ -73,6 +74,7 @@ export default function BlogIndexPage() {
           </p>
         </section>
       </main>
+      <SiteFooter />
     </>
   );
 }

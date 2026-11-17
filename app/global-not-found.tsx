@@ -15,7 +15,7 @@ export const viewport: Viewport = { width: 'device-width', initialScale: 1, them
 
 // Rendered outside app/layout.tsx, so its font preload and styles never reach the other pages.
 export default function GlobalNotFound() {
-  preload('/src/fonts/hanken-grotesk-latin.woff2', { as: 'font', type: 'font/woff2', crossOrigin: 'anonymous' });
+  preload('/src/fonts/inter-latin.woff2', { as: 'font', type: 'font/woff2', crossOrigin: 'anonymous' });
   return (
     <html lang="en">
       <head>
@@ -23,13 +23,13 @@ export default function GlobalNotFound() {
       </head>
       <body>
         <main>
-          <p className="code">404</p>
+          <p className="code">404 ERROR</p>
           <h1>Page not found</h1>
           <p>The page you're looking for doesn't exist or has been moved.</p>
           <div className="actions">
-            <a className="btn btn-primary" href="/">Home</a>
+            <a className="btn btn-primary" href="/">Back to home</a>
             {' '}
-            <a className="btn" href="/blog/">Blog</a>
+            <a className="btn" href="/blog/">Read the blog</a>
           </div>
         </main>
       </body>

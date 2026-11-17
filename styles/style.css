@@ -7,6 +7,7 @@
   --primary-glow: rgba(20, 184, 166, 0.5);
   --secondary-color: #06b6d4; /* Cyan */
   --accent-color: #f59e0b;
+  --danger-color: #f87171;
 
   /* Neutral Colors - Ultra Dark Theme */
   --text-primary: #ffffff;
@@ -503,30 +504,199 @@ section {
   gap: 0.35rem;
 }
 
-.profile-email a {
-  color: var(--primary-color);
+/* The address opens a new email; the icon beside it copies the address */
+.email-group {
+  display: inline-flex;
+  align-items: stretch;
+  height: 32px;
+  max-width: 100%;
 }
 
-.profile-email a:hover {
-  color: var(--secondary-color);
-}
-
-.copy-email {
+.email-btn {
   display: inline-flex;
   align-items: center;
-  justify-content: center;
+  gap: 0.5rem;
+  padding: 0;
+  border: 0;
   background: none;
-  border: none;
-  padding: 4px;
-  color: var(--text-secondary);
+  color: var(--text-primary);
+  font: inherit;
+  font-size: 0.85rem;
+  font-weight: 500;
+  white-space: nowrap;
+  text-decoration: none;
   cursor: pointer;
-  border-radius: 4px;
-  transition: var(--transition-fast);
 }
 
-.copy-email:hover {
+.email-btn-copy {
+  margin-left: 0.15rem;
+  padding: 0 0.55rem;
+}
+
+.email-btn:focus-visible {
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+.email-btn svg {
+  width: 15px;
+  height: 15px;
+  flex-shrink: 0;
+  color: var(--text-muted);
+}
+
+/* On a narrow phone the address truncates rather than pushing the header off screen */
+.profile-header {
+  max-width: 100%;
+}
+
+.profile-intro,
+.profile-email,
+.email-btn-send {
+  min-width: 0;
+}
+
+.email-btn-text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@media screen and (max-width: 600px) {
+  .email-btn {
+    font-size: 0.78rem;
+  }
+
+  .email-btn-copy {
+    padding: 0 0.5rem;
+  }
+}
+
+@media screen and (max-width: 379px) {
+  .email-btn {
+    font-size: 0.74rem;
+  }
+}
+
+.email-btn[data-status="copied"] svg {
   color: var(--primary-color);
-  background: rgba(20, 184, 166, 0.1);
+}
+
+.email-btn[data-status="failed"] svg {
+  color: var(--danger-color);
+}
+
+/* Copy notification: a floating pill under the sticky nav, styled like the
+   link preview card (raised surface, hairline, xl shadow) */
+.toast {
+  position: fixed;
+  top: calc(56px + 1rem);
+  left: 50%;
+  z-index: 1100;
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  max-width: calc(100vw - 2rem);
+  padding: 0.55rem 1.1rem 0.55rem 0.6rem;
+  border: 1px solid var(--border-hover);
+  border-radius: var(--radius-full);
+  background: var(--bg-tertiary);
+  box-shadow: var(--shadow-xl);
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  transform: translate(-50%, -12px) scale(0.96);
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease,
+    visibility 0s linear 0.2s;
+}
+
+.toast[data-open="true"] {
+  opacity: 1;
+  visibility: visible;
+  transform: translate(-50%, 0) scale(1);
+  transition:
+    opacity 0.25s ease,
+    transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1),
+    visibility 0s;
+}
+
+.toast-icon {
+  display: grid;
+  place-items: center;
+  width: 1.6rem;
+  height: 1.6rem;
+  flex-shrink: 0;
+  border-radius: var(--radius-full);
+  color: var(--primary-color);
+  background: rgba(20, 184, 166, 0.12);
+  border: 1px solid rgba(20, 184, 166, 0.3);
+}
+
+.toast[data-result="failed"] .toast-icon {
+  color: var(--danger-color);
+  background: rgba(248, 113, 113, 0.12);
+  border-color: rgba(248, 113, 113, 0.3);
+}
+
+.toast-body {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  line-height: 1.25;
+}
+
+.toast-title {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.toast-detail {
+  overflow: hidden;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .toast,
+  .toast[data-open="true"] {
+    transform: translate(-50%, 0);
+    transition: opacity 0.2s ease, visibility 0s linear 0.2s;
+  }
+
+  .toast[data-open="true"] {
+    transition: opacity 0.2s ease, visibility 0s;
+  }
+}
+
+.email-btn-state {
+  animation: email-state-in 0.2s ease-out;
+}
+
+@keyframes email-state-in {
+  from {
+    opacity: 0;
+    transform: scale(0.6);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .email-btn-state {
+    animation: none;
+  }
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
 }
 
 .profile-bio {
@@ -581,9 +751,10 @@ section {
   }
 }
 
+/* Inline it crowds the icon row, so it only shows in the wide-screen gutter */
 @media screen and (max-width: 999px) {
-  .follow-note-arrow {
-    transform: rotate(-35deg) translateY(4px);
+  .follow-note {
+    display: none;
   }
 }
 
@@ -624,7 +795,7 @@ section {
 
 /* WORK / EXPERIENCE LIST */
 
-#work {
+#experience {
   padding: 0 2rem 3rem;
   max-width: 760px;
 }
@@ -753,14 +924,17 @@ section {
 
 .exp-org a {
   color: inherit;
-  text-decoration: underline;
-  text-decoration-color: var(--border-hover);
-  text-underline-offset: 3px;
 }
 
-.exp-org a:hover {
+.exp-org a::after {
+  content: " \2197";
+  font-size: 0.8em;
+  color: var(--text-muted);
+}
+
+.exp-org a:hover,
+.exp-org a:hover::after {
   color: var(--text-primary);
-  text-decoration-color: var(--primary-color);
 }
 
 .exp-loc {
@@ -829,7 +1003,7 @@ section {
    Contact / Footer) - shared 760px column
    ============================================ */
 #about,
-#experience,
+#skills,
 #projects,
 #contact {
   max-width: 760px;
@@ -973,8 +1147,26 @@ section {
   }
 
   .skill-grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     border-top: 1px solid var(--rule);
+  }
+
+  .skill-cell {
+    gap: 0.45rem;
+    min-height: 2.75rem;
+    padding: 0 0.6rem;
+    font-size: 0.8rem;
+  }
+
+  .skill-icon {
+    width: 1rem;
+    height: 1rem;
+  }
+}
+
+@media screen and (max-width: 379px) {
+  .skill-grid {
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
@@ -1049,9 +1241,15 @@ section {
   display: inline-flex;
   align-items: center;
   gap: 0.35rem;
+  padding: 0.35rem 0;
   color: var(--text-secondary);
   font-size: 0.85rem;
   transition: var(--transition-fast);
+}
+
+.project-row-shot {
+  display: block;
+  border-radius: var(--radius-md);
 }
 
 .project-row-links a:hover {
@@ -1061,6 +1259,11 @@ section {
 .project-code,
 .project-live {
   font-weight: 500;
+}
+
+.project-private {
+  font-size: 0.8rem;
+  color: var(--text-muted);
 }
 
 /* CONTACT */
@@ -1075,6 +1278,7 @@ section {
 .contact-links {
   display: flex;
   flex-direction: column;
+  padding-bottom: 2.5rem;
 }
 
 .contact-link-row {
@@ -1113,35 +1317,6 @@ section {
   color: var(--primary-color);
 }
 
-/* FOOTER */
-.site-footer {
-  border-top: 1px solid var(--border-color);
-  background: var(--bg-primary);
-  padding: 1.25rem 0;
-}
-
-/* Same inset as the sections, so the footer text lines up with the content */
-.footer-inner {
-  max-width: 760px;
-  margin: 0 auto;
-  padding: 0 2rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 1rem;
-  flex-wrap: wrap;
-}
-
-.footer-name {
-  font-weight: 700;
-  color: var(--text-primary);
-}
-
-.footer-copy {
-  font-size: 0.85rem;
-  color: var(--text-muted);
-  margin: 0;
-}
 
 
 /* Profile picture container styling */
@@ -1157,7 +1332,7 @@ section {
 
 /* EXPERIENCE SECTION */
 
-#experience {
+#skills {
   padding: var(--section-gap) 2rem;
   position: relative;
 }
@@ -1647,7 +1822,7 @@ img {
   
 
   /* Experience Section */
-  #experience {
+  #skills {
     padding: 2.5rem 1rem;
   }
 
@@ -1912,7 +2087,7 @@ img {
   
 
   /* Experience Section */
-  #experience {
+  #skills {
     padding: 2rem 0.75rem;
   }
 
@@ -2207,7 +2382,7 @@ code {
   
 
   /* Experience Section */
-  #experience {
+  #skills {
     padding: 4rem 2rem;
   }
 
@@ -2300,7 +2475,7 @@ code {
   
 
   /* Experience Section */
-  #experience {
+  #skills {
     padding: 5rem 3rem;
   }
 
@@ -2380,7 +2555,7 @@ code {
   
 
   /* Experience Section */
-  #experience {
+  #skills {
     padding: 6rem 5rem;
   }
 
@@ -2564,7 +2739,7 @@ footer {
    per-breakpoint #profile rules above.
    ============================================ */
 #profile,
-#work {
+#experience {
   margin-left: auto;
   margin-right: auto;
 }
@@ -2583,7 +2758,7 @@ footer {
 
 @media screen and (max-width: 768px) {
   #profile,
-#work {
+#experience {
     padding-left: 1.5rem;
     padding-right: 1.5rem;
   }
@@ -2631,7 +2806,7 @@ footer {
 /* Compact section overrides - keep About/Skills/Projects/Contact
    left-aligned in the 760px column at every breakpoint */
 #about,
-#experience,
+#skills,
 #projects,
 #contact {
   max-width: 760px;
@@ -2643,7 +2818,7 @@ footer {
 
 @media screen and (max-width: 768px) {
   #about,
-#experience,
+#skills,
 #projects,
 #contact {
     padding-left: 1.5rem;
@@ -2687,8 +2862,8 @@ footer {
 
   .nav-links {
     flex-wrap: nowrap;
-    gap: 1.25rem;
-    font-size: 0.7rem;
+    gap: 1rem;
+    font-size: 0.8rem;
     white-space: nowrap;
   }
 
@@ -2751,7 +2926,7 @@ footer {
   }
 
   /* Consistent section rhythm on mobile */
-  #work,
+  #experience,
 #blogs {
     padding-left: 1.5rem;
     padding-right: 1.5rem;
@@ -2888,8 +3063,3 @@ footer {
   }
 }
 
-@media (max-width: 768px) {
-  .footer-inner {
-    padding: 0 1.5rem;
-  }
-}

@@ -38,7 +38,7 @@ main.framed > section + section::before {
 /* The ::before spacer above is the whole gap under each divider; drop the
    older per-section top padding so every section sits the same distance
    below its divider */
-main.framed > section:is(#about, #work, #experience, #projects, #blogs, #contact) {
+main.framed > section:is(#about, #experience, #skills, #projects, #blogs, #contact) {
   padding-top: 0;
 }
 

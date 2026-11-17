@@ -45,7 +45,7 @@ app/
   global-not-found.tsx    404 page (exported as out/404.html)
   feed.xml/route.ts       RSS feed, generated from the posts
   sitemap.ts              sitemap.xml, generated from the posts
-components/               Client components: mobile menu, copy-email button,
+components/               Client components: mobile menu, email copy control,
                           link previews, code copy buttons, scroll effects
 lib/
   posts.ts                Loads and validates content/blog/<slug>/post.json + body.html

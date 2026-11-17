@@ -1,10 +1,10 @@
 import type { Metadata } from 'next';
 import { preload } from 'react-dom';
-import { CopyEmailButton } from '@/components/copy-email-button';
-import { FooterYear } from '@/components/footer-year';
+import { EmailActions } from '@/components/email-actions';
 import { HomeEffects } from '@/components/home-effects';
 import { LinkPreview, LinkPreviewProvider } from '@/components/link-preview';
 import { MobileNav } from '@/components/mobile-nav';
+import { SiteFooter } from '@/components/site-footer';
 import { NAV_LINKS } from '@/components/nav-links';
 import { BlogList } from '@/components/blog-list';
 import { getPosts } from '@/lib/posts';
@@ -43,7 +43,7 @@ const EXPERIENCE = [
     ],
   },
   {
-    title: 'Freelance Developer', org: 'Full Stack Web Development', start: '2023', end: 'Present', location: 'Remote', current: false,
+    title: 'Freelance Developer', org: 'Self-employed', start: '2023', end: 'Present', location: 'Remote', current: false,
     points: [
       'Build full-stack web apps for clients with React and Next.js, backed by Node.js, Express or Flask.',
       'Store data in MySQL or MongoDB, and add AI features with the Gemini API where they help.',
@@ -146,9 +146,7 @@ export default function HomePage() {
                 <span className="dot">·</span>
                 {' '}
                 <span className="profile-email">
-                  <a href="mailto:kamblevikram2810@gmail.com">kamblevikram2810@gmail.com</a>
-                  {' '}
-                  <CopyEmailButton email={EMAIL} />
+                  <EmailActions email={EMAIL} />
                 </span>
               </p>
             </div>
@@ -193,13 +191,13 @@ export default function HomePage() {
         <section id="about">
           <h2 className="section-heading">About</h2>
           <p className="about-text">
-            {"Hi, I'm Vikram, a full stack developer working across the frontend, backend, databases and AI. I learn best by building, so most of what I know came from shipping something and fixing what broke."}
+            {"I learn best by building. Most of what I know came from shipping something, watching it break, and working out why."}
           </p>
           <p className="about-text">
-            {"I have almost 2 years of experience (freelance + job) in software engineering."}
+            {"Right now I'm a software engineer intern at RegiKart, working on their web apps. Before that I wrote Python automation at Malleable Software, and I've built web apps for freelance clients since 2023."}
           </p>
         </section>
-        <section id="work">
+        <section id="experience">
           <h2 className="section-heading">Experience</h2>
           <ol className="exp-list">
             {EXPERIENCE.map(role => (
@@ -212,7 +210,7 @@ export default function HomePage() {
                 <div className="exp-body">
                   <h3 className="exp-title">
                     {role.title}
-                    {role.current && <span className="exp-badge">Working</span>}
+                    {role.current && <span className="exp-badge">Current</span>}
                   </h3>
                   <p className="exp-org">
                     {'orgUrl' in role ? <a href={role.orgUrl} target="_blank" rel="noopener">{role.org}</a> : role.org}
@@ -226,7 +224,7 @@ export default function HomePage() {
             ))}
           </ol>
         </section>
-        <section id="experience">
+        <section id="skills">
           <h2 className="section-heading">Skills</h2>
           {/* Brand logo sprite (Simple Icons, CC0) */}
           <svg className="icon-sprite" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
@@ -317,24 +315,26 @@ export default function HomePage() {
         <section id="projects">
           <h2 className="section-heading">Projects</h2>
           <p className="section-subtext">
-            Selected full-stack and AI-powered projects. Full details, source code and live demos linked.
+            Things I built end to end and shipped. Each one is live, so you can try it.
           </p>
           <div className="projects-list" id="projects-container">
             <div className="project-row" id="ai-explains-repo">
-              <img src="src/assets/projects/ai-explains-repo.webp?v=a556ecf7" alt="Screenshot of AI Explains Repo home page" className="project-row-thumb" width="640" height="400" loading="lazy" decoding="async" />
+              <a href="https://ai-explains-repo.vercel.app/" target="_blank" rel="noopener" className="project-row-shot" tabIndex={-1} aria-hidden="true">
+                <img src="src/assets/projects/ai-explains-repo.webp?v=a556ecf7" alt="Screenshot of AI Explains Repo home page" className="project-row-thumb" width="640" height="400" loading="lazy" decoding="async" />
+              </a>
               <div className="project-row-top">
                 <h3 className="project-row-title">AI Explains Repo</h3>
                 <div className="project-row-links">
                   <a href="https://github.com/vikky2810/ai-explains-repo" target="_blank" rel="noopener" className="project-code" aria-label="GitHub repository for AI Explains Repo">
                     {" GitHub "}
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                       <path d="M12 .3a12 12 0 0 0-3.8 23.38c.6.12.83-.26.83-.57v-2c-3.34.72-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.08-.75.09-.73.09-.73 1.2.09 1.83 1.24 1.83 1.24 1.07 1.83 2.81 1.3 3.5.99.1-.78.42-1.3.76-1.6-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.14-.3-.54-1.52.1-3.18 0 0 1-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.28-1.55 3.29-1.23 3.29-1.23.65 1.66.24 2.88.12 3.18.77.84 1.23 1.91 1.23 3.22 0 4.61-2.8 5.63-5.48 5.92.42.36.81 1.1.81 2.22v3.29c0 .31.21.69.83.57A12 12 0 0 0 12 .3z"></path>
                     </svg>
                   </a>
                   {' '}
                   <a href="https://ai-explains-repo.vercel.app/" target="_blank" rel="noopener" className="project-live" aria-label="Live demo of AI Explains Repo">
                     {" Live "}
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                       <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
                       <polyline points="15 3 21 3 21 9"></polyline>
                       <line x1="10" y1="14" x2="21" y2="3"></line>
@@ -352,20 +352,22 @@ export default function HomePage() {
               </div>
             </div>
             <div className="project-row" id="online-python-code-editor">
-              <img src="src/assets/projects/online-python-code-editor.webp?v=df6fe76b" alt="Screenshot of Online Python Code Editor home page" className="project-row-thumb" width="640" height="400" loading="lazy" decoding="async" />
+              <a href="https://viks-online-code-editor.vercel.app/" target="_blank" rel="noopener" className="project-row-shot" tabIndex={-1} aria-hidden="true">
+                <img src="src/assets/projects/online-python-code-editor.webp?v=df6fe76b" alt="Screenshot of Online Python Code Editor home page" className="project-row-thumb" width="640" height="400" loading="lazy" decoding="async" />
+              </a>
               <div className="project-row-top">
                 <h3 className="project-row-title">Online Python Code Editor</h3>
                 <div className="project-row-links">
                   <a href="https://github.com/vikky2810/OnlineCodeEditor" target="_blank" rel="noopener" className="project-code" aria-label="GitHub repository for Online Python Code Editor">
                     {" GitHub "}
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                       <path d="M12 .3a12 12 0 0 0-3.8 23.38c.6.12.83-.26.83-.57v-2c-3.34.72-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.08-.75.09-.73.09-.73 1.2.09 1.83 1.24 1.83 1.24 1.07 1.83 2.81 1.3 3.5.99.1-.78.42-1.3.76-1.6-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.14-.3-.54-1.52.1-3.18 0 0 1-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.28-1.55 3.29-1.23 3.29-1.23.65 1.66.24 2.88.12 3.18.77.84 1.23 1.91 1.23 3.22 0 4.61-2.8 5.63-5.48 5.92.42.36.81 1.1.81 2.22v3.29c0 .31.21.69.83.57A12 12 0 0 0 12 .3z"></path>
                     </svg>
                   </a>
                   {' '}
                   <a href="https://viks-online-code-editor.vercel.app/" target="_blank" rel="noopener" className="project-live" aria-label="Live demo of Online Python Code Editor">
                     {" Live "}
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                       <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
                       <polyline points="15 3 21 3 21 9"></polyline>
                       <line x1="10" y1="14" x2="21" y2="3"></line>
@@ -385,13 +387,17 @@ export default function HomePage() {
               </div>
             </div>
             <div className="project-row" id="varch-dsl-to-diagrams">
-              <img src="src/assets/projects/varch-dsl-to-diagrams.webp?v=0d6fe241" alt="Screenshot of the VArch home page with a live DSL editor rendering an architecture diagram" className="project-row-thumb" width="640" height="400" loading="lazy" decoding="async" />
+              <a href="https://dsl-to-diagrams.vercel.app/" target="_blank" rel="noopener" className="project-row-shot" tabIndex={-1} aria-hidden="true">
+                <img src="src/assets/projects/varch-dsl-to-diagrams.webp?v=0d6fe241" alt="Screenshot of the VArch home page with a live DSL editor rendering an architecture diagram" className="project-row-thumb" width="640" height="400" loading="lazy" decoding="async" />
+              </a>
               <div className="project-row-top">
                 <h3 className="project-row-title">VArch: DSL to Architecture Diagrams</h3>
                 <div className="project-row-links">
+                  <span className="project-private">Source private</span>
+                  {' '}
                   <a href="https://dsl-to-diagrams.vercel.app/" target="_blank" rel="noopener" className="project-live" aria-label="Live demo of VArch">
                     {" Live "}
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                       <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
                       <polyline points="15 3 21 3 21 9"></polyline>
                       <line x1="10" y1="14" x2="21" y2="3"></line>
@@ -428,7 +434,7 @@ export default function HomePage() {
         <section id="contact">
           <h2 className="section-heading">Get in touch</h2>
           <p className="contact-lead">
-            Have a project in mind, or just want to say hi? My inbox is always open, and I'll try to get back to you.
+            Hiring, or have a project in mind? Email is the fastest way to reach me.
           </p>
           <div className="contact-links">
             <a href="mailto:kamblevikram2810@gmail.com" className="contact-link-row">
@@ -467,18 +473,7 @@ export default function HomePage() {
           </div>
         </section>
       </main>
-      <footer className="site-footer">
-        <div className="footer-inner">
-          <span className="footer-name">Vikram Kamble</span>
-          <p className="footer-copy">
-            {"© "}
-            <FooterYear buildYear={new Date().getFullYear()} />
-            {" · Built with "}
-            <span style={{ color: "#ef4444" }}>♥</span>
-            {" and code."}
-          </p>
-        </div>
-      </footer>
+      <SiteFooter />
       {/* Progressive blur/fade at the bottom edge of the viewport */}
       <div className="scroll-fade" aria-hidden="true">
         <div className="scroll-fade__layer"></div>

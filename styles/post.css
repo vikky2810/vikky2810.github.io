@@ -481,3 +481,8 @@
         gap: 0.9rem;
     }
 }
+
+/* Line the footer up with the wider post column */
+.blog-post ~ .site-footer .footer-inner {
+  max-width: 800px;
+}

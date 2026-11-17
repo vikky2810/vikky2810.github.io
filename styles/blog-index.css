@@ -877,15 +877,27 @@ tbody td:first-child {
 }
 
 .blog-index-footnote a {
-  color: var(--primary-color);
+  color: var(--text-primary);
   text-decoration: underline;
   text-underline-offset: 3px;
-  text-decoration-color: rgba(20, 184, 166, 0.45);
+  text-decoration-color: var(--border-hover);
 }
 
 .blog-index-footnote a:hover {
-  color: var(--secondary-color);
-  text-decoration-color: currentColor;
+  text-decoration-color: var(--primary-color);
+}
+
+/* The frame runs down to the footer, and the footer sits at the bottom of
+   the window even when the list is short */
+body:has(> main.framed) {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+body:has(> main.framed) > main.framed {
+  flex: 1;
+  padding-bottom: 3rem;
 }
 
 /* Keep the header link on the same left edge as the page content */
@@ -897,9 +909,4 @@ tbody td:first-child {
   .blog-header .header-container {
     padding: 0 1.5rem;
   }
-}
-
-/* Run the homepage's dashed column frame down the whole page, not just the list */
-main.framed {
-  min-height: calc(100vh - 56px);
 }

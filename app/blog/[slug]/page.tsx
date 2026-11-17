@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { preload } from 'react-dom';
 import { CodeCopy } from '@/components/code-copy';
+import { SiteFooter } from '@/components/site-footer';
 import { formatDisplayDate, getPost, getPosts, type Post } from '@/lib/posts';
 import { JsonLd, SITE_URL, pageMetadata } from '@/lib/seo';
 import '@/styles/style.css';
@@ -87,8 +88,7 @@ export default async function PostPage(props: Params) {
           <h1>{post.title}</h1>
           <div className="blog-meta">
             <span><time dateTime={post.publishedDate}>{formatDisplayDate(post.publishedDate)}</time></span>{' '}
-            <span className="meta-sep">·</span> <span>{`${post.readTimeMinutes} min read`}</span>{' '}
-            <span className="meta-sep">·</span> <span>{post.category}</span>
+            <span className="meta-sep">·</span> <span>{`${post.readTimeMinutes} min read`}</span>
           </div>
           {!post.noCoverImage && (
             <img
@@ -125,6 +125,7 @@ export default async function PostPage(props: Params) {
           </div>
         </aside>
       </main>
+      <SiteFooter />
       <CodeCopy />
     </>
   );

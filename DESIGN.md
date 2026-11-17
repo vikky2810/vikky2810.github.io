@@ -2,7 +2,7 @@
 
 The design system behind vikky2810.github.io, written from the current UI. Use it when adding or changing a page so new work matches what is already there.
 
-Source of truth: `styles/style.css` (homepage), `styles/blog-list.css` (shared post list), `styles/blog-index.css` (`/blog/`), `styles/post.css` (post pages), `styles/not-found.css` (404), `styles/fonts.css`. If this file and the CSS disagree, the CSS wins; update this file.
+Source of truth: `styles/style.css` (homepage), `styles/blog-list.css` (shared post list), `styles/blog-index.css` (`/blog/`), `styles/post.css` (post pages), `styles/not-found.css` (404), `styles/site-footer.css` (footer on every page but the 404), `styles/fonts.css`. If this file and the CSS disagree, the CSS wins; update this file.
 
 ## Character
 
@@ -55,22 +55,22 @@ All tokens live on `:root` in `styles/style.css`. `styles/blog-index.css` repeat
 | `--primary-color` | `#14b8a6` teal | Hover and interactive state |
 | `--secondary-color` | `#06b6d4` cyan | Second hover step (email link hover only) |
 | `--accent-color` | `#f59e0b` amber | Current, selected, highlighted |
+| `--danger-color` | `#f87171` red | Failed actions only (copy failure icon and notification) |
 | `--gradient-brand` | teal → cyan, 135° | Nav link underline |
 | `--brand` (per skill) | each tech's logo colour | Skills grid hover only |
 
-Tints are built from the accent at low alpha, for example `rgba(20,184,166,0.1)` behind the copy-email button on hover, or amber at `0.12` fill with a `0.3` border for the "Current" badge (badge text `#fbbf24`). Use `color-mix(in srgb, var(--brand) 7%, var(--bg-primary))` for brand-tinted backgrounds.
+Tints are built from the accent at low alpha, for example amber at `0.12` fill with a `0.3` border for the "Current" badge (badge text `#fbbf24`). Use `color-mix(in srgb, var(--brand) 7%, var(--bg-primary))` for brand-tinted backgrounds.
 
 Text selection is amber with black text (`::selection`), including on the gradient-clipped name.
 
-The only light surface on the site is the 404 page: amber background, black text, Hanken Grotesk.
+The 404 page uses the same black canvas, Inter, dashed column edges and white pill as the homepage.
 
 ## Typography
 
 | Family | Where | Notes |
 |---|---|---|
 | Inter (variable, 300–800) | Everything | Self-hosted in `/src/fonts`, `font-display: swap`. Stack: `"Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif` |
-| Hanken Grotesk | 404 page only | |
-| Caveat | The handwritten "follow me" note only | Rotated -8° |
+| Caveat | The handwritten "follow me" note only, shown at 1000px and wider | Rotated -8° |
 | `ui-monospace, SFMono-Regular, Menlo, Consolas, monospace` | Code blocks in posts | |
 
 Body line-height is 1.6; long-form copy (About, contact lead, posts) uses 1.7.
@@ -136,6 +136,7 @@ Named motion:
 - **Current-role pulse:** the amber timeline node pulses a ring every 2s.
 - **Scroll reveal:** `.reveal` elements rise 16px and fade in over 0.6s, staggered 70ms by `--i`. JS adds `.reveal` only when motion is allowed, so content is never hidden without it.
 - **Link preview:** the card scales from 0.6 with a slight overshoot (`cubic-bezier(0.34, 1.56, 0.64, 1)`, 0.45s).
+- **Copy notification:** a pill drops 12px into place under the nav with the link preview's overshoot curve, holds for 2.2s, then fades out over 0.2s.
 - **Small nudges:** social icons lift 2px on hover; blog arrow shifts 3px; contact rows indent 0.5rem.
 
 Every one of these is turned off or reduced to a plain fade under `prefers-reduced-motion: reduce`.
@@ -143,13 +144,13 @@ Every one of these is turned off or reduced to a plain fade under `prefers-reduc
 ## Components
 
 ### Profile header (`#profile`)
-96px round avatar with a 2px border, name with shimmer, subtitle items separated by muted dots, email in teal with a copy button, bio, then the social row: icons in `--text-secondary` turning teal on hover, plus a "Resume" pill (1px border, full radius, teal border and text on hover).
+96px round avatar with a 2px border, name with shimmer, subtitle items separated by muted dots, the email as plain white text that opens a new email (`components/email-actions.tsx`), followed by a muted copy icon with no border, fill or hover effect. Copying swaps the icon to a teal check (or a red cross on failure) without changing width. Results are announced through a status region, bio, then the social row: icons in `--text-secondary` turning teal on hover, plus a "Resume" pill (1px border, full radius, teal border and text on hover).
 
 ### Section heading (`.section-heading`)
 Plain `h2`, 1.5rem/700, white. No eyebrow, no underline, no icon.
 
 ### Experience timeline (`.exp-list`)
-Three-column grid: dates (right-aligned, start in white 0.9rem/600, end muted), a dashed rail with an 11px ring node, and the role body. The node turns teal on row hover. The current role gets a filled amber node with the pulse, an amber "Current" pill next to the title, and amber bullet dashes. Bullets are 0.45rem horizontal lines, not dots. The organisation is underlined in `--border-hover`, turning teal on hover.
+Three-column grid: dates (right-aligned, start in white 0.9rem/600, end muted), a dashed rail with an 11px ring node, and the role body. The node turns teal on row hover. The current role gets a filled amber node with the pulse, an amber "Current" pill next to the title, and amber bullet dashes. Bullets are 0.45rem horizontal lines, not dots. A linked organisation gets a muted ↗ after its name and turns white on hover.
 
 ### Skills sheet (`.skills-sheet`)
 A ruled spec sheet. Each group is a row: label and count on the left (10rem, right border), a grid of cells on the right (`auto-fill, minmax(8.25rem, 1fr)`). Cells are 3rem tall with a monochrome logo and name. On hover the logo takes its brand colour, a 2px brand bar draws in along the top, and the background tints 7% toward the brand. Empty space at the end of a row shows the hatch pattern. On touch screens logos show their brand colour at rest.
@@ -174,8 +175,11 @@ Tech names in the bio are white with a translucent teal underline. Hovering floa
 ### Code blocks (posts)
 `--bg-secondary` fill, 1px border, `--radius-lg`, 1.5rem padding, monospace 0.9rem at 1.65 line-height. A small "Copy" button sits top right and turns green (`#22c55e`) after copying.
 
+### Copy notification
+`.toast`, rendered into `body` by `components/email-actions.tsx` so no transformed ancestor traps its fixed position. A centred pill 1rem below the sticky nav: `--bg-tertiary` fill, `--border-hover` hairline, `--shadow-xl`, like the link preview card. A 1.6rem icon disc tinted teal at `0.12`/`0.3` (red for a failure), then a 0.85rem/600 white title and a 0.78rem muted detail line. Screen readers get the same text through a status region; the pill itself is `aria-hidden`.
+
 ### Footer
-1px top border, 760px inner row: name in bold white on the left, muted 0.85rem copyright on the right.
+`components/site-footer.tsx`, shared by the home, blog and post pages. 1px top border, 760px inner row (800px under a post): name in bold white linking home on the left; copyright, Blog and RSS links in 0.85rem on the right.
 
 ## Accessibility
 

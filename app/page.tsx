@@ -85,9 +85,9 @@ export const metadata: Metadata = {
   ...pageMetadata({
     title: TITLE,
     description:
-      'Vikram Kamble is a passionate Full Stack Developer. Explore my projects, skills in React, Node.js, and experience in web development.',
+      'Vikram Kamble is a full stack developer who builds and ships web apps with Next.js, React, Python and Postgres. See live projects, experience and blog posts.',
     socialTitle: TITLE,
-    socialDescription: 'Passionate Full Stack Developer. Specializing in React, Node.js, and modern web technologies.',
+    socialDescription: 'I build web apps and ship them. Live projects, experience, and notes from building with Next.js, React and Python.',
     url: `${SITE_URL}/`,
     type: 'website',
     image: { url: OG_IMAGE, width: 1200, height: 630, alt: 'Vikram Kamble - Full Stack Developer' },
@@ -108,7 +108,7 @@ const PERSON = {
   '@type': 'Person',
   name: 'Vikram Kamble',
   jobTitle: 'Full Stack Developer',
-  description: 'Passionate Full Stack Developer',
+  description: 'Full stack developer who builds and ships web apps with Next.js, React and Python.',
   url: `${SITE_URL}/`,
   image: `${SITE_URL}/src/assets/profile-pic.webp`,
   sameAs: ['https://linkedin.com/in/vikram-kamble-888933264', 'https://github.com/vikky2810'],

@@ -1,0 +1,36 @@
+{
+    "slug": "navigator-clipboard-undefined-http",
+    "title": "navigator.clipboard Is Undefined Over HTTP: Why It Happens and How I Fixed It",
+    "seoTitle": "navigator.clipboard Undefined on HTTP? Why and How to Fix It",
+    "description": "navigator.clipboard is undefined on plain HTTP pages that aren't localhost. Real screenshots of the bug, why it happens, and a small fallback that still copies.",
+    "category": "JavaScript",
+    "publishedDate": "2026-11-19",
+    "modifiedDate": "2026-11-19",
+    "breadcrumbLabel": "navigator.clipboard Over HTTP",
+    "readTimeMinutes": 6,
+    "includeReadingSchema": true,
+    "noCoverImage": true,
+    "image": {
+        "ogFile": "clipboard-http-og.png",
+        "pageFile": "clipboard-http-lan.webp",
+        "width": 1200,
+        "height": 640,
+        "ogAlt": "Brave on a LAN IP showing isSecureContext false and navigator.clipboard undefined",
+        "pageAlt": "Brave on a plain HTTP LAN address, marked Not secure, showing isSecureContext false and typeof navigator.clipboard undefined."
+    },
+    "authorBio": "Full-stack developer working with React, Next.js, Flask and Node.js. I write about the bugs I hit while shipping and what actually fixed them.",
+    "related": [
+        {
+            "href": "/blog/local-large-file-upload-tracker/",
+            "label": "Related post",
+            "title": "Trying to Build a Local Large File Upload Tracker",
+            "desc": "Another browser API that behaves differently than the docs suggest, worked through on a real project."
+        },
+        {
+            "href": "/#projects",
+            "label": "Projects",
+            "title": "The projects I build and ship",
+            "desc": "Source code and live demos for the web apps I've built with Next.js, React and Flask."
+        }
+    ]
+}

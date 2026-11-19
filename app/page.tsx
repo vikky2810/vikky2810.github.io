@@ -153,7 +153,7 @@ export default function HomePage() {
           </div>
           <LinkPreviewProvider previews={Object.values(BIO_TOOLS).map(t => t.preview)}>
             <p className="profile-bio">
-              Full stack developer working across different technologies: {tool('Next.js')}, {tool('React')}, {tool('Python')}, {tool('Postgres')}, and AI tools like {tool('Claude')}, {tool('OpenCode')} and {tool('Cursor')}.
+              I build web apps and ship them: {tool('Next.js')} and {tool('React')} on the front, {tool('Python')} and {tool('Postgres')} behind. Day to day I work with AI tools like {tool('Claude')}, {tool('OpenCode')} and {tool('Cursor')}.
             </p>
           </LinkPreviewProvider>
           <div className="profile-socials">

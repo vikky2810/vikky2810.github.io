@@ -8,7 +8,7 @@ const BLURBS: Record<string, string> = {
   'cpp-vs-node': 'Crow gave me 5k req/sec. Node gave me 12k. Then uWebSockets gave me 57k. A benchmark story about C++, Node.js, and picking the right library.',
   'building-with-gemini-api': 'The quickstart gets you a working call in ten lines. Everything that actually broke happened somewhere else: what to send, reading real error bodies, and a response that came back empty.',
   'sql-vs-nosql': 'Most SQL vs NoSQL posts are a comparison chart copied from the docs. This one is a decision process, built from shipping real projects on both MySQL and MongoDB.',
-  'library-vs-framework': 'Understanding the difference between a library and a framework is crucial for developers. Beginner-friendly explanations, real-world analogies, and practical React and Next.js examples.',
+  'library-vs-framework': 'A library waits for you to call it. A framework calls you. The difference, shown with React and Next.js code from my own projects.',
 };
 
 function formatDate(iso: string, withYear: boolean): string {

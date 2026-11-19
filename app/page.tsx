@@ -343,7 +343,7 @@ export default function HomePage() {
                 </div>
               </div>
               <p className="project-row-desc">
-                Full-stack Next.js app that ingests GitHub repository data and generates AI-powered reports on code quality, architecture, security risks, and performance via the Gemini API, with authenticated session history.
+                Paste a GitHub repo link and get a plain-English report on it: how the code is organised, how good it is, and where the security and performance risks are. It runs on Next.js and the Gemini API, and signed-in users can go back to their past reports.
               </p>
               <div className="project-row-tags">
                 <span className="project-tag">Next.js</span>
@@ -376,7 +376,7 @@ export default function HomePage() {
                 </div>
               </div>
               <p className="project-row-desc">
-                Browser-based Python editor built with Flask and CodeMirror that executes user code server-side and streams output back in real time, with syntax highlighting, error handling, and a responsive dark UI.
+                Write Python in your browser and run it, no setup needed. A Flask server runs the code and sends the output back line by line as it prints. It has syntax highlighting, readable error messages, and a dark theme that works on phones.
               </p>
               <div className="project-row-tags">
                 <span className="project-tag">Python</span>

@@ -32,7 +32,7 @@ const EXPERIENCE = [
     title: 'Software Engineer Intern', org: 'RegiKart Private Limited', start: 'Jun 2026', end: 'Present', location: 'Kolkata, India · Remote', current: true,
     points: [
       'Build, test and debug features on the company’s web applications, working in Git with code reviews.',
-      'Research and ship changes that improve app performance and usability, and streamline internal workflows.',
+      'Ship fixes that make the apps faster and easier to use, and simplify the team’s internal workflows.',
     ],
   },
   {

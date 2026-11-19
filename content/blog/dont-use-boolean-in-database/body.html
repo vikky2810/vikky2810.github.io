@@ -1,6 +1,4 @@
-            <p>After reading the title, the first question that comes to your mind is: why??</p>
-            <p>So let me try to answer that.</p>
-            <p>First, let's understand what happens when we put boolean values in a production database. A junior developer won't see any problem with it. But when a senior developer sees it, they will ask one question:</p>
+            <p>Your first question after reading the title is probably: why? A boolean column looks harmless in a production database. A junior developer won't see a problem with it. A senior developer will ask one question:</p>
             <blockquote>
                 <p>"What if, instead of true and false, we get a third situation?"</p>
             </blockquote>
@@ -27,7 +25,7 @@ is_refunded BOOLEAN</code></pre>
             <p>One column. One clear answer. And if tomorrow you need a new state, you just add a new value instead of a new column.</p>
             <p>The <code>CHECK</code> constraint also means the database itself rejects a typo like <code>'payed'</code>. It's the same idea from <a href="/blog/sql-vs-nosql/">SQL vs NoSQL: how I actually decide</a>: let the database enforce the shape of your data.</p>
             <h2>When a Boolean Is Fine</h2>
-            <p>Sure, if you only have a dark and a light theme and you want a toggle option, then a boolean is totally fine there.</p>
+            <p>If all you have is a light and a dark theme with a toggle between them, a boolean is fine.</p>
             <div class="success">
                 <p>So the simple rule is: if it's a switch (on/off), use a boolean. If it's a status that can change over time, don't.</p>
             </div>

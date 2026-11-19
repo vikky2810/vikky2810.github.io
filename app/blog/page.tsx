@@ -30,7 +30,7 @@ const BLOG = {
   '@context': 'https://schema.org',
   '@type': 'Blog',
   name: "Vikram Kamble's Blog",
-  description: 'Blog posts about web development, programming, and technology',
+  description: "Notes from things I've built: what I measured, what broke, and what I'd do differently.",
   url: `${SITE_URL}/blog/`,
   author: { '@type': 'Person', name: 'Vikram Kamble', url: `${SITE_URL}/` },
 };

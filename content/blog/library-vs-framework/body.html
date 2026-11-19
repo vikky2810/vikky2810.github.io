@@ -1,5 +1,5 @@
-            <p>If you've ever started a coding project, you've probably asked yourself: "Should I use a library or a framework?" They both promise to save you time, provide reusable code, and make development smoother. But the difference between them is bigger than most beginners realize. Choosing the wrong one can turn a simple project into a confusing mess.</p>
-            <p>In this post, we'll break down the distinction, give real-world analogies, show examples in modern web development, and even provide code snippets so it clicks immediately.</p>
+            <p>I've built one project on Next.js and one on Flask. Both are frameworks, but they felt completely different. Flask let me decide where almost everything went. Next.js had already decided, and my job was to fill in the slots it gave me.</p>
+            <p>That gap is the library-vs-framework question in miniature. Here's the difference, using React (a library) and Next.js (a framework built on React) as the example.</p>
             <h2>Library vs Framework in One Sentence</h2>
             <p>Here's the cheat code:</p>
             <ul>
@@ -28,7 +28,7 @@
                 <li>A library is like a box of ingredients. You can make any dish in any order. You control everything.</li>
                 <li>A framework is like a meal kit. It comes with a recipe and a plan. You can add spices or tweak a little, but you're generally following its instructions.</li>
             </ul>
-            <p>This is exactly why beginners sometimes feel "restricted" with frameworks, they aren't meant to give total freedom. They give structure so you don't have to reinvent the wheel every time.</p>
+            <p>This is exactly why beginners sometimes feel "restricted" with frameworks. They aren't meant to give total freedom. They give structure so you don't have to reinvent the wheel every time.</p>
             <h2>Why This Matters in Web Development</h2>
             <h3>React: The Library</h3>
             <p>React is a library for building UI components. It provides tools to create reusable UI elements like buttons, modals, and navigation bars. But beyond that, you decide:</p>
@@ -38,9 +38,7 @@
                 <li>How data fetching works</li>
             </ul>
             <p>Here's a tiny React example:</p>
-            <pre class="code-block"><code class="language-js">import React from "react";
-
-function Greeting({ name }) {
+            <pre class="code-block"><code class="language-js">function Greeting({ name }) {
   return &lt;h1&gt;Hello, {name}!&lt;/h1&gt;;
 }
 
@@ -49,16 +47,16 @@ export default Greeting;</code></pre>
             <h3>Next.js: The Framework</h3>
             <p>Next.js is a framework built on React. It handles routing, server-side rendering, static site generation, and more. It dictates certain patterns, like:</p>
             <ul>
-                <li>File-based routing (pages/index.js becomes your homepage)</li>
-                <li>API routes (pages/api/)</li>
+                <li>File-based routing (app/page.js becomes your homepage)</li>
+                <li>API endpoints as files (app/api/&lt;name&gt;/route.js)</li>
                 <li>Built-in optimizations (SSR, SSG, image optimization)</li>
             </ul>
             <p>A tiny Next.js page example:</p>
-            <pre class="code-block"><code class="language-js">// pages/index.js
+            <pre class="code-block"><code class="language-js">// app/page.js
 export default function Home() {
   return &lt;h1&gt;Welcome to my Next.js site!&lt;/h1&gt;;
 }</code></pre>
-            <p>Notice how you don't need to configure routing, Next.js handles it automatically. That's the framework "calling your code," instead of you calling the library manually.</p>
+            <p>Notice that you never set up routing. Next.js sees the file and handles it. That's the framework "calling your code," instead of you calling the library manually.</p>
             <h2>Picking Between a Library and a Framework</h2>
             <ul>
                 <li><strong>Project Complexity:</strong> Small or highly customized projects → library (React, Lodash); Larger projects with standard patterns → framework (Next.js, Angular, Django)</li>
@@ -93,14 +91,11 @@ function UsersList() {
 export default UsersList;</code></pre>
             <p>You decide everything: how to fetch, where to store state, when to render.</p>
             <h3>Using Next.js (Framework Approach)</h3>
-            <pre class="code-block"><code class="language-js">// pages/users.js
-export async function getServerSideProps() {
+            <pre class="code-block"><code class="language-js">// app/users/page.js
+export default async function Users() {
   const res = await fetch("https://jsonplaceholder.typicode.com/users");
   const users = await res.json();
-  return { props: { users } };
-}
 
-export default function Users({ users }) {
   return (
     &lt;ul&gt;
       {users.map((user) =&gt; (
@@ -109,19 +104,16 @@ export default function Users({ users }) {
     &lt;/ul&gt;
   );
 }</code></pre>
-            <p>Here, Next.js decides when and how to fetch data (server-side) and inject it into your page. You just provide the component logic. That's inversion of control in practice.</p>
+            <p>Here, Next.js decides when this runs: on the server, before any HTML reaches the browser. There's no useEffect and no loading state, and the URL comes from the folder name. You only write the component. That's inversion of control in practice.</p>
             <h2>Common Misconceptions</h2>
             <ul>
                 <li>"Libraries are always easier than frameworks" → Not true. Libraries give flexibility, but you're responsible for app architecture.</li>
                 <li>"Frameworks are restrictive" → They're structured. That structure can save you time and prevent messy code in large apps.</li>
                 <li>"React is a framework" → Nope. React is a library; Next.js is a framework built on top of it.</li>
             </ul>
-            <h2>Key Takeaways</h2>
+            <h2>The Short Version</h2>
             <ul>
-                <li>Library = You call it. Flexibility.</li>
-                <li>Framework = It calls you. Structure.</li>
-                <li>React vs Next.js perfectly illustrates the difference.</li>
-                <li>Project choice matters, pick the right tool for the size and complexity of your app.</li>
-                <li>Understanding inversion of control will make your life easier when learning frameworks.</li>
+                <li>A library waits for you to call it. A framework calls you.</li>
+                <li>React is a library. Next.js is a framework built on top of it.</li>
+                <li>Pick by the project, not by habit: a framework when its structure fits what you're building, a library when you want to decide the structure yourself.</li>
             </ul>
-            <p>Bottom Line: Knowing the difference between a library and a framework is more than a buzzword. It helps you structure projects correctly, pick the right tools, and avoid unnecessary frustration. Next time someone asks you this in an interview or a project, you'll answer like a pro.</p>

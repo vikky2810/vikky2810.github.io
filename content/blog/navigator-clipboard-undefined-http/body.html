@@ -1,0 +1,78 @@
+            <p>My <a href="../../">portfolio</a> has a small "copy email" button. Click it, the address goes to your clipboard, and a little card says it worked. On my laptop it worked every time. Then I opened the dev server on my phone to check the mobile layout, tapped the button, and got the error card instead.</p>
+            <p>Same code and same browser engine, but a different result. The only thing that changed was the URL.</p>
+            <h2>What Was Going On</h2>
+            <p>On the laptop I was opening <code>http://localhost:3000</code>. On the phone I was opening the laptop's Wi-Fi address, something like <code>http://10.152.109.222:3000</code>. Both are plain HTTP. But browsers treat them differently.</p>
+            <p>The async Clipboard API (<code>navigator.clipboard</code>) is only exposed in a <strong>secure context</strong>. A page is a secure context when it is served over HTTPS, or when it comes from <code>localhost</code> or <code>127.0.0.1</code>, which browsers trust because the traffic never leaves your machine. A LAN IP over HTTP is neither, so the browser doesn't just block the call. The whole <code>navigator.clipboard</code> object is missing.</p>
+            <p>My original code assumed it was always there:</p>
+            <pre class="code-block"><code class="language-js">navigator.clipboard.writeText(email).then(() =&gt; 'copied', () =&gt; 'failed');</code></pre>
+            <p>On the phone this throws <code>TypeError: Cannot read properties of undefined (reading 'writeText')</code> before the promise even exists, so the failure handler never runs.</p>
+            <h2>Same Page, Two Origins</h2>
+            <p>I wrote one tiny HTML page that only prints what the browser reports, and opened it in Brave twice. First through <code>localhost</code>:</p>
+            <img src="/src/assets/clipboard-http-localhost.webp" alt="Brave on localhost showing isSecureContext true and typeof navigator.clipboard object" class="blog-image" loading="lazy" width="1366" height="728">
+            <p><em>Through localhost: the page is a secure context and the clipboard API exists.</em></p>
+            <p>Then the exact same file through the laptop's Wi-Fi address, the way my phone opens it. Brave marks it "Not secure":</p>
+            <img src="/src/assets/clipboard-http-lan.webp" alt="Brave on a LAN IP marked Not secure, showing isSecureContext false and typeof navigator.clipboard undefined" class="blog-image" loading="lazy" width="1366" height="728">
+            <p><em>Same file over the LAN IP: isSecureContext is false and navigator.clipboard is gone.</em></p>
+            <p>And this is what my old code ran into. I typed the original call into Brave's DevTools console on that page:</p>
+            <img src="/src/assets/clipboard-http-devtools.webp" alt="Brave DevTools console: Uncaught TypeError: Cannot read properties of undefined (reading 'writeText')" class="blog-image" loading="lazy" width="1366" height="728">
+            <p><em>The exact TypeError, thrown before any promise exists.</em></p>
+            <h2>The Fix: Feature-Detect, Then Fall Back</h2>
+            <p>The modern API is still the right first choice. When it's missing, the old <code>document.execCommand('copy')</code> still works in every major browser. It's marked deprecated, but nobody has removed it, and it doesn't need a secure context. It copies whatever text is selected, so the trick is to create a hidden textarea, select its contents, copy, and remove it.</p>
+            <pre class="code-block"><code class="language-js">// navigator.clipboard only exists on HTTPS and localhost; a phone on the dev
+// server's LAN address gets plain HTTP, so fall back to the legacy copy command
+function writeClipboard(text) {
+  if (navigator.clipboard) return navigator.clipboard.writeText(text);
+  const field = document.createElement('textarea');
+  field.value = text;
+  field.setAttribute('readonly', '');
+  field.style.cssText = 'position:fixed;top:0;left:0;opacity:0';
+  document.body.append(field);
+  field.select();
+  field.setSelectionRange(0, text.length);
+  const ok = document.execCommand('copy');
+  field.remove();
+  return ok ? Promise.resolve() : Promise.reject(new Error('copy command refused'));
+}</code></pre>
+            <p>A few small details here are there for a reason:</p>
+            <ul>
+                <li><strong><code>readonly</code></strong> stops the phone keyboard from popping up when the textarea gets focus.</li>
+                <li><strong><code>position:fixed; top:0</code></strong> stops the page from jumping. A textarea added at the bottom of the body would scroll the page down to it when selected.</li>
+                <li><strong><code>setSelectionRange</code></strong> after <code>select()</code> is for iOS Safari, which doesn't always select the text with <code>select()</code> alone.</li>
+                <li><strong>It returns a Promise</strong> either way, so the caller doesn't care which path ran.</li>
+            </ul>
+            <p>The button code only changed one word:</p>
+            <pre class="code-block"><code>- navigator.clipboard.writeText(email).then(...)
++ writeClipboard(email).then(...)</code></pre>
+            <h2>The Fix Working Over Plain HTTP</h2>
+            <p>I opened my real portfolio from the dev server through the Wi-Fi address, with "Not secure" in the address bar, and clicked the copy button:</p>
+            <img src="/src/assets/clipboard-http-fixed.webp" alt="Portfolio served over a LAN IP, marked Not secure, showing an Email copied notification" class="blog-image" loading="lazy" width="1366" height="728">
+            <p><em>"Email copied" on a page where navigator.clipboard doesn't exist. The fallback did the work.</em></p>
+            <p>The terminal confirms it: the commit with the fix, and the system clipboard read back right after the click:</p>
+            <img src="/src/assets/clipboard-http-terminal.webp" alt="Terminal showing commit bcdc83a, the writeClipboard diff, and xclip printing the copied email address" class="blog-image" loading="lazy" width="1366" height="728">
+            <p><em>Commit bcdc83a, the added writeClipboard function, and xclip printing the address the browser just copied.</em></p>
+            <h2>Tell the User What Happened</h2>
+            <p>While I was in there I rewrote the failure message. "Couldn't copy" told the visitor nothing. Now it says what to do next: "Your browser blocked the clipboard. Select the address instead." Copying can still fail even with the fallback, for example inside some in-app browsers, so the error state is still needed, and it should be useful.</p>
+            <h2>Why This Matters Beyond the Dev Server</h2>
+            <p>You might think this only bites during local testing, since production is HTTPS. That's mostly true, but plain HTTP still shows up in real use:</p>
+            <ul>
+                <li>Testing on a real phone over Wi-Fi, like I was.</li>
+                <li>Internal tools and dashboards served on an office IP.</li>
+                <li>Sites inside an <code>&lt;iframe&gt;</code> without the <code>clipboard-write</code> permission, where the call is blocked.</li>
+                <li>Kiosk and intranet setups with no certificate.</li>
+            </ul>
+            <p>In every case the fix is the same: check before you call, and have a fallback.</p>
+            <h2>One Related Next.js Detail</h2>
+            <p>To even load the dev server from my phone, Next.js 16 needs to allow the LAN origin, or dev assets and hot reload get blocked. I read the machine's IPv4 addresses at startup instead of hard-coding one, because my Wi-Fi IP changes:</p>
+            <pre class="code-block"><code class="language-js">import { networkInterfaces } from 'node:os';
+
+// Dev only: lets a phone on the same network load the dev server through this machine's LAN address.
+const lanAddresses = Object.values(networkInterfaces())
+  .flat()
+  .flatMap(net =&gt; (net &amp;&amp; net.family === 'IPv4' &amp;&amp; !net.internal ? [net.address] : []));
+
+const nextConfig = { /* ... */ allowedDevOrigins: lanAddresses };</code></pre>
+            <h2>Takeaway</h2>
+            <div class="info">
+                <p><code>navigator.clipboard</code> being <code>undefined</code> almost always means the page isn't a secure context. Check <code>window.isSecureContext</code> in the console to confirm. Then feature-detect, fall back to <code>execCommand('copy')</code> with a hidden textarea, and show a helpful error if both fail.</p>
+            </div>
+            <p>More posts like this on the <a href="./">blog</a>.</p>

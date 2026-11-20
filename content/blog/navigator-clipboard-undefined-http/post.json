@@ -1,6 +1,6 @@
 {
     "slug": "navigator-clipboard-undefined-http",
-    "title": "navigator.clipboard Is Undefined Over HTTP: Why It Happens and How I Fixed It",
+    "title": "navigator.clipboard Is Undefined Over HTTP",
     "seoTitle": "navigator.clipboard Undefined on HTTP? Why and How to Fix It",
     "description": "navigator.clipboard is undefined on plain HTTP pages that aren't localhost. Real screenshots of the bug, why it happens, and a small fallback that still copies.",
     "category": "JavaScript",

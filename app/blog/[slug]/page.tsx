@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { preload } from 'react-dom';
 import { CodeCopy } from '@/components/code-copy';
+import { ReadingIsland } from '@/components/reading-island';
 import { SiteFooter } from '@/components/site-footer';
 import { formatDisplayDate, getPost, getPosts, type Post } from '@/lib/posts';
 import { JsonLd, SITE_URL, pageMetadata } from '@/lib/seo';
@@ -127,6 +128,7 @@ export default async function PostPage(props: Params) {
       </main>
       <SiteFooter />
       <CodeCopy />
+      <ReadingIsland title={post.title} />
     </>
   );
 }
